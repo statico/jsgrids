@@ -1,6 +1,10 @@
 @tailwind base;
 @tailwind components;
 
+body {
+  @apply text-gray-900 bg-gray-100;
+}
+
 .corner-ribbon {
   @apply absolute p-2 flex flex-col justify-end items-center bg-gray-100 text-blue-600 transform rotate-45;
   width: 300px;

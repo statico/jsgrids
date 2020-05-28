@@ -13,7 +13,7 @@ const GitHubRepo = rt.String.withConstraint(
 )
 const Feature = rt.Boolean.Or(URL).Or(rt.String)
 
-const RawSpec = rt.Record({
+const RawInfo = rt.Record({
   id: rt.String,
   title: rt.String,
   description: rt.String,
@@ -36,17 +36,17 @@ const RawSpec = rt.Record({
   features: rt.Dictionary(Feature),
 })
 
-const Spec = rt
-  .Record({ ...RawSpec.fields, features: rt.Dictionary(Feature) })
+const AugmentedInfo = rt
+  .Record({
+    ...RawInfo.fields,
+    features: rt.Dictionary(Feature),
+  })
   .asReadonly()
 
-const Specs = rt.Dictionary(Spec)
+type RawInfo = rt.Static<typeof RawInfo>
+export type AugmentedInfo = rt.Static<typeof AugmentedInfo>
 
-type RawSpec = rt.Static<typeof RawSpec>
-type Spec = rt.Static<typeof Spec>
-type Specs = rt.Static<typeof Specs>
-
-export const getData = async (): Promise<Specs> => {
+export const getLibraries = async (): Promise<AugmentedInfo[]> => {
   const dataDir = join(process.cwd(), 'data')
   const paths = readdirSync(dataDir)
     .filter((name) => /\.yml$/.test(name))
@@ -54,16 +54,16 @@ export const getData = async (): Promise<Specs> => {
 
   const cache = flatCache.load('jgrids-data')
 
-  const specs: Specs = {}
+  const items: AugmentedInfo[] = []
 
   await Promise.all(
     paths.map(async (path) => {
       const id = basename(path, '.yml')
 
       const obj = yaml.safeLoad(await readFileSync(path, 'utf8'))
-      let spec: RawSpec
+      let item: RawInfo
       try {
-        spec = RawSpec.check({
+        item = RawInfo.check({
           id,
           ...obj,
         })
@@ -76,19 +76,19 @@ export const getData = async (): Promise<Specs> => {
       }
 
       try {
-        if (spec.githubRepo) {
+        if (item.githubRepo) {
           // Cache responses because the GitHub public API limits are pretty low.
-          const key = `github-${spec.githubRepo}`
+          const key = `github-${item.githubRepo}`
           let gh: any = cache.getKey(key)
 
           if (!gh || gh.expires < Date.now()) {
-            const url = `https://api.github.com/repos/${spec.githubRepo}`
+            const url = `https://api.github.com/repos/${item.githubRepo}`
             console.log(`Fetching ${url}`)
 
             const res = await axios.get(url)
-            if (res.data.full_name !== spec.githubRepo) {
+            if (res.data.full_name !== item.githubRepo) {
               throw new Error(
-                `GitHub repo ${spec.githubRepo} has moved to ${res.data.full_name}`
+                `GitHub repo ${item.githubRepo} has moved to ${res.data.full_name}`
               )
             }
 
@@ -100,7 +100,7 @@ export const getData = async (): Promise<Specs> => {
             cache.save()
           }
 
-          spec.github = {
+          item.github = {
             stars: gh.data.stargazers_count,
             forks: gh.data.forks_count,
             openIssues: gh.data.open_issues_count,
@@ -113,9 +113,9 @@ export const getData = async (): Promise<Specs> => {
         console.error(`Error getting GitHub data for ${id}: ${err}`)
       }
 
-      specs[id] = Spec.check(spec)
+      items.push(AugmentedInfo.check(item))
     })
   )
 
-  return specs
+  return items
 }

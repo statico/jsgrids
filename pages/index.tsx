@@ -1,18 +1,23 @@
 import { NextPage } from 'next'
 import Footer from '../components/Footer'
 import Header from '../components/Header'
-import { getData } from '../lib/data'
+import { AugmentedInfo, getLibraries } from '../lib/data'
+import Card from '../components/Card'
 
 interface Props {
-  data: any
+  items: AugmentedInfo[]
 }
 
-const Page: NextPage<Props> = ({ data }) => (
+const Page: NextPage<Props> = ({ items }) => (
   <>
     <Header />
-    <pre className="container mx-auto text-xs">
-      {JSON.stringify(data, null, '  ')}
-    </pre>
+    <div className="container mx-auto py-10 text-xs">
+      {items.map((item) => (
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
+          <Card info={item} />
+        </div>
+      ))}
+    </div>
     <Footer />
   </>
 )
@@ -20,5 +25,5 @@ const Page: NextPage<Props> = ({ data }) => (
 export default Page
 
 export const getStaticProps = async () => {
-  return { props: { data: await getData() } }
+  return { props: { items: await getLibraries() } }
 }
