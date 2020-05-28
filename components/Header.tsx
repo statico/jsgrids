@@ -15,10 +15,10 @@ const Header: React.FC = () => (
       className="corner-ribbon bg-gray-100 text-blue-600"
     >
       <GoMarkGithub className="text-3xl mb-2" />
-      <div className="text-xs uppercase">Fork me on GitHub</div>
+      <div className="text-xs uppercase">Do the Thing</div>
     </a>
 
-    <h1 className="text-5xl">jsgrids</h1>
+    <h1 className="text-5xl font-semibold">jsgrids</h1>
     <h2 className="text-2xl">
       A List of JavaScript Spreadsheets and Data Grid Libraries
     </h2>
