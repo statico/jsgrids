@@ -1,0 +1,21 @@
+title: Test Grid
+homeUrl: https://example.local/test
+demoUrl: https://example.local/demo
+githubRepo: vercel/next.js
+license: MIT
+revenueModel: null
+maintained: true
+description: >
+  This is an example data grid library that flurps all the herps and foos all the bars.
+  It is a very good library and you should use it.
+features:
+  copyPaste: Within the grid only
+  fillDown: true
+  fillRight: false
+  filtering: true
+  frozenCols: true
+  keyboardAccess: true
+  resizableCols: true
+  richCells: true
+  sorting: true
+  virtualization: true
