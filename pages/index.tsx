@@ -1,4 +1,6 @@
 import { NextPage } from 'next'
+import Footer from '../components/Footer'
+import Header from '../components/Header'
 import { getData } from '../lib/data'
 
 interface Props {
@@ -6,7 +8,13 @@ interface Props {
 }
 
 const Page: NextPage<Props> = ({ data }) => (
-  <pre>{JSON.stringify(data, null, '  ')}</pre>
+  <>
+    <Header />
+    <pre className="container mx-auto text-xs">
+      {JSON.stringify(data, null, '  ')}
+    </pre>
+    <Footer />
+  </>
 )
 
 export default Page
