@@ -12,7 +12,7 @@ const Header: React.FC = () => (
     <a
       href="https://github.com/statico/jsgrids"
       aria-label="View source on GitHub"
-      className="bg-gray-100 text-blue-600 absolute p-1 flex flex-col justify-end items-center bg-gray-100 text-blue-600 transform rotate-45"
+      className="bg-gray-100 text-blue-600 absolute p-3 flex flex-col justify-end items-center bg-gray-100 text-blue-600 transform rotate-45"
       style={{
         width: 300,
         height: 300,
@@ -20,7 +20,7 @@ const Header: React.FC = () => (
         right: -210,
       }}
     >
-      <GoMarkGithub className="text-3xl mb-2" />
+      <GoMarkGithub className="text-3xl" />
     </a>
 
     <h1 className="text-5xl font-semibold -mt-2">jsgrids</h1>

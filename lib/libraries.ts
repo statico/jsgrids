@@ -4,7 +4,7 @@ import { join, basename } from 'path'
 import { readdirSync, readFileSync } from 'fs'
 import * as rt from 'runtypes'
 import * as flatCache from 'flat-cache'
-import features from './features'
+import { FEATURES } from './features'
 
 const URL = rt.String.withConstraint(
   (str) => /^https?:\/\//.test(str) || `${str} is not a valid URL`
@@ -30,6 +30,7 @@ const RawInfo = rt.Record({
   githubRepo: GitHubRepo,
   github: rt
     .Record({
+      url: URL,
       stars: rt.Number,
       forks: rt.Number,
       openIssues: rt.Number,
@@ -55,7 +56,7 @@ const AugmentedInfo = rt
 type RawInfo = rt.Static<typeof RawInfo>
 export type AugmentedInfo = rt.Static<typeof AugmentedInfo>
 
-const allowedFeatures = new Set(Object.keys(features))
+const allowedFeatures = new Set(Object.keys(FEATURES))
 
 export const getLibraries = async (): Promise<AugmentedInfo[]> => {
   const dataDir = join(process.cwd(), 'data')
@@ -116,6 +117,7 @@ export const getLibraries = async (): Promise<AugmentedInfo[]> => {
           }
 
           item.github = {
+            url: gh.data.html_url,
             stars: gh.data.stargazers_count,
             forks: gh.data.forks_count,
             openIssues: gh.data.open_issues_count,

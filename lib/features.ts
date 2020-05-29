@@ -1,6 +1,4 @@
-type Feature = { title: string; description: string }
-
-const features: { [key: string]: Feature } = {
+export const FEATURES = {
   copyPaste: {
     title: 'Copy and Paste',
     description: 'Supports copy and paste, preferably to the system clipboard.',
@@ -104,11 +102,4 @@ const features: { [key: string]: Feature } = {
   },
 }
 
-export default features
-
-console.log('features:')
-Object.keys(features)
-  .sort()
-  .forEach((key) => {
-    console.log(`  ${key}: false`)
-  })
+export type FeatureName = keyof typeof FEATURES
