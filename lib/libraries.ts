@@ -113,7 +113,7 @@ export const getLibraries = async (): Promise<AugmentedInfo[]> => {
               data: res.data,
             }
             cache.setKey(key, gh)
-            cache.save()
+            cache.save(true)
           }
 
           item.github = {
