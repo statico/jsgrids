@@ -2,6 +2,7 @@ import { FaCheckCircle, FaInfoCircle } from 'react-icons/fa'
 import { GoIssueOpened, GoRepoForked, GoStar } from 'react-icons/go'
 import { FEATURES } from '../lib/features'
 import { AugmentedInfo } from '../lib/libraries'
+import classNames from 'classnames'
 
 const Tidbit: React.FC<{
   icon: React.ReactNode
@@ -11,9 +12,10 @@ const Tidbit: React.FC<{
   <FeatureText size="big">
     <span
       title={title}
-      className={`flex flex-row justify-center items-center ${
+      className={classNames(
+        'flex flex-row justify-center items-center',
         value ? 'text-gray-800' : 'text-gray-500'
-      }`}
+      )}
     >
       {icon}&nbsp;{value || 'n/a'}
     </span>
@@ -90,13 +92,34 @@ const FeatureWithIcon: React.FC<{
   }
 }
 
+const ActionButton: React.FC<{ href: string; title: string }> = ({
+  href,
+  title,
+}) => (
+  <a
+    href={href}
+    className={classNames(
+      'block p-2 rounded-md border border-transparent text-center flex justify-center items-center',
+      'uppercase text-sm bg-gray-200 text-gray-700 hover:bg-gray-300 hover:text-gray-900',
+      'transition transition-shadow hover:shadow-sm duration-100'
+    )}
+  >
+    {title}
+  </a>
+)
+
+const Actions: React.FC<{ info: AugmentedInfo }> = ({ info }) => (
+  <div className="grid grid-cols-3 gap-4">
+    <ActionButton href={info.demoUrl} title="Demo" />
+    <ActionButton href={info.github.url} title="Source" />
+    <ActionButton href={info.homeUrl} title="Home" />
+  </div>
+)
+
 const Card: React.FC<{ info: AugmentedInfo }> = ({ info }) => {
   const gh = info.github
   return (
-    <a
-      href={info.homeUrl}
-      className="bg-white block p-8 shadow-md hover:shadow-lg transition-shadow duration-100 rounded-md text-gray-900 appearance-none"
-    >
+    <div className="bg-white block p-8 shadow-md rounded-md text-gray-900 flex flex-col justify-start">
       <div className="mb-4 text-2xl text-center font-semibold">
         {info.title}
       </div>
@@ -118,8 +141,14 @@ const Card: React.FC<{ info: AugmentedInfo }> = ({ info }) => {
           title={`${gh?.stars} open issues on GitHub`}
         />
       </div>
-      <FeatureList features={info.features} />
-    </a>
+      <div className="mb-4">
+        <FeatureList features={info.features} />
+      </div>
+      <div className="flex-grow"></div>
+      <div className="">
+        <Actions info={info} />
+      </div>
+    </div>
   )
 }
 
