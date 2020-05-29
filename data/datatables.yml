@@ -11,6 +11,7 @@ description: >
 frameworks:
   - jquery
 features:
+  accessible: true
   copyPaste: false
   csvExport: false
   customEditors: false
@@ -27,6 +28,7 @@ features:
   pivots: false
   rangeSelection: false
   resizableCols: false
+  responsive: true
   rowSelection: false
   serverSide: true
   sorting: true

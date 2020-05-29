@@ -1,4 +1,9 @@
 export const FEATURES = {
+  accessible: {
+    title: 'Accessible',
+    description:
+      'Has focused on features to make the interface less challenging for those with disabilities.',
+  },
   copyPaste: {
     title: 'Copy and Paste',
     description: 'Supports copy and paste, preferably to the system clipboard.',
@@ -71,6 +76,10 @@ export const FEATURES = {
   resizableCols: {
     title: 'Resizable Columns',
     description: 'The user interface lets you resize columns by dragging.',
+  },
+  responsive: {
+    title: 'Responsive',
+    description: 'Works well on tablet and mobile devices.',
   },
   rowSelection: {
     title: 'Row Selection',

@@ -10,6 +10,7 @@ description: >
 frameworks:
   - vanilla
 features:
+  accessible: false
   copyPaste: false
   csvExport: false
   customEditors: false
@@ -26,6 +27,7 @@ features:
   pivots: false
   rangeSelection: false
   resizableCols: false
+  responsive: false
   rowSelection: false
   serverSide: false
   sorting: false

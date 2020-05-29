@@ -14,6 +14,7 @@ frameworks:
   - vanilla
   - vue
 features:
+  accessible: false
   copyPaste: true
   csvExport: true
   customEditors: true
@@ -30,6 +31,7 @@ features:
   pivots: false
   rangeSelection: true
   resizableCols: true
+  responsive: false
   rowSelection: true
   serverSide: false
   sorting: true
