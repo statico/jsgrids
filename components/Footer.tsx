@@ -1,16 +1,11 @@
-const Separator = () => <span className="mx-4">&middot;</span>
-
 const Footer: React.FC = () => (
   <footer className="mt-4 text-gray-600 text-sm text-center">
-    <a href="https://nextjs.org/">Built with Next.js</a>
-    <Separator />
-    <a href="https://netlify.com">Hosted on Netlify</a>
-    <Separator />
-    <a href="https://github.com/statico/jsgrids">Source available on GitHub</a>
-    <Separator />
-    <a href="http://www.heropatterns.com">
-      Header background from Hero Patterns
-    </a>
+    <div className="container mx-auto grid grid-cols-2 lg:grid-cols-4 gap-2">
+      <a href="https://github.com/statico/jsgrids">Fork this on GitHub</a>
+      <a href="https://nextjs.org/">Built with Next.js</a>
+      <a href="https://netlify.com">Hosted on Netlify</a>
+      <a href="http://www.heropatterns.com">Background from Hero Patterns</a>
+    </div>
   </footer>
 )
 

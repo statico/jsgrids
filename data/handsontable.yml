@@ -7,8 +7,7 @@ revenueModel: Community/Premium
 maintained: true
 description: >
   JavaScript data grid that looks and feels like a spreadsheet. Minimalistic,
-  Excel-like grid component for web apps. Available for pure JavaScript,
-  React, Vue, and Angular.
+  Excel-like grid component for web apps.
 frameworks:
   - angular
   - react
