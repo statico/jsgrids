@@ -1,0 +1,34 @@
+title: Clusterize.js
+homeUrl: https://clusterize.js.org/
+demoUrl: https://clusterize.js.org/
+githubRepo: NeXTs/Clusterize.js
+license: Custom
+revenueModel: Community/Premium
+maintained: false
+description: >
+  A fast, tiny plugin for vanilla JavaScript to display large data sets easily.
+frameworks:
+  - vanilla
+features:
+  copyPaste: false
+  csvExport: false
+  customEditors: false
+  customFormatters: false
+  draggableRows: false
+  editable: false
+  fillDown: false
+  fillRight: false
+  filtering: false
+  formulas: false
+  freezableCols: false
+  headless: Optional
+  pagination: false
+  pivots: false
+  rangeSelection: false
+  resizableCols: false
+  rowSelection: false
+  serverSide: false
+  sorting: false
+  trees: false
+  xlsxExport: false
+  virtualization: true

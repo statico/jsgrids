@@ -1,4 +1,4 @@
-import { AugmentedInfo } from '../lib/data'
+import { AugmentedInfo } from '../lib/libraries'
 
 interface Props {
   info: AugmentedInfo
@@ -7,9 +7,9 @@ interface Props {
 const Card: React.FC<Props> = ({ info }) => (
   <a
     href={info.homeUrl}
-    className="bg-white shadow-md hover:shadow-lg transition-shadow duration-100 p-8 rounded-md text-gray-900 appearance-none"
+    className="bg-white block p-8 mb-6 shadow-md hover:shadow-lg transition-shadow duration-100 rounded-md text-gray-900 appearance-none"
   >
-    <div className="text-xl text-center font-semibold mb-4">{info.title}</div>
+    <div className="text-2xl text-center font-semibold mb-4">{info.title}</div>
     <div className="">{info.description}</div>
   </a>
 )

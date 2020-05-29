@@ -4,6 +4,7 @@ import { join, basename } from 'path'
 import { readdirSync, readFileSync } from 'fs'
 import * as rt from 'runtypes'
 import * as flatCache from 'flat-cache'
+import features from './features'
 
 const URL = rt.String.withConstraint(
   (str) => /^https?:\/\//.test(str) || `${str} is not a valid URL`
@@ -12,6 +13,13 @@ const GitHubRepo = rt.String.withConstraint(
   (str) => /^\S+\/\S+$/.test(str) || `${str} is not a username/repo pair`
 )
 const Feature = rt.Boolean.Or(URL).Or(rt.String)
+const Framework = rt.Union(
+  rt.Literal('vanilla'),
+  rt.Literal('react'),
+  rt.Literal('vue'),
+  rt.Literal('angular'),
+  rt.Literal('jquery')
+)
 
 const RawInfo = rt.Record({
   id: rt.String,
@@ -33,6 +41,7 @@ const RawInfo = rt.Record({
   license: rt.String.Or(rt.Null),
   revenueModel: rt.String.Or(rt.Null),
   maintained: rt.Boolean,
+  frameworks: rt.Array(Framework),
   features: rt.Dictionary(Feature),
 })
 
@@ -45,6 +54,8 @@ const AugmentedInfo = rt
 
 type RawInfo = rt.Static<typeof RawInfo>
 export type AugmentedInfo = rt.Static<typeof AugmentedInfo>
+
+const allowedFeatures = new Set(Object.keys(features))
 
 export const getLibraries = async (): Promise<AugmentedInfo[]> => {
   const dataDir = join(process.cwd(), 'data')
@@ -69,10 +80,14 @@ export const getLibraries = async (): Promise<AugmentedInfo[]> => {
         })
       } catch (err) {
         throw new Error(
-          `In ${basename(path)}, key "${err.key}" failed validation: ${
-            err.message
-          }`
+          `In ${path}, key "${err.key}" failed validation: ${err.message}`
         )
+      }
+
+      for (const key in item.features) {
+        if (!allowedFeatures.has(key)) {
+          throw new Error(`In ${path}, unexpected feature "${key}"`)
+        }
       }
 
       try {

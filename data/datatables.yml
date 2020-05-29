@@ -1,0 +1,35 @@
+title: DataTables
+homeUrl: https://www.datatables.net/
+demoUrl: https://www.datatables.net/examples/index
+githubRepo: DataTables/DataTables
+license: MIT
+revenueModel: Support & Maintenance
+maintained: true
+description: >
+  A highly flexible tool, built upon the foundations of progressive
+  enhancement, that adds all of these advanced features to any HTML table.
+frameworks:
+  - jquery
+features:
+  copyPaste: false
+  csvExport: false
+  customEditors: false
+  customFormatters: true
+  draggableRows: false
+  editable: With inline form elements or modal
+  fillDown: false
+  fillRight: false
+  filtering: true
+  formulas: false
+  freezableCols: false
+  headless: Optional
+  pagination: true
+  pivots: false
+  rangeSelection: false
+  resizableCols: false
+  rowSelection: false
+  serverSide: true
+  sorting: true
+  trees: false
+  xlsxExport: false
+  virtualization: true

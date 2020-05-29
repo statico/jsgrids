@@ -1,0 +1,39 @@
+title: Handsontable
+homeUrl: https://handsontable.com
+demoUrl: https://handsontable.com/examples
+githubRepo: handsontable/handsontable
+license: Custom
+revenueModel: Community/Premium
+maintained: true
+description: >
+  JavaScript data grid that looks and feels like a spreadsheet. Minimalistic,
+  Excel-like grid component for web apps. Available for pure JavaScript,
+  React, Vue, and Angular.
+frameworks:
+  - angular
+  - react
+  - vanilla
+  - vue
+features:
+  copyPaste: true
+  csvExport: true
+  customEditors: true
+  customFormatters: true
+  draggableRows: true
+  editable: true
+  fillDown: true
+  fillRight: true
+  filtering: true
+  formulas: false
+  freezableCols: true
+  headless: false
+  pagination: false
+  pivots: false
+  rangeSelection: true
+  resizableCols: true
+  rowSelection: true
+  serverSide: false
+  sorting: true
+  trees: false
+  xlsxExport: false
+  virtualization: true
