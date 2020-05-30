@@ -77,7 +77,7 @@ const FeatureWithIcon: React.FC<{
     throw new Error(`Unknown feature name: ${name}`)
   }
   const { title, description } = FEATURES[name]
-  if (value || name === 'maintained') {
+  if (value) {
     return (
       <FeatureText>
         <span
@@ -86,12 +86,22 @@ const FeatureWithIcon: React.FC<{
         >
           {value === true ? (
             <FaCheckCircle className="flex-none w-3 text-green-400" />
-          ) : value ? (
-            <FaInfoCircle className="flex-none w-3 text-yellow-500" />
           ) : (
-            <FaTimesCircle className="flex-none w-3 text-red-500" />
+            <FaInfoCircle className="flex-none w-3 text-yellow-500" />
           )}
           <span className="ml-1">{title}</span>
+        </span>
+      </FeatureText>
+    )
+  } else if (name === 'maintained' && !value) {
+    return (
+      <FeatureText>
+        <span
+          title={typeof value === 'string' ? value : description}
+          className="flex flex-row items-center mb-1"
+        >
+          <FaTimesCircle className="flex-none w-3 text-red-500" />
+          <span className="ml-1">Not Maintained</span>
         </span>
       </FeatureText>
     )
