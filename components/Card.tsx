@@ -1,5 +1,6 @@
 import { FaCheckCircle, FaInfoCircle, FaTimesCircle } from 'react-icons/fa'
-import { GoIssueOpened, GoRepoForked, GoStar } from 'react-icons/go'
+import { GoIssueOpened, GoRepoForked, GoStar, GoLaw } from 'react-icons/go'
+import { GiMoneyStack } from 'react-icons/gi'
 import { FEATURES } from '../lib/features'
 import { AugmentedInfo } from '../lib/libraries'
 import classNames from 'classnames'
@@ -148,8 +149,17 @@ const Card: React.FC<{ info: AugmentedInfo }> = ({ info }) => {
           title={`${gh?.stars} open issues on GitHub`}
         />
       </div>
-      <div className="mb-4">
+      <div className="mb-2">
         <FeatureList features={info.features} />
+      </div>
+      <div className="mb-4">
+        <div className="inline-block">
+          <FeatureText size="big">
+            <GoLaw className="inline" /> {info.license}
+            <br />
+            <GiMoneyStack className="inline" /> {info.revenueModel}
+          </FeatureText>
+        </div>
       </div>
       <div className="flex-grow"></div>
       <div className="">
