@@ -2,8 +2,8 @@ title: DataTables
 homeUrl: https://www.datatables.net/
 demoUrl: https://www.datatables.net/examples/index
 githubRepo: DataTables/DataTables
-license: MIT
-revenueModel: Support & Maintenance
+license: MIT License
+revenueModel: Premium Support
 description: >
   A highly flexible tool, built upon the foundations of progressive
   enhancement, that adds all of these advanced features to any HTML table.

@@ -1,9 +1,13 @@
-import { FaCheckCircle, FaInfoCircle, FaTimesCircle } from 'react-icons/fa'
-import { GoIssueOpened, GoRepoForked, GoStar, GoLaw } from 'react-icons/go'
-import { GiMoneyStack } from 'react-icons/gi'
+import classNames from 'classnames'
+import {
+  FaCheckCircle,
+  FaDollarSign,
+  FaInfoCircle,
+  FaTimesCircle,
+} from 'react-icons/fa'
+import { GoIssueOpened, GoLaw, GoRepoForked, GoStar } from 'react-icons/go'
 import { FEATURES } from '../lib/features'
 import { AugmentedInfo } from '../lib/libraries'
-import classNames from 'classnames'
 
 const Tidbit: React.FC<{
   icon: React.ReactNode
@@ -53,7 +57,7 @@ const FeatureText: React.FC<{ size?: 'big' | 'small ' }> = ({
   <span
     className={`text-${
       size === 'big' ? 'sm' : 'xs'
-    } text-gray-800 uppercase leading-tight`}
+    } text-gray-800 leading-tight`}
   >
     {children}
   </span>
@@ -82,7 +86,7 @@ const FeatureWithIcon: React.FC<{
       <FeatureText>
         <span
           title={typeof value === 'string' ? value : description}
-          className="flex flex-row items-center mb-1"
+          className="uppercase flex flex-row items-center mb-1"
         >
           {value === true ? (
             <FaCheckCircle className="flex-none w-3 text-green-400" />
@@ -98,7 +102,7 @@ const FeatureWithIcon: React.FC<{
       <FeatureText>
         <span
           title={typeof value === 'string' ? value : description}
-          className="flex flex-row items-center mb-1"
+          className="uppercase flex flex-row items-center mb-1"
         >
           <FaTimesCircle className="flex-none w-3 text-red-500" />
           <span className="ml-1">Not Maintained</span>
@@ -167,7 +171,8 @@ const Card: React.FC<{ info: AugmentedInfo }> = ({ info }) => {
           <FeatureText size="big">
             <GoLaw className="inline" /> {info.license}
             <br />
-            <GiMoneyStack className="inline" /> {info.revenueModel}
+            {/* Wishlist: Use a localized currency symbol instead of $ for everyone */}
+            <FaDollarSign className="inline" /> {info.revenueModel}
           </FeatureText>
         </div>
       </div>

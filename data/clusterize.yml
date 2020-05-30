@@ -2,8 +2,8 @@ title: Clusterize.js
 homeUrl: https://clusterize.js.org/
 demoUrl: https://clusterize.js.org/
 githubRepo: NeXTs/Clusterize.js
-license: Custom
-revenueModel: Community/Premium
+license: GPLv3 or Commercial License
+revenueModel: Free for Personal Use
 description: >
   A fast, tiny plugin for vanilla JavaScript to display large data sets easily.
 frameworks:
