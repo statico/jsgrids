@@ -1,11 +1,16 @@
 import classNames from 'classnames'
+import { DiJqueryLogo } from 'react-icons/di'
 import {
+  FaAngular,
   FaCheckCircle,
   FaDollarSign,
   FaInfoCircle,
+  FaReact,
   FaTimesCircle,
+  FaVuejs,
 } from 'react-icons/fa'
 import { GoIssueOpened, GoLaw, GoRepoForked, GoStar } from 'react-icons/go'
+import { IoLogoJavascript } from 'react-icons/io'
 import { FEATURES } from '../lib/features'
 import { AugmentedInfo } from '../lib/libraries'
 
@@ -138,12 +143,37 @@ const Actions: React.FC<{ info: AugmentedInfo }> = ({ info }) => (
   </div>
 )
 
+const FrameworkList: React.FC<{ frameworks: AugmentedInfo['frameworks'] }> = ({
+  frameworks,
+}) => (
+  <div className="flex flex-row items-center justify-center text-2xl">
+    {frameworks
+      .sort()
+      .map((name) =>
+        name === 'vanilla' ? (
+          <IoLogoJavascript title="Vanilla JavaScript" key={name} />
+        ) : name === 'react' ? (
+          <FaReact title="React" key={name} />
+        ) : name === 'vue' ? (
+          <FaVuejs title="Vue" key={name} />
+        ) : name === 'angular' ? (
+          <FaAngular title="Angular" key={name} />
+        ) : name === 'jquery' ? (
+          <DiJqueryLogo title="jQuery" key={name} />
+        ) : null
+      )}
+  </div>
+)
+
 const Card: React.FC<{ info: AugmentedInfo }> = ({ info }) => {
   const gh = info.github
   return (
     <div className="bg-white block p-8 shadow-md rounded-md text-gray-900 flex flex-col justify-start">
-      <div className="mb-4 text-2xl text-center font-semibold">
-        {info.title}
+      <div className="mb-4 flex flex-row items-center justify-between">
+        <div className="text-2xl text-center font-semibold">{info.title}</div>
+        <div className="">
+          <FrameworkList frameworks={info.frameworks} />
+        </div>
       </div>
       <div className="mb-4">{info.description}</div>
       <div className="mb-4 grid grid-cols-3">
