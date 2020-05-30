@@ -8,9 +8,10 @@ import {
   FaReact,
   FaTimesCircle,
   FaVuejs,
+  FaDownload,
 } from 'react-icons/fa'
 import { GoIssueOpened, GoLaw, GoRepoForked, GoStar } from 'react-icons/go'
-import { IoLogoJavascript } from 'react-icons/io'
+import { IoLogoJavascript, IoMdDownload } from 'react-icons/io'
 import { FEATURES } from '../lib/features'
 import { AugmentedInfo } from '../lib/libraries'
 
@@ -27,7 +28,10 @@ const Tidbit: React.FC<{
         value ? 'text-gray-800' : 'text-gray-500'
       )}
     >
-      {icon}&nbsp;{value || 'n/a'}
+      {icon}&nbsp;
+      {value && typeof value === 'number'
+        ? value.toLocaleString()
+        : value || 'n/a'}
     </span>
   </FeatureText>
 )
@@ -73,7 +77,7 @@ const FeatureList: React.FC<{ features: AugmentedInfo['features'] }> = ({
 }) => (
   <div className="grid grid-cols-2">
     {sortedFeatureNames(features).map((name) => (
-      <FeatureWithIcon name={name} value={features[name]} />
+      <FeatureWithIcon key={name} name={name} value={features[name]} />
     ))}
   </div>
 )
@@ -169,18 +173,23 @@ const Card: React.FC<{ info: AugmentedInfo }> = ({ info }) => {
   const gh = info.github
   return (
     <div className="bg-white block p-8 shadow-md rounded-md text-gray-900 flex flex-col justify-start">
-      <div className="mb-4 flex flex-row items-center justify-between">
+      <div className="mb-5 flex flex-row items-center justify-between">
         <div className="text-2xl text-center font-semibold">{info.title}</div>
         <div className="">
           <FrameworkList frameworks={info.frameworks} />
         </div>
       </div>
-      <div className="mb-4">{info.description}</div>
-      <div className="mb-4 grid grid-cols-3">
+      <div className="mb-5">{info.description}</div>
+      <div className="mb-5 grid grid-cols-4">
         <Tidbit
           icon={<GoStar />}
           value={gh?.stars}
           title={`${gh?.stars} stars on GitHub`}
+        />
+        <Tidbit
+          icon={<IoMdDownload />}
+          value={info.npm?.downloads}
+          title={`${info.npm?.downloads} downloads on NPM in the last week`}
         />
         <Tidbit
           icon={<GoRepoForked />}
@@ -196,7 +205,7 @@ const Card: React.FC<{ info: AugmentedInfo }> = ({ info }) => {
       <div className="mb-2">
         <FeatureList features={info.features} />
       </div>
-      <div className="mb-4">
+      <div className="mb-5">
         <div className="inline-block">
           <FeatureText size="big">
             <GoLaw className="inline" /> {info.license}

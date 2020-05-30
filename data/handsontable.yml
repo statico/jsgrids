@@ -2,6 +2,7 @@ title: Handsontable
 homeUrl: https://handsontable.com
 demoUrl: https://handsontable.com/examples
 githubRepo: handsontable/handsontable
+npmPackage: handsontable
 license: Custom License
 revenueModel: Free for Personal Use
 description: >

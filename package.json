@@ -15,6 +15,7 @@
     "flat-cache": "^2.0.1",
     "js-yaml": "^3.14.0",
     "next": "^9.4.2",
+    "npm-api": "^1.0.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-icons": "^3.10.0",

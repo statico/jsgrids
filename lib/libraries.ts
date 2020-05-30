@@ -5,6 +5,7 @@ import { readdirSync, readFileSync } from 'fs'
 import * as rt from 'runtypes'
 import * as flatCache from 'flat-cache'
 import { FEATURES } from './features'
+import * as NpmApi from 'npm-api'
 
 const URL = rt.String.withConstraint(
   (str) => /^https?:\/\//.test(str) || `${str} is not a valid URL`
@@ -27,7 +28,7 @@ const RawInfo = rt.Record({
   description: rt.String,
   homeUrl: URL.Or(rt.Null),
   demoUrl: URL.Or(rt.Null),
-  githubRepo: GitHubRepo,
+  githubRepo: GitHubRepo.Or(rt.Null),
   github: rt
     .Record({
       url: URL,
@@ -37,6 +38,12 @@ const RawInfo = rt.Record({
       watchers: rt.Number,
       subscribers: rt.Number,
       network: rt.Number,
+    })
+    .Or(rt.Undefined),
+  npmPackage: rt.String.Or(rt.Null),
+  npm: rt
+    .Record({
+      downloads: rt.Number,
     })
     .Or(rt.Undefined),
   license: rt.String.Or(rt.Null),
@@ -64,6 +71,7 @@ export const getLibraries = async (): Promise<AugmentedInfo[]> => {
     .map((name) => join(dataDir, name))
 
   const cache = flatCache.load('jgrids-data')
+  const npm = new NpmApi()
 
   const items: AugmentedInfo[] = []
 
@@ -127,6 +135,18 @@ export const getLibraries = async (): Promise<AugmentedInfo[]> => {
         }
       } catch (err) {
         console.error(`Error getting GitHub data for ${id}: ${err}`)
+      }
+
+      try {
+        if (item.npmPackage) {
+          console.log(`Fetching downloads for NPM package ${item.npmPackage}`)
+          const repo = await npm.repo(item.npmPackage)
+          item.npm = {
+            downloads: await repo.last(7),
+          }
+        }
+      } catch (err) {
+        console.error(`Error getting NPM data for ${item.npmPackage}: ${err}`)
       }
 
       items.push(AugmentedInfo.check(item))

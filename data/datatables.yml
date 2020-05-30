@@ -2,6 +2,7 @@ title: DataTables
 homeUrl: https://www.datatables.net/
 demoUrl: https://www.datatables.net/examples/index
 githubRepo: DataTables/DataTables
+npmPackage: datatables
 license: MIT License
 revenueModel: Premium Support
 description: >
