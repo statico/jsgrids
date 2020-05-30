@@ -4,7 +4,6 @@ demoUrl: https://handsontable.com/examples
 githubRepo: handsontable/handsontable
 license: Custom
 revenueModel: Community/Premium
-maintained: true
 description: >
   JavaScript data grid that looks and feels like a spreadsheet. Minimalistic,
   Excel-like grid component for web apps.
@@ -27,6 +26,7 @@ features:
   formulas: false
   freezableCols: true
   headless: false
+  maintained: true
   pagination: false
   pivots: false
   rangeSelection: true

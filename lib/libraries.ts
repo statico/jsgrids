@@ -41,7 +41,6 @@ const RawInfo = rt.Record({
     .Or(rt.Undefined),
   license: rt.String.Or(rt.Null),
   revenueModel: rt.String.Or(rt.Null),
-  maintained: rt.Boolean,
   frameworks: rt.Array(Framework),
   features: rt.Dictionary(Feature),
 })

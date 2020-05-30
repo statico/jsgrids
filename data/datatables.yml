@@ -4,7 +4,6 @@ demoUrl: https://www.datatables.net/examples/index
 githubRepo: DataTables/DataTables
 license: MIT
 revenueModel: Support & Maintenance
-maintained: true
 description: >
   A highly flexible tool, built upon the foundations of progressive
   enhancement, that adds all of these advanced features to any HTML table.
@@ -24,6 +23,7 @@ features:
   formulas: false
   freezableCols: false
   headless: Optional
+  maintained: true
   pagination: true
   pivots: false
   rangeSelection: false

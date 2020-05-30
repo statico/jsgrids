@@ -1,4 +1,4 @@
-import { FaCheckCircle, FaInfoCircle } from 'react-icons/fa'
+import { FaCheckCircle, FaInfoCircle, FaTimesCircle } from 'react-icons/fa'
 import { GoIssueOpened, GoRepoForked, GoStar } from 'react-icons/go'
 import { FEATURES } from '../lib/features'
 import { AugmentedInfo } from '../lib/libraries'
@@ -22,12 +22,17 @@ const Tidbit: React.FC<{
   </FeatureText>
 )
 
-// Sort the features by positive ones first, then middling ones.
+// Sort the features by negative ones first, then positive, then negative.
+// Only important negative features are shown, which is why they're first.
 const sortedFeatureNames = (features: AugmentedInfo['features']): string[] =>
   Object.keys(features).sort((a, b) => {
     const av = features[a]
     const bv = features[b]
-    if (av === true && bv === true) {
+    if (!av) {
+      return -1
+    } else if (!bv) {
+      return 1
+    } else if (av === true && bv === true) {
       return a.localeCompare(b)
     } else if (typeof av === 'string' && typeof bv === 'string') {
       return a.localeCompare(b)
@@ -71,7 +76,7 @@ const FeatureWithIcon: React.FC<{
     throw new Error(`Unknown feature name: ${name}`)
   }
   const { title, description } = FEATURES[name]
-  if (value) {
+  if (value || name === 'maintained') {
     return (
       <FeatureText>
         <span
@@ -80,8 +85,10 @@ const FeatureWithIcon: React.FC<{
         >
           {value === true ? (
             <FaCheckCircle className="flex-none w-3 text-green-400" />
-          ) : (
+          ) : value ? (
             <FaInfoCircle className="flex-none w-3 text-yellow-500" />
+          ) : (
+            <FaTimesCircle className="flex-none w-3 text-red-500" />
           )}
           <span className="ml-1">{title}</span>
         </span>
@@ -101,7 +108,7 @@ const ActionButton: React.FC<{ href: string; title: string }> = ({
     className={classNames(
       'block p-2 rounded-md border border-transparent text-center flex justify-center items-center',
       'uppercase text-sm bg-gray-200 text-gray-700 hover:bg-gray-300 hover:text-gray-900',
-      'transition transition-shadow hover:shadow-sm duration-100'
+      'transition transition-all hover:shadow-sm duration-100'
     )}
   >
     {title}

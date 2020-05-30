@@ -4,7 +4,6 @@ demoUrl: https://clusterize.js.org/
 githubRepo: NeXTs/Clusterize.js
 license: Custom
 revenueModel: Community/Premium
-maintained: false
 description: >
   A fast, tiny plugin for vanilla JavaScript to display large data sets easily.
 frameworks:
@@ -23,6 +22,7 @@ features:
   formulas: false
   freezableCols: false
   headless: Optional
+  maintained: false
   pagination: false
   pivots: false
   rangeSelection: false

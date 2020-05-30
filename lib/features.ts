@@ -60,6 +60,11 @@ export const FEATURES = {
     description:
       'There is no user interface provided by default -- this library is logic-only.',
   },
+  maintained: {
+    title: 'Maintained',
+    description:
+      "Whether this library under active development, or has recently-fixed bugs, or is so wonderfully stable that it doesn't need maintenance.",
+  },
   pagination: {
     title: 'Pagination',
     description:
