@@ -3,9 +3,11 @@ import axios from 'axios'
 import { join, basename } from 'path'
 import { readdirSync, readFileSync } from 'fs'
 import * as rt from 'runtypes'
-import * as flatCache from 'flat-cache'
 import { FEATURES } from './features'
 import * as NpmApi from 'npm-api'
+import * as cache from './cache'
+
+const npmClient = new NpmApi()
 
 const URL = rt.String.withConstraint(
   (str) => /^https?:\/\//.test(str) || `${str} is not a valid URL`
@@ -70,9 +72,6 @@ export const getLibraries = async (): Promise<AugmentedInfo[]> => {
     .filter((name) => /\.yml$/.test(name))
     .map((name) => join(dataDir, name))
 
-  const cache = flatCache.load('jgrids-data')
-  const npm = new NpmApi()
-
   const items: AugmentedInfo[] = []
 
   await Promise.all(
@@ -98,13 +97,12 @@ export const getLibraries = async (): Promise<AugmentedInfo[]> => {
         }
       }
 
-      try {
-        if (item.githubRepo) {
-          // Cache responses because the GitHub public API limits are pretty low.
-          const key = `github-${item.githubRepo}`
-          let gh: any = cache.getKey(key)
-
-          if (!gh || gh.expires < Date.now()) {
+      if (item.githubRepo) {
+        // Cache responses because the GitHub public API limits are pretty low.
+        const key = `gh-${item.githubRepo}`
+        let gh: any = cache.get(key)
+        if (!gh) {
+          try {
             const url = `https://api.github.com/repos/${item.githubRepo}`
             console.log(`Fetching ${url}`)
 
@@ -119,34 +117,41 @@ export const getLibraries = async (): Promise<AugmentedInfo[]> => {
               expires: Date.now() + 60 * 60 * 1000,
               data: res.data,
             }
-            cache.setKey(key, gh)
-            cache.save(true)
-          }
-
-          item.github = {
-            url: gh.data.html_url,
-            stars: gh.data.stargazers_count,
-            forks: gh.data.forks_count,
-            openIssues: gh.data.open_issues_count,
-            watchers: gh.data.watchers_count,
-            subscribers: gh.data.subscribers_count,
-            network: gh.data.network_count,
+            cache.set(key, gh)
+          } catch (err) {
+            console.error(`Error getting GitHub data for ${id}: ${err}`)
           }
         }
-      } catch (err) {
-        console.error(`Error getting GitHub data for ${id}: ${err}`)
+
+        item.github = {
+          url: gh.data.html_url,
+          stars: gh.data.stargazers_count,
+          forks: gh.data.forks_count,
+          openIssues: gh.data.open_issues_count,
+          watchers: gh.data.watchers_count,
+          subscribers: gh.data.subscribers_count,
+          network: gh.data.network_count,
+        }
       }
 
-      try {
-        if (item.npmPackage) {
-          console.log(`Fetching downloads for NPM package ${item.npmPackage}`)
-          const repo = await npm.repo(item.npmPackage)
-          item.npm = {
-            downloads: await repo.last(7),
+      if (item.npmPackage) {
+        const key = `npm-${item.npmPackage}`
+        let npm = cache.get(key)
+        if (!npm) {
+          try {
+            console.log(`Fetching downloads for NPM package ${item.npmPackage}`)
+            const repo = await npmClient.repo(item.npmPackage)
+            npm = {
+              downloads: await repo.last(7),
+            }
+            cache.set(key, npm)
+          } catch (err) {
+            console.error(
+              `Error getting NPM data for ${item.npmPackage}: ${err}`
+            )
           }
+          item.npm = npm
         }
-      } catch (err) {
-        console.error(`Error getting NPM data for ${item.npmPackage}: ${err}`)
       }
 
       items.push(AugmentedInfo.check(item))
