@@ -42,6 +42,7 @@ const RawInfo = rt.Record({
       watchers: rt.Number,
       subscribers: rt.Number,
       network: rt.Number,
+      contributors: rt.Number,
     })
     .Or(rt.Undefined),
   npmPackage: rt.String.Or(rt.Null),
@@ -102,8 +103,8 @@ export const getLibraries = async (): Promise<AugmentedInfo[]> => {
 
       if (item.githubRepo) {
         // Cache responses because the GitHub public API limits are pretty low.
-        const key = `gh-${item.githubRepo}`
-        let gh: any = cache.get(key)
+        const key1 = `gh-${item.githubRepo}-info`
+        let gh: any = cache.get(key1)
         if (!gh) {
           try {
             const url = `https://api.github.com/repos/${item.githubRepo}`
@@ -116,24 +117,56 @@ export const getLibraries = async (): Promise<AugmentedInfo[]> => {
               )
             }
 
-            gh = {
-              expires: Date.now() + 60 * 60 * 1000,
-              data: res.data,
-            }
-            cache.set(key, gh)
+            gh = res.data
+            cache.set(key1, gh)
           } catch (err) {
             console.error(`Error getting GitHub data for ${id}: ${err}`)
           }
         }
 
+        const key2 = `gh-${item.githubRepo}-contributors`
+        let stats: any = cache.get(key2)
+        if (!stats) {
+          try {
+            const pageSize = 100
+            const url = `https://api.github.com/repos/${item.githubRepo}/contributors?per_page=${pageSize}`
+            console.log(`Fetching ${url}`)
+            const res1 = await axios.get(url)
+            if (res1.data.length < pageSize || !res1.headers.link) {
+              stats = { contributors: res1.data.length }
+            } else {
+              const lastPage = Number(
+                res1.headers.link
+                  .split(',')
+                  .find((s) => /rel="last"/.test(s))
+                  .match(/\bpage=(\d+)/)[1]
+              )
+              const url2 = `${url}&page=${lastPage}`
+              console.log(`Fetching ${url2}`)
+              const res2 = await axios.get(url2)
+              const total = pageSize * (lastPage - 1) + res2.data.length
+              stats = { contributors: total }
+            }
+            cache.set(key2, stats)
+          } catch (err) {
+            console.error(`Error getting GitHub stats for ${id}: ${err}`)
+          }
+        }
+
+        if (!stats) {
+          console.log('XXX', item.githubRepo, 'missing stats')
+          return
+        }
+
         item.github = {
-          url: gh.data.html_url,
-          stars: gh.data.stargazers_count,
-          forks: gh.data.forks_count,
-          openIssues: gh.data.open_issues_count,
-          watchers: gh.data.watchers_count,
-          subscribers: gh.data.subscribers_count,
-          network: gh.data.network_count,
+          url: gh.html_url,
+          stars: gh.stargazers_count,
+          forks: gh.forks_count,
+          openIssues: gh.open_issues_count,
+          watchers: gh.watchers_count,
+          subscribers: gh.subscribers_count,
+          network: gh.network_count,
+          contributors: stats.contributors,
         }
       }
 

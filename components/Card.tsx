@@ -8,6 +8,7 @@ import {
   FaReact,
   FaTimesCircle,
   FaVuejs,
+  FaUsers,
 } from 'react-icons/fa'
 import { GoIssueOpened, GoLaw, GoRepoForked, GoStar } from 'react-icons/go'
 import { IoLogoJavascript, IoMdDownload } from 'react-icons/io'
@@ -207,7 +208,7 @@ const Card: React.FC<{ info: AugmentedInfo }> = ({ info }) => {
         </div>
       </div>
       <div className="mb-5">{info.description}</div>
-      <div className="mb-5 grid grid-cols-4">
+      <div className="mb-5 grid grid-cols-5">
         <Tidbit
           icon={<GoStar />}
           value={gh?.stars}
@@ -224,6 +225,12 @@ const Card: React.FC<{ info: AugmentedInfo }> = ({ info }) => {
           icon={<GoRepoForked />}
           value={gh?.forks}
           title={`${gh?.stars} forks on GitHub`}
+          url={gh?.url}
+        />
+        <Tidbit
+          icon={<FaUsers />}
+          value={gh?.contributors}
+          title={`${gh?.contributors} contributors on GitHub`}
           url={gh?.url}
         />
         <Tidbit
