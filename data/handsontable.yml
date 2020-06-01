@@ -29,11 +29,13 @@ features:
   headless: false
   i18n: true
   maintained: true
+  openSource: true
   pagination: false
   pivots: false
   rangeSelection: true
   resizableCols: true
   responsive: false
+  rowGrouping: false
   rowSelection: true
   serverSide: false
   sorting: true

@@ -1,0 +1,46 @@
+title: jExcel
+homeUrl: https://bossanova.uk/jexcel/
+demoUrl: https://bossanova.uk/jexcel/v4/examples
+githubRepo: paulhodel/jexcel
+npmPackage: jexcel
+license: MIT or Commercial License
+revenueModel: Free for Older v4, Subscription for Newer v5
+description: >
+  jExcel is a lightweight vanilla javascript plugin to create amazing
+  web-based online interactive tables and spreadsheets compatible with other
+  spreadsheet softwares.
+frameworks:
+  vanilla: true
+  react: true
+  angular: true
+  vue: true
+  jquery: true
+features:
+  accessible: false
+  copyPaste: true
+  csvExport: true
+  customEditors: true
+  customFormatters: true
+  draggableRows: false
+  editable: true
+  fillDown: true
+  fillRight: true
+  filtering: true
+  formulas: true
+  freezableCols: true
+  headless: false
+  i18n: false
+  maintained: true
+  openSource: true
+  pagination: false
+  pivots: false
+  rangeSelection: true
+  resizableCols: true
+  responsive: false
+  rowGrouping: false
+  rowSelection: true
+  serverSide: false
+  sorting: true
+  trees: false
+  xlsxExport: true
+  virtualization: 'Only lazy-loading of rows. Vertical scrollbar is jumpy.'

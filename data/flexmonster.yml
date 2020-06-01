@@ -1,0 +1,43 @@
+title: Flexmonster
+homeUrl: https://www.flexmonster.com/
+demoUrl: https://www.flexmonster.com/demos/
+githubRepo: null
+npmPackage: flexmonster
+license: Custom License
+revenueModel: Commercial 30-day Trial
+description: >
+  The most powerful JavaScript tool for visualizing your business data.
+frameworks:
+  angular: true
+  react: true
+  vanilla: true
+  vue: true
+features:
+  accessible: false
+  copyPaste: true
+  csvExport: true
+  customEditors: false
+  customFormatters: true
+  draggableRows: false
+  editable: false
+  fillDown: false
+  fillRight: false
+  filtering: true
+  formulas: true
+  freezableCols: true
+  headless: false
+  i18n: true
+  maintained: true
+  openSource: 'Framework-specific additions are open-source but the core library is not.'
+  pagination: false
+  pivots: true
+  rangeSelection: false
+  resizableCols: true
+  responsive: false
+  rowGrouping: false
+  rowSelection: false
+  serverSide: true
+  sorting: true
+  trees: true
+  xlsxExport: true
+  virtualization: true

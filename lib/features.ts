@@ -69,6 +69,11 @@ export const FEATURES = {
     description:
       "Whether this library under active development, or has recently-fixed bugs, or is so wonderfully stable that it doesn't need maintenance.",
   },
+  openSource: {
+    title: 'Open-source',
+    description:
+      'Whether the source for this library is hosting in an online version control system.',
+  },
   pagination: {
     title: 'Pagination',
     description:
@@ -89,6 +94,11 @@ export const FEATURES = {
   responsive: {
     title: 'Responsive',
     description: 'Works well on tablet and mobile devices.',
+  },
+  rowGrouping: {
+    title: 'Row Grouping',
+    description:
+      'Whether rows be grouped and preferably collapsed and expanded.',
   },
   rowSelection: {
     title: 'Row Selection',

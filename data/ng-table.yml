@@ -1,0 +1,40 @@
+title: ng-table
+homeUrl: https://esvit.github.io/ng-table/
+demoUrl: null
+githubRepo: esvit/ng-table
+npmPackage: ng-table
+license: BSD 3-Clause License
+revenueModel: Free
+description: >
+  Simple table with sorting and filtering on AngularJS.
+frameworks:
+  angular: true
+features:
+  accessible: false
+  copyPaste: false
+  csvExport: false
+  customEditors: false
+  customFormatters: true
+  draggableRows: false
+  editable: "With row-wide 'Edit' button"
+  fillDown: false
+  fillRight: false
+  filtering: true
+  formulas: false
+  freezableCols: false
+  headless: false
+  i18n: false
+  maintained: false
+  openSource: true
+  pagination: true
+  pivots: false
+  rangeSelection: false
+  resizableCols: false
+  responsive: false
+  rowGrouping: false
+  rowSelection: false
+  serverSide: false
+  sorting: true
+  trees: false
+  xlsxExport: false
+  virtualization: false

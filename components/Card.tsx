@@ -85,7 +85,7 @@ const FeatureWithIcon: React.FC<{
         </span>
       </FeatureText>
     )
-  } else if (name === 'maintained' && !value) {
+  } else if (!value && (name === 'maintained' || name === 'openSource')) {
     return (
       <FeatureText>
         <span
@@ -93,7 +93,7 @@ const FeatureWithIcon: React.FC<{
           className="uppercase flex flex-row items-center mb-1"
         >
           <FaTimesCircle className="flex-none w-3 text-red-500" />
-          <span className="ml-1">Not Maintained</span>
+          <span className="ml-1">{`Not ${title}`}</span>
         </span>
       </FeatureText>
     )
@@ -121,7 +121,7 @@ const ActionButton: React.FC<{ href: string; title: string }> = ({
 const Actions: React.FC<{ info: AugmentedInfo }> = ({ info }) => (
   <div className="grid grid-cols-3 gap-4">
     <ActionButton href={info.demoUrl} title="Demo" />
-    <ActionButton href={info.github.url} title="Source" />
+    <ActionButton href={info.github?.url} title="Source" />
     <ActionButton href={info.homeUrl} title="Home" />
   </div>
 )
@@ -208,7 +208,7 @@ const Card: React.FC<{ info: AugmentedInfo }> = ({ info }) => {
         </div>
       </div>
       <div className="mb-5">{info.description}</div>
-      <div className="mb-5 grid grid-cols-5">
+      <div className="mb-5 flex flex-row justify-between">
         <Tidbit
           icon={<GoStar />}
           value={gh?.stars}

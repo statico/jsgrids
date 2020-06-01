@@ -1,0 +1,46 @@
+title: Tabulator
+homeUrl: http://tabulator.info/
+demoUrl: http://tabulator.info/examples/
+githubRepo: olifolkerd/tabulator
+npmPackage: tabulator-tables
+license: MIT License
+revenueModel: Donate via Patreon or PayPal
+description: >
+  The easy to use, fully featured, interactive table JavaScript library.
+  Tabulator allows you to create interactive tables in seconds from any HTML
+  Table, JavaScript Array, AJAX data source or JSON formatted data.
+frameworks:
+  vanilla: true
+  jquery: true
+  react: https://www.npmjs.com/package/react-tabulator
+  angular: https://www.npmjs.com/package/ng-tabulator-tables
+  vue: https://www.npmjs.com/package/vue-tabulator
+features:
+  accessible: true
+  copyPaste: false
+  csvExport: true
+  customEditors: true
+  customFormatters: true
+  draggableRows: true
+  editable: true
+  fillDown: false
+  fillRight: false
+  filtering: true
+  formulas: false
+  freezableCols: true
+  headless: false
+  i18n: true
+  maintained: true
+  openSource: true
+  pagination: false
+  pivots: false
+  rangeSelection: false
+  resizableCols: true
+  responsive: true
+  rowGrouping: true
+  rowSelection: true
+  serverSide: 'Support lazy loading of rows.'
+  sorting: true
+  trees: false
+  xlsxExport: true
+  virtualization: true

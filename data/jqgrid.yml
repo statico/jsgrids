@@ -1,0 +1,41 @@
+title: jqGrid
+homeUrl: http://guriddo.net/
+demoUrl: http://guriddo.net/?page_id=119
+githubRepo: tonytomov/jqGrid
+npmPackage: jqGrid
+license: CC-BY-NC-3.0 or Commerical License
+revenueModel: Free for Personal Use / Commercial License
+description: >
+  JqGrid is an Ajax-enabled JavaScript control that provides solutions for
+  representing and manipulating tabular data on the web.
+frameworks:
+  jquery: true
+features:
+  accessible: true
+  copyPaste: true
+  csvExport: true
+  customEditors: false
+  customFormatters: true
+  draggableRows: true
+  editable: true
+  fillDown: false
+  fillRight: false
+  filtering: true
+  formulas: false
+  freezableCols: false
+  headless: false
+  i18n: false
+  maintained: true
+  openSource: true
+  pagination: true
+  pivots: true
+  rangeSelection: false
+  resizableCols: true
+  responsive: false
+  rowGrouping: true
+  rowSelection: true
+  serverSide: true
+  sorting: true
+  trees: 'With limited levels of depth'
+  xlsxExport: true
+  virtualization: true

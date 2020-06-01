@@ -1,0 +1,41 @@
+title: React Spreadsheet Grid
+homeUrl: https://denisraslov.github.io/grid/
+demoUrl: https://denisraslov.github.io/grid/
+githubRepo: denisraslov/react-spreadsheet-grid
+npmPackage: react-spreadsheet-grid
+license: MIT License
+revenueModel: Free
+description: >
+  An Excel-like grid component for React with custom cell editors, performant
+  scroll & resizable columns.
+frameworks:
+  react: true
+features:
+  accessible: true
+  copyPaste: false
+  csvExport: false
+  customEditors: false
+  customFormatters: true
+  draggableRows: false
+  editable: true
+  fillDown: false
+  fillRight: false
+  filtering: false
+  formulas: false
+  freezableCols: false
+  headless: false
+  i18n: false
+  maintained: true
+  openSource: true
+  pagination: false
+  pivots: false
+  rangeSelection: false
+  resizableCols: true
+  responsive: false
+  rowGrouping: false
+  rowSelection: false
+  serverSide: false
+  sorting: false
+  trees: false
+  xlsxExport: false
+  virtualization: true
