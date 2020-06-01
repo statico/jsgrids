@@ -1,0 +1,40 @@
+title: React Data Grid
+homeUrl: https://adazzle.github.io/react-data-grid/
+demoUrl: https://adazzle.github.io/react-data-grid/docs/examples/simple-grid
+githubRepo: adazzle/react-data-grid
+npmPackage: react-data-grid
+license: MIT License
+revenueModel: Free
+description: >
+  Excel-like data grid component built with React. Lightning fast rendering,
+  rich editing and formatting, configurable & customizable, packed full of
+  Excel features.
+frameworks:
+  react: true
+features:
+  accessible: false
+  copyPaste: Only within the grid. System clipboard not supported.
+  csvExport: false
+  customEditors: true
+  customFormatters: true
+  draggableRows: true
+  editable: true
+  fillDown: true
+  fillRight: false
+  filtering: true
+  formulas: false
+  freezableCols: true
+  headless: false
+  i18n: false
+  maintained: true
+  pagination: false
+  pivots: false
+  rangeSelection: true
+  resizableCols: true
+  responsive: false
+  rowSelection: true
+  serverSide: false
+  sorting: true
+  trees: true
+  xlsxExport: false
+  virtualization: true

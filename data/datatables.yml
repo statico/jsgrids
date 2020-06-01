@@ -9,7 +9,9 @@ description: >
   A highly flexible tool, built upon the foundations of progressive
   enhancement, that adds all of these advanced features to any HTML table.
 frameworks:
-  - jquery
+  jquery: true
+  react: https://www.npmjs.com/package/datatables-react
+  angular: https://www.npmjs.com/package/angular-datatables
 features:
   accessible: true
   copyPaste: false
@@ -24,6 +26,7 @@ features:
   formulas: false
   freezableCols: false
   headless: Optional
+  i18n: true
   maintained: true
   pagination: true
   pivots: false

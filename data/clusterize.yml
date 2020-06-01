@@ -8,7 +8,9 @@ revenueModel: Free for Personal Use
 description: >
   A fast, tiny plugin for vanilla JavaScript to display large data sets easily.
 frameworks:
-  - vanilla
+  vanilla: true
+  vue: https://www.npmjs.com/package/vue-clusterize
+  react: https://www.npmjs.com/package/react-clusterize
 features:
   accessible: false
   copyPaste: false
@@ -23,6 +25,7 @@ features:
   formulas: false
   freezableCols: false
   headless: Optional
+  i18n: false
   maintained: false
   pagination: false
   pivots: false

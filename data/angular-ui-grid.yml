@@ -1,0 +1,41 @@
+title: Angular UI Grid
+homeUrl: http://ui-grid.info/
+demoUrl: http://ui-grid.info/
+githubRepo: angular-ui/ui-grid
+npmPackage: angular-ui-grid
+license: MIT License
+revenueModel: Free
+description: >
+  A data grid for AngularJS; part of the AngularUI suite.
+  Native AngularJS implementation, no jQuery.
+  Performs well with large data sets; even 10,000+ rows
+  Plugin architecture allows you to use only the features you need.
+frameworks:
+  angular: true
+features:
+  accessible: true
+  copyPaste: false
+  csvExport: false
+  customEditors: true
+  customFormatters: true
+  draggableRows: false
+  editable: true
+  fillDown: false
+  fillRight: false
+  filtering: true
+  formulas: false
+  freezableCols: true
+  headless: false
+  i18n: true
+  maintained: true
+  pagination: true
+  pivots: false
+  rangeSelection: true
+  resizableCols: true
+  responsive: false
+  rowSelection: true
+  serverSide: true
+  sorting: true
+  trees: true
+  xlsxExport: false
+  virtualization: true

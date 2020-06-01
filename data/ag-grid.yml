@@ -1,0 +1,43 @@
+title: ag-Grid
+homeUrl: https://www.ag-grid.com/
+demoUrl: https://www.ag-grid.com/example.php
+githubRepo: ag-grid/ag-grid
+npmPackage: ag-grid-community
+license: MIT or Commercial License
+revenueModel: Free for Personal Use
+description: >
+  At ag-Grid, our mission is simple: Build the best datagrid in the world.
+  Born out of frustration with existing solutions, ag-Grid evolved from a
+  side project to becoming the leading JavaScript datagrid on the market.
+frameworks:
+  vanilla: true
+  react: true
+  angular: true
+  vue: true
+features:
+  accessible: true
+  copyPaste: true
+  csvExport: true
+  customEditors: true
+  customFormatters: true
+  draggableRows: true
+  editable: true
+  fillDown: true
+  fillRight: true
+  filtering: true
+  formulas: false
+  freezableCols: true
+  headless: false
+  i18n: true
+  maintained: true
+  pagination: true
+  pivots: true
+  rangeSelection: true
+  resizableCols: true
+  responsive: false
+  rowSelection: true
+  serverSide: true
+  sorting: true
+  trees: true
+  xlsxExport: true
+  virtualization: true

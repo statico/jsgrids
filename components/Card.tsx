@@ -8,33 +8,11 @@ import {
   FaReact,
   FaTimesCircle,
   FaVuejs,
-  FaDownload,
 } from 'react-icons/fa'
 import { GoIssueOpened, GoLaw, GoRepoForked, GoStar } from 'react-icons/go'
 import { IoLogoJavascript, IoMdDownload } from 'react-icons/io'
 import { FEATURES } from '../lib/features'
 import { AugmentedInfo } from '../lib/libraries'
-
-const Tidbit: React.FC<{
-  icon: React.ReactNode
-  value?: any
-  title: string
-}> = ({ icon, value, title }) => (
-  <FeatureText size="big">
-    <span
-      title={title}
-      className={classNames(
-        'flex flex-row justify-center items-center',
-        value ? 'text-gray-800' : 'text-gray-500'
-      )}
-    >
-      {icon}&nbsp;
-      {value && typeof value === 'number'
-        ? value.toLocaleString()
-        : value || 'n/a'}
-    </span>
-  </FeatureText>
-)
 
 // Sort the features by negative ones first, then positive, then negative.
 // Only important negative features are shown, which is why they're first.
@@ -147,27 +125,76 @@ const Actions: React.FC<{ info: AugmentedInfo }> = ({ info }) => (
   </div>
 )
 
-const FrameworkList: React.FC<{ frameworks: AugmentedInfo['frameworks'] }> = ({
-  frameworks,
-}) => (
+const FrameworkInfo = {
+  vanilla: {
+    title: 'Vanilla JavaScript (no framework)',
+    Icon: IoLogoJavascript,
+  },
+  react: {
+    title: 'React',
+    Icon: FaReact,
+  },
+  vue: {
+    title: 'Vue.js',
+    Icon: FaVuejs,
+  },
+  angular: {
+    title: 'Angular',
+    Icon: FaAngular,
+  },
+  jquery: {
+    title: 'jQuery',
+    Icon: DiJqueryLogo,
+  },
+}
+
+const FrameworkList: React.FC<{ info: AugmentedInfo }> = ({ info }) => (
   <div className="flex flex-row items-center justify-center text-2xl">
-    {frameworks
-      .sort()
-      .map((name) =>
-        name === 'vanilla' ? (
-          <IoLogoJavascript title="Vanilla JavaScript" key={name} />
-        ) : name === 'react' ? (
-          <FaReact title="React" key={name} />
-        ) : name === 'vue' ? (
-          <FaVuejs title="Vue" key={name} />
-        ) : name === 'angular' ? (
-          <FaAngular title="Angular" key={name} />
-        ) : name === 'jquery' ? (
-          <DiJqueryLogo title="jQuery" key={name} />
-        ) : null
-      )}
+    {Object.keys(info.frameworks).map((name) => {
+      const value = info.frameworks[name]
+      const url = typeof value === 'string' ? value : info.homeUrl
+      const { title, Icon } = FrameworkInfo[name]
+      return (
+        <a href={url} key={name}>
+          <Icon title={title} />{' '}
+        </a>
+      )
+    })}
   </div>
 )
+
+const Tidbit: React.FC<{
+  icon: React.ReactNode
+  title: string
+  value?: any
+  url?: string
+}> = ({ icon, title, value, url }) => {
+  const cn = classNames(
+    'flex flex-row justify-center items-center',
+    value ? 'text-gray-800' : 'text-gray-500'
+  )
+  const contents = (
+    <>
+      {icon}&nbsp;
+      {value && typeof value === 'number'
+        ? value.toLocaleString()
+        : value || 'n/a'}
+    </>
+  )
+  return (
+    <FeatureText size="big">
+      {value ? (
+        <a href={url} title={title} className={cn}>
+          {contents}
+        </a>
+      ) : (
+        <span title={title} className={cn}>
+          {contents}
+        </span>
+      )}
+    </FeatureText>
+  )
+}
 
 const Card: React.FC<{ info: AugmentedInfo }> = ({ info }) => {
   const gh = info.github
@@ -176,7 +203,7 @@ const Card: React.FC<{ info: AugmentedInfo }> = ({ info }) => {
       <div className="mb-5 flex flex-row items-center justify-between">
         <div className="text-2xl text-center font-semibold">{info.title}</div>
         <div className="">
-          <FrameworkList frameworks={info.frameworks} />
+          <FrameworkList info={info} />
         </div>
       </div>
       <div className="mb-5">{info.description}</div>
@@ -185,21 +212,25 @@ const Card: React.FC<{ info: AugmentedInfo }> = ({ info }) => {
           icon={<GoStar />}
           value={gh?.stars}
           title={`${gh?.stars} stars on GitHub`}
+          url={gh?.url}
         />
         <Tidbit
           icon={<IoMdDownload />}
           value={info.npm?.downloads}
           title={`${info.npm?.downloads} downloads on NPM in the last week`}
+          url={info.npm?.url}
         />
         <Tidbit
           icon={<GoRepoForked />}
           value={gh?.forks}
           title={`${gh?.stars} forks on GitHub`}
+          url={gh?.url}
         />
         <Tidbit
           icon={<GoIssueOpened />}
           value={gh?.openIssues}
           title={`${gh?.stars} open issues on GitHub`}
+          url={gh?.url + '/issues'}
         />
       </div>
       <div className="mb-2">

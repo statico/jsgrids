@@ -9,10 +9,10 @@ description: >
   JavaScript data grid that looks and feels like a spreadsheet. Minimalistic,
   Excel-like grid component for web apps.
 frameworks:
-  - angular
-  - react
-  - vanilla
-  - vue
+  angular: true
+  react: true
+  vanilla: true
+  vue: true
 features:
   accessible: false
   copyPaste: true
@@ -27,6 +27,7 @@ features:
   formulas: false
   freezableCols: true
   headless: false
+  i18n: true
   maintained: true
   pagination: false
   pivots: false

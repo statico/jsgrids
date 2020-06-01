@@ -16,13 +16,15 @@ const GitHubRepo = rt.String.withConstraint(
   (str) => /^\S+\/\S+$/.test(str) || `${str} is not a username/repo pair`
 )
 const Feature = rt.Boolean.Or(URL).Or(rt.String)
-const Framework = rt.Union(
-  rt.Literal('vanilla'),
-  rt.Literal('react'),
-  rt.Literal('vue'),
-  rt.Literal('angular'),
-  rt.Literal('jquery')
-)
+
+const FrameworkValue = URL.Or(rt.Boolean).Or(rt.Undefined)
+const Frameworks = rt.Record({
+  vanilla: FrameworkValue,
+  react: FrameworkValue,
+  vue: FrameworkValue,
+  angular: FrameworkValue,
+  jquery: FrameworkValue,
+})
 
 const RawInfo = rt.Record({
   id: rt.String,
@@ -45,12 +47,13 @@ const RawInfo = rt.Record({
   npmPackage: rt.String.Or(rt.Null),
   npm: rt
     .Record({
+      url: URL,
       downloads: rt.Number,
     })
     .Or(rt.Undefined),
   license: rt.String.Or(rt.Null),
   revenueModel: rt.String.Or(rt.Null),
-  frameworks: rt.Array(Framework),
+  frameworks: Frameworks,
   features: rt.Dictionary(Feature),
 })
 
@@ -142,6 +145,7 @@ export const getLibraries = async (): Promise<AugmentedInfo[]> => {
             console.log(`Fetching downloads for NPM package ${item.npmPackage}`)
             const repo = await npmClient.repo(item.npmPackage)
             npm = {
+              url: `https://www.npmjs.com/package/${item.npmPackage}`,
               downloads: await repo.last(7),
             }
             cache.set(key, npm)
@@ -150,8 +154,8 @@ export const getLibraries = async (): Promise<AugmentedInfo[]> => {
               `Error getting NPM data for ${item.npmPackage}: ${err}`
             )
           }
-          item.npm = npm
         }
+        item.npm = npm
       }
 
       items.push(AugmentedInfo.check(item))

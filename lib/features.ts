@@ -60,6 +60,10 @@ export const FEATURES = {
     description:
       'There is no user interface provided by default -- this library is logic-only.',
   },
+  i18n: {
+    title: 'i18n',
+    description: 'Has features for internationalization and localization.',
+  },
   maintained: {
     title: 'Maintained',
     description:
