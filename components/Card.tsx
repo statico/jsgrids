@@ -9,6 +9,7 @@ import {
   FaTimesCircle,
   FaVuejs,
   FaUsers,
+  FaEmber,
 } from 'react-icons/fa'
 import { GoIssueOpened, GoLaw, GoRepoForked, GoStar } from 'react-icons/go'
 import { IoLogoJavascript, IoMdDownload } from 'react-icons/io'
@@ -146,6 +147,10 @@ const FrameworkInfo = {
   jquery: {
     title: 'jQuery',
     Icon: DiJqueryLogo,
+  },
+  ember: {
+    title: 'Ember.js',
+    Icon: FaEmber,
   },
 }
 

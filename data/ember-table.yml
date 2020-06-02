@@ -1,0 +1,42 @@
+title: Ember Table
+homeUrl: https://opensource.addepar.com/ember-table
+demoUrl: https://opensource.addepar.com/ember-table/docs/guides/main/basic-table
+githubRepo: Addepar/ember-table
+npmPackage: ember-table
+license: MIT License
+revenueModel: Free
+description: >
+  An addon to support large data set and a number of features around table.
+  Ember Table can handle over 100,000 rows without any rendering or
+  performance issue.
+frameworks:
+  ember: true
+features:
+  accessible: true
+  copyPaste: false
+  csvExport: false
+  customEditors: false
+  customFormatters: true
+  draggableRows: false
+  editable: false
+  fillDown: false
+  fillRight: false
+  filtering: false
+  formulas: false
+  freezableCols: false
+  headless: false
+  i18n: false
+  maintained: true
+  openSource: true
+  pagination: false
+  pivots: false
+  rangeSelection: false
+  resizableCols: true
+  responsive: false
+  rowGrouping: false
+  rowSelection: true
+  serverSide: false
+  sorting: true
+  trees: true
+  xlsxExport: false
+  virtualization: false

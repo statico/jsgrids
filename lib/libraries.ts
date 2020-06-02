@@ -24,6 +24,7 @@ const Frameworks = rt.Record({
   vue: FrameworkValue,
   angular: FrameworkValue,
   jquery: FrameworkValue,
+  ember: FrameworkValue,
 })
 
 const RawInfo = rt.Record({

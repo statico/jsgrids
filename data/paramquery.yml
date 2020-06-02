@@ -1,0 +1,44 @@
+title: ParamQuery
+homeUrl: https://paramquery.com/
+demoUrl: https://paramquery.com/demos
+githubRepo: paramquery/grid
+npmPackage: pqgrid
+license: GPL v3.0 or Commercial License
+revenueModel: Free (Vanilla JS Only) and Pro Versions
+description: >
+  ParamQuery Grid is an open source initiative for the web whose easy to use
+  interface is inspired by MS Excel and Google spreadsheets.
+frameworks:
+  vanilla: true
+  angular: true
+  react: true
+  vue: true
+features:
+  accessible: true
+  copyPaste: true
+  csvExport: true
+  customEditors: true
+  customFormatters: true
+  draggableRows: true
+  editable: true
+  fillDown: true
+  fillRight: true
+  filtering: true
+  formulas: false
+  freezableCols: true
+  headless: false
+  i18n: true
+  maintained: true
+  openSource: true
+  pagination: true
+  pivots: true
+  rangeSelection: true
+  resizableCols: true
+  responsive: false
+  rowGrouping: true
+  rowSelection: true
+  serverSide: true
+  sorting: true
+  trees: true
+  xlsxExport: true
+  virtualization: true

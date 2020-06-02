@@ -1,0 +1,42 @@
+title: w2ui
+homeUrl: http://w2ui.com/
+demoUrl: http://w2ui.com/web/demos/#!grid/grid-1
+githubRepo: vitmalina/w2ui
+npmPackage: w2ui
+license: MIT License
+revenueModel: Free
+description: >
+  w2ui is a modern and intuitive JavaScript UI library for building rich
+  data-driven web applications. The library has a small footprint and
+  requires only jQuery (1.9+) as a dependency.
+frameworks:
+  jquery: true
+features:
+  accessible: true
+  copyPaste: false
+  csvExport: false
+  customEditors: false
+  customFormatters: true
+  draggableRows: true
+  editable: true
+  fillDown: false
+  fillRight: false
+  filtering: true
+  formulas: false
+  freezableCols: true
+  headless: false
+  i18n: false
+  maintained: true
+  openSource: true
+  pagination: false
+  pivots: false
+  rangeSelection: false
+  resizableCols: true
+  responsive: false
+  rowGrouping: false
+  rowSelection: true
+  serverSide: false
+  sorting: true
+  trees: false
+  xlsxExport: false
+  virtualization: false

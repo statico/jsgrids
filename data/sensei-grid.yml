@@ -1,0 +1,41 @@
+title: Sensei Grid
+homeUrl: https://datazenit.com/static/sensei-grid/examples/index.html
+demoUrl: https://datazenit.com/static/sensei-grid/examples/index.html
+githubRepo: datazenit/sensei-grid
+npmPackage: sensei-grid
+license: MIT License
+revenueModel: Free
+description: >
+  Simple data grid library written in JavaScript. The data grid is part of
+  Datazenit, a web-based database administration tool.
+frameworks:
+  jquery: true
+features:
+  accessible: true
+  copyPaste: false
+  csvExport: false
+  customEditors: true
+  customFormatters: true
+  draggableRows: false
+  editable: true
+  fillDown: false
+  fillRight: false
+  filtering: false
+  formulas: false
+  freezableCols: false
+  headless: false
+  i18n: false
+  maintained: no
+  openSource: true
+  pagination: false
+  pivots: false
+  rangeSelection: false
+  resizableCols: false
+  responsive: false
+  rowGrouping: false
+  rowSelection: false
+  serverSide: false
+  sorting: true
+  trees: false
+  xlsxExport: false
+  virtualization: false

@@ -1,0 +1,40 @@
+title: React-Spreadsheet-Component
+homeUrl: https://github.com/felixrieseberg/React-Spreadsheet-Component
+demoUrl: https://felixrieseberg.github.io/React-Spreadsheet-Component/
+githubRepo: felixrieseberg/React-Spreadsheet-Component
+npmPackage: react-spreadsheet-component
+license: MIT License
+revenueModel: Free
+description: >
+  This is a spreadsheet component built in Facebook's ReactJS.
+frameworks:
+  react: true
+features:
+  accessible: true
+  copyPaste: false
+  csvExport: false
+  customEditors: false
+  customFormatters: false
+  draggableRows: false
+  editable: true
+  fillDown: false
+  fillRight: false
+  filtering: false
+  formulas: false
+  freezableCols: false
+  headless: false
+  i18n: false
+  maintained: false
+  openSource: true
+  pagination: false
+  pivots: false
+  rangeSelection: false
+  resizableCols: false
+  responsive: false
+  rowGrouping: false
+  rowSelection: false
+  serverSide: false
+  sorting: false
+  trees: false
+  xlsxExport: false
+  virtualization: false

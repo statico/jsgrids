@@ -1,0 +1,42 @@
+title: React-Pivot
+homeUrl: https://davidguttman.github.io/react-pivot/
+demoUrl: https://davidguttman.github.io/react-pivot/
+githubRepo: davidguttman/react-pivot
+npmPackage: react-pivot
+license: MIT License
+revenueModel: Free
+description: >
+  React-Pivot is a data-grid component with pivot-table-like functionality
+  for data display, filtering, and exploration.
+frameworks:
+  react: true
+  vanilla: true
+features:
+  accessible: true
+  copyPaste: false
+  csvExport: false
+  customEditors: false
+  customFormatters: false
+  draggableRows: false
+  editable: false
+  fillDown: false
+  fillRight: false
+  filtering: false
+  formulas: false
+  freezableCols: false
+  headless: false
+  i18n: false
+  maintained: true
+  openSource: true
+  pagination: false
+  pivots: true
+  rangeSelection: false
+  resizableCols: false
+  responsive: false
+  rowGrouping: false
+  rowSelection: false
+  serverSide: false
+  sorting: false
+  trees: false
+  xlsxExport: false
+  virtualization: false

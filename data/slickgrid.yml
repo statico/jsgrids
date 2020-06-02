@@ -1,0 +1,43 @@
+title: SlickGrid
+homeUrl: https://slickgrid.net/
+demoUrl: https://github.com/6pac/SlickGrid/wiki/Examples
+githubRepo: 6pac/SlickGrid
+npmPackage: slickgrid
+license: MIT License
+revenueModel: Free
+description: >
+  SlickGrid is a fully open-source, javascript, client-side grid control
+  designed to take an external component as a datasource, and that means
+  SlickGrid should be compatible with a wide range of modern data-centric
+  frameworks.
+frameworks:
+  jquery: true
+features:
+  accessible: false
+  copyPaste: false
+  csvExport: false
+  customEditors: true
+  customFormatters: true
+  draggableRows: true
+  editable: true
+  fillDown: false
+  fillRight: false
+  filtering: true
+  formulas: false
+  freezableCols: true
+  headless: false
+  i18n: false
+  maintained: true
+  openSource: true
+  pagination: true
+  pivots: false
+  rangeSelection: false
+  resizableCols: true
+  responsive: false
+  rowGrouping: true
+  rowSelection: true
+  serverSide: false
+  sorting: true
+  trees: true
+  xlsxExport: false
+  virtualization: true

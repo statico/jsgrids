@@ -2,7 +2,7 @@ export const FEATURES = {
   accessible: {
     title: 'Accessible',
     description:
-      'Has focused on features to make the interface less challenging for those with disabilities.',
+      'Uses semantic markup or ARIA attributes to make the interface less challenging to use.',
   },
   copyPaste: {
     title: 'Copy and Paste',
