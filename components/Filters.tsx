@@ -24,7 +24,7 @@ const SortSelector: React.FC<{
 }> = ({ value, onChange }) => {
   const sortOption = SortOptions.find((s) => s.key === value)
   if (!sortOption) {
-    throw new Error(`Unknown sort option ${filters.sort}`)
+    throw new Error(`Unknown sort option ${value}`)
   }
   return (
     <SingleItemChooser

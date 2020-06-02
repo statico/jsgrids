@@ -5,7 +5,7 @@ import { GoChevronDown } from 'react-icons/go'
 
 interface Props {
   value: string
-  items: [[string, ReactNode]]
+  items: [string, ReactNode][]
   onChange: (newValue: string) => void
 }
 
