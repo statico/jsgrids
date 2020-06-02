@@ -1,0 +1,41 @@
+title: React Virtualized Pivot
+homeUrl: https://github.com/turnerniles/react-virtualized-pivot
+demoUrl: https://turnerniles.github.io/react-virtualized-pivot/
+githubRepo: turnerniles/react-virtualized-pivot
+npmPackage: react-virtualized-pivot
+license: MIT License
+revenueModel: Free
+description: >
+  react-virtualized-pivot is a React.js pivot table UI built on top of
+  react-virtualized and quick-pivot.
+frameworks:
+  react: true
+features:
+  accessible: false
+  copyPaste: false
+  csvExport: false
+  customEditors: false
+  customFormatters: false
+  draggableRows: false
+  editable: false
+  fillDown: false
+  fillRight: false
+  filtering: false
+  formulas: false
+  freezableCols: false
+  headless: false
+  i18n: false
+  maintained: false
+  openSource: true
+  pagination: false
+  pivots: true
+  rangeSelection: false
+  resizableCols: false
+  responsive: false
+  rowGrouping: false
+  rowSelection: false
+  serverSide: false
+  sorting: true
+  trees: false
+  xlsxExport: false
+  virtualization: true

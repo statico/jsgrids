@@ -1,0 +1,45 @@
+title: SyncFusion DataGrid
+homeUrl: https://www.syncfusion.com/javascript-ui-controls/js-data-grid
+demoUrl: https://ej2.syncfusion.com/demos/#/material/grid/grid-overview.html
+githubRepo: syncfusion/ej2-grids
+npmPackage: '@syncfusion/ej2-grids'
+license: Custom License
+revenueModel: Commercial License
+description: >
+  HTML5/JavaScript Grid/DataGrid is a feature-rich control for displaying
+  data in a tabular format. Its wide range of functionalities includes data
+  binding, editing, Excel-like filtering, custom sorting, aggregating rows,
+  selection, and support for Excel, CSV, and PDF formats.
+frameworks:
+  react: true
+  angular: true
+  vue: true
+features:
+  accessible: true
+  copyPaste: false
+  csvExport: true
+  customEditors: true
+  customFormatters: true
+  draggableRows: false
+  editable: true
+  fillDown: false
+  fillRight: false
+  filtering: true
+  formulas: false
+  freezableCols: true
+  headless: false
+  i18n: true
+  maintained: true
+  openSource: true
+  pagination: true
+  pivots: false
+  rangeSelection: false
+  resizableCols: true
+  responsive: false
+  rowGrouping: true
+  rowSelection: true
+  serverSide: true
+  sorting: true
+  trees: false
+  xlsxExport: true
+  virtualization: true

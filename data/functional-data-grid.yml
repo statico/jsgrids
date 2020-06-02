@@ -1,0 +1,42 @@
+title: Functional Data Grid
+homeUrl: https://github.com/energydrink9/functional-data-grid
+demoUrl: https://energydrink9.github.io/functional-data-grid-examples/
+githubRepo: energydrink9/functional-data-grid
+npmPackage: functional-data-grid
+license: MIT License
+revenueModel: Donations
+description: >
+  This is a library made with React and React-Virtualized for creating rich
+  data grids. It's really fast and is being used in production with tens of
+  thousands of elements.
+frameworks:
+  react: true
+features:
+  accessible: false
+  copyPaste: false
+  csvExport: false
+  customEditors: false
+  customFormatters: true
+  draggableRows: false
+  editable: false
+  fillDown: false
+  fillRight: false
+  filtering: true
+  formulas: false
+  freezableCols: false
+  headless: false
+  i18n: false
+  maintained: true
+  openSource: true
+  pagination: false
+  pivots: false
+  rangeSelection: false
+  resizableCols: true
+  responsive: false
+  rowGrouping: true
+  rowSelection: false
+  serverSide: false
+  sorting: true
+  trees: false
+  xlsxExport: false
+  virtualization: true

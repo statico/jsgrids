@@ -1,0 +1,42 @@
+title: ipgrid
+homeUrl: http://www.inspireproduction.co.za/
+demoUrl: http://www.inspireproduction.co.za/#/demo-ui/jquery-spreadsheet
+githubRepo: marzsocks/ipgrid
+npmPackage: null
+license: MIT License
+revenueModel: Donations
+description: >
+  Spreadsheet is a fully functional native javascript spreadsheet. It is
+  inspired by Google sheets, shares similar functionality, but is 100%
+  original hand coded.
+frameworks:
+  jquery: true
+features:
+  accessible: true
+  copyPaste: false
+  csvExport: false
+  customEditors: false
+  customFormatters: true
+  draggableRows: true
+  editable: true
+  fillDown: false
+  fillRight: false
+  filtering: false
+  formulas: true
+  freezableCols: false
+  headless: false
+  i18n: false
+  maintained: false
+  openSource: true
+  pagination: false
+  pivots: false
+  rangeSelection: true
+  resizableCols: true
+  responsive: false
+  rowGrouping: true
+  rowSelection: true
+  serverSide: false
+  sorting: true
+  trees: false
+  xlsxExport: false
+  virtualization: true

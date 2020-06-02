@@ -1,0 +1,41 @@
+title: Sou React Table
+homeUrl: https://miadwang.github.io/sou-react-table/
+demoUrl: https://miadwang.github.io/sou-react-table/
+githubRepo: miadwang/sou-react-table
+npmPackage: sou-react-table
+license: MIT License
+revenueModel: Free
+description: >
+  A spreadsheet component for React with simple and clean spreadsheet-like
+  features.
+frameworks:
+  react: true
+features:
+  accessible: true
+  copyPaste: true
+  csvExport: false
+  customEditors: false
+  customFormatters: false
+  draggableRows: false
+  editable: true
+  fillDown: true
+  fillRight: true
+  filtering: false
+  formulas: false
+  freezableCols: false
+  headless: false
+  i18n: false
+  maintained: false
+  openSource: true
+  pagination: false
+  pivots: false
+  rangeSelection: true
+  resizableCols: false
+  responsive: false
+  rowGrouping: false
+  rowSelection: false
+  serverSide: false
+  sorting: true
+  trees: false
+  xlsxExport: false
+  virtualization: false

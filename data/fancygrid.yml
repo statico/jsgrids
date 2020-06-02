@@ -1,0 +1,43 @@
+title: FancyGrid
+homeUrl: https://fancygrid.com/
+demoUrl: https://fancygrid.com/gallery/
+githubRepo: FancyGrid/FancyGrid
+npmPackage: fancygrid
+license: Custom License
+revenueModel: Commercial 60-day Trial
+description: >
+  JavaScript grid library with charts integration and server communication.
+frameworks:
+  angular: true
+  react: true
+  vanilla: true
+  vue: true
+features:
+  accessible: false
+  copyPaste: true
+  csvExport: true
+  customEditors: true
+  customFormatters: true
+  draggableRows: true
+  editable: true
+  fillDown: false
+  fillRight: false
+  filtering: true
+  formulas: false
+  freezableCols: true
+  headless: false
+  i18n: true
+  maintained: true
+  openSource: true
+  pagination: true
+  pivots: false
+  rangeSelection: true
+  resizableCols: true
+  responsive: true
+  rowGrouping: true
+  rowSelection: true
+  serverSide: true
+  sorting: true
+  trees: true
+  xlsxExport: true
+  virtualization: true

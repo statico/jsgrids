@@ -1,22 +1,21 @@
-title: ParamQuery
-homeUrl: https://paramquery.com/
-demoUrl: https://paramquery.com/demos
-githubRepo: paramquery/grid
-npmPackage: pqgrid
-license: GPL v3.0 or Commercial License
-revenueModel: Free (Vanilla JS Only) and Pro Versions
+title: Smart.Grid
+homeUrl: https://www.htmlelements.com/docs/grid/
+demoUrl: https://www.htmlelements.com/demos/grid/overview/
+githubRepo: HTMLElements/smart-webcomponents
+npmPackage: '@smarthtmlelements/smart-elements'
+license: Custom License
+revenueModel: Community and Enterprise Versions
 description: >
-  ParamQuery Grid is an open source initiative for the web whose easy to use
-  interface is inspired by MS Excel and Google spreadsheets. Angular, React,
-  and Vue support is available with a paid Pro license.
+  Smart.Grid represents a Data Grid component which displays tabular data. It
+  allows you to sort, filter, edit, group the data.
 frameworks:
-  vanilla: true
   angular: true
   react: true
+  vanilla: true
   vue: true
 features:
   accessible: true
-  copyPaste: true
+  copyPaste: false
   csvExport: true
   customEditors: true
   customFormatters: true
@@ -32,13 +31,13 @@ features:
   maintained: true
   openSource: true
   pagination: true
-  pivots: true
+  pivots: false
   rangeSelection: true
   resizableCols: true
-  responsive: false
+  responsive: true
   rowGrouping: true
   rowSelection: true
-  serverSide: true
+  serverSide: false
   sorting: true
   trees: true
   xlsxExport: true
