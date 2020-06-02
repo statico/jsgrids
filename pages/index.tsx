@@ -3,6 +3,7 @@ import Footer from '../components/Footer'
 import Header from '../components/Header'
 import { AugmentedInfo, getLibraries } from '../lib/libraries'
 import Card from '../components/Card'
+import { FilteredItems } from '../components/Filters'
 
 interface Props {
   items: AugmentedInfo[]
@@ -11,13 +12,22 @@ interface Props {
 const Page: NextPage<Props> = ({ items }) => (
   <>
     <Header />
-    <div className="container mx-auto px-4 py-8 lg:py-10">
-      <div className="grid gap-4 md:gap-6 lg:gap-8 grid-cols-1 lg:grid-cols-2 xl:grid-cols-3">
-        {items.map((item) => (
-          <Card key={item.id} info={item} />
-        ))}
-      </div>
-    </div>
+    <FilteredItems items={items}>
+      {(filteredItems, filterBar) => (
+        <>
+          <div className="container mx-auto my-4 flex flex-row justify-center">
+            {filterBar}
+          </div>
+          <div className="container mx-auto px-4">
+            <div className="grid gap-4 md:gap-6 lg:gap-8 grid-cols-1 lg:grid-cols-2 xl:grid-cols-3">
+              {filteredItems.map((item) => (
+                <Card key={item.id} info={item} />
+              ))}
+            </div>
+          </div>
+        </>
+      )}
+    </FilteredItems>
     <Footer />
   </>
 )

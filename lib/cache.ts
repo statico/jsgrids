@@ -2,7 +2,7 @@ import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'fs'
 import { join } from 'path'
 import * as crypto from 'crypto'
 
-const age = 1000 * 60 * 60
+const age = 1000 * 60 * 60 * 24
 
 const basedir = join(process.cwd(), '.cache')
 mkdirSync(basedir, { recursive: true })
