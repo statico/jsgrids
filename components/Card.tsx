@@ -1,20 +1,16 @@
 import classNames from 'classnames'
-import { DiJqueryLogo } from 'react-icons/di'
 import {
-  FaAngular,
   FaCheckCircle,
   FaDollarSign,
   FaInfoCircle,
-  FaReact,
   FaTimesCircle,
-  FaVuejs,
   FaUsers,
-  FaEmber,
 } from 'react-icons/fa'
 import { GoIssueOpened, GoLaw, GoRepoForked, GoStar } from 'react-icons/go'
-import { IoLogoJavascript, IoMdDownload } from 'react-icons/io'
+import { IoMdDownload } from 'react-icons/io'
 import { FEATURES } from '../lib/features'
 import { AugmentedInfo } from '../lib/libraries'
+import { FrameworkTitles, FrameworkIcons } from './Frameworks'
 
 // Sort the features by negative ones first, then positive, then negative.
 // Only important negative features are shown, which is why they're first.
@@ -127,39 +123,13 @@ const Actions: React.FC<{ info: AugmentedInfo }> = ({ info }) => (
   </div>
 )
 
-const FrameworkInfo = {
-  vanilla: {
-    title: 'Vanilla JavaScript (no framework)',
-    Icon: IoLogoJavascript,
-  },
-  react: {
-    title: 'React',
-    Icon: FaReact,
-  },
-  vue: {
-    title: 'Vue.js',
-    Icon: FaVuejs,
-  },
-  angular: {
-    title: 'Angular',
-    Icon: FaAngular,
-  },
-  jquery: {
-    title: 'jQuery',
-    Icon: DiJqueryLogo,
-  },
-  ember: {
-    title: 'Ember.js',
-    Icon: FaEmber,
-  },
-}
-
 const FrameworkList: React.FC<{ info: AugmentedInfo }> = ({ info }) => (
   <div className="flex flex-row items-center justify-center text-2xl">
     {Object.keys(info.frameworks).map((name) => {
       const value = info.frameworks[name]
       const url = typeof value === 'string' ? value : info.homeUrl
-      const { title, Icon } = FrameworkInfo[name]
+      const title = FrameworkTitles[name]
+      const Icon = FrameworkIcons[name]
       return (
         <a href={url} key={name}>
           <Icon title={title} />{' '}

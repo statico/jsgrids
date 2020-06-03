@@ -1,37 +1,28 @@
 import { useState } from 'react'
-import { AugmentedInfo } from '../lib/libraries'
-import { SortOptions } from '../lib/sorting'
+import { AugmentedInfo, FrameworkName } from '../lib/libraries'
+import { SortOptions, SortOptionName } from '../lib/sorting'
 import SingleItemChooser from './SingleItemChooser'
+import { FrameworkNames, FrameworkIcons, FrameworkTitles } from './Frameworks'
+import classNames from 'classnames'
 
 interface FilterState {
-  sort: string
-  frameworks: Set<string>
+  sort: SortOptionName
+  frameworks: Set<FrameworkName>
   features: Set<string>
   licenses: Set<string>
 }
 
-interface FilteredItemsProps {
-  items: AugmentedInfo[]
-  children: (
-    filteredItems: AugmentedInfo[],
-    filterBar: React.ReactNode
-  ) => React.ReactNode
-}
-
 const SortSelector: React.FC<{
-  value: string
-  onChange: (newValue: string) => void
+  value: SortOptionName
+  onChange: (newValue: SortOptionName) => void
 }> = ({ value, onChange }) => {
-  const sortOption = SortOptions.find((s) => s.key === value)
-  if (!sortOption) {
-    throw new Error(`Unknown sort option ${value}`)
-  }
+  const sortOption = SortOptions.find((s) => s.name === value)
   return (
     <SingleItemChooser
       value={value}
       onChange={onChange}
       items={SortOptions.map((s) => [
-        s.key,
+        s.name,
         <>
           <div>{s.title}</div>
           {s.byline && <div className="text-gray-600">{s.byline}</div>}
@@ -40,6 +31,43 @@ const SortSelector: React.FC<{
     >
       Sort by {sortOption.title}
     </SingleItemChooser>
+  )
+}
+
+const FrameworkSelector: React.FC<{
+  selected: Set<FrameworkName>
+  onChange: (newValue: Set<FrameworkName>) => void
+}> = ({ selected, onChange }) => {
+  const handleToggle = (name: FrameworkName) => () => {
+    const newValue = new Set(selected)
+    if (selected.has(name)) {
+      newValue.delete(name)
+    } else {
+      newValue.add(name)
+    }
+    onChange(newValue)
+  }
+  return (
+    <div className="flex flex-row items-center">
+      <span className="mr-2">Frameworks:</span>
+      {FrameworkNames.map((name) => {
+        const Icon = FrameworkIcons[name]
+        const title = FrameworkTitles[name]
+        const color = selected.has(name) ? 'bg-blue-400' : 'bg-transparent'
+        return (
+          <Icon
+            style={{ width: 40, height: 40 }}
+            title={title}
+            className={classNames(
+              'text-gray-800 hover:bg-gray-300',
+              'm-1 p-1 rounded-md transition-colors duration-100 cursor-pointer',
+              color
+            )}
+            onClick={handleToggle(name)}
+          />
+        )
+      })}
+    </div>
   )
 }
 
@@ -52,12 +80,20 @@ const hasKeys = (obj: Object, keys: Iterable<string>) => {
   return true
 }
 
+interface FilteredItemsProps {
+  items: AugmentedInfo[]
+  children: (
+    filteredItems: AugmentedInfo[],
+    filterBar: React.ReactNode
+  ) => React.ReactNode
+}
+
 export const FilteredItems: React.FC<FilteredItemsProps> = ({
   items,
   children,
 }) => {
   const [filters, setFilters] = useState<FilterState>({
-    sort: SortOptions[0].key,
+    sort: SortOptions[0].name,
     frameworks: new Set(),
     features: new Set(),
     licenses: new Set(['MIT License']),
@@ -65,7 +101,7 @@ export const FilteredItems: React.FC<FilteredItemsProps> = ({
 
   let clone = items.slice() // Shallow copy
 
-  const sortOption = SortOptions.find((s) => s.key === filters.sort)
+  const sortOption = SortOptions.find((s) => s.name === filters.sort)
   if (!sortOption) {
     throw new Error(`Unknown sort option ${filters.sort}`)
   }
@@ -81,15 +117,25 @@ export const FilteredItems: React.FC<FilteredItemsProps> = ({
     clone = clone.filter((item) => filters.licenses.has(item.license))
   }
 
+  const Separator = () => <div className="mx-2" />
+
   const filterBar = (
-    <div className="text-gray-800">
+    <div className="text-gray-800 flex flex-row items-center select-none">
       <SortSelector
         value={filters.sort}
         onChange={(sort) => {
           setFilters({ ...filters, sort })
         }}
       />
-      {clone.length} results
+      <Separator />
+      <FrameworkSelector
+        selected={filters.frameworks}
+        onChange={(frameworks) => {
+          setFilters({ ...filters, frameworks })
+        }}
+      />
+      <Separator />
+      <div className="px-2">{clone.length} results</div>
     </div>
   )
 

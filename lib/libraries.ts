@@ -44,6 +44,7 @@ const GitHubRepo = rt.String.withConstraint(
 const Feature = rt.Boolean.Or(URL).Or(rt.String)
 
 const FrameworkValue = URL.Or(rt.Boolean).Or(rt.Undefined)
+
 const Frameworks = rt.Record({
   vanilla: FrameworkValue,
   react: FrameworkValue,
@@ -52,6 +53,8 @@ const Frameworks = rt.Record({
   jquery: FrameworkValue,
   ember: FrameworkValue,
 })
+
+export type FrameworkName = keyof rt.Static<typeof Frameworks>
 
 const RawInfo = rt.Record({
   id: rt.String,

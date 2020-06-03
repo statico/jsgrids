@@ -1,15 +1,17 @@
 import { AugmentedInfo } from './libraries'
 
-interface SortOption {
-  key: string
+export interface SortOption {
+  name: 'popularity' | 'stars' | 'downloads'
   title: string
   byline?: string
   fn: (a: AugmentedInfo, b: AugmentedInfo) => number
 }
 
+export type SortOptionName = SortOption['name']
+
 export const SortOptions: SortOption[] = [
   {
-    key: 'popularity',
+    name: 'popularity',
     title: 'Popularity',
     byline: 'GitHub stars + NPM downloads',
     fn: (a, b) => {
@@ -19,12 +21,12 @@ export const SortOptions: SortOption[] = [
     },
   },
   {
-    key: 'stars',
+    name: 'stars',
     title: 'GitHub Stars',
     fn: (a, b) => b.github?.stars - a.github?.stars,
   },
   {
-    key: 'downloads',
+    name: 'downloads',
     title: 'NPM Weekly Downloads',
     fn: (a, b) => b.npm?.downloads - a.npm?.downloads,
   },
