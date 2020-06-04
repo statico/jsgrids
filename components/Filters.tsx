@@ -1,15 +1,15 @@
+import classNames from 'classnames'
 import { useState } from 'react'
-import { AugmentedInfo, FrameworkName } from '../lib/libraries'
-import { SortOptions, SortOptionName } from '../lib/sorting'
-import SingleItemMenu from './SingleItemMenu'
+import { FeatureName, FeatureNames, Features } from '../lib/features'
 import {
-  FrameworkNames,
   FrameworkIcons,
+  FrameworkNames,
   FrameworkTitles,
 } from '../lib/frameworks'
-import classNames from 'classnames'
-import { FeatureName, FeatureNames, Features } from '../lib/features'
+import { AugmentedInfo, FrameworkName } from '../lib/libraries'
+import { SortOptionName, SortOptions } from '../lib/sorting'
 import MultiItemPicker from './MultiItemPicker'
+import SingleItemMenu from './SingleItemMenu'
 import SingleItemPicker from './SingleItemPicker'
 
 interface FilterState {
@@ -17,28 +17,6 @@ interface FilterState {
   framework: FrameworkName | null
   features: Set<FeatureName>
   license: string | null
-}
-
-const SortSelector: React.FC<{
-  value: SortOptionName
-  onChange: (newSelected: SortOptionName) => void
-}> = ({ value, onChange }) => {
-  const sortOption = SortOptions.find((s) => s.name === value)
-  return (
-    <SingleItemMenu
-      value={value}
-      onChange={onChange}
-      items={SortOptions.map((s) => [
-        s.name,
-        <>
-          <div>{s.title}</div>
-          {s.byline && <div className="text-gray-600">{s.byline}</div>}
-        </>,
-      ])}
-    >
-      Sort by {sortOption.title}
-    </SingleItemMenu>
-  )
 }
 
 const FrameworkSelector: React.FC<{
@@ -90,7 +68,7 @@ const FeaturesSelector: React.FC<{
         description: Features[name].description,
       }))}
     >
-      {selected.size || ''} Features
+      {selected.size ? `${selected.size} Features` : 'Any Feature'} 
     </MultiItemPicker>
   )
 }
@@ -112,8 +90,20 @@ const LicenseSelector: React.FC<{
           description: "See the project's home page for license details.",
         }))}
     >
-      {selected || 'License'}
+      {selected || 'Any License'}
     </SingleItemPicker>
+  )
+}
+
+const SortSelector: React.FC<{
+  value: SortOptionName
+  onChange: (newSelected: SortOptionName) => void
+}> = ({ value, onChange }) => {
+  const sortOption = SortOptions.find((s) => s.name === value)
+  return (
+    <SingleItemMenu onChange={onChange} items={SortOptions}>
+      Sort by {sortOption.title}
+    </SingleItemMenu>
   )
 }
 

@@ -30,40 +30,42 @@ export const MultiItemPicker: React.FC<Props> = ({
       </FilterBarButton>
     }
   >
-    <div className="mb-3">Choose one or more features:</div>
-    <div className="grid grid-cols-2 row-gap-0 col-gap-3 mb-3">
-      {options.map(({ key, title, description }) => (
-        <label
-          key={key}
-          title={description}
-          className="cursor-pointer hover:bg-gray-100 px-1 py-1"
-        >
-          <input
-            type="checkbox"
-            className="align-middle mb-1 mr-2"
-            checked={selected.has(key)}
-            onChange={(event) => {
-              const newValue = new Set(selected)
-              if (event.target.checked) {
-                newValue.add(key)
-              } else {
-                newValue.delete(key)
-              }
-              onChange(newValue)
-            }}
-          />
-          {title}
-        </label>
-      ))}
+    <div className="block w-full p-3 text-sm whitespace-no-wrap">
+      <div className="mb-3">Choose one or more features:</div>
+      <div className="grid grid-cols-2 row-gap-0 col-gap-3 mb-3">
+        {options.map(({ key, title, description }) => (
+          <label
+            key={key}
+            title={description}
+            className="cursor-pointer hover:bg-gray-100 px-1 py-1 rounded-sm"
+          >
+            <input
+              type="checkbox"
+              className="align-middle mb-1 mr-2"
+              checked={selected.has(key)}
+              onChange={(event) => {
+                const newValue = new Set(selected)
+                if (event.target.checked) {
+                  newValue.add(key)
+                } else {
+                  newValue.delete(key)
+                }
+                onChange(newValue)
+              }}
+            />
+            {title}
+          </label>
+        ))}
+      </div>
+      <Button
+        small
+        title="Clear All"
+        disabled={selected.size === 0}
+        onClick={() => {
+          onChange(new Set())
+        }}
+      />
     </div>
-    <Button
-      small
-      title="Clear All"
-      disabled={selected.size === 0}
-      onClick={() => {
-        onChange(new Set())
-      }}
-    />
   </Dropdown>
 )
 

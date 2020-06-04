@@ -37,6 +37,7 @@ export const Dropdown: React.FC<{
         ref={buttonRef}
         onMouseEnter={handleEnterButton}
         onMouseLeave={handleLeaveButton}
+        onClick={handleLeaveButton}
       >
         {button}
       </div>
@@ -50,9 +51,7 @@ export const Dropdown: React.FC<{
         onMouseEnter={handleEnterPopup}
         onMouseLeave={handleLeavePopup}
       >
-        <div className="block w-full p-3 text-sm whitespace-no-wrap">
-          {children}
-        </div>
+        {children}
       </div>
     </>
   )
