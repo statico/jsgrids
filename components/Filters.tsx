@@ -7,13 +7,12 @@ import {
   FrameworkTitles,
 } from '../lib/frameworks'
 import { AugmentedInfo, FrameworkName } from '../lib/libraries'
-import { SortOptionName, SortOptions } from '../lib/sorting'
+import { SortOptionKey, SortOptions } from '../lib/sorting'
 import MultiItemPicker from './MultiItemPicker'
-import SingleItemMenu from './SingleItemMenu'
 import SingleItemPicker from './SingleItemPicker'
 
 interface FilterState {
-  sort: SortOptionName
+  sort: SortOptionKey
   framework: FrameworkName | null
   features: Set<FeatureName>
   license: string | null
@@ -68,7 +67,7 @@ const FeaturesSelector: React.FC<{
         description: Features[name].description,
       }))}
     >
-      {selected.size ? `${selected.size} Features` : 'Any Feature'} 
+      {selected.size ? `${selected.size} Features` : 'Any Feature'}
     </MultiItemPicker>
   )
 }
@@ -96,14 +95,19 @@ const LicenseSelector: React.FC<{
 }
 
 const SortSelector: React.FC<{
-  value: SortOptionName
-  onChange: (newSelected: SortOptionName) => void
-}> = ({ value, onChange }) => {
-  const sortOption = SortOptions.find((s) => s.name === value)
+  selected: SortOptionKey
+  onChange: (newSelected: SortOptionKey) => void
+}> = ({ selected, onChange }) => {
+  const selectedOption = SortOptions.find((s) => s.key === selected)
   return (
-    <SingleItemMenu onChange={onChange} items={SortOptions}>
-      Sort by {sortOption.title}
-    </SingleItemMenu>
+    <SingleItemPicker
+      selected={selected}
+      onChange={onChange}
+      options={SortOptions}
+      allowNull={false}
+    >
+      Sort by {selectedOption.title}
+    </SingleItemPicker>
   )
 }
 
@@ -129,7 +133,7 @@ export const FilteredItems: React.FC<FilteredItemsProps> = ({
   children,
 }) => {
   const [filters, setFilters] = useState<FilterState>({
-    sort: SortOptions[0].name,
+    sort: SortOptions[0].key,
     framework: null,
     features: new Set(),
     license: null,
@@ -137,7 +141,7 @@ export const FilteredItems: React.FC<FilteredItemsProps> = ({
 
   let clone = items.slice() // Shallow copy
 
-  const sortOption = SortOptions.find((s) => s.name === filters.sort)
+  const sortOption = SortOptions.find((s) => s.key === filters.sort)
   if (!sortOption) {
     throw new Error(`Unknown sort option ${filters.sort}`)
   }
@@ -180,7 +184,7 @@ export const FilteredItems: React.FC<FilteredItemsProps> = ({
       />
       <Separator />
       <SortSelector
-        value={filters.sort}
+        selected={filters.sort}
         onChange={(sort) => {
           setFilters({ ...filters, sort })
         }}

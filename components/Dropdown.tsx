@@ -45,7 +45,7 @@ export const Dropdown: React.FC<{
         ref={popupRef}
         className={classnames(
           isOverButton || isOverPopup ? 'block' : 'hidden',
-          'bg-white z-50 float-left rounded-sm shadow-md text-left mt-1 border-gray-200 border select-none'
+          'bg-white z-50 float-left rounded-sm shadow-lg text-left mt-1 border-gray-200 border select-none'
         )}
         style={{ minWidth: '12rem' }}
         onMouseEnter={handleEnterPopup}
