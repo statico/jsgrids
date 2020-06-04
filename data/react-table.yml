@@ -1,0 +1,41 @@
+title: React Table
+homeUrl: https://react-table.js.org/
+demoUrl: https://github.com/tannerlinsley/react-table/blob/master/docs/examples.md
+githubRepo: tannerlinsley/react-table
+npmPackage: react-table
+license: MIT License
+revenueModel: Free
+description: >
+  Headless (bring-your-own UI) library with hoos for building lightweight,
+  fast and extendable datagrids for React.
+frameworks:
+  react: true
+features:
+  accessible: Adding these tags is up to you.
+  copyPaste: false
+  csvExport: false
+  customEditors: true
+  customFormatters: true
+  draggableRows: true
+  editable: true
+  fillDown: false
+  fillRight: false
+  filtering: true
+  formulas: false
+  freezableCols: false
+  headless: true
+  i18n: Internationalization is up to you.
+  maintained: true
+  openSource: true
+  pagination: true
+  pivots: false
+  rangeSelection: false
+  resizableCols: true
+  responsive: Adding responsiveness is up to you (see examples)
+  rowGrouping: true
+  rowSelection: true
+  serverSide: false
+  sorting: true
+  trees: true
+  xlsxExport: false
+  virtualization: Using react-window (see examples)
