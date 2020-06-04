@@ -10,6 +10,7 @@ import { AugmentedInfo, FrameworkName } from '../lib/libraries'
 import { SortOptionKey, SortOptions } from '../lib/sorting'
 import MultiItemPicker from './MultiItemPicker'
 import SingleItemPicker from './SingleItemPicker'
+import { hasKeys } from '../lib/utils'
 
 interface FilterState {
   sort: SortOptionKey
@@ -31,19 +32,14 @@ const FrameworkSelector: React.FC<{
       {FrameworkNames.map((name) => {
         const Icon = FrameworkIcons[name]
         const title = FrameworkTitles[name]
-        const color =
-          selected === name
-            ? 'bg-blue-400 active:transparent'
-            : 'bg-transparent active:bg-blue-400'
         return (
           <Icon
             key={name}
-            style={{ width: 40, height: 40 }}
+            style={{ width: 35, height: 35 }}
             title={title}
             className={classNames(
-              'text-gray-800 opacity-100 hover:opacity-75',
-              'm-1 p-1 rounded-md transition-opacity duration-100 cursor-pointer',
-              color
+              'm-1 p-1 rounded-md cursor-pointer',
+              selected === name ? 'bg-gray-600 text-gray-200' : 'bg-transparent'
             )}
             onClick={handleToggle(name)}
           />
@@ -109,15 +105,6 @@ const SortSelector: React.FC<{
       Sort by {selectedOption.title}
     </SingleItemPicker>
   )
-}
-
-const hasKeys = (obj: Object, keys: Iterable<string>) => {
-  for (const key of Array.from(keys)) {
-    if (!obj[key]) {
-      return false
-    }
-  }
-  return true
 }
 
 interface FilteredItemsProps {
