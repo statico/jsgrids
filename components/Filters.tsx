@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { AugmentedInfo, FrameworkName } from '../lib/libraries'
 import { SortOptions, SortOptionName } from '../lib/sorting'
-import SingleItemChooser from './SingleItemChooser'
+import SingleItemMenu from './SingleItemMenu'
 import {
   FrameworkNames,
   FrameworkIcons,
@@ -9,13 +9,14 @@ import {
 } from '../lib/frameworks'
 import classNames from 'classnames'
 import { FeatureName, FeatureNames, Features } from '../lib/features'
-import MultiItemChooser from './MultiItemChooser'
+import MultiItemPicker from './MultiItemPicker'
+import SingleItemPicker from './SingleItemPicker'
 
 interface FilterState {
   sort: SortOptionName
   framework: FrameworkName | null
   features: Set<FeatureName>
-  licenses: Set<string>
+  license: string | null
 }
 
 const SortSelector: React.FC<{
@@ -24,7 +25,7 @@ const SortSelector: React.FC<{
 }> = ({ value, onChange }) => {
   const sortOption = SortOptions.find((s) => s.name === value)
   return (
-    <SingleItemChooser
+    <SingleItemMenu
       value={value}
       onChange={onChange}
       items={SortOptions.map((s) => [
@@ -36,7 +37,7 @@ const SortSelector: React.FC<{
       ])}
     >
       Sort by {sortOption.title}
-    </SingleItemChooser>
+    </SingleItemMenu>
   )
 }
 
@@ -56,7 +57,7 @@ const FrameworkSelector: React.FC<{
         const color =
           selected === name
             ? 'bg-blue-400 active:transparent'
-            : 'bg-transparent active:bg-blue-500'
+            : 'bg-transparent active:bg-blue-400'
         return (
           <Icon
             key={name}
@@ -80,7 +81,7 @@ const FeaturesSelector: React.FC<{
   onChange: (newSelected: Set<FeatureName>) => void
 }> = ({ selected, onChange }) => {
   return (
-    <MultiItemChooser
+    <MultiItemPicker
       selected={selected}
       onChange={onChange}
       options={FeatureNames.map((name) => ({
@@ -90,17 +91,17 @@ const FeaturesSelector: React.FC<{
       }))}
     >
       {selected.size || ''} Features
-    </MultiItemChooser>
+    </MultiItemPicker>
   )
 }
 
 const LicenseSelector: React.FC<{
   licenses: Set<string>
-  selected: Set<string>
-  onChange: (newSelected: Set<string>) => void
+  selected: string | null
+  onChange: (newSelected: string) => void
 }> = ({ licenses, selected, onChange }) => {
   return (
-    <MultiItemChooser
+    <SingleItemPicker
       selected={selected}
       onChange={onChange}
       options={Array.from(licenses)
@@ -111,8 +112,8 @@ const LicenseSelector: React.FC<{
           description: "See the project's home page for license details.",
         }))}
     >
-      {selected.size || ''} Licenses
-    </MultiItemChooser>
+      {selected || 'License'}
+    </SingleItemPicker>
   )
 }
 
@@ -141,7 +142,7 @@ export const FilteredItems: React.FC<FilteredItemsProps> = ({
     sort: SortOptions[0].name,
     framework: null,
     features: new Set(),
-    licenses: new Set(),
+    license: null,
   })
 
   let clone = items.slice() // Shallow copy
@@ -158,8 +159,8 @@ export const FilteredItems: React.FC<FilteredItemsProps> = ({
   if (filters.features.size) {
     clone = clone.filter((item) => hasKeys(item.features, filters.features))
   }
-  if (filters.licenses.size) {
-    clone = clone.filter((item) => filters.licenses.has(item.license))
+  if (filters.license) {
+    clone = clone.filter((item) => item.license === filters.license)
   }
 
   const Separator = () => <div className="mx-2" />
@@ -182,9 +183,9 @@ export const FilteredItems: React.FC<FilteredItemsProps> = ({
       <Separator />
       <LicenseSelector
         licenses={new Set(items.map((i) => i.license))}
-        selected={filters.licenses}
-        onChange={(licenses) => {
-          setFilters({ ...filters, licenses })
+        selected={filters.license}
+        onChange={(license) => {
+          setFilters({ ...filters, license })
         }}
       />
       <Separator />

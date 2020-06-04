@@ -9,7 +9,7 @@ interface Props {
   onChange: (newValue: string) => void
 }
 
-export const SingleItemChooser: React.FC<Props> = ({
+export const SingleItemMenu: React.FC<Props> = ({
   children,
   value,
   items,
@@ -79,4 +79,4 @@ export const SingleItemChooser: React.FC<Props> = ({
   )
 }
 
-export default SingleItemChooser
+export default SingleItemMenu

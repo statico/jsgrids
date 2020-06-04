@@ -15,7 +15,7 @@ interface Props {
   onChange: (newValue: Set<string>) => void
 }
 
-export const MultiItemChooser: React.FC<Props> = ({
+export const MultiItemPicker: React.FC<Props> = ({
   children,
   selected,
   options,
@@ -107,4 +107,4 @@ export const MultiItemChooser: React.FC<Props> = ({
   )
 }
 
-export default MultiItemChooser
+export default MultiItemPicker
