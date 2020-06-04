@@ -2,12 +2,16 @@ import { useState } from 'react'
 import { AugmentedInfo, FrameworkName } from '../lib/libraries'
 import { SortOptions, SortOptionName } from '../lib/sorting'
 import SingleItemChooser from './SingleItemChooser'
-import { FrameworkNames, FrameworkIcons, FrameworkTitles } from './Frameworks'
+import {
+  FrameworkNames,
+  FrameworkIcons,
+  FrameworkTitles,
+} from '../lib/frameworks'
 import classNames from 'classnames'
 
 interface FilterState {
   sort: SortOptionName
-  frameworks: Set<FrameworkName>
+  framework: FrameworkName | null
   features: Set<string>
   licenses: Set<string>
 }
@@ -35,17 +39,11 @@ const SortSelector: React.FC<{
 }
 
 const FrameworkSelector: React.FC<{
-  selected: Set<FrameworkName>
-  onChange: (newValue: Set<FrameworkName>) => void
+  selected: FrameworkName
+  onChange: (newValue: FrameworkName) => void
 }> = ({ selected, onChange }) => {
   const handleToggle = (name: FrameworkName) => () => {
-    const newValue = new Set(selected)
-    if (selected.has(name)) {
-      newValue.delete(name)
-    } else {
-      newValue.add(name)
-    }
-    onChange(newValue)
+    onChange(selected === name ? null : name)
   }
   return (
     <div className="flex flex-row items-center">
@@ -53,11 +51,13 @@ const FrameworkSelector: React.FC<{
       {FrameworkNames.map((name) => {
         const Icon = FrameworkIcons[name]
         const title = FrameworkTitles[name]
-        const color = selected.has(name)
-          ? 'bg-blue-400 active:bg-gray-500'
-          : 'bg-transparent active:bg-blue-500'
+        const color =
+          selected === name
+            ? 'bg-blue-400 active:transparent'
+            : 'bg-transparent active:bg-blue-500'
         return (
           <Icon
+            key={name}
             style={{ width: 40, height: 40 }}
             title={title}
             className={classNames(
@@ -96,9 +96,9 @@ export const FilteredItems: React.FC<FilteredItemsProps> = ({
 }) => {
   const [filters, setFilters] = useState<FilterState>({
     sort: SortOptions[0].name,
-    frameworks: new Set(),
+    framework: null,
     features: new Set(),
-    licenses: new Set(['MIT License']),
+    licenses: new Set(),
   })
 
   let clone = items.slice() // Shallow copy
@@ -109,8 +109,8 @@ export const FilteredItems: React.FC<FilteredItemsProps> = ({
   }
   clone.sort(sortOption.fn)
 
-  if (filters.frameworks.size) {
-    clone = clone.filter((item) => hasKeys(item.frameworks, filters.frameworks))
+  if (filters.framework) {
+    clone = clone.filter((item) => item.frameworks[filters.framework])
   }
   if (filters.features.size) {
     clone = clone.filter((item) => hasKeys(item.features, filters.features))
@@ -123,17 +123,17 @@ export const FilteredItems: React.FC<FilteredItemsProps> = ({
 
   const filterBar = (
     <div className="text-gray-800 flex flex-row items-center select-none">
+      <FrameworkSelector
+        selected={filters.framework}
+        onChange={(framework) => {
+          setFilters({ ...filters, framework })
+        }}
+      />
+      <Separator />
       <SortSelector
         value={filters.sort}
         onChange={(sort) => {
           setFilters({ ...filters, sort })
-        }}
-      />
-      <Separator />
-      <FrameworkSelector
-        selected={filters.frameworks}
-        onChange={(frameworks) => {
-          setFilters({ ...filters, frameworks })
         }}
       />
       <Separator />

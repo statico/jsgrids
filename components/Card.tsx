@@ -10,7 +10,7 @@ import { GoIssueOpened, GoLaw, GoRepoForked, GoStar } from 'react-icons/go'
 import { IoMdDownload } from 'react-icons/io'
 import { FEATURES } from '../lib/features'
 import { AugmentedInfo } from '../lib/libraries'
-import { FrameworkTitles, FrameworkIcons } from './Frameworks'
+import { FrameworkTitles, FrameworkIcons } from '../lib/frameworks'
 
 // Sort the features by negative ones first, then positive, then negative.
 // Only important negative features are shown, which is why they're first.

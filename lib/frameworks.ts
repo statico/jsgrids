@@ -1,7 +1,7 @@
 import { DiJqueryLogo } from 'react-icons/di'
 import { FaAngular, FaReact, FaVuejs, FaEmber } from 'react-icons/fa'
 import { IoLogoJavascript } from 'react-icons/io'
-import { FrameworkName } from '../lib/libraries'
+import { FrameworkName } from './libraries'
 
 // An ordered set of all framework names.
 export const FrameworkNames: FrameworkName[] = [

@@ -1,7 +1,6 @@
 import axios, { AxiosRequestConfig } from 'axios'
 import { readdirSync, readFileSync } from 'fs'
 import yaml from 'js-yaml'
-import * as NpmApi from 'npm-api'
 import pThrottle from 'p-throttle'
 import { basename, join } from 'path'
 import * as rt from 'runtypes'
@@ -32,8 +31,6 @@ const get = pThrottle(
   1,
   300
 )
-
-const npmClient = new NpmApi()
 
 const URL = rt.String.withConstraint(
   (str) => /^https?:\/\//.test(str) || `${str} is not a valid URL`
@@ -191,21 +188,21 @@ export const getLibraries = async (): Promise<AugmentedInfo[]> => {
     }
 
     if (item.npmPackage) {
-      const key = `npm-${item.npmPackage}`
+      const name = item.npmPackage
+      const key = `npm-${name}`
       let npm = cache.get(key)
       if (!npm) {
         try {
-          console.log(`Fetching downloads for NPM package ${item.npmPackage}`)
-          const repo = await npmClient.repo(item.npmPackage)
+          const res = await get(
+            `https://api.npmjs.org/downloads/point/last-week/${name}`
+          )
           npm = {
-            url: `https://www.npmjs.com/package/${item.npmPackage}`,
-            downloads: await repo.last(7),
+            url: `https://www.npmjs.com/package/${name}`,
+            downloads: res.data.downloads,
           }
           cache.set(key, npm)
         } catch (err) {
-          throw new Error(
-            `Error getting NPM data for ${item.npmPackage}: ${err}`
-          )
+          throw new Error(`Error getting NPM data for ${name}: ${err}`)
         }
       }
       item.npm = npm
@@ -215,7 +212,7 @@ export const getLibraries = async (): Promise<AugmentedInfo[]> => {
   })
 
   try {
-    await Promise.all(promises)
+    await Promise.allSettled(promises)
   } catch (err) {
     if (process.env.NODE_ENV === 'production') {
       throw new Error(`Fetching library information failed: ${err}`)
@@ -224,6 +221,12 @@ export const getLibraries = async (): Promise<AugmentedInfo[]> => {
         `DATA IS INCOMPLETE. See above for errors. Continuing because we're in dev mode.`
       )
     }
+  }
+
+  if (items.length !== paths.length) {
+    throw new Error(
+      `Incomplete data. Parsed ${paths.length} YAML files but only got ${items.length} info objects.`
+    )
   }
 
   return items
