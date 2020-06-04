@@ -8,11 +8,13 @@ import {
   FrameworkTitles,
 } from '../lib/frameworks'
 import classNames from 'classnames'
+import { FeatureName, FeatureNames, Features } from '../lib/features'
+import MultiItemChooser from './MultiItemChooser'
 
 interface FilterState {
   sort: SortOptionName
   framework: FrameworkName | null
-  features: Set<string>
+  features: Set<FeatureName>
   licenses: Set<string>
 }
 
@@ -73,9 +75,37 @@ const FrameworkSelector: React.FC<{
   )
 }
 
+const FeaturesSelector: React.FC<{
+  selected: Set<FeatureName>
+  onChange: (newValue: Set<FeatureName>) => void
+}> = ({ selected, onChange }) => {
+  const handleToggle = (name: FeatureName) => () => {
+    const newValue = new Set(selected)
+    if (selected.has(name)) {
+      newValue.delete(name)
+    } else {
+      newValue.add(name)
+    }
+    onChange(newValue)
+  }
+  return (
+    <MultiItemChooser
+      selected={selected}
+      onChange={onChange}
+      options={FeatureNames.map((name) => ({
+        key: name,
+        title: Features[name].title,
+        description: Features[name].description,
+      }))}
+    >
+      {selected.size || ''} Features
+    </MultiItemChooser>
+  )
+}
+
 const hasKeys = (obj: Object, keys: Iterable<string>) => {
   for (const key of Array.from(keys)) {
-    if (!obj.hasOwnProperty(key)) {
+    if (!obj[key]) {
       return false
     }
   }
@@ -127,6 +157,13 @@ export const FilteredItems: React.FC<FilteredItemsProps> = ({
         selected={filters.framework}
         onChange={(framework) => {
           setFilters({ ...filters, framework })
+        }}
+      />
+      <Separator />
+      <FeaturesSelector
+        selected={filters.features}
+        onChange={(features) => {
+          setFilters({ ...filters, features })
         }}
       />
       <Separator />

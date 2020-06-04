@@ -1,4 +1,4 @@
-export const FEATURES = {
+export const Features = {
   accessible: {
     title: 'Accessible',
     description:
@@ -130,4 +130,7 @@ export const FEATURES = {
   },
 }
 
-export type FeatureName = keyof typeof FEATURES
+export type FeatureName = keyof typeof Features
+
+export const FeatureNames = Object.keys(Features) as FeatureName[]
+FeatureNames.sort()

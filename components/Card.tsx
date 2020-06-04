@@ -8,7 +8,7 @@ import {
 } from 'react-icons/fa'
 import { GoIssueOpened, GoLaw, GoRepoForked, GoStar } from 'react-icons/go'
 import { IoMdDownload } from 'react-icons/io'
-import { FEATURES } from '../lib/features'
+import { Features } from '../lib/features'
 import { AugmentedInfo } from '../lib/libraries'
 import { FrameworkTitles, FrameworkIcons } from '../lib/frameworks'
 
@@ -62,10 +62,10 @@ const FeatureWithIcon: React.FC<{
   name: string
   value: boolean | string | null
 }> = ({ name, value }) => {
-  if (!FEATURES[name]) {
+  if (!Features[name]) {
     throw new Error(`Unknown feature name: ${name}`)
   }
-  const { title, description } = FEATURES[name]
+  const { title, description } = Features[name]
   if (value) {
     return (
       <FeatureText>

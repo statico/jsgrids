@@ -5,7 +5,7 @@ import pThrottle from 'p-throttle'
 import { basename, join } from 'path'
 import * as rt from 'runtypes'
 import * as cache from './cache'
-import { FEATURES } from './features'
+import { Features } from './features'
 
 // Hammering GitHub APIs makes them angry, so don't do that.
 const get = pThrottle(
@@ -95,7 +95,7 @@ const AugmentedInfo = rt
 type RawInfo = rt.Static<typeof RawInfo>
 export type AugmentedInfo = rt.Static<typeof AugmentedInfo>
 
-const allowedFeatures = new Set(Object.keys(FEATURES))
+const allowedFeatures = new Set(Object.keys(Features))
 
 export const getLibraries = async (): Promise<AugmentedInfo[]> => {
   const dataDir = join(process.cwd(), 'data')
