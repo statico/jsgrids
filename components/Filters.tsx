@@ -20,7 +20,7 @@ interface FilterState {
 
 const SortSelector: React.FC<{
   value: SortOptionName
-  onChange: (newValue: SortOptionName) => void
+  onChange: (newSelected: SortOptionName) => void
 }> = ({ value, onChange }) => {
   const sortOption = SortOptions.find((s) => s.name === value)
   return (
@@ -42,7 +42,7 @@ const SortSelector: React.FC<{
 
 const FrameworkSelector: React.FC<{
   selected: FrameworkName
-  onChange: (newValue: FrameworkName) => void
+  onChange: (newSelected: FrameworkName) => void
 }> = ({ selected, onChange }) => {
   const handleToggle = (name: FrameworkName) => () => {
     onChange(selected === name ? null : name)
@@ -77,17 +77,8 @@ const FrameworkSelector: React.FC<{
 
 const FeaturesSelector: React.FC<{
   selected: Set<FeatureName>
-  onChange: (newValue: Set<FeatureName>) => void
+  onChange: (newSelected: Set<FeatureName>) => void
 }> = ({ selected, onChange }) => {
-  const handleToggle = (name: FeatureName) => () => {
-    const newValue = new Set(selected)
-    if (selected.has(name)) {
-      newValue.delete(name)
-    } else {
-      newValue.add(name)
-    }
-    onChange(newValue)
-  }
   return (
     <MultiItemChooser
       selected={selected}
@@ -99,6 +90,28 @@ const FeaturesSelector: React.FC<{
       }))}
     >
       {selected.size || ''} Features
+    </MultiItemChooser>
+  )
+}
+
+const LicenseSelector: React.FC<{
+  licenses: Set<string>
+  selected: Set<string>
+  onChange: (newSelected: Set<string>) => void
+}> = ({ licenses, selected, onChange }) => {
+  return (
+    <MultiItemChooser
+      selected={selected}
+      onChange={onChange}
+      options={Array.from(licenses)
+        .sort()
+        .map((name) => ({
+          key: name,
+          title: name,
+          description: "See the project's home page for license details.",
+        }))}
+    >
+      {selected.size || ''} Licenses
     </MultiItemChooser>
   )
 }
@@ -164,6 +177,14 @@ export const FilteredItems: React.FC<FilteredItemsProps> = ({
         selected={filters.features}
         onChange={(features) => {
           setFilters({ ...filters, features })
+        }}
+      />
+      <Separator />
+      <LicenseSelector
+        licenses={new Set(items.map((i) => i.license))}
+        selected={filters.licenses}
+        onChange={(licenses) => {
+          setFilters({ ...filters, licenses })
         }}
       />
       <Separator />
