@@ -11,6 +11,7 @@ import { IoMdDownload } from 'react-icons/io'
 import { Features } from '../lib/features'
 import { AugmentedInfo } from '../lib/libraries'
 import { FrameworkTitles, FrameworkIcons } from '../lib/frameworks'
+import Button from './Button'
 
 // Sort the features by negative ones first, then positive, then negative.
 // Only important negative features are shown, which is why they're first.
@@ -99,27 +100,11 @@ const FeatureWithIcon: React.FC<{
   }
 }
 
-const ActionButton: React.FC<{ href: string; title: string }> = ({
-  href,
-  title,
-}) => (
-  <a
-    href={href}
-    className={classNames(
-      'block p-2 rounded-md border border-transparent text-center flex justify-center items-center',
-      'uppercase text-sm bg-gray-200 text-gray-700 hover:bg-gray-300 hover:text-gray-900',
-      'transition transition-all hover:shadow-sm duration-100'
-    )}
-  >
-    {title}
-  </a>
-)
-
 const Actions: React.FC<{ info: AugmentedInfo }> = ({ info }) => (
   <div className="grid grid-cols-3 gap-4">
-    <ActionButton href={info.demoUrl} title="Demo" />
-    <ActionButton href={info.github?.url} title="Source" />
-    <ActionButton href={info.homeUrl} title="Home" />
+    <Button href={info.demoUrl} title="Demo" />
+    <Button href={info.github?.url} title="Source" />
+    <Button href={info.homeUrl} title="Home" />
   </div>
 )
 

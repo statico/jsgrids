@@ -2,6 +2,7 @@ import { createPopper } from '@popperjs/core'
 import classnames from 'classnames'
 import React, { createRef, useCallback, useState } from 'react'
 import { GoChevronDown } from 'react-icons/go'
+import Button from './Button'
 
 interface Option {
   key: string
@@ -68,24 +69,18 @@ export const MultiItemPicker: React.FC<Props> = ({
         onMouseEnter={handleEnterPopup}
         onMouseLeave={handleLeavePopup}
       >
-        <div className="block w-full px-4 py-3 text-sm whitespace-no-wrap">
-          <div
-            className={classnames(
-              'block p-2 rounded-md border border-transparent text-center flex justify-center items-center',
-              'uppercase text-sm bg-gray-200 text-gray-700 hover:bg-gray-300 hover:text-gray-900',
-              'transition transition-all hover:shadow-sm duration-100'
-            )}
-            onClick={() => {
-              onChange(new Set())
-            }}
-          >
-            Clear All
-          </div>
-          <div className="grid grid-cols-2">
+        <div className="block w-full p-3 text-sm whitespace-no-wrap">
+          <div className="mb-3">Choose one or more features:</div>
+          <div className="grid grid-cols-2 row-gap-0 col-gap-3 mb-3">
             {options.map(({ key, title, description }) => (
-              <label key={key} title={description} className="cursor-pointer">
+              <label
+                key={key}
+                title={description}
+                className="cursor-pointer hover:bg-gray-100 px-1 py-1"
+              >
                 <input
                   type="checkbox"
+                  className="align-middle mb-1 mr-2"
                   checked={selected.has(key)}
                   onChange={(event) => {
                     const newValue = new Set(selected)
@@ -96,11 +91,19 @@ export const MultiItemPicker: React.FC<Props> = ({
                     }
                     onChange(newValue)
                   }}
-                />{' '}
+                />
                 {title}
               </label>
             ))}
           </div>
+          <Button
+            small
+            title="Clear All"
+            disabled={selected.size === 0}
+            onClick={() => {
+              onChange(new Set())
+            }}
+          />
         </div>
       </div>
     </>
