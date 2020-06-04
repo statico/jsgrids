@@ -2,7 +2,12 @@ import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'fs'
 import { join } from 'path'
 import * as crypto from 'crypto'
 
-const age = 1000 * 60 * 60 * 24
+//
+// This is a simple filesystem cache because, amazingly, nothing on npm seemed
+// to be this simple and this is easy to write.
+//
+
+const duration = 1000 * 60 * 60 * 24
 
 const basedir = join(process.cwd(), '.cache')
 mkdirSync(basedir, { recursive: true })
@@ -31,7 +36,7 @@ const get = (key: string): any => {
 
 const set = (key: string, data: any): void => {
   const path = join(basedir, keyToFilename(key))
-  const obj = JSON.stringify({ expiration: Date.now() + age, data })
+  const obj = JSON.stringify({ expiration: Date.now() + duration, data })
   writeFileSync(path, obj, 'utf8')
   console.log(`Cache write for key "${key}"`)
 }

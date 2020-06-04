@@ -1,4 +1,4 @@
-import classNames from 'classnames'
+import classnames from 'classnames'
 import {
   FaCheckCircle,
   FaDollarSign,
@@ -9,104 +9,57 @@ import {
 import { GoIssueOpened, GoLaw, GoRepoForked, GoStar } from 'react-icons/go'
 import { IoMdDownload } from 'react-icons/io'
 import { Features } from '../lib/features'
+import { FrameworkIcons, FrameworkTitles } from '../lib/frameworks'
 import { AugmentedInfo } from '../lib/libraries'
-import { FrameworkTitles, FrameworkIcons } from '../lib/frameworks'
+import { sortedFeatureNames } from '../lib/sorting'
 import Button from './Button'
-
-// Sort the features by negative ones first, then positive, then negative.
-// Only important negative features are shown, which is why they're first.
-const sortedFeatureNames = (features: AugmentedInfo['features']): string[] =>
-  Object.keys(features).sort((a, b) => {
-    const av = features[a]
-    const bv = features[b]
-    if (!av) {
-      return -1
-    } else if (!bv) {
-      return 1
-    } else if (av === true && bv === true) {
-      return a.localeCompare(b)
-    } else if (typeof av === 'string' && typeof bv === 'string') {
-      return a.localeCompare(b)
-    } else if (av === true) {
-      return -1
-    } else if (bv === true) {
-      return 1
-    } else {
-      return a.localeCompare(b)
-    }
-  })
-
-const FeatureText: React.FC<{ size?: 'big' | 'small ' }> = ({
-  children,
-  size = 'small',
-}) => (
-  <span
-    className={`text-${
-      size === 'big' ? 'sm' : 'xs'
-    } text-gray-800 leading-tight`}
-  >
-    {children}
-  </span>
-)
 
 const FeatureList: React.FC<{ features: AugmentedInfo['features'] }> = ({
   features,
 }) => (
-  <div className="grid grid-cols-2">
+  <div className="leading-tight text-xs grid grid-cols-2">
     {sortedFeatureNames(features).map((name) => (
-      <FeatureWithIcon key={name} name={name} value={features[name]} />
+      <Feature key={name} name={name} value={features[name]} />
     ))}
   </div>
 )
 
-const FeatureWithIcon: React.FC<{
+const Feature: React.FC<{
   name: string
   value: boolean | string | null
 }> = ({ name, value }) => {
   if (!Features[name]) {
     throw new Error(`Unknown feature name: ${name}`)
   }
-  const { title, description } = Features[name]
+  const { title, description, important } = Features[name]
   if (value) {
     return (
-      <FeatureText>
-        <span
-          title={typeof value === 'string' ? value : description}
-          className="uppercase flex flex-row items-center mb-1"
-        >
-          {value === true ? (
-            <FaCheckCircle className="flex-none w-3 text-green-400" />
-          ) : (
-            <FaInfoCircle className="flex-none w-3 text-yellow-500" />
-          )}
-          <span className="ml-1">{title}</span>
-        </span>
-      </FeatureText>
+      <span
+        title={typeof value === 'string' ? value : description}
+        className="uppercase flex flex-row items-center mb-1"
+      >
+        {value === true ? (
+          <FaCheckCircle className="flex-none w-3 text-green-400" />
+        ) : (
+          <FaInfoCircle className="flex-none w-3 text-yellow-500" />
+        )}
+        <span className="ml-1">{title}</span>
+      </span>
     )
-  } else if (!value && (name === 'maintained' || name === 'openSource')) {
+  } else if (!value && important) {
     return (
-      <FeatureText>
-        <span
-          title={typeof value === 'string' ? value : description}
-          className="uppercase flex flex-row items-center mb-1"
-        >
-          <FaTimesCircle className="flex-none w-3 text-red-500" />
-          <span className="ml-1">{`Not ${title}`}</span>
-        </span>
-      </FeatureText>
+      <span
+        title={typeof value === 'string' ? value : description}
+        className="uppercase flex flex-row items-center mb-1"
+      >
+        <FaTimesCircle className="flex-none w-3 text-red-500" />
+        <span className="ml-1">{`Not ${title}`}</span>
+      </span>
     )
   } else {
     return null
   }
 }
-
-const Actions: React.FC<{ info: AugmentedInfo }> = ({ info }) => (
-  <div className="grid grid-cols-3 gap-4">
-    <Button href={info.demoUrl} title="Demo" />
-    <Button href={info.github?.url} title="Source" />
-    <Button href={info.homeUrl} title="Home" />
-  </div>
-)
 
 const FrameworkList: React.FC<{ info: AugmentedInfo }> = ({ info }) => (
   <div className="flex flex-row items-center justify-center text-2xl">
@@ -124,15 +77,15 @@ const FrameworkList: React.FC<{ info: AugmentedInfo }> = ({ info }) => (
   </div>
 )
 
-const Tidbit: React.FC<{
+const Metric: React.FC<{
   icon: React.ReactNode
   title: string
   value?: any
   url?: string
 }> = ({ icon, title, value, url }) => {
-  const cn = classNames(
-    'flex flex-row justify-center items-center',
-    value ? 'text-gray-800' : 'text-gray-500'
+  const cls = classnames(
+    'flex flex-row justify-center items-center leading-tight text-sm',
+    !value && 'text-gray-500'
   )
   const contents = (
     <>
@@ -142,18 +95,14 @@ const Tidbit: React.FC<{
         : value || 'n/a'}
     </>
   )
-  return (
-    <FeatureText size="big">
-      {value ? (
-        <a href={url} title={title} className={cn}>
-          {contents}
-        </a>
-      ) : (
-        <span title={title} className={cn}>
-          {contents}
-        </span>
-      )}
-    </FeatureText>
+  return value ? (
+    <a href={url} title={title} className={cls}>
+      {contents}
+    </a>
+  ) : (
+    <span title={title} className={cls}>
+      {contents}
+    </span>
   )
 }
 
@@ -168,54 +117,54 @@ const Card: React.FC<{ info: AugmentedInfo }> = ({ info }) => {
         </div>
       </div>
       <div className="mb-5">{info.description}</div>
-      <div className="mb-5 flex flex-row justify-between">
-        <Tidbit
+      <div className="mb-5 text-gray-800 flex flex-row justify-between">
+        <Metric
           icon={<GoStar />}
           value={gh?.stars}
           title={`${gh?.stars} stars on GitHub`}
           url={gh?.url}
         />
-        <Tidbit
+        <Metric
           icon={<IoMdDownload />}
           value={info.npm?.downloads}
           title={`${info.npm?.downloads} downloads on NPM in the last week`}
           url={info.npm?.url}
         />
-        <Tidbit
+        <Metric
           icon={<GoRepoForked />}
           value={gh?.forks}
           title={`${gh?.stars} forks on GitHub`}
           url={gh?.url}
         />
-        <Tidbit
+        <Metric
           icon={<FaUsers />}
           value={gh?.contributors}
           title={`${gh?.contributors} contributors on GitHub`}
           url={gh?.url}
         />
-        <Tidbit
+        <Metric
           icon={<GoIssueOpened />}
           value={gh?.openIssues}
           title={`${gh?.stars} open issues on GitHub`}
           url={gh?.url + '/issues'}
         />
       </div>
-      <div className="mb-2">
+      <div className="mb-2 text-gray-800">
         <FeatureList features={info.features} />
       </div>
-      <div className="mb-5">
+      <div className="mb-5 text-gray-800 text-sm leading-relaxed">
         <div className="inline-block">
-          <FeatureText size="big">
-            <GoLaw className="inline" /> {info.license}
-            <br />
-            {/* Wishlist: Use a localized currency symbol instead of $ for everyone */}
-            <FaDollarSign className="inline" /> {info.revenueModel}
-          </FeatureText>
+          <GoLaw className="inline" /> {info.license}
+          <br />
+          {/* Wishlist: Use a localized currency symbol instead of $ for everyone */}
+          <FaDollarSign className="inline" /> {info.revenueModel}
         </div>
       </div>
-      <div className="flex-grow"></div>
-      <div className="">
-        <Actions info={info} />
+      <div className="flex-grow">{/* Make buttons appear at bottom */}</div>
+      <div className="grid grid-cols-3 col-gap-4">
+        <Button href={info.demoUrl} title="Demo" />
+        <Button href={info.github?.url} title="Source" />
+        <Button href={info.homeUrl} title="Home" />
       </div>
     </div>
   )

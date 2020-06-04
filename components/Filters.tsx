@@ -1,4 +1,4 @@
-import classNames from 'classnames'
+import classnames from 'classnames'
 import { useState } from 'react'
 import { FeatureName, FeatureNames, Features } from '../lib/features'
 import {
@@ -37,7 +37,7 @@ const FrameworkSelector: React.FC<{
             key={name}
             style={{ width: 35, height: 35 }}
             title={title}
-            className={classNames(
+            className={classnames(
               'm-1 p-1 rounded-md cursor-pointer',
               selected === name ? 'bg-gray-600 text-gray-200' : 'bg-transparent'
             )}

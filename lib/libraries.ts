@@ -1,36 +1,15 @@
-import axios, { AxiosRequestConfig } from 'axios'
 import { readdirSync, readFileSync } from 'fs'
 import yaml from 'js-yaml'
-import pThrottle from 'p-throttle'
 import { basename, join } from 'path'
 import * as rt from 'runtypes'
 import * as cache from './cache'
 import { Features } from './features'
+import { throttledFetch } from './utils'
 
-// Hammering GitHub APIs makes them angry, so don't do that.
-const get = pThrottle(
-  async (url: string) => {
-    console.log(`Fetching ${url}`)
-    try {
-      const options: AxiosRequestConfig = {}
-      if (process.env.GITHUB_TOKEN && /github.com/.test(url)) {
-        options.headers = {
-          Authorization: `token ${process.env.GITHUB_TOKEN}`,
-        }
-      }
-      return await axios.get(url, options)
-    } catch (err) {
-      const status = err.response?.status
-      const headers = JSON.stringify(err.response?.headers, null, '  ')
-      console.error(
-        `Request to ${url} failed. status=${status} headers=${headers}`
-      )
-      throw err
-    }
-  },
-  1,
-  300
-)
+//
+// Yes, these types and things seem pretty overcomplicated, but it sure makes
+// importing data and working with TypeScript a lot easier.
+//
 
 const URL = rt.String.withConstraint(
   (str) => /^https?:\/\//.test(str) || `${str} is not a valid URL`
@@ -97,7 +76,9 @@ export type AugmentedInfo = rt.Static<typeof AugmentedInfo>
 
 const allowedFeatures = new Set(Object.keys(Features))
 
+// Get all the library data, fetching from APIs or using the cache as necessary.
 export const getLibraries = async (): Promise<AugmentedInfo[]> => {
+  // Get paths to all YAML files.
   const dataDir = join(process.cwd(), 'data')
   const paths = readdirSync(dataDir)
     .filter((name) => /\.yml$/.test(name))
@@ -108,6 +89,7 @@ export const getLibraries = async (): Promise<AugmentedInfo[]> => {
   const promises = paths.map(async (path) => {
     const id = basename(path, '.yml')
 
+    // Load raw YAML data and make sure it validates.
     const obj = yaml.safeLoad(await readFileSync(path, 'utf8'))
     let item: RawInfo
     try {
@@ -120,20 +102,19 @@ export const getLibraries = async (): Promise<AugmentedInfo[]> => {
         `In ${path}, key "${err.key}" failed validation: ${err.message}`
       )
     }
-
     for (const key in item.features) {
       if (!allowedFeatures.has(key)) {
         throw new Error(`In ${path}, unexpected feature "${key}"`)
       }
     }
 
+    // Populate GitHub data if the library has a GitHub repo.
     if (item.githubRepo) {
-      // Cache responses because the GitHub public API limits are pretty low.
       const key1 = `gh-${item.githubRepo}-info`
       let gh: any = cache.get(key1)
       if (!gh) {
         try {
-          const res = await get(
+          const res = await throttledFetch(
             `https://api.github.com/repos/${item.githubRepo}`
           )
           if (res.data.full_name !== item.githubRepo) {
@@ -155,7 +136,7 @@ export const getLibraries = async (): Promise<AugmentedInfo[]> => {
         try {
           const pageSize = 100
           const url = `https://api.github.com/repos/${item.githubRepo}/contributors?per_page=${pageSize}`
-          const res1 = await get(url)
+          const res1 = await throttledFetch(url)
           if (res1.data.length < pageSize || !res1.headers.link) {
             stats = { contributors: res1.data.length }
           } else {
@@ -165,7 +146,7 @@ export const getLibraries = async (): Promise<AugmentedInfo[]> => {
                 .find((s?: string) => /rel="last"/.test(s))
                 .match(/\bpage=(\d+)/)[1]
             )
-            const res2 = await get(`${url}&page=${lastPage}`)
+            const res2 = await throttledFetch(`${url}&page=${lastPage}`)
             const total = pageSize * (lastPage - 1) + res2.data.length
             stats = { contributors: total }
           }
@@ -187,13 +168,14 @@ export const getLibraries = async (): Promise<AugmentedInfo[]> => {
       }
     }
 
+    // Populate NPM data if the library has an NPM package name.
     if (item.npmPackage) {
       const name = item.npmPackage
       const key = `npm-${name}`
       let npm = cache.get(key)
       if (!npm) {
         try {
-          const res = await get(
+          const res = await throttledFetch(
             `https://api.npmjs.org/downloads/point/last-week/${name}`
           )
           npm = {
@@ -211,18 +193,9 @@ export const getLibraries = async (): Promise<AugmentedInfo[]> => {
     items.push(AugmentedInfo.check(item))
   })
 
-  try {
-    await Promise.allSettled(promises)
-  } catch (err) {
-    if (process.env.NODE_ENV === 'production') {
-      throw new Error(`Fetching library information failed: ${err}`)
-    } else {
-      console.error(
-        `DATA IS INCOMPLETE. See above for errors. Continuing because we're in dev mode.`
-      )
-    }
-  }
+  await Promise.allSettled(promises)
 
+  // Just a quick sanity check here.
   if (items.length !== paths.length) {
     throw new Error(
       `Incomplete data. Parsed ${paths.length} YAML files but only got ${items.length} info objects.`

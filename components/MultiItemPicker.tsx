@@ -10,18 +10,11 @@ interface Option {
   description: string
 }
 
-interface Props {
+export const MultiItemPicker: React.FC<{
   selected: Set<string>
   options: Option[]
   onChange: (newValue: Set<string>) => void
-}
-
-export const MultiItemPicker: React.FC<Props> = ({
-  children,
-  selected,
-  options,
-  onChange,
-}) => (
+}> = ({ children, selected, options, onChange }) => (
   <Dropdown
     button={
       <FilterBarButton>

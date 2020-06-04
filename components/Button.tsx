@@ -3,12 +3,12 @@ import classnames from 'classnames'
 
 const Button: React.FC<{
   title: string
-  className?: string
   href?: string
   small?: boolean
-  disabled?: boolean
   onClick?: MouseEventHandler
-}> = ({ title, className, href, small, disabled, onClick }) => {
+  className?: string
+  disabled?: boolean
+}> = ({ title, href, small, onClick, className, disabled }) => {
   if (disabled) {
     onClick = (event) => {
       event.preventDefault()

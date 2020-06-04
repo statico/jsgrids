@@ -1,3 +1,8 @@
+//
+// All library features are defined here. "important" means we should highlight
+// when a library _doesn't_ have this feature.
+//
+
 export const Features = {
   accessible: {
     title: 'Accessible',
@@ -68,11 +73,13 @@ export const Features = {
     title: 'Maintained',
     description:
       "Whether this library under active development, or has recently-fixed bugs, or is so wonderfully stable that it doesn't need maintenance.",
+    important: true,
   },
   openSource: {
     title: 'Open-source',
     description:
       'Whether the source for this library is hosting in an online version control system.',
+    important: true,
   },
   pagination: {
     title: 'Pagination',

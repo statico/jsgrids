@@ -11,20 +11,12 @@ interface Option {
   description?: string
 }
 
-interface Props {
+export const SingleItemPicker: React.FC<{
   selected: string | null
   options: Option[]
   allowNull?: boolean
   onChange: (newValue: string) => void
-}
-
-export const SingleItemPicker: React.FC<Props> = ({
-  children,
-  selected,
-  options,
-  onChange,
-  allowNull = true,
-}) => (
+}> = ({ children, selected, options, onChange, allowNull = true }) => (
   <Dropdown
     button={
       <FilterBarButton>

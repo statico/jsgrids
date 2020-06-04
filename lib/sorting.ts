@@ -8,7 +8,6 @@ export interface SortOption {
 }
 
 export type SortOptionKey = SortOption['key']
-
 export const SortOptions: SortOption[] = [
   {
     key: 'popularity',
@@ -31,3 +30,28 @@ export const SortOptions: SortOption[] = [
     fn: (a, b) => b.npm?.downloads - a.npm?.downloads,
   },
 ]
+
+// Sort the features by negative ones first, then positive, then middling.
+// Only important negative features are shown, which is why they're first.
+export const sortedFeatureNames = (
+  features: AugmentedInfo['features']
+): string[] =>
+  Object.keys(features).sort((a, b) => {
+    const av = features[a]
+    const bv = features[b]
+    if (!av) {
+      return -1
+    } else if (!bv) {
+      return 1
+    } else if (av === true && bv === true) {
+      return a.localeCompare(b)
+    } else if (typeof av === 'string' && typeof bv === 'string') {
+      return a.localeCompare(b)
+    } else if (av === true) {
+      return -1
+    } else if (bv === true) {
+      return 1
+    } else {
+      return a.localeCompare(b)
+    }
+  })
