@@ -53,14 +53,16 @@ const FrameworkSelector: React.FC<{
       {FrameworkNames.map((name) => {
         const Icon = FrameworkIcons[name]
         const title = FrameworkTitles[name]
-        const color = selected.has(name) ? 'bg-blue-400' : 'bg-transparent'
+        const color = selected.has(name)
+          ? 'bg-blue-400 active:bg-gray-500'
+          : 'bg-transparent active:bg-blue-500'
         return (
           <Icon
             style={{ width: 40, height: 40 }}
             title={title}
             className={classNames(
-              'text-gray-800 hover:bg-gray-300',
-              'm-1 p-1 rounded-md transition-colors duration-100 cursor-pointer',
+              'text-gray-800 opacity-100 hover:opacity-75',
+              'm-1 p-1 rounded-md transition-opacity duration-100 cursor-pointer',
               color
             )}
             onClick={handleToggle(name)}
