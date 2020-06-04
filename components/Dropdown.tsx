@@ -1,0 +1,61 @@
+import { createPopper } from '@popperjs/core'
+import classnames from 'classnames'
+import React, { createRef, useCallback, useState } from 'react'
+
+export const Dropdown: React.FC<{
+  button: React.ReactNode
+}> = ({ button, children }) => {
+  const [isOverButton, setIsOverButton] = useState(false)
+  const [isOverPopup, setIsOverPopup] = useState(false)
+
+  const buttonRef = createRef<HTMLDivElement>()
+  const popupRef = createRef<HTMLDivElement>()
+
+  const handleEnterButton = () => {
+    if (!buttonRef.current || !popupRef.current) {
+      return
+    }
+    setIsOverButton(true)
+    createPopper(buttonRef.current, popupRef.current, {
+      placement: 'bottom-start',
+    })
+  }
+  const handleLeaveButton = useCallback(() => {
+    setIsOverButton(false)
+  }, [])
+  const handleEnterPopup = useCallback(() => {
+    setIsOverPopup(true)
+  }, [])
+  const handleLeavePopup = useCallback(() => {
+    setIsOverPopup(false)
+  }, [])
+
+  return (
+    <>
+      <div
+        className="inline-block"
+        ref={buttonRef}
+        onMouseEnter={handleEnterButton}
+        onMouseLeave={handleLeaveButton}
+      >
+        {button}
+      </div>
+      <div
+        ref={popupRef}
+        className={classnames(
+          isOverButton || isOverPopup ? 'block' : 'hidden',
+          'bg-white z-50 float-left rounded-sm shadow-md text-left mt-1 border-gray-200 border select-none'
+        )}
+        style={{ minWidth: '12rem' }}
+        onMouseEnter={handleEnterPopup}
+        onMouseLeave={handleLeavePopup}
+      >
+        <div className="block w-full p-3 text-sm whitespace-no-wrap">
+          {children}
+        </div>
+      </div>
+    </>
+  )
+}
+
+export default Dropdown
