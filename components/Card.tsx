@@ -177,12 +177,12 @@ const Card: React.FC<{ info: AugmentedInfo }> = ({ info }) => {
       </div>
       <div className="mb-5 text-gray-800 text-sm leading-relaxed">
         <div className="inline-block">
-          <div className="mb-1 lg:mb-1">
-            <GoLaw className="inline" /> {info.license}
+          <div className="mb-1 lg:mb-1 flex flex-row items-center">
+            <GoLaw className="inline mr-1" /> {info.license}
           </div>
-          <div>
+          <div className="mb-1 lg:mb-1 flex flex-row items-center">
             {/* Wishlist: Use a localized currency symbol instead of $ for everyone */}
-            <FaDollarSign className="inline" /> {info.revenueModel}
+            <FaDollarSign className="inline mr-1" /> {info.revenueModel}
           </div>
         </div>
       </div>
