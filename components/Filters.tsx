@@ -10,7 +10,7 @@ import { AugmentedInfo, FrameworkName } from '../lib/libraries'
 import { SortOptionKey, SortOptions } from '../lib/sorting'
 import MultiItemPicker from './MultiItemPicker'
 import SingleItemPicker from './SingleItemPicker'
-import { hasKeys } from '../lib/utils'
+import { hasAllKeys } from '../lib/utils'
 import Tooltip from './Tooltip'
 
 interface FilterState {
@@ -148,7 +148,7 @@ export const FilteredItems: React.FC<FilteredItemsProps> = ({
     clone = clone.filter((item) => item.frameworks[filters.framework])
   }
   if (filters.features.size) {
-    clone = clone.filter((item) => hasKeys(item.features, filters.features))
+    clone = clone.filter((item) => hasAllKeys(item.features, filters.features))
   }
   if (filters.license) {
     clone = clone.filter((item) => item.license === filters.license)

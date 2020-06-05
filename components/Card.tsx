@@ -6,7 +6,13 @@ import {
   FaTimesCircle,
   FaUsers,
 } from 'react-icons/fa'
-import { GoIssueOpened, GoLaw, GoRepoForked, GoStar } from 'react-icons/go'
+import {
+  GoIssueOpened,
+  GoLaw,
+  GoRepoForked,
+  GoStar,
+  GoPackage,
+} from 'react-icons/go'
 import { IoMdDownload } from 'react-icons/io'
 import { Features } from '../lib/features'
 import { FrameworkIcons, FrameworkTitles } from '../lib/frameworks'
@@ -98,7 +104,7 @@ const Metric: React.FC<{
   href?: string
 }> = ({ icon, title, value, href }) => {
   const cls = classnames(
-    'flex flex-row justify-center items-center leading-tight text-sm',
+    'flex flex-row items-center leading-tight text-sm',
     'hover:opacity-75',
     !value && 'text-gray-500'
   )
@@ -140,7 +146,7 @@ const Card: React.FC<{ info: AugmentedInfo }> = ({ info }) => {
         </div>
       </div>
       <div className="mb-5">{info.description}</div>
-      <div className="mb-5 text-gray-800 flex flex-row justify-between">
+      <div className="mb-5 text-gray-800 grid grid-cols-3 row-gap-2 col-gap-8 w-auto mx-auto">
         <Metric
           icon={<GoStar />}
           value={gh?.stars}
@@ -160,6 +166,12 @@ const Card: React.FC<{ info: AugmentedInfo }> = ({ info }) => {
           href={gh?.url}
         />
         <Metric
+          icon={<GoPackage />}
+          value={info.bundlephobia?.gzipSize}
+          title={'Gzipped package size is %s'}
+          href={info.bundlephobia?.url}
+        />
+        <Metric
           icon={<FaUsers />}
           value={gh?.contributors}
           title={'%s contributors on GitHub'}
@@ -175,15 +187,13 @@ const Card: React.FC<{ info: AugmentedInfo }> = ({ info }) => {
       <div className="mb-2 text-gray-800">
         <FeatureList features={info.features} />
       </div>
-      <div className="mb-5 text-gray-800 text-sm leading-relaxed">
-        <div className="inline-block">
-          <div className="mb-1 lg:mb-1 flex flex-row items-center">
-            <GoLaw className="inline mr-1" /> {info.license}
-          </div>
-          <div className="mb-1 lg:mb-1 flex flex-row items-center">
-            {/* Wishlist: Use a localized currency symbol instead of $ for everyone */}
-            <FaDollarSign className="inline mr-1" /> {info.revenueModel}
-          </div>
+      <div className="mb-5 text-gray-800 text-sm grid grid-cols-1 row-gap-1">
+        <div className="flex flex-row items-center">
+          <GoLaw className="inline mr-1" /> {info.license}
+        </div>
+        <div className="flex flex-row items-center">
+          {/* Wishlist: Use a localized currency symbol instead of $ for everyone */}
+          <FaDollarSign className="inline mr-1" /> {info.revenueModel}
         </div>
       </div>
       <div className="flex-grow">{/* Make buttons appear at bottom */}</div>
