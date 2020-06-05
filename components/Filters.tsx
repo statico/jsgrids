@@ -23,13 +23,17 @@ interface FilterState {
 const FrameworkSelector: React.FC<{
   selected: FrameworkName
   onChange: (newSelected: FrameworkName) => void
-}> = ({ selected, onChange }) => {
+  className?: string
+}> = ({ selected, onChange, className }) => {
   const handleToggle = (name: FrameworkName) => () => {
     onChange(selected === name ? null : name)
   }
   return (
-    <div className="flex flex-row items-center">
-      <span className="mr-2">Frameworks:</span>
+    <div className={classnames('flex flex-row items-center', className)}>
+      <span className="mr-2">
+        <span className="hidden xl:inline">Frameworks:</span>
+        <span className="inline xl:hidden">Show:</span>
+      </span>
       {FrameworkNames.map((name) => {
         const Icon = FrameworkIcons[name]
         const title = FrameworkTitles[name]
@@ -64,7 +68,10 @@ const FeaturesSelector: React.FC<{
         description: Features[name].description,
       }))}
     >
-      {selected.size ? `${selected.size} Features` : 'Any Feature'}
+      <span className="hidden xl:inline">
+        {selected.size ? `${selected.size} Features` : 'Any Feature'}
+      </span>
+      <span className="inline xl:hidden">Features</span>
     </MultiItemPicker>
   )
 }
@@ -86,7 +93,8 @@ const LicenseSelector: React.FC<{
           description: "See the project's home page for license details.",
         }))}
     >
-      {selected || 'Any License'}
+      <span className="hidden xl:inline">{selected || 'Any License'}</span>
+      <span className="inline xl:hidden">License</span>
     </SingleItemPicker>
   )
 }
@@ -103,7 +111,8 @@ const SortSelector: React.FC<{
       options={SortOptions}
       allowNull={false}
     >
-      Sort by {selectedOption.title}
+      <span className="hidden xl:inline">Sort by {selectedOption.title}</span>
+      <span className="inline xl:hidden">Sort</span>
     </SingleItemPicker>
   )
 }
@@ -148,8 +157,14 @@ export const FilteredItems: React.FC<FilteredItemsProps> = ({
   const Separator = () => <div className="mx-2" />
 
   const filterBar = (
-    <div className="text-gray-800 flex flex-row items-center select-none">
+    <div
+      className={classnames(
+        'text-gray-800 px-4 select-none',
+        'flex flex-row flex-wrap lg:flex-no-wrap items-center justify-center'
+      )}
+    >
       <FrameworkSelector
+        className="w-full lg:w-auto justify-center mb-2 lg:mb-0"
         selected={filters.framework}
         onChange={(framework) => {
           setFilters({ ...filters, framework })
@@ -178,7 +193,7 @@ export const FilteredItems: React.FC<FilteredItemsProps> = ({
         }}
       />
       <Separator />
-      <div className="px-2">{clone.length} results</div>
+      <div className="px-2 hidden xl:inline">{clone.length} results</div>
     </div>
   )
 

@@ -19,7 +19,7 @@ import { format } from 'url'
 const FeatureList: React.FC<{ features: AugmentedInfo['features'] }> = ({
   features,
 }) => (
-  <div className="leading-tight text-xs grid grid-cols-2">
+  <div className="leading-tight text-xs grid grid-cols-2 row-gap-1 lg:row-gap-0">
     {sortedFeatureNames(features).map((name) => (
       <Feature key={name} name={name} value={features[name]} />
     ))}
@@ -128,7 +128,12 @@ const Metric: React.FC<{
 const Card: React.FC<{ info: AugmentedInfo }> = ({ info }) => {
   const gh = info.github
   return (
-    <div className="bg-white block p-8 shadow-md rounded-md text-gray-900 flex flex-col justify-start">
+    <div
+      className={classnames(
+        'bg-white block p-4 sm:p-8 shadow-md rounded-md text-gray-900',
+        'flex flex-col justify-start'
+      )}
+    >
       <div className="mb-5 flex flex-row items-center justify-between">
         <div className="text-2xl text-center font-semibold">{info.title}</div>
         <div className="">
@@ -173,10 +178,13 @@ const Card: React.FC<{ info: AugmentedInfo }> = ({ info }) => {
       </div>
       <div className="mb-5 text-gray-800 text-sm leading-relaxed">
         <div className="inline-block">
-          <GoLaw className="inline" /> {info.license}
-          <br />
-          {/* Wishlist: Use a localized currency symbol instead of $ for everyone */}
-          <FaDollarSign className="inline" /> {info.revenueModel}
+          <div className="mb-1 lg:mb-1">
+            <GoLaw className="inline" /> {info.license}
+          </div>
+          <div>
+            {/* Wishlist: Use a localized currency symbol instead of $ for everyone */}
+            <FaDollarSign className="inline" /> {info.revenueModel}
+          </div>
         </div>
       </div>
       <div className="flex-grow">{/* Make buttons appear at bottom */}</div>
