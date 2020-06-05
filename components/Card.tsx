@@ -76,13 +76,15 @@ const FrameworkList: React.FC<{ info: AugmentedInfo }> = ({ info }) => (
         <Tooltip tip={title} key={name}>
           <a href={url} className="relative inline-block">
             <Icon className="hover:opacity-75" />
-            <div
-              className={classnames(
-                'absolute bottom-0 right-0 w-2 h-2',
-                'border border-white rounded-full',
-                isThirdParty ? 'bg-yellow-500' : 'bg-green-400'
-              )}
-            />
+            {isThirdParty && (
+              <div
+                className={classnames(
+                  'absolute bottom-0 right-0 w-3 h-3',
+                  'border-2 border-white rounded-full',
+                  'bg-yellow-500'
+                )}
+              />
+            )}
           </a>
         </Tooltip>
       )
