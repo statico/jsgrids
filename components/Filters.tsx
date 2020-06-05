@@ -38,10 +38,8 @@ const FrameworkSelector: React.FC<{
             <Icon
               style={{ width: 35, height: 35 }}
               className={classnames(
-                'm-1 p-1 rounded-md cursor-pointer',
-                selected === name
-                  ? 'bg-gray-600 text-gray-200'
-                  : 'bg-transparent'
+                'p-1 rounded-md cursor-pointer hover:opacity-75',
+                selected === name ? 'bg-gray-400' : 'bg-transparent'
               )}
               onClick={handleToggle(name)}
             />
