@@ -11,6 +11,7 @@ import { SortOptionKey, SortOptions } from '../lib/sorting'
 import MultiItemPicker from './MultiItemPicker'
 import SingleItemPicker from './SingleItemPicker'
 import { hasKeys } from '../lib/utils'
+import Tooltip from './Tooltip'
 
 interface FilterState {
   sort: SortOptionKey
@@ -33,16 +34,18 @@ const FrameworkSelector: React.FC<{
         const Icon = FrameworkIcons[name]
         const title = FrameworkTitles[name]
         return (
-          <Icon
-            key={name}
-            style={{ width: 35, height: 35 }}
-            title={title}
-            className={classnames(
-              'm-1 p-1 rounded-md cursor-pointer',
-              selected === name ? 'bg-gray-600 text-gray-200' : 'bg-transparent'
-            )}
-            onClick={handleToggle(name)}
-          />
+          <Tooltip key={name} tip={title}>
+            <Icon
+              style={{ width: 35, height: 35 }}
+              className={classnames(
+                'm-1 p-1 rounded-md cursor-pointer',
+                selected === name
+                  ? 'bg-gray-600 text-gray-200'
+                  : 'bg-transparent'
+              )}
+              onClick={handleToggle(name)}
+            />
+          </Tooltip>
         )
       })}
     </div>

@@ -3,6 +3,7 @@ import { GoChevronDown } from 'react-icons/go'
 import Button from './Button'
 import Dropdown from './Dropdown'
 import FilterBarButton from './FilterBarButton'
+import Tooltip from './Tooltip'
 
 interface Option {
   key: string
@@ -27,27 +28,28 @@ export const MultiItemPicker: React.FC<{
       <div className="mb-3">Choose one or more features:</div>
       <div className="grid grid-cols-2 row-gap-0 col-gap-3 mb-3">
         {options.map(({ key, title, description }) => (
-          <label
-            key={key}
-            title={description}
-            className="cursor-pointer hover:bg-gray-100 px-1 py-1 rounded-sm"
-          >
-            <input
-              type="checkbox"
-              className="align-middle mb-1 mr-2"
-              checked={selected.has(key)}
-              onChange={(event) => {
-                const newValue = new Set(selected)
-                if (event.target.checked) {
-                  newValue.add(key)
-                } else {
-                  newValue.delete(key)
-                }
-                onChange(newValue)
-              }}
-            />
-            {title}
-          </label>
+          <Tooltip tip={description}>
+            <label
+              key={key}
+              className="cursor-pointer hover:bg-gray-100 px-1 py-1 rounded-sm"
+            >
+              <input
+                type="checkbox"
+                className="align-middle mb-1 mr-2"
+                checked={selected.has(key)}
+                onChange={(event) => {
+                  const newValue = new Set(selected)
+                  if (event.target.checked) {
+                    newValue.add(key)
+                  } else {
+                    newValue.delete(key)
+                  }
+                  onChange(newValue)
+                }}
+              />
+              {title}
+            </label>
+          </Tooltip>
         ))}
       </div>
       <Button
