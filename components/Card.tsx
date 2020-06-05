@@ -13,6 +13,8 @@ import { FrameworkIcons, FrameworkTitles } from '../lib/frameworks'
 import { AugmentedInfo } from '../lib/libraries'
 import { sortedFeatureNames } from '../lib/sorting'
 import Button from './Button'
+import Tooltip from './Tooltip'
+import { format } from 'url'
 
 const FeatureList: React.FC<{ features: AugmentedInfo['features'] }> = ({
   features,
@@ -32,29 +34,28 @@ const Feature: React.FC<{
     throw new Error(`Unknown feature name: ${name}`)
   }
   const { title, description, important } = Features[name]
+  const cls = 'uppercase flex flex-row items-center mb-1 hover:opacity-75'
   if (value) {
     return (
-      <span
-        title={typeof value === 'string' ? value : description}
-        className="uppercase flex flex-row items-center mb-1"
-      >
-        {value === true ? (
-          <FaCheckCircle className="flex-none w-3 text-green-400" />
-        ) : (
-          <FaInfoCircle className="flex-none w-3 text-yellow-500" />
-        )}
-        <span className="ml-1">{title}</span>
-      </span>
+      <Tooltip tip={typeof value === 'string' ? value : description}>
+        <span className={cls}>
+          {value === true ? (
+            <FaCheckCircle className="flex-none w-3 text-green-400" />
+          ) : (
+            <FaInfoCircle className="flex-none w-3 text-yellow-500" />
+          )}
+          <span className="ml-1">{title}</span>
+        </span>
+      </Tooltip>
     )
   } else if (!value && important) {
     return (
-      <span
-        title={typeof value === 'string' ? value : description}
-        className="uppercase flex flex-row items-center mb-1"
-      >
-        <FaTimesCircle className="flex-none w-3 text-red-500" />
-        <span className="ml-1">{`Not ${title}`}</span>
-      </span>
+      <Tooltip tip={typeof value === 'string' ? value : description}>
+        <span className={cls}>
+          <FaTimesCircle className="flex-none w-3 text-red-500" />
+          <span className="ml-1">{`Not ${title}`}</span>
+        </span>
+      </Tooltip>
     )
   } else {
     return null
@@ -65,13 +66,18 @@ const FrameworkList: React.FC<{ info: AugmentedInfo }> = ({ info }) => (
   <div className="flex flex-row items-center justify-center text-2xl">
     {Object.keys(info.frameworks).map((name) => {
       const value = info.frameworks[name]
-      const url = typeof value === 'string' ? value : info.homeUrl
-      const title = FrameworkTitles[name]
+      const isThirdParty = typeof value === 'string'
+      const url = isThirdParty ? value : info.homeUrl
+      const title = isThirdParty
+        ? `Works with ${FrameworkTitles[name]} using a third-party library`
+        : `Works with ${FrameworkTitles[name]}`
       const Icon = FrameworkIcons[name]
       return (
-        <a href={url} key={name}>
-          <Icon title={title} />{' '}
-        </a>
+        <Tooltip tip={title} key={name}>
+          <a href={url}>
+            <Icon className="hover:opacity-75" />
+          </a>
+        </Tooltip>
       )
     })}
   </div>
@@ -81,28 +87,32 @@ const Metric: React.FC<{
   icon: React.ReactNode
   title: string
   value?: any
-  url?: string
-}> = ({ icon, title, value, url }) => {
+  href?: string
+}> = ({ icon, title, value, href }) => {
   const cls = classnames(
     'flex flex-row justify-center items-center leading-tight text-sm',
+    'hover:opacity-75',
     !value && 'text-gray-500'
   )
+  const formattedValue =
+    value && typeof value === 'number' ? value.toLocaleString() : value || 'n/a'
+  const formattedTitle = title.replace('%s', value ? formattedValue : 'unknown')
   const contents = (
     <>
-      {icon}&nbsp;
-      {value && typeof value === 'number'
-        ? value.toLocaleString()
-        : value || 'n/a'}
+      {icon}&nbsp;{formattedValue}
+      {}
     </>
   )
   return value ? (
-    <a href={url} title={title} className={cls}>
-      {contents}
-    </a>
+    <Tooltip tip={formattedTitle}>
+      <a href={href} className={cls}>
+        {contents}
+      </a>
+    </Tooltip>
   ) : (
-    <span title={title} className={cls}>
-      {contents}
-    </span>
+    <Tooltip tip={formattedTitle}>
+      <span className={cls}>{contents}</span>
+    </Tooltip>
   )
 }
 
@@ -121,32 +131,32 @@ const Card: React.FC<{ info: AugmentedInfo }> = ({ info }) => {
         <Metric
           icon={<GoStar />}
           value={gh?.stars}
-          title={`${gh?.stars} stars on GitHub`}
-          url={gh?.url}
+          title={'%s stars on GitHub'}
+          href={gh?.url}
         />
         <Metric
           icon={<IoMdDownload />}
           value={info.npm?.downloads}
-          title={`${info.npm?.downloads} downloads on NPM in the last week`}
-          url={info.npm?.url}
+          title={'%s downloads on NPM in the last week'}
+          href={info.npm?.url}
         />
         <Metric
           icon={<GoRepoForked />}
           value={gh?.forks}
-          title={`${gh?.stars} forks on GitHub`}
-          url={gh?.url}
+          title={'%s forks on GitHub'}
+          href={gh?.url}
         />
         <Metric
           icon={<FaUsers />}
           value={gh?.contributors}
-          title={`${gh?.contributors} contributors on GitHub`}
-          url={gh?.url}
+          title={'%s contributors on GitHub'}
+          href={gh?.url}
         />
         <Metric
           icon={<GoIssueOpened />}
           value={gh?.openIssues}
-          title={`${gh?.stars} open issues on GitHub`}
-          url={gh?.url + '/issues'}
+          title={'%s open issues on GitHub'}
+          href={gh?.url + '/issues'}
         />
       </div>
       <div className="mb-2 text-gray-800">
