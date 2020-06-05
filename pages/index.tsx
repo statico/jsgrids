@@ -4,6 +4,7 @@ import Header from '../components/Header'
 import { AugmentedInfo, getLibraries } from '../lib/libraries'
 import Card from '../components/Card'
 import { FilteredItems } from '../components/Filters'
+import Meta from '../components/Meta'
 
 interface Props {
   items: AugmentedInfo[]
@@ -11,6 +12,7 @@ interface Props {
 
 const Page: NextPage<Props> = ({ items }) => (
   <>
+    <Meta />
     <Header />
     <FilteredItems items={items}>
       {(filteredItems, filterBar) => (
