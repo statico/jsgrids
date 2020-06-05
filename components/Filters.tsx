@@ -90,7 +90,6 @@ const LicenseSelector: React.FC<{
         .map((name) => ({
           key: name,
           title: name,
-          description: "See the project's home page for license details.",
         }))}
     >
       <span className="hidden xl:inline">{selected || 'Any License'}</span>

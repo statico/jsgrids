@@ -2,7 +2,6 @@ import React from 'react'
 import { GoChevronDown } from 'react-icons/go'
 import Dropdown from './Dropdown'
 import FilterBarButton from './FilterBarButton'
-import Tooltip from './Tooltip'
 
 interface Option {
   key: string
@@ -29,7 +28,7 @@ export const SingleItemPicker: React.FC<{
         <label className="cursor-pointer hover:bg-gray-100 px-1 py-1 rounded-sm">
           <input
             type="radio"
-            className="align-middle mb-1 mr-2"
+            className="align-middle mb-1 mr-3"
             checked={!selected}
             onChange={() => {
               onChange(null)
@@ -39,19 +38,20 @@ export const SingleItemPicker: React.FC<{
         </label>
       )}
       {options.map(({ key, title, description }) => (
-        <Tooltip tip={description} key={key}>
-          <label className="cursor-pointer hover:bg-gray-100 px-1 py-1">
-            <input
-              type="radio"
-              className="align-middle mb-1 mr-2"
-              checked={selected === key}
-              onChange={() => {
-                onChange(key)
-              }}
-            />
-            {title}
-          </label>
-        </Tooltip>
+        <label key={key} className="cursor-pointer hover:bg-gray-100 px-1 py-1">
+          <input
+            type="radio"
+            className="align-middle mb-1 mr-3"
+            checked={selected === key}
+            onChange={() => {
+              onChange(key)
+            }}
+          />
+          {title}
+          {description && (
+            <div className="text-xs text-gray-700 ml-6">{description}</div>
+          )}
+        </label>
       ))}
     </div>
   </Dropdown>
