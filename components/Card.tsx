@@ -69,13 +69,20 @@ const FrameworkList: React.FC<{ info: AugmentedInfo }> = ({ info }) => (
       const isThirdParty = typeof value === 'string'
       const url = isThirdParty ? value : info.homeUrl
       const title = isThirdParty
-        ? `Works with ${FrameworkTitles[name]} using a third-party library`
-        : `Works with ${FrameworkTitles[name]}`
+        ? `Go to the third-party library for ${FrameworkTitles[name]}`
+        : `Built-in support for ${FrameworkTitles[name]}`
       const Icon = FrameworkIcons[name]
       return (
         <Tooltip tip={title} key={name}>
-          <a href={url}>
+          <a href={url} className="relative inline-block">
             <Icon className="hover:opacity-75" />
+            <div
+              className={classnames(
+                'absolute bottom-0 right-0 w-2 h-2',
+                'border border-white rounded-full',
+                isThirdParty ? 'bg-yellow-500' : 'bg-green-400'
+              )}
+            />
           </a>
         </Tooltip>
       )
