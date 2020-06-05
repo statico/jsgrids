@@ -15,6 +15,7 @@ frameworks:
   angular: true
   vue: true
 features:
+  foo: bar
   accessible: true
   copyPaste: true
   csvExport: true
