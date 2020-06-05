@@ -26,7 +26,7 @@ export const SingleItemPicker: React.FC<{
       </FilterBarButton>
     }
   >
-    <div className="block w-full px-4 py-3 text-sm whitespace-no-wrap grid grid-cols-1 row-gap-1">
+    <div className="block w-full px-4 py-3 text-sm whitespace-no-wrap grid grid-cols-1 row-gap-2 md:row-gap-1">
       {allowNull && (
         <label className="cursor-pointer hover:bg-gray-100 px-1 py-1 rounded-sm">
           <input
