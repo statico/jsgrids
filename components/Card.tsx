@@ -198,7 +198,7 @@ const Card: React.FC<{ info: AugmentedInfo }> = ({ info }) => {
       <div className="mb-4 text-gray-800">
         <FeatureList features={info.features} />
       </div>
-      <div className="mb-5 text-gray-800 text-sm grid grid-cols-1 row-gap-1">
+      <div className="mb-6 text-gray-800 text-sm grid grid-cols-1 row-gap-1">
         <div className="flex flex-row items-center">
           <GoLaw className="inline mr-2" /> {info.license}
         </div>
