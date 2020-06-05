@@ -1,4 +1,5 @@
 import classnames from 'classnames'
+import { fileSize } from 'humanize-plus'
 import {
   FaCheckCircle,
   FaDollarSign,
@@ -9,9 +10,9 @@ import {
 import {
   GoIssueOpened,
   GoLaw,
+  GoPackage,
   GoRepoForked,
   GoStar,
-  GoPackage,
 } from 'react-icons/go'
 import { IoMdDownload } from 'react-icons/io'
 import { Features } from '../lib/features'
@@ -20,7 +21,6 @@ import { AugmentedInfo } from '../lib/libraries'
 import { sortedFeatureNames } from '../lib/sorting'
 import Button from './Button'
 import Tooltip from './Tooltip'
-import { compactInteger, fileSize } from 'humanize-plus'
 
 const FeatureList: React.FC<{ features: AugmentedInfo['features'] }> = ({
   features,
@@ -104,7 +104,13 @@ const Metric: React.FC<{
   value?: any
   formatter?: (value: any) => string
   href?: string
-}> = ({ icon, title, value, formatter = compactInteger, href }) => {
+}> = ({
+  icon,
+  title,
+  value,
+  formatter = (x) => Number(x).toLocaleString(),
+  href,
+}) => {
   const cls = classnames(
     'flex flex-row items-center leading-tight text-sm',
     'hover:opacity-75',
@@ -113,12 +119,12 @@ const Metric: React.FC<{
   const formattedValue = value === undefined ? 'n/a' : formatter(value)
   const formattedTitle = title.replace(
     '%s',
-    value === undefined ? 'unknown' : Number(value).toLocaleString()
+    value === undefined ? 'unknown' : formattedValue
   )
   const contents = (
     <>
-      {icon}&nbsp;{formattedValue}
-      {}
+      <span className="mr-2">{icon}</span>
+      {formattedValue}
     </>
   )
   return value ? (
@@ -150,7 +156,7 @@ const Card: React.FC<{ info: AugmentedInfo }> = ({ info }) => {
         </div>
       </div>
       <div className="mb-5">{info.description}</div>
-      <div className="mb-5 text-gray-800 grid grid-cols-3 row-gap-2 col-gap-12 w-auto mx-auto">
+      <div className="mb-5 text-gray-800 grid grid-cols-3 row-gap-2 col-gap-12">
         <Metric
           icon={<GoStar />}
           value={gh?.stars}
@@ -173,7 +179,7 @@ const Card: React.FC<{ info: AugmentedInfo }> = ({ info }) => {
           icon={<GoPackage />}
           value={info.bundlephobia?.gzipSize}
           formatter={fileSize}
-          title={'Gzipped package size is %s bytes'}
+          title={'Gzipped package size is %s'}
           href={info.bundlephobia?.url}
         />
         <Metric
@@ -189,16 +195,16 @@ const Card: React.FC<{ info: AugmentedInfo }> = ({ info }) => {
           href={gh?.url + '/issues'}
         />
       </div>
-      <div className="mb-2 text-gray-800">
+      <div className="mb-4 text-gray-800">
         <FeatureList features={info.features} />
       </div>
       <div className="mb-5 text-gray-800 text-sm grid grid-cols-1 row-gap-1">
         <div className="flex flex-row items-center">
-          <GoLaw className="inline mr-1" /> {info.license}
+          <GoLaw className="inline mr-2" /> {info.license}
         </div>
         <div className="flex flex-row items-center">
           {/* Wishlist: Use a localized currency symbol instead of $ for everyone */}
-          <FaDollarSign className="inline mr-1" /> {info.revenueModel}
+          <FaDollarSign className="inline mr-2" /> {info.revenueModel}
         </div>
       </div>
       <div className="flex-grow">{/* Make buttons appear at bottom */}</div>
