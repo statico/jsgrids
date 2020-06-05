@@ -22,12 +22,12 @@ export const SortOptions: SortOption[] = [
   {
     key: 'stars',
     title: 'GitHub Stars',
-    fn: (a, b) => b.github?.stars - a.github?.stars,
+    fn: (a, b) => (b.github?.stars || 0) - (a.github?.stars || 0),
   },
   {
     key: 'downloads',
     title: 'NPM Weekly Downloads',
-    fn: (a, b) => b.npm?.downloads - a.npm?.downloads,
+    fn: (a, b) => (b.npm?.downloads || 0) - (a.npm?.downloads || 0),
   },
 ]
 
