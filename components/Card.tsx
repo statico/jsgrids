@@ -150,7 +150,7 @@ const Card: React.FC<{ info: AugmentedInfo }> = ({ info }) => {
       )}
     >
       <div className="mb-5 flex flex-row items-center justify-between">
-        <div className="text-2xl text-center font-semibold">{info.title}</div>
+        <div className="text-2xl text-left font-semibold">{info.title}</div>
         <div className="">
           <FrameworkList info={info} />
         </div>
