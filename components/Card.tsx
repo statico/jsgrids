@@ -20,6 +20,7 @@ import { AugmentedInfo } from '../lib/libraries'
 import { sortedFeatureNames } from '../lib/sorting'
 import Button from './Button'
 import Tooltip from './Tooltip'
+import { compactInteger, fileSize } from 'humanize-plus'
 
 const FeatureList: React.FC<{ features: AugmentedInfo['features'] }> = ({
   features,
@@ -101,16 +102,19 @@ const Metric: React.FC<{
   icon: React.ReactNode
   title: string
   value?: any
+  formatter?: (value: any) => string
   href?: string
-}> = ({ icon, title, value, href }) => {
+}> = ({ icon, title, value, formatter = compactInteger, href }) => {
   const cls = classnames(
     'flex flex-row items-center leading-tight text-sm',
     'hover:opacity-75',
     !value && 'text-gray-500'
   )
-  const formattedValue =
-    value && typeof value === 'number' ? value.toLocaleString() : value || 'n/a'
-  const formattedTitle = title.replace('%s', value ? formattedValue : 'unknown')
+  const formattedValue = value === undefined ? 'n/a' : formatter(value)
+  const formattedTitle = title.replace(
+    '%s',
+    value === undefined ? 'unknown' : Number(value).toLocaleString()
+  )
   const contents = (
     <>
       {icon}&nbsp;{formattedValue}
@@ -146,7 +150,7 @@ const Card: React.FC<{ info: AugmentedInfo }> = ({ info }) => {
         </div>
       </div>
       <div className="mb-5">{info.description}</div>
-      <div className="mb-5 text-gray-800 grid grid-cols-3 row-gap-2 col-gap-8 w-auto mx-auto">
+      <div className="mb-5 text-gray-800 grid grid-cols-3 row-gap-2 col-gap-12 w-auto mx-auto">
         <Metric
           icon={<GoStar />}
           value={gh?.stars}
@@ -168,7 +172,8 @@ const Card: React.FC<{ info: AugmentedInfo }> = ({ info }) => {
         <Metric
           icon={<GoPackage />}
           value={info.bundlephobia?.gzipSize}
-          title={'Gzipped package size is %s'}
+          formatter={fileSize}
+          title={'Gzipped package size is %s bytes'}
           href={info.bundlephobia?.url}
         />
         <Metric

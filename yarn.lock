@@ -1033,6 +1033,11 @@
   resolved "https://registry.yarnpkg.com/@types/flat-cache/-/flat-cache-2.0.0.tgz#64e5d3b426c392b603a208a55bdcc7d920ce6e57"
   integrity sha512-fHeEsm9hvmZ+QHpw6Fkvf19KIhuqnYLU6vtWLjd5BsMd/qVi7iTkMioDZl0mQmfNRA1A6NwvhrSRNr9hGYZGww==
 
+"@types/humanize-plus@^1.8.0":
+  version "1.8.0"
+  resolved "https://registry.yarnpkg.com/@types/humanize-plus/-/humanize-plus-1.8.0.tgz#ab6bfdb143ca719604dc031449a497fc11f54eb4"
+  integrity sha512-c7QNInYzgvbrNZvbwI/iYvHDTik/GqONxAvRUqwYF0AjgycoiyELrRR3RrILGXdZcaLt6Y+ds0+gSRQFzc71IQ==
+
 "@types/js-yaml@^3.12.4":
   version "3.12.4"
   resolved "https://registry.yarnpkg.com/@types/js-yaml/-/js-yaml-3.12.4.tgz#7d3b534ec35a0585128e2d332db1403ebe057e25"
@@ -3235,6 +3240,11 @@ human-signals@^1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/human-signals/-/human-signals-1.1.1.tgz#c5b1cd14f50aeae09ab6c59fe63ba3395fe4dfa3"
   integrity sha512-SEQu7vl8KjNL2eoGBLF3+wAjpsNfA9XMlXAYj/3EdaNfAlxKthD1xjEQfGOUhllCGGJVNY34bRr6lPINhNjyZw==
+
+humanize-plus@^1.8.2:
+  version "1.8.2"
+  resolved "https://registry.yarnpkg.com/humanize-plus/-/humanize-plus-1.8.2.tgz#a65b34459ad6367adbb3707a82a3c9f916167030"
+  integrity sha1-pls0RZrWNnrbs3B6gqPJ+RYWcDA=
 
 husky@>=4:
   version "4.2.5"
