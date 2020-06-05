@@ -37,7 +37,6 @@ export const Dropdown: React.FC<{
         ref={buttonRef}
         onMouseEnter={handleEnterButton}
         onMouseLeave={handleLeaveButton}
-        onClick={handleLeaveButton}
       >
         {button}
       </div>
