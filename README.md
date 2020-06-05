@@ -1,6 +1,6 @@
 # jsgrids.io
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/9fac2029-7e64-40b6-855b-f4df15d2f54d/deploy-status)](https://app.netlify.com/sites/jsgrids/deploys)
+![Netlify Status](https://api.netlify.com/api/v1/badges/9fac2029-7e64-40b6-855b-f4df15d2f54d/deploy-status)
 
 A List of JavaScript Spreadsheets and Data Grid Libraries - https://jsgrids.io/
 
