@@ -14,7 +14,6 @@ import { AugmentedInfo } from '../lib/libraries'
 import { sortedFeatureNames } from '../lib/sorting'
 import Button from './Button'
 import Tooltip from './Tooltip'
-import { format } from 'url'
 
 const FeatureList: React.FC<{ features: AugmentedInfo['features'] }> = ({
   features,

@@ -1,6 +1,4 @@
-import { createPopper } from '@popperjs/core'
-import classnames from 'classnames'
-import React, { createRef, useCallback, useState } from 'react'
+import React from 'react'
 import { GoChevronDown } from 'react-icons/go'
 import Dropdown from './Dropdown'
 import FilterBarButton from './FilterBarButton'
