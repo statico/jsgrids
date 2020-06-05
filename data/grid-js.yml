@@ -1,0 +1,41 @@
+title: Grid.js
+homeUrl: https://gridjs.io/
+demoUrl: https://gridjs.io/docs/examples/hello-world/
+githubRepo: grid-js/gridjs
+npmPackage: gridjs
+license: MIT License
+revenueModel: Free
+description: >
+  Grid.js is a free and open-source HTML table plugin written in TypeScript.
+frameworks:
+  vanilla: true
+  react: true
+features:
+  accessible: true
+  copyPaste: false
+  csvExport: false
+  customEditors: false
+  customFormatters: false
+  draggableRows: false
+  editable: false
+  fillDown: false
+  fillRight: false
+  filtering: false
+  formulas: false
+  freezableCols: false
+  headless: false
+  i18n: false
+  maintained: true
+  openSource: true
+  pagination: true
+  pivots: false
+  rangeSelection: false
+  resizableCols: false
+  responsive: true
+  rowGrouping: false
+  rowSelection: false
+  serverSide: true
+  sorting: true
+  trees: false
+  xlsxExport: false
+  virtualization: false
