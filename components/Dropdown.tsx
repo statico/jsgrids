@@ -33,6 +33,13 @@ export const Dropdown: React.FC<{
 
   const handleButtonClick = useCallback(() => {
     setIsLockedOpen(!isLockedOpen)
+    if (isLockedOpen || !buttonRef.current || !popupRef.current) {
+      return
+    }
+    setIsOverButton(true)
+    createPopper(buttonRef.current, popupRef.current, {
+      placement: 'bottom-start',
+    })
   }, [])
   const handleDocumentClick = useCallback(() => {
     setIsLockedOpen(false)
