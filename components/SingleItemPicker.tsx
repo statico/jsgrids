@@ -23,7 +23,10 @@ export const SingleItemPicker: React.FC<{
       </FilterBarButton>
     }
   >
-    <div className="block w-full px-4 py-3 text-sm whitespace-no-wrap grid grid-cols-1 row-gap-2 md:row-gap-1">
+    <fieldset
+      className="block w-full px-4 py-3 text-sm whitespace-no-wrap grid grid-cols-1 row-gap-2 md:row-gap-1"
+      role="menu"
+    >
       {allowNull && (
         <label className="cursor-pointer hover:bg-gray-100 px-1 py-1 rounded-sm">
           <input
@@ -33,6 +36,8 @@ export const SingleItemPicker: React.FC<{
             onChange={() => {
               onChange(null)
             }}
+            role="menuitem"
+            tabIndex={-1}
           />
           Any License
         </label>
@@ -46,6 +51,8 @@ export const SingleItemPicker: React.FC<{
             onChange={() => {
               onChange(key)
             }}
+            role="menuitem"
+            tabIndex={-1}
           />
           {title}
           {description && (
@@ -53,7 +60,7 @@ export const SingleItemPicker: React.FC<{
           )}
         </label>
       ))}
-    </div>
+    </fieldset>
   </Dropdown>
 )
 

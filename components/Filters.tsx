@@ -39,14 +39,15 @@ const FrameworkSelector: React.FC<{
         const title = FrameworkTitles[name]
         return (
           <Tooltip key={name} tip={title}>
-            <Icon
-              style={{ width: 35, height: 35 }}
+            <button
               className={classnames(
                 'p-1 rounded-md cursor-pointer hover:opacity-75',
                 selected === name ? 'bg-gray-400' : 'bg-transparent'
               )}
               onClick={handleToggle(name)}
-            />
+            >
+              <Icon style={{ width: 32, height: 32 }} />
+            </button>
           </Tooltip>
         )
       })}
@@ -156,7 +157,7 @@ export const FilteredItems: React.FC<FilteredItemsProps> = ({
   const Separator = () => <div className="mx-2" />
 
   const filterBar = (
-    <div
+    <nav
       className={classnames(
         'text-gray-800 px-4 select-none',
         'flex flex-row flex-wrap lg:flex-no-wrap items-center justify-center'
@@ -193,7 +194,7 @@ export const FilteredItems: React.FC<FilteredItemsProps> = ({
       />
       <Separator />
       <div className="px-2 hidden xl:inline">{clone.length} results</div>
-    </div>
+    </nav>
   )
 
   return <>{children(clone, filterBar)}</>

@@ -141,17 +141,21 @@ const Metric: React.FC<{
 }
 
 const Card: React.FC<{ info: AugmentedInfo }> = ({ info }) => {
+  const id = `card-${info.id}`
   const gh = info.github
   return (
-    <div
+    <section
       className={classnames(
         'bg-white block p-4 sm:p-8 shadow-md rounded-md text-gray-900',
         'flex flex-col justify-start'
       )}
+      aria-labelledby={id}
     >
       <div className="mb-5 flex flex-row items-center justify-between">
-        <div className="text-2xl text-left font-semibold">{info.title}</div>
-        <div className="">
+        <h3 className="text-2xl text-left font-semibold" id={id}>
+          {info.title}
+        </h3>
+        <div>
           <FrameworkList info={info} />
         </div>
       </div>
@@ -213,7 +217,7 @@ const Card: React.FC<{ info: AugmentedInfo }> = ({ info }) => {
         <Button href={info.github?.url} title="Source" />
         <Button href={info.homeUrl} title="Home" />
       </div>
-    </div>
+    </section>
   )
 }
 

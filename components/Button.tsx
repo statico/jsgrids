@@ -16,7 +16,7 @@ const Button: React.FC<{
   }
   const cls = classnames(
     'block rounded-md border border-transparent text-center flex justify-center items-center',
-    'uppercase transition transition-all duration-100',
+    'uppercase transition transition-all duration-100 w-full',
     small ? 'text-xs p-1' : 'text-sm p-2',
     disabled
       ? 'bg-gray-100 text-gray-500'
@@ -28,9 +28,9 @@ const Button: React.FC<{
       {title}
     </a>
   ) : (
-    <div onClick={onClick} className={cls}>
+    <button onClick={onClick} className={cls}>
       {title}
-    </div>
+    </button>
   )
 }
 

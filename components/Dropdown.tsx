@@ -9,7 +9,7 @@ export const Dropdown: React.FC<{
   const [isOverPopup, setIsOverPopup] = useState(false)
   const [isLockedOpen, setIsLockedOpen] = useState(false)
 
-  const buttonRef = createRef<HTMLDivElement>()
+  const buttonRef = createRef<HTMLButtonElement>()
   const popupRef = createRef<HTMLDivElement>()
 
   const handleEnterButton = () => {
@@ -32,7 +32,7 @@ export const Dropdown: React.FC<{
   }, [])
 
   const handleButtonClick = useCallback(() => {
-    setIsLockedOpen(true)
+    setIsLockedOpen(!isLockedOpen)
   }, [])
   const handleDocumentClick = useCallback(() => {
     setIsLockedOpen(false)
@@ -48,15 +48,17 @@ export const Dropdown: React.FC<{
 
   return (
     <>
-      <div
+      <button
         className="inline-block active:opacity-75"
         ref={buttonRef}
         onMouseEnter={handleEnterButton}
         onMouseLeave={handleLeaveButton}
         onClick={handleButtonClick}
+        aria-haspopup="true"
+        aria-expanded={isOpen}
       >
         {button}
-      </div>
+      </button>
       <div
         ref={popupRef}
         className={classnames(
@@ -67,6 +69,7 @@ export const Dropdown: React.FC<{
         style={{ minWidth: '12rem' }}
         onMouseEnter={handleEnterPopup}
         onMouseLeave={handleLeavePopup}
+        hidden={isOpen}
       >
         {children}
       </div>
