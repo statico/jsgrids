@@ -72,7 +72,7 @@ export const Features = {
   maintained: {
     title: 'Maintained',
     description:
-      "Whether this library under active development, or has recently-fixed bugs, or is so wonderfully stable that it doesn't need maintenance.",
+      "Whether this library is under active development, or has recently-fixed bugs, or is so wonderfully stable that it doesn't need maintenance.",
     important: true,
   },
   openSource: {
