@@ -1,0 +1,43 @@
+title: TOAST UI Grid
+homeUrl: https://nhn.github.io/tui.grid/latest/
+demoUrl: https://nhn.github.io/tui.grid/latest/tutorial-example01-basic
+githubRepo: nhn/tui.grid
+npmPackage: tui-grid
+license: MIT License
+revenueModel: Free
+description: >
+  TOAST UI Grid is a powerful widget which allows you to visualize and edit
+  data via its table representation.
+frameworks:
+  vanilla: true
+  vue: https://www.npmjs.com/package/@toast-ui/vue-grid
+  react: https://www.npmjs.com/package/@toast-ui/react-grid
+features:
+  accessible: true
+  copyPaste: true
+  csvExport: false
+  customEditors: true
+  customFormatters: true
+  draggableRows: false
+  editable: true
+  fillDown: false
+  fillRight: false
+  filtering: true
+  formulas: false
+  freezableCols: true
+  headless: false
+  i18n: true
+  maintained: true
+  openSource: true
+  pagination: true
+  pivots: false
+  rangeSelection: true
+  resizableCols: true
+  responsive: false
+  rowGrouping: false
+  rowSelection: false
+  serverSide: true
+  sorting: true
+  trees: true
+  xlsxExport: false
+  virtualization: true
