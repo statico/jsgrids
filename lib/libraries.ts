@@ -58,6 +58,7 @@ const RawInfo = rt.Record({
       downloads: rt.Number,
     })
     .Or(rt.Undefined),
+  ignoreBundlephobia: rt.Boolean.Or(rt.Undefined),
   bundlephobia: rt
     .Record({
       url: URL,
@@ -199,7 +200,7 @@ export const getLibraries = async (): Promise<AugmentedInfo[]> => {
       }
 
       // Grab bundle sizes from Bundlephobia.
-      if (item.npmPackage) {
+      if (item.npmPackage && item.ignoreBundlephobia !== true) {
         const name = item.npmPackage
         const key = `bundlephobia-${name}`
         let bundlephobia = cache.get(key)
@@ -217,7 +218,7 @@ export const getLibraries = async (): Promise<AugmentedInfo[]> => {
           } catch (err) {
             // For now, some packages like pqgrid seem to break their build system, so
             // ignore 500 errors.
-            console.error(
+            throw new Error(
               err.response
                 ? `Bundlephobia API returned ${err.response.status} for package ${name}`
                 : `Bundlephobia failed for package ${name}: ${err}`

@@ -3,6 +3,7 @@ homeUrl: https://gridjs.io/
 demoUrl: https://gridjs.io/docs/examples/hello-world/
 githubRepo: grid-js/gridjs
 npmPackage: gridjs
+ignoreBundlephobia: true
 license: MIT License
 revenueModel: Free
 description: >

@@ -3,6 +3,7 @@ homeUrl: https://www.htmlelements.com/docs/grid/
 demoUrl: https://www.htmlelements.com/demos/grid/overview/
 githubRepo: HTMLElements/smart-webcomponents
 npmPackage: '@smarthtmlelements/smart-elements'
+ignoreBundlephobia: true
 license: Custom License
 revenueModel: Community and Enterprise Versions
 description: >

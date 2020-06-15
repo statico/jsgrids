@@ -3,6 +3,7 @@ homeUrl: https://davidguttman.github.io/react-pivot/
 demoUrl: https://davidguttman.github.io/react-pivot/
 githubRepo: davidguttman/react-pivot
 npmPackage: react-pivot
+ignoreBundlephobia: true
 license: MIT License
 revenueModel: Free
 description: >

@@ -3,6 +3,7 @@ homeUrl: http://guriddo.net/
 demoUrl: http://guriddo.net/?page_id=119
 githubRepo: tonytomov/jqGrid
 npmPackage: jqGrid
+ignoreBundlephobia: true
 license: CC-BY-NC-3.0 or Commerical License
 revenueModel: Free for Personal Use / Commercial License
 description: >
