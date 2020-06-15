@@ -10,6 +10,8 @@ description: >
   covering everything from paging, sorting, filtering, editing, and grouping
   to row and column virtualization, export to PDF and Excel and
   accessibility.
+
+  A dedicated TreeList component is available for working with hierarchical data.
 frameworks:
   react: true
 features:
