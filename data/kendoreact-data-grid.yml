@@ -15,7 +15,7 @@ frameworks:
 features:
   accessible: true
   copyPaste: false
-  csvExport: true
+  csvExport:  false
   customEditors: true
   customFormatters: true
   draggableRows: true
@@ -39,5 +39,5 @@ features:
   serverSide: true
   sorting: true
   trees: false
-  xlsxExport: false
+  xlsxExport: true
   virtualization: true
