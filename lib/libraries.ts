@@ -34,7 +34,6 @@ export type FrameworkName = keyof rt.Static<typeof Frameworks>
 
 // Validate and type the data we get from the YAML files in `data`.
 const ImportedYAMLInfo = rt.Record({
-  id: rt.String,
   title: rt.String,
   description: rt.String,
   homeUrl: URL.Or(rt.Null),
@@ -51,6 +50,7 @@ const ImportedYAMLInfo = rt.Record({
 // Allow additional information to be added to the library info dictionaries.
 const AugmentedInfo = rt.Record({
   ...ImportedYAMLInfo.fields,
+  id: rt.String,
   features: rt.Dictionary(Feature),
   github: rt
     .Record({
