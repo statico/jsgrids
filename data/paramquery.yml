@@ -4,7 +4,7 @@ demoUrl: https://paramquery.com/demos
 githubRepo: paramquery/grid
 npmPackage: pqgrid
 ignoreBundlephobia: true
-license: GPL v3.0 or Commercial License
+license: GPLv3 or Commercial License
 revenueModel: Free (Vanilla JS Only) and Pro Versions
 description: >
   ParamQuery Grid is an open source initiative for the web whose easy to use
