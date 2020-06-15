@@ -10,8 +10,6 @@ description: >
   covering everything from paging, sorting, filtering, editing, and grouping
   to row and column virtualization, export to PDF and Excel and
   accessibility.
-
-  A dedicated TreeList component is available for working with hierarchical data.
 frameworks:
   angular: true
 features:
@@ -40,6 +38,6 @@ features:
   rowSelection: true
   serverSide: true
   sorting: true
-  trees: false
+  trees: A dedicated TreeList component is available for working with hierarchical data.
   xlsxExport: true
   virtualization: true
