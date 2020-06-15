@@ -10,12 +10,12 @@
     "start": "next start"
   },
   "dependencies": {
-    "@popperjs/core": "^2.4.0",
+    "@popperjs/core": "^2.4.2",
     "axios": "^0.19.2",
     "classnames": "^2.2.6",
     "humanize-plus": "^1.8.2",
     "js-yaml": "^3.14.0",
-    "next": "^9.4.2",
+    "next": "^9.4.4",
     "p-throttle": "^3.1.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
@@ -25,14 +25,13 @@
     "runtypes": "^4.2.0"
   },
   "devDependencies": {
-    "@types/axios": "^0.14.0",
     "@types/classnames": "^2.2.10",
     "@types/flat-cache": "^2.0.0",
     "@types/humanize-plus": "^1.8.0",
     "@types/js-yaml": "^3.12.4",
-    "@types/node": "^14.0.5",
+    "@types/node": "^14.0.13",
     "@types/p-throttle": "^2.1.0",
-    "@types/react": "^16.9.35",
+    "@types/react": "^16.9.36",
     "@types/react-icons": "^3.0.0",
     "husky": ">=4",
     "lint-staged": ">=10",
@@ -40,7 +39,7 @@
     "prettier": "^2.0.5",
     "tailwindcss": "^1.4.6",
     "ts-node": "^8.10.2",
-    "typescript": "^3.9.3"
+    "typescript": "^3.9.5"
   },
   "husky": {
     "hooks": {
