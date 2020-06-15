@@ -1,10 +1,10 @@
-import { AugmentedInfo } from './libraries'
+import { LibraryInfo } from './libraries'
 
 export interface SortOption {
   key: 'popularity' | 'stars' | 'downloads'
   title: string
   description?: string
-  fn: (a: AugmentedInfo, b: AugmentedInfo) => number
+  fn: (a: LibraryInfo, b: LibraryInfo) => number
 }
 
 export type SortOptionKey = SortOption['key']
@@ -34,7 +34,7 @@ export const SortOptions: SortOption[] = [
 // Sort the features by negative ones first, then positive, then middling.
 // Only important negative features are shown, which is why they're first.
 export const sortedFeatureNames = (
-  features: AugmentedInfo['features']
+  features: LibraryInfo['features']
 ): string[] =>
   Object.keys(features).sort((a, b) => {
     const av = features[a]

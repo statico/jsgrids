@@ -1,12 +1,12 @@
 import { NextPage, GetStaticProps } from 'next'
 import Footer from '../components/Footer'
 import Header from '../components/Header'
-import { AugmentedInfo, getLibraries } from '../lib/libraries'
+import { LibraryInfo, getLibraries } from '../lib/libraries'
 import Card from '../components/Card'
 import { FilteredItems } from '../components/Filters'
 
 interface Props {
-  items: AugmentedInfo[]
+  items: LibraryInfo[]
 }
 
 const Page: NextPage<Props> = ({ items }) => (

@@ -17,12 +17,12 @@ import {
 import { IoMdDownload } from 'react-icons/io'
 import { Features } from '../lib/features'
 import { FrameworkIcons, FrameworkTitles } from '../lib/frameworks'
-import { AugmentedInfo } from '../lib/libraries'
+import { LibraryInfo } from '../lib/libraries'
 import { sortedFeatureNames } from '../lib/sorting'
 import Button from './Button'
 import Tooltip from './Tooltip'
 
-const FeatureList: React.FC<{ features: AugmentedInfo['features'] }> = ({
+const FeatureList: React.FC<{ features: LibraryInfo['features'] }> = ({
   features,
 }) => (
   <div className="leading-tight text-xs grid grid-cols-2 row-gap-1 lg:row-gap-0">
@@ -68,7 +68,7 @@ const Feature: React.FC<{
   }
 }
 
-const FrameworkList: React.FC<{ info: AugmentedInfo }> = ({ info }) => (
+const FrameworkList: React.FC<{ info: LibraryInfo }> = ({ info }) => (
   <div className="flex flex-row items-center justify-center text-2xl">
     {Object.keys(info.frameworks).map((name) => {
       const value = info.frameworks[name]
@@ -140,7 +140,7 @@ const Metric: React.FC<{
   )
 }
 
-const Card: React.FC<{ info: AugmentedInfo }> = ({ info }) => {
+const Card: React.FC<{ info: LibraryInfo }> = ({ info }) => {
   const id = `card-${info.id}`
   const gh = info.github
   return (

@@ -32,13 +32,26 @@ const Frameworks = rt.Record({
 
 export type FrameworkName = keyof rt.Static<typeof Frameworks>
 
-const RawInfo = rt.Record({
+// Validate and type the data we get from the YAML files in `data`.
+const ImportedYAMLInfo = rt.Record({
   id: rt.String,
   title: rt.String,
   description: rt.String,
   homeUrl: URL.Or(rt.Null),
   demoUrl: URL.Or(rt.Null),
   githubRepo: GitHubRepo.Or(rt.Null),
+  npmPackage: rt.String.Or(rt.Null),
+  ignoreBundlephobia: rt.Boolean.Or(rt.Undefined),
+  license: rt.String.Or(rt.Null),
+  revenueModel: rt.String.Or(rt.Null),
+  frameworks: Frameworks,
+  features: rt.Dictionary(Feature),
+})
+
+// Allow additional information to be added to the library info dictionaries.
+const AugmentedInfo = rt.Record({
+  ...ImportedYAMLInfo.fields,
+  features: rt.Dictionary(Feature),
   github: rt
     .Record({
       url: URL,
@@ -51,14 +64,12 @@ const RawInfo = rt.Record({
       contributors: rt.Number,
     })
     .Or(rt.Undefined),
-  npmPackage: rt.String.Or(rt.Null),
   npm: rt
     .Record({
       url: URL,
       downloads: rt.Number,
     })
     .Or(rt.Undefined),
-  ignoreBundlephobia: rt.Boolean.Or(rt.Undefined),
   bundlephobia: rt
     .Record({
       url: URL,
@@ -67,26 +78,19 @@ const RawInfo = rt.Record({
     })
     .Or(rt.Null)
     .Or(rt.Undefined),
-  license: rt.String.Or(rt.Null),
-  revenueModel: rt.String.Or(rt.Null),
-  frameworks: Frameworks,
-  features: rt.Dictionary(Feature),
 })
 
-const AugmentedInfo = rt
-  .Record({
-    ...RawInfo.fields,
-    features: rt.Dictionary(Feature),
-  })
-  .asReadonly()
+// Make the final thing we return read-only.
+const LibraryInfo = rt.Record(AugmentedInfo.fields).asReadonly()
 
-type RawInfo = rt.Static<typeof RawInfo>
-export type AugmentedInfo = rt.Static<typeof AugmentedInfo>
+type ImportedYAMLInfo = rt.Static<typeof ImportedYAMLInfo>
+type AugmentedInfo = rt.Static<typeof AugmentedInfo>
+export type LibraryInfo = rt.Static<typeof LibraryInfo>
 
 const allowedFeatures = new Set(Object.keys(Features))
 
 // Get all the library data, fetching from APIs or using the cache as necessary.
-export const getLibraries = async (): Promise<AugmentedInfo[]> => {
+export const getLibraries = async (): Promise<LibraryInfo[]> => {
   // Get paths to all YAML files.
   const dataDir = join(process.cwd(), 'data')
   const paths = readdirSync(dataDir)
@@ -100,12 +104,10 @@ export const getLibraries = async (): Promise<AugmentedInfo[]> => {
 
       // Load raw YAML data and make sure it validates.
       const obj = yaml.safeLoad(await readFileSync(path, 'utf8'))
-      let item: RawInfo
+      let item: AugmentedInfo
       try {
-        item = RawInfo.check({
-          id,
-          ...obj,
-        })
+        ImportedYAMLInfo.check(obj)
+        item = AugmentedInfo.check({ id, ...obj })
       } catch (err) {
         throw new Error(
           `In ${path}, key "${err.key}" failed validation: ${err.message}`

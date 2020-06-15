@@ -6,7 +6,7 @@ import {
   FrameworkNames,
   FrameworkTitles,
 } from '../lib/frameworks'
-import { AugmentedInfo, FrameworkName } from '../lib/libraries'
+import { LibraryInfo, FrameworkName } from '../lib/libraries'
 import { SortOptionKey, SortOptions } from '../lib/sorting'
 import MultiItemPicker from './MultiItemPicker'
 import SingleItemPicker from './SingleItemPicker'
@@ -118,9 +118,9 @@ const SortSelector: React.FC<{
 }
 
 interface FilteredItemsProps {
-  items: AugmentedInfo[]
+  items: LibraryInfo[]
   children: (
-    filteredItems: AugmentedInfo[],
+    filteredItems: LibraryInfo[],
     filterBar: React.ReactNode
   ) => React.ReactNode
 }
