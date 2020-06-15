@@ -1,0 +1,45 @@
+title: Kendo UI for Angular Data Grid
+homeUrl: https://www.telerik.com/kendo-angular-ui/components/grid/
+demoUrl: https://www.telerik.com/kendo-angular-ui/components/grid/
+githubRepo: telerik/kendo-angular
+npmPackage: '@progress/kendo-angular-grid'
+license: Custom License
+revenueModel: Commercial 30-day Trial
+description: >
+  The Kendo UI for Angular Data Grid (Table) provides 100+ ready-to-use features
+  covering everything from paging, sorting, filtering, editing, and grouping
+  to row and column virtualization, export to PDF and Excel and
+  accessibility.
+
+  A dedicated TreeList component is available for working with hierarchical data.
+frameworks:
+  angular: true
+features:
+  accessible: true
+  copyPaste: false
+  csvExport: false
+  customEditors: true
+  customFormatters: true
+  draggableRows: false
+  editable: true
+  fillDown: false
+  fillRight: false
+  filtering: true
+  formulas: false
+  freezableCols: true
+  headless: false
+  i18n: true
+  maintained: true
+  openSource: false
+  pagination: true
+  pivots: false
+  rangeSelection: false
+  resizableCols: true
+  responsive: true
+  rowGrouping: true
+  rowSelection: true
+  serverSide: true
+  sorting: true
+  trees: false
+  xlsxExport: true
+  virtualization: true
