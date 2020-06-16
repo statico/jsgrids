@@ -42,6 +42,7 @@ const FrameworkSelector: React.FC<{
             <button
               className={classnames(
                 'p-1 rounded-md cursor-pointer hover:opacity-75',
+                'transition-opacity duration-75',
                 selected === name ? 'bg-gray-400' : 'bg-transparent'
               )}
               onClick={handleToggle(name)}
