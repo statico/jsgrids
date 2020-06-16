@@ -30,6 +30,7 @@ features:
   maintained: true
   openSource: false
   pagination: true
+  pdfExport: true
   pivots: false
   rangeSelection: false
   resizableCols: true
