@@ -1,9 +1,10 @@
-import { NextPage, GetStaticProps } from 'next'
-import Footer from '../components/Footer'
-import Header from '../components/Header'
-import { LibraryInfo, getLibraries } from '../lib/libraries'
+import { GetStaticProps, NextPage } from 'next'
+import Head from 'next/head'
 import Card from '../components/Card'
 import { FilteredItems } from '../components/Filters'
+import Footer from '../components/Footer'
+import Header from '../components/Header'
+import { getLibraries, LibraryInfo } from '../lib/libraries'
 
 interface Props {
   items: LibraryInfo[]
@@ -11,6 +12,11 @@ interface Props {
 
 const Page: NextPage<Props> = ({ items }) => (
   <>
+    <Head>
+      <title>
+        jsgrids | Spreadsheets and Data Grid Libraries for JavaScript
+      </title>
+    </Head>
     <Header />
     <FilteredItems items={items}>
       {(filteredItems, filterBar) => (
