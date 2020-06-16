@@ -32,7 +32,7 @@ export const MultiItemPicker: React.FC<{
       <div className="grid grid-cols-2 row-gap-1 lg:row-gap-0 col-gap-3 mb-3">
         {options.map(({ key, title, description }) => (
           <Tooltip key={key} tip={description}>
-            <label className="cursor-pointer hover:bg-gray-100 px-1 py-1 rounded-sm leading-relaxed">
+            <label className="cursor-pointer hover:opacity-75 px-1 py-1 rounded-sm leading-relaxed">
               <input
                 type="checkbox"
                 className="align-middle mb-1 mr-2"

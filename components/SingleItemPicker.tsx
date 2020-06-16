@@ -43,7 +43,7 @@ export const SingleItemPicker: React.FC<{
         </label>
       )}
       {options.map(({ key, title, description }) => (
-        <label key={key} className="cursor-pointer hover:bg-gray-100 px-1 py-1">
+        <label key={key} className="cursor-pointer hover:opacity-75 px-1 py-1">
           <input
             type="radio"
             className="align-middle mb-1 mr-3"

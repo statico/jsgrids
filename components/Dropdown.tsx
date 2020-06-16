@@ -1,49 +1,40 @@
 import { createPopper } from '@popperjs/core'
 import classnames from 'classnames'
-import React, { createRef, useCallback, useState, useEffect } from 'react'
+import React, { createRef, useEffect, useState } from 'react'
 
 export const Dropdown: React.FC<{
   button: React.ReactNode
 }> = ({ button, children }) => {
-  const [isOverButton, setIsOverButton] = useState(false)
-  const [isOverPopup, setIsOverPopup] = useState(false)
-  const [isLockedOpen, setIsLockedOpen] = useState(false)
+  const [isOpen, setIsOpen] = useState(false)
 
   const buttonRef = createRef<HTMLButtonElement>()
   const popupRef = createRef<HTMLDivElement>()
 
-  const handleEnterButton = () => {
-    if (!buttonRef.current || !popupRef.current) {
-      return
+  const handleButtonClick = (event: React.MouseEvent) => {
+    event.stopPropagation()
+    if (!isOpen && buttonRef.current && popupRef.current) {
+      createPopper(buttonRef.current, popupRef.current, {
+        placement: 'bottom-start',
+      })
     }
-    setIsOverButton(true)
-    createPopper(buttonRef.current, popupRef.current, {
-      placement: 'bottom-start',
-    })
+    setIsOpen(!isOpen)
   }
-  const handleLeaveButton = useCallback(() => {
-    setIsOverButton(false)
-  }, [])
-  const handleEnterPopup = useCallback(() => {
-    setIsOverPopup(true)
-  }, [])
-  const handleLeavePopup = useCallback(() => {
-    setIsOverPopup(false)
-  }, [])
 
-  const handleButtonClick = useCallback(() => {
-    setIsLockedOpen(!isLockedOpen)
-    if (isLockedOpen || !buttonRef.current || !popupRef.current) {
-      return
+  const handlePopupClick = (event: React.MouseEvent) => {
+    event.stopPropagation()
+  }
+
+  const handleDocumentClick = (event: MouseEvent) => {
+    if (
+      buttonRef.current &&
+      !buttonRef.current.contains(event.target as Element) &&
+      popupRef.current &&
+      !popupRef.current.contains(event.target as Element)
+    ) {
+      setIsOpen(false)
     }
-    setIsOverButton(true)
-    createPopper(buttonRef.current, popupRef.current, {
-      placement: 'bottom-start',
-    })
-  }, [])
-  const handleDocumentClick = useCallback(() => {
-    setIsLockedOpen(false)
-  }, [])
+  }
+
   useEffect(() => {
     document.body.addEventListener('click', handleDocumentClick)
     return () => {
@@ -51,15 +42,11 @@ export const Dropdown: React.FC<{
     }
   })
 
-  const isOpen = isOverButton || isOverPopup || isLockedOpen
-
   return (
     <>
       <button
-        className="inline-block active:opacity-75"
+        className="inline-block active:text-black"
         ref={buttonRef}
-        onMouseEnter={handleEnterButton}
-        onMouseLeave={handleLeaveButton}
         onClick={handleButtonClick}
         aria-haspopup="true"
         aria-expanded={isOpen}
@@ -69,13 +56,12 @@ export const Dropdown: React.FC<{
       <div
         ref={popupRef}
         className={classnames(
-          'bg-white z-30 float-left rounded-sm shadow-lg text-left mt-1',
+          'bg-white z-30 rounded-sm shadow-lg text-left mt-1',
           'border-gray-200 border select-none',
           isOpen ? 'block' : 'hidden'
         )}
+        onClick={handlePopupClick}
         style={{ minWidth: '12rem' }}
-        onMouseEnter={handleEnterPopup}
-        onMouseLeave={handleLeavePopup}
         hidden={isOpen}
       >
         {children}
