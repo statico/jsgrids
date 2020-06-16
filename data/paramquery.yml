@@ -33,6 +33,7 @@ features:
   maintained: true
   openSource: true
   pagination: true
+  pdfExport: false
   pivots: true
   rangeSelection: true
   resizableCols: true

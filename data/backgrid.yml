@@ -28,6 +28,7 @@ features:
   maintained: false
   openSource: true
   pagination: 'With extension'
+  pdfExport: false
   pivots: false
   rangeSelection: false
   resizableCols: false

@@ -15,7 +15,7 @@ frameworks:
 features:
   accessible: true
   copyPaste: false
-  csvExport: false
+  csvExport: true
   customEditors: false
   customFormatters: false
   draggableRows: false
@@ -30,6 +30,7 @@ features:
   maintained: true
   openSource: true
   pagination: false
+  pdfExport: false
   pivots: true
   rangeSelection: false
   resizableCols: false
