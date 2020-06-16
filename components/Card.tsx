@@ -41,7 +41,7 @@ const Feature: React.FC<{
   }
   const { title, description, important } = Features[name]
   const cls =
-    'uppercase flex flex-row items-center mb-1 hover:opacity-75 cursor-default'
+    'uppercase flex flex-row items-center mb-3/2 hover:opacity-75 cursor-default'
   if (value) {
     return (
       <Tooltip tip={typeof value === 'string' ? value : description}>
@@ -152,7 +152,7 @@ const Card: React.FC<{ info: LibraryInfo }> = ({ info }) => {
       )}
       aria-labelledby={id}
     >
-      <div className="mb-5 flex flex-row items-center justify-between">
+      <div className="mb-4 flex flex-row items-center justify-between">
         <h3 className="text-2xl text-left font-semibold" id={id}>
           {info.title}
         </h3>
@@ -160,7 +160,7 @@ const Card: React.FC<{ info: LibraryInfo }> = ({ info }) => {
           <FrameworkList info={info} />
         </div>
       </div>
-      <div className="mb-5">{info.description}</div>
+      <div className="mb-4">{info.description}</div>
       <div className="mb-5 text-gray-800 grid grid-cols-3 row-gap-2 col-gap-12">
         <Metric
           icon={<GoStar />}
