@@ -51,7 +51,6 @@ const ImportedYAMLInfo = rt.Record({
 const AugmentedInfo = rt.Record({
   ...ImportedYAMLInfo.fields,
   id: rt.String,
-  features: rt.Dictionary(Feature),
   github: rt
     .Record({
       url: URL,
