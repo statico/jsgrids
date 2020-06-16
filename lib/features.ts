@@ -86,6 +86,11 @@ export const Features = {
     description:
       'Supports a widget to navigate through pages of rows as opposed to scrolling.',
   },
+  pdfExport: {
+    title: 'PDF Export',
+    description:
+      'The library lets you download a PDF copy of the table contents without third-party libraries.',
+  },
   pivots: {
     title: 'Pivot Tables',
     description: 'Has support for pivot tables',
