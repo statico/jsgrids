@@ -56,8 +56,8 @@ export const Dropdown: React.FC<{
       <div
         ref={popupRef}
         className={classnames(
-          'bg-white z-30 rounded-sm shadow-lg text-left mt-1',
-          'border-gray-200 border select-none',
+          'bg-white dark:bg-gray-700 z-30 rounded-sm shadow-lg text-left mt-1',
+          'border-gray-200 dark:border-gray-900 border select-none',
           isOpen ? 'block' : 'hidden'
         )}
         onClick={handlePopupClick}

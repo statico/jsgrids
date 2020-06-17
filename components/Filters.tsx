@@ -43,7 +43,9 @@ const FrameworkSelector: React.FC<{
               className={classnames(
                 'p-1 rounded-md cursor-pointer hover:opacity-75',
                 'transition-opacity duration-75',
-                selected === name ? 'bg-gray-400' : 'bg-transparent'
+                selected === name
+                  ? 'bg-gray-400 dark:bg-gray-700'
+                  : 'bg-transparent'
               )}
               onClick={handleToggle(name)}
             >
@@ -160,7 +162,7 @@ export const FilteredItems: React.FC<FilteredItemsProps> = ({
   const filterBar = (
     <nav
       className={classnames(
-        'text-gray-800 px-4 select-none',
+        'text-gray-800 dark:text-gray-200 px-4 select-none',
         'flex flex-row flex-wrap lg:flex-no-wrap items-center justify-center'
       )}
     >

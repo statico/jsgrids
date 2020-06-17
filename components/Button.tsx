@@ -22,8 +22,11 @@ const Button: React.FC<{
     'uppercase transition transition-all duration-100 w-full',
     small ? 'text-xs p-1' : 'text-sm p-2',
     disabled
-      ? 'bg-gray-100 text-gray-500 cursor-default'
-      : 'bg-gray-200 text-gray-700 hover:bg-gray-300 hover:text-gray-900 hover:shadow-sm cursor-pointer',
+      ? 'bg-gray-100 text-gray-500 dark:bg-gray-800 dark:text-gray-700 cursor-default'
+      : [
+          'bg-gray-200 text-gray-700 dark:bg-gray-700 dark:text-gray-200 dark:hover:bg-gray-500',
+          'hover:bg-gray-300 hover:text-gray-900 hover:shadow-sm cursor-pointer',
+        ],
     className
   )
   return href ? (

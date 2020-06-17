@@ -56,7 +56,9 @@ export const SingleItemPicker: React.FC<{
           />
           {title}
           {description && (
-            <div className="text-xs text-gray-700 ml-6">{description}</div>
+            <div className="text-xs text-gray-700 dark:text-gray-500 ml-6">
+              {description}
+            </div>
           )}
         </label>
       ))}

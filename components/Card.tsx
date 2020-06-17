@@ -87,7 +87,7 @@ const FrameworkList: React.FC<{ info: LibraryInfo }> = ({ info }) => (
               <div
                 className={classnames(
                   'absolute bottom-0 right-0 w-3 h-3',
-                  'border-2 border-white rounded-full',
+                  'border-2 rounded-full border-white dark:border-gray-800',
                   'bg-yellow-500'
                 )}
               />
@@ -147,7 +147,8 @@ const Card: React.FC<{ info: LibraryInfo }> = ({ info }) => {
   return (
     <section
       className={classnames(
-        'bg-white block p-4 sm:p-8 shadow-md rounded-md text-gray-900',
+        'bg-white text-gray-900 dark:bg-gray-800 dark:text-gray-100',
+        'block p-4 sm:p-8 shadow-md rounded-md',
         'flex flex-col justify-start'
       )}
       aria-labelledby={id}
@@ -161,7 +162,7 @@ const Card: React.FC<{ info: LibraryInfo }> = ({ info }) => {
         </div>
       </div>
       <div className="mb-4">{info.description}</div>
-      <div className="mb-5 text-gray-800 grid grid-cols-3 row-gap-2 col-gap-12">
+      <div className="mb-5 text-gray-800 dark:text-gray-200 grid grid-cols-3 row-gap-2 col-gap-12">
         <Metric
           icon={<GoStar />}
           value={gh?.stars}
@@ -200,10 +201,10 @@ const Card: React.FC<{ info: LibraryInfo }> = ({ info }) => {
           href={gh?.url + '/issues'}
         />
       </div>
-      <div className="mb-4 text-gray-800">
+      <div className="mb-4 text-gray-800 dark:text-gray-200">
         <FeatureList features={info.features} />
       </div>
-      <div className="mb-6 text-gray-800 text-sm grid grid-cols-1 row-gap-1">
+      <div className="mb-6 text-gray-800 dark:text-gray-200 text-sm grid grid-cols-1 row-gap-1">
         <div className="flex flex-row items-center">
           <GoLaw className="inline mr-2" /> {info.license}
         </div>
