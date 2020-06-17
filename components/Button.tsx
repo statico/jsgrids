@@ -9,7 +9,7 @@ const Button: React.FC<{
   className?: string
   disabled?: boolean
 }> = ({ title, href, small, onClick, className, disabled }) => {
-  if (!href) {
+  if (!href && !onClick) {
     disabled = true
   }
   if (disabled) {
