@@ -1,0 +1,42 @@
+title: Kendo UI Spreadsheet
+homeUrl: https://www.telerik.com/kendo-ui/spreadsheet
+demoUrl: https://demos.telerik.com/kendo-ui/spreadsheet/index
+githubRepo: telerik/kendo-ui-core
+npmPackage: '@progress/kendo-ui'
+license: Custom License
+revenueModel: Commercial 30-day Trial
+description: >
+  Kendo UI's Spreadsheet allows you to edit and visualize tabular data by using cell formatting options, styles, and themes. Sorting, filtering, export and import features are ready-to-use out of the box. You can bind to a data source, create custom editors, use cell comments, validation and much more.
+
+frameworks:
+  jquery: true
+features:
+  accessible: true
+  copyPaste: true
+  csvExport: true
+  customEditors: true
+  customFormatters: true
+  draggableRows: false
+  editable: true
+  fillDown: true
+  fillRight: true
+  filtering: true
+  formulas: true
+  freezableCols: true
+  headless: false
+  i18n: true
+  maintained: true
+  openSource: false
+  pagination: false
+  pdfExport: true
+  pivots: A dedicated PivotGrid widget is available for working with pivot tables.
+  rangeSelection: true
+  resizableCols: true
+  responsive: true
+  rowGrouping: false
+  rowSelection: true
+  serverSide: true
+  sorting: true
+  trees: A dedicated TreeList widget is available for working with hierarchical data.
+  xlsxExport: true
+  virtualization: false
