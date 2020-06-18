@@ -1,0 +1,42 @@
+title: Kendo UI Grid
+homeUrl: https://www.telerik.com/kendo-ui/grid
+demoUrl: https://demos.telerik.com/kendo-ui/grid/index
+githubRepo: telerik/kendo-ui-core
+npmPackage: '@progress/kendo-ui'
+license: Custom License
+revenueModel: Commercial 30-day Trial
+description: >
+  Kendo UI's Responsive and Adaptive HTML5 Grid widget provides 100+ ready-to-use features from paging, sorting, filtering, editing, grouping and group paging to row and column virtualization, export to PDF and Excel, accessibility, globalization and RTL support. 
+
+frameworks:
+  jquery: true
+features:
+  accessible: true
+  copyPaste: false
+  csvExport: false
+  customEditors: true
+  customFormatters: true
+  draggableRows: false
+  editable: true
+  fillDown: false
+  fillRight: false
+  filtering: true
+  formulas: false
+  freezableCols: true
+  headless: false
+  i18n: true
+  maintained: true
+  openSource: false
+  pagination: true
+  pdfExport: true
+  pivots: A dedicated PivotGrid widget is available for working with pivot tables.
+  rangeSelection: true
+  resizableCols: true
+  responsive: true
+  rowGrouping: true
+  rowSelection: true
+  serverSide: true
+  sorting: true
+  trees: A dedicated TreeList widget is available for working with hierarchical data.
+  xlsxExport: true
+  virtualization: true
