@@ -40,8 +40,10 @@ const Feature: React.FC<{
     throw new Error(`Unknown feature name: ${name}`)
   }
   const { title, description, important } = Features[name]
-  const cls =
-    'uppercase flex flex-row items-center mb-3/2 hover:opacity-75 cursor-default'
+  const cls = classnames(
+    'flex flex-row items-center uppercase mb-3/2',
+    'hover:opacity-75 transition-opacity duration-75 cursor-default'
+  )
   if (value) {
     return (
       <Tooltip tip={typeof value === 'string' ? value : description}>
