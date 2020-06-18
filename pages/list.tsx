@@ -9,7 +9,7 @@ interface Props {
 
 const Link: React.FC<{ name: string; url?: string }> = ({ url, name }) =>
   url ? (
-    <a className="text-blue-700" href={url}>
+    <a className="text-blue-700 dark:text-blue-400" href={url}>
       {name}
     </a>
   ) : null
@@ -22,7 +22,7 @@ const TD: React.FC = ({ children }) => (
 )
 
 const Page: NextPage<Props> = ({ items }) => (
-  <div className="container mx-auto py-4 text-gray-900">
+  <div className="container mx-auto py-4">
     <Head>
       <title>Library List</title>
       <meta name="robots" content="noindex, nofollow" />
