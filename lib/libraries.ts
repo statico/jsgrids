@@ -103,6 +103,9 @@ export const getLibraries = async (): Promise<LibraryInfo[]> => {
 
       // Load raw YAML data and make sure it validates.
       const obj = yaml.safeLoad(readFileSync(path, 'utf8'))
+      if (typeof obj !== 'object') {
+        throw new Error(`Expected ${path} to be an object`)
+      }
       let item: AugmentedInfo
       try {
         ImportedYAMLInfo.check(obj)
