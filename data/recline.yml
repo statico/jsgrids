@@ -1,7 +1,7 @@
 title: Recline.js
-homeUrl: http://okfnlabs.org/recline/
-demoUrl: http://okfnlabs.org/recline/demos/
-githubRepo: okfn/recline
+homeUrl: https://datopian.github.io/recline/
+demoUrl: https://datopian.github.io/recline/demos/
+githubRepo: datopian/recline
 npmPackage: reclinejs
 license: MIT License
 revenueModel: Free
