@@ -29,7 +29,7 @@ export const MultiItemPicker: React.FC<{
       role="menu"
     >
       <div className="mb-3">Choose one or more:</div>
-      <div className="grid grid-cols-2 row-gap-1 lg:row-gap-0 col-gap-3 mb-3">
+      <div className="grid grid-cols-2 gap-y-1 lg:gap-y-0 gap-x-3 mb-3">
         {options.map(({ key, title, description }) => (
           <Tooltip key={key} tip={description}>
             <label className="cursor-pointer hover:opacity-75 px-1 py-1 rounded-sm leading-relaxed">

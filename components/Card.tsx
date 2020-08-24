@@ -25,7 +25,7 @@ import Tooltip from './Tooltip'
 const FeatureList: React.FC<{ features: LibraryInfo['features'] }> = ({
   features,
 }) => (
-  <div className="leading-tight text-xs grid grid-cols-2 row-gap-1 lg:row-gap-0">
+  <div className="leading-tight text-xs grid grid-cols-2 gap-y-1 lg:gap-y-0">
     {sortedFeatureNames(features).map((name) => (
       <Feature key={name} name={name} value={features[name]} />
     ))}
@@ -164,7 +164,7 @@ const Card: React.FC<{ info: LibraryInfo }> = ({ info }) => {
         </div>
       </div>
       <div className="mb-4">{info.description}</div>
-      <div className="mb-5 text-gray-800 dark:text-gray-200 grid grid-cols-3 row-gap-2 col-gap-12">
+      <div className="mb-5 text-gray-800 dark:text-gray-200 grid grid-cols-3 gap-y-2 gap-x-12">
         <Metric
           icon={<GoStar />}
           value={gh?.stars}
@@ -206,7 +206,7 @@ const Card: React.FC<{ info: LibraryInfo }> = ({ info }) => {
       <div className="mb-4 text-gray-800 dark:text-gray-200">
         <FeatureList features={info.features} />
       </div>
-      <div className="mb-6 text-gray-800 dark:text-gray-200 text-sm grid grid-cols-1 row-gap-1">
+      <div className="mb-6 text-gray-800 dark:text-gray-200 text-sm grid grid-cols-1 gap-y-1">
         <div className="flex flex-row items-center">
           <GoLaw className="inline mr-2" /> {info.license}
         </div>
@@ -216,7 +216,7 @@ const Card: React.FC<{ info: LibraryInfo }> = ({ info }) => {
         </div>
       </div>
       <div className="flex-grow">{/* Make buttons appear at bottom */}</div>
-      <div className="grid grid-cols-3 col-gap-4">
+      <div className="grid grid-cols-3 gap-x-4">
         <Button href={info.demoUrl} title="Demo" />
         <Button href={info.github?.url} title="Source" />
         <Button href={info.homeUrl} title="Home" />

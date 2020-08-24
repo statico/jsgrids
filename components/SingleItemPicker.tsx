@@ -24,7 +24,7 @@ export const SingleItemPicker: React.FC<{
     }
   >
     <fieldset
-      className="block w-full px-4 py-3 text-sm whitespace-no-wrap grid grid-cols-1 row-gap-2 md:row-gap-1"
+      className="block w-full px-4 py-3 text-sm whitespace-no-wrap grid grid-cols-1 gap-y-2 md:gap-y-1"
       role="menu"
     >
       {allowNull && (
