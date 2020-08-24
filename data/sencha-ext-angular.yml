@@ -1,0 +1,44 @@
+title: Sencha ExtAngular
+homeUrl: https://www.sencha.com/products/extangular/
+demoUrl: https://examples.sencha.com/ExtAngular/
+githubRepo: sencha/ext-angular
+npmPackage: '@sencha/ext-angular-modern'
+license: Custom License
+revenueModel: Commercial 30-day Trial
+description: >
+  ExtAngular includes a comprehensive set of 115+ components for Angular
+  developers, including grid, tree grid, pivot grid, charts, D3
+  visualizations, trees, calendar, buttons, menus and more. All components
+  are professionally tested and supported, and designed to work together.
+frameworks:
+  angular: true
+features:
+  accessible: true
+  copyPaste: true
+  csvExport: true
+  customEditors: true
+  customFormatters: true
+  draggableRows: true
+  editable: true
+  fillDown: true
+  fillRight: true
+  filtering: true
+  formulas: false
+  freezableCols: true
+  headless: false
+  i18n: false
+  maintained: true
+  openSource: false
+  pagination: true
+  pdfExport: false
+  pivots: false
+  rangeSelection: true
+  resizableCols: true
+  responsive: false
+  rowGrouping: true
+  rowSelection: true
+  serverSide: true
+  sorting: true
+  trees: true
+  xlsxExport: true
+  virtualization: true

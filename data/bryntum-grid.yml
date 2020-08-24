@@ -1,0 +1,46 @@
+title: Bryntum Grid
+homeUrl: https://www.bryntum.com/products/grid/
+demoUrl: https://www.bryntum.com/examples/grid/
+githubRepo: null
+npmPackage: null
+license: Custom License
+revenueModel: Commercial with Trial
+description: >
+  The Bryntum Grid is a powerful and high performance table component for the
+  web. Since it is built with pure JavaScript, it works with the framework
+  you are already using.
+frameworks:
+  vanilla: true
+  angular: true
+  react: true
+  vue: true
+features:
+  accessible: false
+  copyPaste: false
+  csvExport: false
+  customEditors: true
+  customFormatters: true
+  draggableRows: true
+  editable: true
+  fillDown: false
+  fillRight: false
+  filtering: true
+  formulas: false
+  freezableCols: true
+  headless: false
+  i18n: true
+  maintained: true
+  openSource: false
+  pagination: true
+  pdfExport: true
+  pivots: false
+  rangeSelection: true
+  resizableCols: true
+  responsive: true
+  rowGrouping: true
+  rowSelection: false
+  serverSide: true
+  sorting: true
+  trees: true
+  xlsxExport: true
+  virtualization: true

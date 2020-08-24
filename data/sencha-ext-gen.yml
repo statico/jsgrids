@@ -1,0 +1,44 @@
+title: Sencha Ext JS
+homeUrl: https://www.sencha.com/products/extjs/
+demoUrl: https://examples.sencha.com/extjs/
+githubRepo: sencha/ext-gen
+npmPackage: '@sencha/ext-gen'
+ignoreBundlephobia: true
+license: Custom License
+revenueModel: Commercial 30-day Trial
+description: >
+  Ext JS provides the industry's most comprehensive collection of
+  high-performance, customizable UI widgets - including HTML5 grids, trees,
+  lists, forms, menus, toolbars, panels, windows, and much more.
+frameworks:
+  vanilla: true
+features:
+  accessible: true
+  copyPaste: true
+  csvExport: true
+  customEditors: true
+  customFormatters: true
+  draggableRows: true
+  editable: true
+  fillDown: true
+  fillRight: true
+  filtering: true
+  formulas: false
+  freezableCols: true
+  headless: false
+  i18n: false
+  maintained: true
+  openSource: false
+  pagination: true
+  pdfExport: false
+  pivots: false
+  rangeSelection: true
+  resizableCols: true
+  responsive: false
+  rowGrouping: true
+  rowSelection: true
+  serverSide: true
+  sorting: true
+  trees: true
+  xlsxExport: true
+  virtualization: true

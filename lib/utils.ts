@@ -29,7 +29,7 @@ export const throttledFetch = pThrottle(
         headers['X-Bundlephobia-User'] = ua
       }
 
-      return await axios.get(url, { headers, timeout: 5000 })
+      return await axios.get(url, { headers, timeout: 10000 })
     } catch (err) {
       const status = err.response?.status
       const headers = JSON.stringify(err.response?.headers, null, '  ')
