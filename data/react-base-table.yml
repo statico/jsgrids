@@ -1,0 +1,42 @@
+title: React Base Table
+homeUrl: https://autodesk.github.io/react-base-table/
+demoUrl: https://autodesk.github.io/react-base-table/examples/default
+githubRepo: Autodesk/react-base-table
+npmPackage: react-base-table
+license: MIT License
+revenueModel: Free
+description: >
+  A react table component to display large datasets with high performance and
+  flexibility.
+frameworks:
+  react: true
+features:
+  accessible: false
+  copyPaste: false
+  csvExport: false
+  customEditors: true
+  customFormatters: true
+  draggableRows: true
+  editable: true
+  fillDown: false
+  fillRight: false
+  filtering: false
+  formulas: false
+  freezableCols: true
+  headless: false
+  i18n: false
+  maintained: true
+  openSource: true
+  pagination: false
+  pdfExport: false
+  pivots: false
+  rangeSelection: false
+  resizableCols: true
+  responsive: false
+  rowGrouping: true
+  rowSelection: true
+  serverSide: true
+  sorting: true
+  trees: false
+  xlsxExport: false
+  virtualization: true
