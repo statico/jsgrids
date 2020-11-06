@@ -15,7 +15,7 @@
     "classnames": "^2.2.6",
     "humanize-plus": "^1.8.2",
     "js-yaml": "^3.14.0",
-    "next": "^9.5.2",
+    "next": "^9.5.4",
     "p-throttle": "^3.1.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
