@@ -5,7 +5,7 @@ const Footer: React.FC = () => (
         Help improve this list on GitHub
       </a>
       <a href="https://nextjs.org/">Built with Next.js</a>
-      <a href="https://netlify.com">Hosted on Netlify</a>
+      <a href="https://vercel.com">Hosted on Vercel</a>
       <a href="http://www.heropatterns.com">Background from Hero Patterns</a>
       <a href="https://bundlephobia.com/">Package sizes from Bundlephobia</a>
     </div>

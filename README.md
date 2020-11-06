@@ -1,6 +1,6 @@
-# jsgrids.io
+# jsgrids
 
-A List of JavaScript Spreadsheets and Data Grid Libraries - https://jsgrids.io/
+A List of JavaScript Spreadsheets and Data Grid Libraries - https://jsgrids.statico.io/
 
 ## Motivation
 
@@ -22,7 +22,7 @@ Information on each library is in `data/` and is parsed in `lib/libraries.ts`. E
 
 ## Miscellanous
 
-- jsgrids.io is hosted on [Vercel](https://vercel.com/)
+- jsgrids is hosted on [Vercel](https://vercel.com/)
 - This project makes extensive use of [Tailwind CSS](https://tailwindcss.com/), [Next.js](https://nextjs.org/), and [TypeScript](https://www.typescriptlang.org/)
 - Icons are from the various icon sets in [react-icons](https://react-icons.github.io/react-icons/)
 - The GitHub corner thing is Tim Holman's fancy [GitHub Corners](http://tholman.com/github-corners/) thing

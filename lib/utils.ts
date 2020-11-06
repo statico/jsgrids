@@ -5,7 +5,7 @@ import pThrottle from 'p-throttle'
 // time, so let's be nice.
 export const throttledFetch = pThrottle(
   async (url: string) => {
-    const { GITHUB_TOKEN, NETLIFY, COMMIT_REF, BUILD_ID } = process.env
+    const { GITHUB_TOKEN, VERCEL_URL, VERCEL_GITHUB_COMMIT_SHA } = process.env
     if (!GITHUB_TOKEN) {
       throw new Error(
         "Please set a GITHUB_TOKEN. Otherwise you'll quickly exceed GitHub's API rate limits."
@@ -15,9 +15,9 @@ export const throttledFetch = pThrottle(
     console.log(`Fetching ${url}`)
     try {
       // Be nice to our APIs. (File a GitHub issue if we aren't!)
-      const ua = NETLIFY
-        ? `jsgrids.io (Netlify build ${BUILD_ID} for commit ${COMMIT_REF})`
-        : `jsgrids.io (local development)`
+      const ua = VERCEL_URL
+        ? `jsgrids.statico.io (Netlify build ${VERCEL_URL} for commit ${VERCEL_GITHUB_COMMIT_SHA})`
+        : `jsgrids.statico.io (local development)`
       const headers: any = {
         'User-Agent': ua,
       }
