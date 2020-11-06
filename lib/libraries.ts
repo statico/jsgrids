@@ -1,5 +1,5 @@
 import { readdirSync, readFileSync } from 'fs'
-import yaml from 'js-yaml'
+import * as yaml from 'js-yaml'
 import { basename, join } from 'path'
 import * as rt from 'runtypes'
 import * as cache from './cache'
@@ -150,11 +150,12 @@ export const getLibraries = async (): Promise<LibraryInfo[]> => {
             const pageSize = 100
             const url = `https://api.github.com/repos/${item.githubRepo}/contributors?per_page=${pageSize}`
             const res1 = await throttledFetch(url)
-            if (res1.data.length < pageSize || !res1.headers.link) {
+            if (res1.data.length < pageSize || !res1.headers.get('link')) {
               stats = { contributors: res1.data.length }
             } else {
               const lastPage = Number(
-                res1.headers.link
+                res1.headers
+                  .get('link')
                   .split(',')
                   .find((s?: string) => /rel="last"/.test(s))
                   .match(/\bpage=(\d+)/)[1]
