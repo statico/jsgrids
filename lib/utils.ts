@@ -1,4 +1,4 @@
-import axios from 'axios'
+import fetch from 'node-fetch'
 import pThrottle from 'p-throttle'
 
 // Hammering APIs usually leads to trouble, and we don't really care about build
@@ -29,7 +29,9 @@ export const throttledFetch = pThrottle(
         headers['X-Bundlephobia-User'] = ua
       }
 
-      return await axios.get(url, { headers, timeout: 10000 })
+      const res = await fetch(url, { headers, timeout: 10000 })
+      const data = await res.json()
+      return { headers: res.headers, data }
     } catch (err) {
       const status = err.response?.status
       const headers = JSON.stringify(err.response?.headers, null, '  ')
