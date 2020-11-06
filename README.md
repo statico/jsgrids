@@ -1,7 +1,5 @@
 # jsgrids.io
 
-![Netlify Status](https://api.netlify.com/api/v1/badges/9fac2029-7e64-40b6-855b-f4df15d2f54d/deploy-status)
-
 A List of JavaScript Spreadsheets and Data Grid Libraries - https://jsgrids.io/
 
 ## Motivation
@@ -10,7 +8,7 @@ I build a lot of internal tools for data auditing and workflows, and every few m
 
 ## Contributing
 
-Pull requests are welcome to help keep this project up to date. Please make sure the Netlify build passes successfully, and please make sure all source is formatted with [Prettier](https://prettier.io/) (there's a git hook that should do it for you anyway).
+Pull requests are welcome to help keep this project up to date. Please make sure the Vercel build passes successfully, and please make sure all source is formatted with [Prettier](https://prettier.io/) (there's a git hook that should do it for you anyway).
 
 ## Development
 
@@ -24,7 +22,7 @@ Information on each library is in `data/` and is parsed in `lib/libraries.ts`. E
 
 ## Miscellanous
 
-- jsgrids.io is hosted on [Netlify](https://jsgrids.io/)
+- jsgrids.io is hosted on [Vercel](https://vercel.com/)
 - This project makes extensive use of [Tailwind CSS](https://tailwindcss.com/), [Next.js](https://nextjs.org/), and [TypeScript](https://www.typescriptlang.org/)
 - Icons are from the various icon sets in [react-icons](https://react-icons.github.io/react-icons/)
 - The GitHub corner thing is Tim Holman's fancy [GitHub Corners](http://tholman.com/github-corners/) thing
