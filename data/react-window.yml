@@ -1,0 +1,41 @@
+title: react-window
+homeUrl: https://github.com/bvaughn/react-window#react-window
+demoUrl: https://react-window.now.sh/
+githubRepo: bvaughn/react-window
+npmPackage: react-window
+license: MIT License
+revenueModel: Free
+description: >
+  React components for efficiently rendering large lists and tabular data.
+frameworks:
+  react: true
+features:
+  accessible: false
+  copyPaste: false
+  csvExport: false
+  customEditors: false
+  customFormatters: true
+  draggableRows: false
+  editable: false
+  fillDown: false
+  fillRight: false
+  filtering: false
+  formulas: false
+  freezableCols: false
+  headless: true
+  i18n: false
+  maintained: true
+  openSource: true
+  pagination: false
+  pdfExport: false
+  pivots: false
+  rangeSelection: false
+  resizableCols: false
+  responsive: false
+  rowGrouping: false
+  rowSelection: false
+  serverSide: false
+  sorting: false
+  trees: false
+  xlsxExport: false
+  virtualization: true
