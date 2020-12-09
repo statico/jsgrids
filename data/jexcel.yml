@@ -1,7 +1,7 @@
 title: jExcel
 homeUrl: https://bossanova.uk/jexcel/
 demoUrl: https://bossanova.uk/jexcel/v4/examples
-githubRepo: paulhodel/jexcel
+githubRepo: jspreadsheet/jexcel
 npmPackage: jexcel
 license: MIT or Commercial License
 revenueModel: Free for Older v4, Subscription for Newer v5
