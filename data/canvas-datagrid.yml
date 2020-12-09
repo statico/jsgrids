@@ -1,0 +1,48 @@
+title: canvas-datagrid
+homeUrl: https://canvas-datagrid.js.org/#readme
+demoUrl: https://canvas-datagrid.js.org/demo.html
+githubRepo: TonyGermaneri/canvas-datagrid
+npmPackage: canvas-datagrid
+license: BSD 3-Clause License
+revenueModel: Free
+description: >
+  Excel-like data grid with a rich API, extensible styling, small file size,
+  and native support for touch devices. Single canvas element, drawn in
+  immediate mode, data size does not impact performance. W3C Web Component
+  and works in all frameworks.
+frameworks:
+  angular: https://canvas-datagrid.js.org/#more-demos
+  jquery: https://canvas-datagrid.js.org/#more-demos
+  react: https://canvas-datagrid.js.org/reactExample.html
+  vanilla: true
+  vue: https://canvas-datagrid.js.org/vueExample.html
+features:
+  accessible: true
+  copyPaste: true
+  csvExport: false
+  customEditors: false
+  customFormatters: Formatters can format plain text only.
+  draggableRows: true
+  editable: true
+  fillDown: false
+  fillRight: false
+  filtering: true
+  formulas: false
+  freezableCols: true
+  headless: false
+  i18n: false
+  maintained: true
+  openSource: true
+  pagination: true
+  pdfExport: false
+  pivots: false
+  rangeSelection: true
+  resizableCols: true
+  responsive: false
+  rowGrouping: false
+  rowSelection: true
+  serverSide: false
+  sorting: true
+  trees: false
+  xlsxExport: false
+  virtualization: true
