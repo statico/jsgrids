@@ -1,0 +1,46 @@
+title: Revo Grid
+homeUrl: https://revolist.github.io/revogrid/
+demoUrl: https://revolist.github.io/revogrid/demo/
+githubRepo: revolist/revogrid
+npmPackage: '@revolist/revogrid'
+license: MIT
+revenueModel: Free
+description: >
+  Revolutionary Spreadsheet Data Grid component.
+  Built according to the latest reactivity concepts.
+  Super fast, full of features with advanced customization level.
+frameworks:
+  vanilla: true
+  react: true
+  angular: true
+  vue: true
+features:
+  accessible: true
+  copyPaste: true
+  csvExport: true
+  customEditors: true
+  customFormatters: true
+  draggableRows: true
+  editable: true
+  fillDown: true
+  fillRight: true
+  filtering: true
+  formulas: false
+  freezableCols: true
+  headless: false
+  i18n: false
+  maintained: true
+  openSource: true
+  pagination: false
+  pdfExport: false
+  pivots: false
+  rangeSelection: true
+  resizableCols: true
+  responsive: true
+  rowGrouping: false
+  rowSelection: true
+  serverSide: false
+  sorting: true
+  trees: false
+  xlsxExport: false
+  virtualization: true
