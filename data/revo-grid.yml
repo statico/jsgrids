@@ -16,7 +16,7 @@ frameworks:
   vue: true
 features:
   accessible: true
-  copyPaste: true
+  copyPaste: Only within the grid. System clipboard not supported.
   csvExport: true
   customEditors: true
   customFormatters: true
