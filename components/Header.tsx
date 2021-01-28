@@ -14,8 +14,10 @@ const Header: React.FC = () => (
       bannerColor="#fff"
       octoColor="#3182ce"
     />
-    <h1 className="text-4xl lg:text-5xl font-semibold -mt-2">jsgrids</h1>
-    <h2 className="text-lg lg:text-2xl">
+    <h1 className="text-4xl lg:text-5xl font-semibold mt-2">
+      jsgrids.statico.io
+    </h1>
+    <h2 className="text-lg lg:text-2xl mt-2">
       A List of JavaScript Spreadsheets and Data Grid Libraries
     </h2>
   </header>
