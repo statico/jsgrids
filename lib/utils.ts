@@ -30,7 +30,7 @@ export const throttledFetch = throttler(async (url: string) => {
       headers['X-Bundlephobia-User'] = ua
     }
 
-    const res = await fetch(url, { headers, timeout: 10000 })
+    const res = await fetch(url, { headers, timeout: 20000 })
     const data = await res.json()
     return { headers: res.headers, data }
   } catch (err) {
