@@ -19,7 +19,7 @@ const GitHubRepo = rt.String.withConstraint(
 )
 const Feature = rt.Boolean.Or(URL).Or(rt.String)
 
-const FrameworkValue = URL.Or(rt.Boolean).Or(rt.Undefined)
+const FrameworkValue = rt.Optional(URL.Or(rt.Boolean))
 
 const Frameworks = rt.Record({
   vanilla: FrameworkValue,
@@ -40,7 +40,7 @@ const ImportedYAMLInfo = rt.Record({
   demoUrl: URL.Or(rt.Null),
   githubRepo: GitHubRepo.Or(rt.Null),
   npmPackage: rt.String.Or(rt.Null),
-  ignoreBundlephobia: rt.Boolean.Or(rt.Undefined),
+  ignoreBundlephobia: rt.Optional(rt.Boolean),
   license: rt.String.Or(rt.Null),
   revenueModel: rt.String.Or(rt.Null),
   frameworks: Frameworks,
@@ -51,8 +51,8 @@ const ImportedYAMLInfo = rt.Record({
 const AugmentedInfo = rt.Record({
   ...ImportedYAMLInfo.fields,
   id: rt.String,
-  github: rt
-    .Record({
+  github: rt.Optional(
+    rt.Record({
       url: URL,
       stars: rt.Number,
       forks: rt.Number,
@@ -62,21 +62,22 @@ const AugmentedInfo = rt.Record({
       network: rt.Number,
       contributors: rt.Number,
     })
-    .Or(rt.Undefined),
-  npm: rt
-    .Record({
+  ),
+  npm: rt.Optional(
+    rt.Record({
       url: URL,
       downloads: rt.Number,
     })
-    .Or(rt.Undefined),
-  bundlephobia: rt
-    .Record({
-      url: URL,
-      rawSize: rt.Number,
-      gzipSize: rt.Number,
-    })
-    .Or(rt.Null)
-    .Or(rt.Undefined),
+  ),
+  bundlephobia: rt.Optional(
+    rt
+      .Record({
+        url: URL,
+        rawSize: rt.Number,
+        gzipSize: rt.Number,
+      })
+      .Or(rt.Null)
+  ),
 })
 
 // Make the final thing we return read-only.

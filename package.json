@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@popperjs/core": "^2.6.0",
+    "autoprefixer": "^10.2.5",
     "classnames": "^2.2.6",
     "humanize-plus": "^1.8.2",
     "js-yaml": "^4.0.0",
@@ -26,6 +27,7 @@
     "runtypes": "^5.0.1"
   },
   "devDependencies": {
+    "@types/autoprefixer": "^10.2.0",
     "@types/classnames": "^2.2.11",
     "@types/flat-cache": "^2.0.0",
     "@types/humanize-plus": "^1.8.0",
