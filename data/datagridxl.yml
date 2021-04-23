@@ -1,21 +1,20 @@
 title: DataGridXL
 homeUrl: https://datagridxl.com
 demoUrl: https://datagridxl.com/demos
-githubRepo: datagridxl/datagridxl
+githubRepo: DataGridXL/DataGridXL
 npmPackage: null
 license: Custom License
 revenueModel: Free for Personal Use
 description: >
-  No-nonsense Super Fast Excel-like Data Grid Library (Up to 1 Million Cells).
+  No-nonsense super fast Excel-like data grid library with support for up to 1 million cells.
 frameworks:
-  angular: false
-  react: true
   vanilla: true
-  vue: true
+  react: https://www.datagridxl.com/docs/react-data-table
+  vue: https://www.datagridxl.com/docs/vue-data-table
 features:
   accessible: false
   copyPaste: true
-  csvExport: true
+  csvExport: false
   customEditors: false
   customFormatters: false
   draggableRows: true
