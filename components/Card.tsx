@@ -78,7 +78,7 @@ const FrameworkList: React.FC<{ info: LibraryInfo }> = ({ info }) => (
       const isThirdParty = typeof value === 'string'
       const url = isThirdParty ? value : info.homeUrl
       const title = isThirdParty
-        ? `Go to the third-party library for ${FrameworkTitles[name]}`
+        ? `Go to the separate solution for ${FrameworkTitles[name]}`
         : `Built-in support for ${FrameworkTitles[name]}`
       const Icon = FrameworkIcons[name]
       return (
