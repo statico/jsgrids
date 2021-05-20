@@ -3,7 +3,7 @@ homeUrl: https://revolist.github.io/revogrid/
 demoUrl: https://revolist.github.io/revogrid/demo/
 githubRepo: revolist/revogrid
 npmPackage: '@revolist/revogrid'
-license: MIT
+license: MIT License
 revenueModel: Free
 description: >
   Revolutionary Spreadsheet Data Grid component.
