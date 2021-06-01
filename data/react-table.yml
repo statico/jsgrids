@@ -1,6 +1,6 @@
 title: React Table
-homeUrl: https://react-table.js.org/
-demoUrl: https://react-table-omega.vercel.app/docs/examples/basic
+homeUrl: https://react-table.tanstack.com/
+demoUrl: https://react-table.tanstack.com/docs/examples/basic
 githubRepo: tannerlinsley/react-table
 npmPackage: react-table
 license: MIT License
