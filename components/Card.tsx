@@ -1,28 +1,28 @@
-import classnames from 'classnames'
-import { fileSize } from 'humanize-plus'
+import classnames from "classnames"
+import { fileSize } from "humanize-plus"
 import {
   FaCheckCircle,
   FaDollarSign,
   FaInfoCircle,
   FaTimesCircle,
   FaUsers,
-} from 'react-icons/fa'
+} from "react-icons/fa"
 import {
   GoIssueOpened,
   GoLaw,
   GoPackage,
   GoRepoForked,
   GoStar,
-} from 'react-icons/go'
-import { IoMdDownload } from 'react-icons/io'
-import { Features } from '../lib/features'
-import { FrameworkIcons, FrameworkTitles } from '../lib/frameworks'
-import { LibraryInfo } from '../lib/libraries'
-import { sortedFeatureNames } from '../lib/sorting'
-import Button from './Button'
-import Tooltip from './Tooltip'
+} from "react-icons/go"
+import { IoMdDownload } from "react-icons/io"
+import { Features } from "../lib/features"
+import { FrameworkIcons, FrameworkTitles } from "../lib/frameworks"
+import { LibraryInfo } from "../lib/libraries"
+import { sortedFeatureNames } from "../lib/sorting"
+import Button from "./Button"
+import Tooltip from "./Tooltip"
 
-const FeatureList: React.FC<{ features: LibraryInfo['features'] }> = ({
+const FeatureList: React.FC<{ features: LibraryInfo["features"] }> = ({
   features,
 }) => (
   <div className="leading-tight text-xs grid grid-cols-2 gap-y-1 lg:gap-y-0">
@@ -41,12 +41,12 @@ const Feature: React.FC<{
   }
   const { title, description, important } = Features[name]
   const cls = classnames(
-    'flex flex-row items-center uppercase mb-3/2',
-    'hover:opacity-75 transition-opacity duration-75 cursor-default'
+    "flex flex-row items-center uppercase mb-3/2",
+    "hover:opacity-75 transition-opacity duration-75 cursor-default"
   )
   if (value) {
     return (
-      <Tooltip tip={typeof value === 'string' ? value : description}>
+      <Tooltip tip={typeof value === "string" ? value : description}>
         <span className={cls}>
           {value === true ? (
             <FaCheckCircle className="flex-none w-3 text-green-400" />
@@ -59,7 +59,7 @@ const Feature: React.FC<{
     )
   } else if (!value && important) {
     return (
-      <Tooltip tip={typeof value === 'string' ? value : description}>
+      <Tooltip tip={typeof value === "string" ? value : description}>
         <span className={cls}>
           <FaTimesCircle className="flex-none w-3 text-red-500" />
           <span className="ml-1">{`Not ${title}`}</span>
@@ -75,7 +75,7 @@ const FrameworkList: React.FC<{ info: LibraryInfo }> = ({ info }) => (
   <div className="flex flex-row items-center justify-center text-2xl">
     {Object.keys(info.frameworks).map((name) => {
       const value = info.frameworks[name]
-      const isThirdParty = typeof value === 'string'
+      const isThirdParty = typeof value === "string"
       const url = isThirdParty ? value : info.homeUrl
       const title = isThirdParty
         ? `Go to the separate solution for ${FrameworkTitles[name]}`
@@ -88,9 +88,9 @@ const FrameworkList: React.FC<{ info: LibraryInfo }> = ({ info }) => (
             {isThirdParty && (
               <div
                 className={classnames(
-                  'absolute bottom-0 right-0 w-3 h-3',
-                  'border-2 rounded-full border-white dark:border-gray-800',
-                  'bg-yellow-500'
+                  "absolute bottom-0 right-0 w-3 h-3",
+                  "border-2 rounded-full border-white dark:border-gray-800",
+                  "bg-yellow-500"
                 )}
               />
             )}
@@ -115,14 +115,14 @@ const Metric: React.FC<{
   href,
 }) => {
   const cls = classnames(
-    'flex flex-row items-center leading-tight text-sm',
-    'hover:opacity-75',
-    !value && 'text-gray-500'
+    "flex flex-row items-center leading-tight text-sm",
+    "hover:opacity-75",
+    !value && "text-gray-500"
   )
-  const formattedValue = value === undefined ? 'n/a' : formatter(value)
+  const formattedValue = value === undefined ? "n/a" : formatter(value)
   const formattedTitle = title.replace(
-    '%s',
-    value === undefined ? 'unknown' : formattedValue
+    "%s",
+    value === undefined ? "unknown" : formattedValue
   )
   const contents = (
     <>
@@ -149,16 +149,20 @@ const Card: React.FC<{ info: LibraryInfo }> = ({ info }) => {
   return (
     <section
       className={classnames(
-        'bg-white text-gray-900 dark:bg-gray-800 dark:text-gray-100',
-        'block p-4 sm:p-8 shadow-md rounded-md',
-        'flex flex-col justify-start'
+        "bg-white text-gray-900 dark:bg-gray-800 dark:text-gray-100",
+        "block p-4 sm:p-8 shadow-md rounded-md",
+        "flex flex-col justify-start"
       )}
       aria-labelledby={id}
     >
       <div className="mb-4 flex flex-row items-center justify-between">
-        <h3 className="text-2xl text-left font-semibold" id={id}>
+        <a
+          className="text-2xl text-left font-semibold no-underline"
+          id={id}
+          href={info.homeUrl}
+        >
           {info.title}
-        </h3>
+        </a>
         <div>
           <FrameworkList info={info} />
         </div>
@@ -168,39 +172,39 @@ const Card: React.FC<{ info: LibraryInfo }> = ({ info }) => {
         <Metric
           icon={<GoStar />}
           value={gh?.stars}
-          title={'%s stars on GitHub'}
+          title={"%s stars on GitHub"}
           href={gh?.url}
         />
         <Metric
           icon={<IoMdDownload />}
           value={info.npm?.downloads}
-          title={'%s downloads on NPM in the last week'}
+          title={"%s downloads on NPM in the last week"}
           href={info.npm?.url}
         />
         <Metric
           icon={<GoRepoForked />}
           value={gh?.forks}
-          title={'%s forks on GitHub'}
+          title={"%s forks on GitHub"}
           href={gh?.url}
         />
         <Metric
           icon={<GoPackage />}
           value={info.bundlephobia?.gzipSize}
           formatter={fileSize}
-          title={'Gzipped package size is %s'}
+          title={"Gzipped package size is %s"}
           href={info.bundlephobia?.url}
         />
         <Metric
           icon={<FaUsers />}
           value={gh?.contributors}
-          title={'%s contributors on GitHub'}
+          title={"%s contributors on GitHub"}
           href={gh?.url}
         />
         <Metric
           icon={<GoIssueOpened />}
           value={gh?.openIssues}
-          title={'%s open issues on GitHub'}
-          href={gh?.url + '/issues'}
+          title={"%s open issues on GitHub"}
+          href={gh?.url + "/issues"}
         />
       </div>
       <div className="mb-4 text-gray-800 dark:text-gray-200">
