@@ -1,0 +1,45 @@
+title: Luckysheet
+homeUrl: https://mengshukeji.github.io/LuckysheetDocs/guide/
+demoUrl: https://mengshukeji.github.io/LuckysheetDemo/
+githubRepo: mengshukeji/Luckysheet
+npmPackage: luckysheet
+license: MIT License
+revenueModel: Free (Asks for sponsors)
+description: >
+  Luckysheet is an online spreadsheet like excel that is powerful, simple to
+  configure, and completely open source.
+frameworks:
+  vanilla: true
+  react: true
+  angular: false
+  vue: true
+features:
+  accessible: false
+  copyPaste: true
+  csvExport: false
+  customEditors: false
+  customFormatters: false
+  draggableRows: false
+  editable: true
+  fillDown: true
+  fillRight: true
+  filtering: true
+  formulas: true
+  freezableCols: false
+  headless: false
+  i18n: true
+  maintained: true
+  openSource: true
+  pagination: false
+  pdfExport: false
+  pivots: true
+  rangeSelection: true
+  resizableCols: true
+  responsive: false
+  rowGrouping: false
+  rowSelection: true
+  serverSide: false
+  sorting: true
+  trees: false
+  xlsxExport: With the Luckyexcel plugin
+  virtualization: true
