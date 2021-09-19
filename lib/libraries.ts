@@ -125,20 +125,21 @@ export const getLibraries = async (): Promise<LibraryInfo[]> => {
       // Populate GitHub data if the library has a GitHub repo.
       if (item.githubRepo) {
         const key1 = `gh-${item.githubRepo}-info`
-        let gh: any = cache.get(key1)
-        if (!gh) {
+        let data: any = cache.get(key1)
+        if (!data) {
           try {
             const res = await throttledFetch(
               `https://api.github.com/repos/${item.githubRepo}`
             )
-            if (res.data.full_name !== item.githubRepo) {
+            data = res.data
+
+            if (data.full_name !== item.githubRepo) {
               throw new Error(
-                `GitHub repo ${item.githubRepo} has moved to ${res.data.full_name}`
+                `GitHub repo ${item.githubRepo} has moved to ${data.full_name}`
               )
             }
 
-            gh = res.data
-            cache.set(key1, gh)
+            cache.set(key1, data)
           } catch (err) {
             throw new Error(`Error getting GitHub data for ${id}: ${err}`)
           }
@@ -151,8 +152,9 @@ export const getLibraries = async (): Promise<LibraryInfo[]> => {
             const pageSize = 100
             const url = `https://api.github.com/repos/${item.githubRepo}/contributors?per_page=${pageSize}`
             const res1 = await throttledFetch(url)
-            if (res1.data.length < pageSize || !res1.headers.get("link")) {
-              stats = { contributors: res1.data.length }
+            const data: any = res1.data
+            if (data.length < pageSize || !res1.headers.get("link")) {
+              stats = { contributors: data.length }
             } else {
               const lastPage = Number(
                 res1.headers
@@ -162,7 +164,8 @@ export const getLibraries = async (): Promise<LibraryInfo[]> => {
                   .match(/\bpage=(\d+)/)[1]
               )
               const res2 = await throttledFetch(`${url}&page=${lastPage}`)
-              const total = pageSize * (lastPage - 1) + res2.data.length
+              const data: any = res2.data
+              const total = pageSize * (lastPage - 1) + data.length
               stats = { contributors: total }
             }
             cache.set(key2, stats)
@@ -172,13 +175,13 @@ export const getLibraries = async (): Promise<LibraryInfo[]> => {
         }
 
         item.github = {
-          url: gh.html_url,
-          stars: gh.stargazers_count,
-          forks: gh.forks_count,
-          openIssues: gh.open_issues_count,
-          watchers: gh.watchers_count,
-          subscribers: gh.subscribers_count,
-          network: gh.network_count,
+          url: data.html_url,
+          stars: data.stargazers_count,
+          forks: data.forks_count,
+          openIssues: data.open_issues_count,
+          watchers: data.watchers_count,
+          subscribers: data.subscribers_count,
+          network: data.network_count,
           contributors: stats.contributors,
         }
       }
@@ -193,9 +196,10 @@ export const getLibraries = async (): Promise<LibraryInfo[]> => {
             const res = await throttledFetch(
               `https://api.npmjs.org/downloads/point/last-week/${name}`
             )
+            const data: any = res
             npm = {
               url: `https://www.npmjs.com/package/${name}`,
-              downloads: res.data.downloads,
+              downloads: data.downloads,
             }
             cache.set(key, npm)
           } catch (err) {
@@ -215,10 +219,11 @@ export const getLibraries = async (): Promise<LibraryInfo[]> => {
             const res = await throttledFetch(
               `https://bundlephobia.com/api/size?package=${name}`
             )
+            const data: any = res
             bundlephobia = {
               url: `https://bundlephobia.com/result?p=${name}`,
-              rawSize: res.data.size,
-              gzipSize: res.data.gzip,
+              rawSize: data.size,
+              gzipSize: data.gzip,
             }
             cache.set(key, bundlephobia)
           } catch (err) {
