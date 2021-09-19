@@ -40,7 +40,7 @@ features:
   responsive: true
   rowGrouping: true
   rowSelection: true
-  serverSide: 'Support lazy loading of rows.'
+  serverSide: "Support lazy loading of rows."
   sorting: true
   trees: false
   xlsxExport: true

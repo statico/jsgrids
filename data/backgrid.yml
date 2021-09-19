@@ -27,7 +27,7 @@ features:
   i18n: false
   maintained: false
   openSource: true
-  pagination: 'With extension'
+  pagination: "With extension"
   pdfExport: false
   pivots: false
   rangeSelection: false

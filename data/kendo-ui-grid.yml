@@ -2,7 +2,7 @@ title: Kendo UI Grid
 homeUrl: https://www.telerik.com/kendo-ui/grid
 demoUrl: https://demos.telerik.com/kendo-ui/grid/index
 githubRepo: telerik/kendo-ui-core
-npmPackage: '@progress/kendo-ui'
+npmPackage: "@progress/kendo-ui"
 license: Custom License
 revenueModel: Commercial 30-day Trial
 description: >

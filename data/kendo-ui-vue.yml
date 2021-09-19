@@ -2,7 +2,7 @@ title: Kendo UI for Vue
 homeUrl: https://www.telerik.com/kendo-vue-ui/components/grid/
 demoUrl: https://www.telerik.com/kendo-vue-ui/components/grid/
 githubRepo: telerik/kendo-vue
-npmPackage: '@progress/kendo-vue-grid'
+npmPackage: "@progress/kendo-vue-grid"
 license: Custom License
 revenueModel: Commercial 30-day Trial
 description: >

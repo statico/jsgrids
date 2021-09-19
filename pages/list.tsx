@@ -1,7 +1,7 @@
-import { GetStaticProps, NextPage } from 'next'
-import React from 'react'
-import Head from 'next/head'
-import { getLibraries, LibraryInfo } from '../lib/libraries'
+import { GetStaticProps, NextPage } from "next"
+import React from "react"
+import Head from "next/head"
+import { getLibraries, LibraryInfo } from "../lib/libraries"
 
 interface Props {
   items: LibraryInfo[]

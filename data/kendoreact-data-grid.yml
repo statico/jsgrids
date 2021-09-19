@@ -2,7 +2,7 @@ title: KendoReact Data Grid
 homeUrl: https://www.telerik.com/kendo-react-ui/components/grid/
 demoUrl: https://www.telerik.com/kendo-react-ui/components/grid/
 githubRepo: telerik/kendo-react
-npmPackage: '@progress/kendo-react-grid'
+npmPackage: "@progress/kendo-react-grid"
 license: Custom License
 revenueModel: Commercial 30-day Trial
 description: >

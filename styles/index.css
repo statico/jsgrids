@@ -13,24 +13,24 @@ body {
 /* I can't figure out how to theme Tippy from here, so this will have to do. */
 .tippy-tooltip,
 .tippy-tooltip [x-circle] {
-  background-color: theme('colors.gray.900') !important;
+  background-color: theme("colors.gray.900") !important;
 }
 .tippy-tooltip > .arrow-regular {
-  border-top-color: theme('colors.gray.900') !important;
+  border-top-color: theme("colors.gray.900") !important;
 }
 .tippy-tooltip > .tippy-tooltip-content {
-  color: theme('colors.gray.100') !important;
+  color: theme("colors.gray.100") !important;
 }
 @media (prefers-color-scheme: dark) {
   .tippy-tooltip,
   .tippy-tooltip [x-circle] {
-    background-color: theme('colors.yellow.100') !important;
+    background-color: theme("colors.yellow.100") !important;
   }
   .tippy-tooltip > .arrow-regular {
-    border-top-color: theme('colors.yellow.100') !important;
+    border-top-color: theme("colors.yellow.100") !important;
   }
   .tippy-tooltip > .tippy-tooltip-content {
-    color: theme('colors.gray.900') !important;
+    color: theme("colors.gray.900") !important;
   }
 }
 

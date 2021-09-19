@@ -28,7 +28,7 @@ features:
   headless: false
   i18n: true
   maintained: true
-  openSource: 'Framework-specific additions are open-source but the core library is not.'
+  openSource: "Framework-specific additions are open-source but the core library is not."
   pagination: false
   pdfExport: true
   pivots: true

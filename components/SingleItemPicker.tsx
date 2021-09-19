@@ -1,7 +1,7 @@
-import React from 'react'
-import { GoChevronDown } from 'react-icons/go'
-import Dropdown from './Dropdown'
-import FilterBarButton from './FilterBarButton'
+import React from "react"
+import { GoChevronDown } from "react-icons/go"
+import Dropdown from "./Dropdown"
+import FilterBarButton from "./FilterBarButton"
 
 interface Option {
   key: string

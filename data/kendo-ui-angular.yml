@@ -2,7 +2,7 @@ title: Kendo UI for Angular
 homeUrl: https://www.telerik.com/kendo-angular-ui/components/grid/
 demoUrl: https://www.telerik.com/kendo-angular-ui/components/grid/
 githubRepo: telerik/kendo-angular
-npmPackage: '@progress/kendo-angular-grid'
+npmPackage: "@progress/kendo-angular-grid"
 license: Custom License
 revenueModel: Commercial 30-day Trial
 description: >

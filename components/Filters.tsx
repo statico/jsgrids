@@ -1,17 +1,17 @@
-import classnames from 'classnames'
-import { useState } from 'react'
-import { FeatureName, FeatureNames, Features } from '../lib/features'
+import classnames from "classnames"
+import { useState } from "react"
+import { FeatureName, FeatureNames, Features } from "../lib/features"
 import {
   FrameworkIcons,
   FrameworkNames,
   FrameworkTitles,
-} from '../lib/frameworks'
-import { LibraryInfo, FrameworkName } from '../lib/libraries'
-import { SortOptionKey, SortOptions } from '../lib/sorting'
-import MultiItemPicker from './MultiItemPicker'
-import SingleItemPicker from './SingleItemPicker'
-import { hasAllKeys } from '../lib/utils'
-import Tooltip from './Tooltip'
+} from "../lib/frameworks"
+import { LibraryInfo, FrameworkName } from "../lib/libraries"
+import { SortOptionKey, SortOptions } from "../lib/sorting"
+import MultiItemPicker from "./MultiItemPicker"
+import SingleItemPicker from "./SingleItemPicker"
+import { hasAllKeys } from "../lib/utils"
+import Tooltip from "./Tooltip"
 
 interface FilterState {
   sort: SortOptionKey
@@ -29,7 +29,7 @@ const FrameworkSelector: React.FC<{
     onChange(selected === name ? null : name)
   }
   return (
-    <div className={classnames('flex flex-row items-center', className)}>
+    <div className={classnames("flex flex-row items-center", className)}>
       <span className="mr-2">
         <span className="hidden xl:inline">Frameworks:</span>
         <span className="inline xl:hidden">Show:</span>
@@ -41,11 +41,11 @@ const FrameworkSelector: React.FC<{
           <Tooltip key={name} tip={title}>
             <button
               className={classnames(
-                'p-1 rounded-md cursor-pointer hover:opacity-75',
-                'transition-opacity duration-75',
+                "p-1 rounded-md cursor-pointer hover:opacity-75",
+                "transition-opacity duration-75",
                 selected === name
-                  ? 'bg-gray-400 dark:bg-gray-700'
-                  : 'bg-transparent'
+                  ? "bg-gray-400 dark:bg-gray-700"
+                  : "bg-transparent"
               )}
               onClick={handleToggle(name)}
             >
@@ -73,7 +73,7 @@ const FeaturesSelector: React.FC<{
       }))}
     >
       <span className="hidden xl:inline">
-        {selected.size ? `${selected.size} Features` : 'Any Feature'}
+        {selected.size ? `${selected.size} Features` : "Any Feature"}
       </span>
       <span className="inline xl:hidden">Features</span>
     </MultiItemPicker>
@@ -96,7 +96,7 @@ const LicenseSelector: React.FC<{
           title: name,
         }))}
     >
-      <span className="hidden xl:inline">{selected || 'Any License'}</span>
+      <span className="hidden xl:inline">{selected || "Any License"}</span>
       <span className="inline xl:hidden">License</span>
     </SingleItemPicker>
   )
@@ -162,8 +162,8 @@ export const FilteredItems: React.FC<FilteredItemsProps> = ({
   const filterBar = (
     <nav
       className={classnames(
-        'text-gray-800 dark:text-gray-200 px-4 select-none',
-        'flex flex-row flex-wrap lg:flex-no-wrap items-center justify-center'
+        "text-gray-800 dark:text-gray-200 px-4 select-none",
+        "flex flex-row flex-wrap lg:flex-no-wrap items-center justify-center"
       )}
     >
       <FrameworkSelector

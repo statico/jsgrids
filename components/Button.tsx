@@ -1,5 +1,5 @@
-import { MouseEventHandler } from 'react'
-import classnames from 'classnames'
+import { MouseEventHandler } from "react"
+import classnames from "classnames"
 
 const Button: React.FC<{
   title: string
@@ -18,14 +18,14 @@ const Button: React.FC<{
     }
   }
   const cls = classnames(
-    'block rounded-md border border-transparent text-center flex justify-center items-center',
-    'uppercase transition transition-all duration-100 w-full',
-    small ? 'text-xs p-1' : 'text-sm p-2',
+    "block rounded-md border border-transparent text-center flex justify-center items-center",
+    "uppercase transition transition-all duration-100 w-full",
+    small ? "text-xs p-1" : "text-sm p-2",
     disabled
-      ? 'bg-gray-100 text-gray-500 dark:bg-gray-800 dark:text-gray-700 cursor-default'
+      ? "bg-gray-100 text-gray-500 dark:bg-gray-800 dark:text-gray-700 cursor-default"
       : [
-          'bg-gray-200 text-gray-700 dark:bg-gray-700 dark:text-gray-200 dark:hover:bg-gray-500',
-          'hover:bg-gray-300 hover:text-gray-900 hover:shadow-sm cursor-pointer',
+          "bg-gray-200 text-gray-700 dark:bg-gray-700 dark:text-gray-200 dark:hover:bg-gray-500",
+          "hover:bg-gray-300 hover:text-gray-900 hover:shadow-sm cursor-pointer",
         ],
     className
   )

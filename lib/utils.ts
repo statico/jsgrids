@@ -1,5 +1,5 @@
-import fetch from 'node-fetch'
-import pThrottle from 'p-throttle'
+import fetch from "node-fetch"
+import pThrottle from "p-throttle"
 
 const throttler = pThrottle({ limit: 1, interval: 300 })
 
@@ -20,14 +20,14 @@ export const throttledFetch = throttler(async (url: string) => {
       ? `jsgrids.statico.io (Netlify build ${VERCEL_URL} for commit ${VERCEL_GITHUB_COMMIT_SHA})`
       : `jsgrids.statico.io (local development)`
     const headers: any = {
-      'User-Agent': ua,
+      "User-Agent": ua,
     }
     if (GITHUB_TOKEN && /github.com/.test(url)) {
       headers.Authorization = `token ${GITHUB_TOKEN}`
     }
     if (/bundlephobia/.test(url)) {
       // bundle-phobia-cli does something like this so let's follow suit.
-      headers['X-Bundlephobia-User'] = ua
+      headers["X-Bundlephobia-User"] = ua
     }
 
     const res = await fetch(url, { headers, timeout: 20000 })
@@ -35,7 +35,7 @@ export const throttledFetch = throttler(async (url: string) => {
     return { headers: res.headers, data }
   } catch (err) {
     const status = err.response?.status
-    const headers = JSON.stringify(err.response?.headers, null, '  ')
+    const headers = JSON.stringify(err.response?.headers, null, "  ")
     console.error(
       `Request to ${url} failed. status=${status} headers=${headers}`
     )

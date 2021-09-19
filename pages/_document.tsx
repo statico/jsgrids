@@ -1,8 +1,8 @@
-import Document, { Head, Html, Main, NextScript } from 'next/document'
-import * as React from 'react'
+import Document, { Head, Html, Main, NextScript } from "next/document"
+import * as React from "react"
 
-const title = 'jsgrids | Spreadsheets and Data Grid Libraries for JavaScript'
-const description = 'A List of JavaScript Spreadsheets and Data Grid Libraries'
+const title = "jsgrids | Spreadsheets and Data Grid Libraries for JavaScript"
+const description = "A List of JavaScript Spreadsheets and Data Grid Libraries"
 
 class MyDocument extends Document {
   render() {

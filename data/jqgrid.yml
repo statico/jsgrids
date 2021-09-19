@@ -38,6 +38,6 @@ features:
   rowSelection: true
   serverSide: true
   sorting: true
-  trees: 'With limited levels of depth'
+  trees: "With limited levels of depth"
   xlsxExport: true
   virtualization: true

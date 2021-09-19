@@ -1,6 +1,6 @@
-import { createPopper } from '@popperjs/core'
-import classnames from 'classnames'
-import React, { createRef, useEffect, useState } from 'react'
+import { createPopper } from "@popperjs/core"
+import classnames from "classnames"
+import React, { createRef, useEffect, useState } from "react"
 
 export const Dropdown: React.FC<{
   button: React.ReactNode
@@ -14,7 +14,7 @@ export const Dropdown: React.FC<{
     event.stopPropagation()
     if (!isOpen && buttonRef.current && popupRef.current) {
       createPopper(buttonRef.current, popupRef.current, {
-        placement: 'bottom-start',
+        placement: "bottom-start",
       })
     }
     setIsOpen(!isOpen)
@@ -36,9 +36,9 @@ export const Dropdown: React.FC<{
   }
 
   useEffect(() => {
-    document.body.addEventListener('click', handleDocumentClick)
+    document.body.addEventListener("click", handleDocumentClick)
     return () => {
-      document.body.removeEventListener('click', handleDocumentClick)
+      document.body.removeEventListener("click", handleDocumentClick)
     }
   })
 
@@ -56,12 +56,12 @@ export const Dropdown: React.FC<{
       <div
         ref={popupRef}
         className={classnames(
-          'bg-white dark:bg-gray-700 z-30 rounded-sm shadow-lg text-left mt-1',
-          'border-gray-200 dark:border-gray-900 border select-none',
-          isOpen ? 'block' : 'hidden'
+          "bg-white dark:bg-gray-700 z-30 rounded-sm shadow-lg text-left mt-1",
+          "border-gray-200 dark:border-gray-900 border select-none",
+          isOpen ? "block" : "hidden"
         )}
         onClick={handlePopupClick}
-        style={{ minWidth: '12rem' }}
+        style={{ minWidth: "12rem" }}
         hidden={isOpen}
       >
         {children}

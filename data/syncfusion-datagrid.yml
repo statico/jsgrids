@@ -2,7 +2,7 @@ title: SyncFusion DataGrid
 homeUrl: https://www.syncfusion.com/javascript-ui-controls/js-data-grid
 demoUrl: https://ej2.syncfusion.com/demos/#/material/grid/grid-overview.html
 githubRepo: syncfusion/ej2-grids
-npmPackage: '@syncfusion/ej2-grids'
+npmPackage: "@syncfusion/ej2-grids"
 license: Custom License
 revenueModel: Commercial License
 description: >

@@ -1,5 +1,5 @@
-import React from 'react'
-import { Tooltip as TippyTooltip } from 'react-tippy'
+import React from "react"
+import { Tooltip as TippyTooltip } from "react-tippy"
 
 const Tooltip: React.FC<{ tip: string }> = ({ tip, children }) => (
   <TippyTooltip

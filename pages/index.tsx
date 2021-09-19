@@ -1,10 +1,10 @@
-import { GetStaticProps, NextPage } from 'next'
-import Head from 'next/head'
-import Card from '../components/Card'
-import { FilteredItems } from '../components/Filters'
-import Footer from '../components/Footer'
-import Header from '../components/Header'
-import { getLibraries, LibraryInfo } from '../lib/libraries'
+import { GetStaticProps, NextPage } from "next"
+import Head from "next/head"
+import Card from "../components/Card"
+import { FilteredItems } from "../components/Filters"
+import Footer from "../components/Footer"
+import Header from "../components/Header"
+import { getLibraries, LibraryInfo } from "../lib/libraries"
 
 interface Props {
   items: LibraryInfo[]

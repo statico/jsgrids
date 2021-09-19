@@ -1,10 +1,10 @@
-import { readdirSync, readFileSync } from 'fs'
-import * as yaml from 'js-yaml'
-import { basename, join } from 'path'
-import * as rt from 'runtypes'
-import * as cache from './cache'
-import { Features } from './features'
-import { throttledFetch } from './utils'
+import { readdirSync, readFileSync } from "fs"
+import * as yaml from "js-yaml"
+import { basename, join } from "path"
+import * as rt from "runtypes"
+import * as cache from "./cache"
+import { Features } from "./features"
+import { throttledFetch } from "./utils"
 
 //
 // Yes, these types and things seem pretty overcomplicated, but it sure makes
@@ -92,7 +92,7 @@ const allowedFeatures = new Set(Object.keys(Features))
 // Get all the library data, fetching from APIs or using the cache as necessary.
 export const getLibraries = async (): Promise<LibraryInfo[]> => {
   // Get paths to all YAML files.
-  const dataDir = join(process.cwd(), 'data')
+  const dataDir = join(process.cwd(), "data")
   const paths = readdirSync(dataDir)
     .filter((name) => /\.yml$/.test(name))
     .map((name) => join(dataDir, name))
@@ -100,11 +100,11 @@ export const getLibraries = async (): Promise<LibraryInfo[]> => {
   const items: AugmentedInfo[] = []
   await Promise.all(
     paths.map(async (path) => {
-      const id = basename(path, '.yml')
+      const id = basename(path, ".yml")
 
       // Load raw YAML data and make sure it validates.
-      const obj = yaml.load(readFileSync(path, 'utf8'))
-      if (typeof obj !== 'object') {
+      const obj = yaml.load(readFileSync(path, "utf8"))
+      if (typeof obj !== "object") {
         throw new Error(`Expected ${path} to be an object`)
       }
       let item: AugmentedInfo
@@ -151,13 +151,13 @@ export const getLibraries = async (): Promise<LibraryInfo[]> => {
             const pageSize = 100
             const url = `https://api.github.com/repos/${item.githubRepo}/contributors?per_page=${pageSize}`
             const res1 = await throttledFetch(url)
-            if (res1.data.length < pageSize || !res1.headers.get('link')) {
+            if (res1.data.length < pageSize || !res1.headers.get("link")) {
               stats = { contributors: res1.data.length }
             } else {
               const lastPage = Number(
                 res1.headers
-                  .get('link')
-                  .split(',')
+                  .get("link")
+                  .split(",")
                   .find((s?: string) => /rel="last"/.test(s))
                   .match(/\bpage=(\d+)/)[1]
               )

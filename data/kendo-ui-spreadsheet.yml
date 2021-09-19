@@ -2,7 +2,7 @@ title: Kendo UI Spreadsheet
 homeUrl: https://www.telerik.com/kendo-ui/spreadsheet
 demoUrl: https://demos.telerik.com/kendo-ui/spreadsheet/index
 githubRepo: telerik/kendo-ui-core
-npmPackage: '@progress/kendo-ui'
+npmPackage: "@progress/kendo-ui"
 license: Custom License
 revenueModel: Commercial 30-day Trial
 description: >

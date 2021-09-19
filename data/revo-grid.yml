@@ -2,7 +2,7 @@ title: Revo Grid
 homeUrl: https://revolist.github.io/revogrid/
 demoUrl: https://revolist.github.io/revogrid/demo/
 githubRepo: revolist/revogrid
-npmPackage: '@revolist/revogrid'
+npmPackage: "@revolist/revogrid"
 license: MIT License
 revenueModel: Free
 description: >

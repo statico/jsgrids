@@ -16,7 +16,7 @@ features:
   customEditors: false
   customFormatters: false
   draggableRows: false
-  editable: 'With modal dialog'
+  editable: "With modal dialog"
   fillDown: false
   fillRight: false
   filtering: true

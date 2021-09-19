@@ -2,7 +2,7 @@ title: Sencha ExtReact
 homeUrl: https://www.sencha.com/products/extreact/
 demoUrl: https://examples.sencha.com/ExtReact/
 githubRepo: sencha/ext-react
-npmPackage: '@sencha/ext-react-modern'
+npmPackage: "@sencha/ext-react-modern"
 license: Custom License
 revenueModel: Commercial 30-day Trial
 description: >

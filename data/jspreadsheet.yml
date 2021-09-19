@@ -44,4 +44,4 @@ features:
   sorting: true
   trees: false
   xlsxExport: true
-  virtualization: 'Only lazy-loading of rows. Vertical scrollbar is jumpy.'
+  virtualization: "Only lazy-loading of rows. Vertical scrollbar is jumpy."
