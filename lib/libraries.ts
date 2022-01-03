@@ -156,13 +156,11 @@ export const getLibraries = async (): Promise<LibraryInfo[]> => {
             if (data.length < pageSize || !res1.headers.get("link")) {
               stats = { contributors: data.length }
             } else {
-              const lastPage = Number(
-                res1.headers
-                  .get("link")
-                  .split(",")
-                  .find((s?: string) => /rel="last"/.test(s))
-                  .match(/\bpage=(\d+)/)[1]
-              )
+              const link = res1.headers.get("link") ?? ""
+              const parts = link.split(",")
+              const lastPart = parts.find((s) => /rel="last"/.test(s)) ?? ""
+              const match = lastPart.match(/\bpage=(\d+)/)
+              const lastPage = Number(match ? match[1] : 1)
               const res2 = await throttledFetch(`${url}&page=${lastPage}`)
               const data: any = res2.data
               const total = pageSize * (lastPage - 1) + data.length
