@@ -12,6 +12,7 @@ description: >
   frameworks.
 frameworks:
   jquery: true
+  angular: https://github.com/ghiscoding/Angular-Slickgrid
 features:
   accessible: false
   copyPaste: false
