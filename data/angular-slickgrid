@@ -1,0 +1,39 @@
+title: Angular-Slickgrid
+homeUrl: https://github.com/ghiscoding/Angular-Slickgrid
+demoUrl: https://ghiscoding.github.io/Angular-Slickgrid/
+githubRepo: https://github.com/ghiscoding/Angular-Slickgrid
+npmPackage: 'Angular-Slickgrid'
+license: MIT License
+revenueModel: Free
+description: >
+  Angular-Slickgrid is a wrapper of the SlickGrid library into an Angular component, it brings all of the features from SlickGrid plus many new and convenient features not available in the original grid, it also includes multiple Styling Themes. SlickGrid utilizes virtual rendering to enable you to easily work with hundreds of thousands of items without any drop in performance.
+frameworks:
+  vanilla: https://github.com/ghiscoding/slickgrid-universal
+  angular: true
+  jquery: true
+features:
+  accessible: true
+  copyPaste: true
+  csvExport: true
+  customEditors: true
+  customFormatters: true
+  draggableRows: true
+  editable: true
+  filtering: true
+  freezableCols: true
+  headless: true
+  i18n: true
+  maintained: true
+  openSource: true
+  pagination: true
+  pdfExport: false
+  rangeSelection: true
+  resizableCols: true
+  responsive: true
+  rowGrouping: true
+  rowSelection: true
+  serverSide: true
+  sorting: true
+  trees: true
+  xlsxExport: true
+  virtualization: true
