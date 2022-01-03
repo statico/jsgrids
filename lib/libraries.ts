@@ -111,7 +111,7 @@ export const getLibraries = async (): Promise<LibraryInfo[]> => {
       try {
         ImportedYAMLInfo.check(obj)
         item = AugmentedInfo.check({ id, ...obj })
-      } catch (err) {
+      } catch (err: any) {
         throw new Error(
           `In ${path}, key "${err.key}" failed validation: ${err.message}`
         )
@@ -196,7 +196,7 @@ export const getLibraries = async (): Promise<LibraryInfo[]> => {
             const res = await throttledFetch(
               `https://api.npmjs.org/downloads/point/last-week/${name}`
             )
-            const data: any = res
+            const data: any = res.data
             npm = {
               url: `https://www.npmjs.com/package/${name}`,
               downloads: data.downloads,
@@ -219,14 +219,14 @@ export const getLibraries = async (): Promise<LibraryInfo[]> => {
             const res = await throttledFetch(
               `https://bundlephobia.com/api/size?package=${name}`
             )
-            const data: any = res
+            const data: any = res.data
             bundlephobia = {
               url: `https://bundlephobia.com/result?p=${name}`,
               rawSize: data.size,
               gzipSize: data.gzip,
             }
             cache.set(key, bundlephobia)
-          } catch (err) {
+          } catch (err: any) {
             // For now, some packages like pqgrid seem to break their build system, so
             // ignore 500 errors.
             throw new Error(
@@ -239,7 +239,12 @@ export const getLibraries = async (): Promise<LibraryInfo[]> => {
         item.bundlephobia = bundlephobia
       }
 
-      items.push(AugmentedInfo.check(item))
+      try {
+        items.push(AugmentedInfo.check(item))
+      } catch (err: any) {
+        const details = JSON.stringify(err.details)
+        throw new Error(`AugmentedInfo for ${path}: ${details}`)
+      }
     })
   )
 
