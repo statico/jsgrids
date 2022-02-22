@@ -1,0 +1,44 @@
+title: Wijmo FlexGrid
+homeURL: https://www.grapecity.com/wijmo/flexgrid-javascript-data-grid
+demoURL: https://www.grapecity.com/wijmo/demos/Grid/Overview/purejs
+githubRepo: https://github.com/wijmo
+npmPackage: "@grapecity/wijmo.all"
+license: Custom License
+revenueModel: Commercial License
+description: >
+  Improve your applications by leveraging the best JavaScript datagrid in the industry with Wijmo's FlexGrid. FlexGrid provides a familiar, Excel-like experience. FlexGrid provides customizable cells with cell templates and themes. With extensive API documentation and hundreds of demos, as well as first-class support, we've got the tools to help you create the datagrid that your application needs.
+frameworks:
+  vanilla: true
+  react: true
+  angular: true
+  vue: true
+features:
+  accessible: true
+  copyPaste: true
+  csvExport: true
+  customEditors: true
+  customFormatters: true
+  draggableRows: true
+  editable: true
+  fillDown: false
+  fillRight: false
+  filtering: true
+  formulas: false
+  freezableCols: true
+  headless: false
+  i18n: true
+  maintained: true
+  openSource: false
+  pagination: true
+  pdfExport: true
+  pivots: true
+  rangeSelection: true
+  resizableCols: true
+  responsive: true
+  rowGrouping: true
+  rowSelection: true
+  serverSide: true
+  sorting: true
+  trees: true
+  xlsxExport: true
+  virtualization: true
