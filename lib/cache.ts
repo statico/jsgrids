@@ -1,6 +1,16 @@
-import { readFileSync, writeFileSync, mkdirSync, existsSync } from "fs"
-import { join } from "path"
 import * as crypto from "crypto"
+import debug from "debug"
+import {
+  existsSync,
+  mkdirSync,
+  readFileSync,
+  unlinkSync,
+  writeFileSync,
+} from "fs"
+import { join } from "path"
+
+const log = debug("cache")
+log.enabled = true
 
 //
 // This is a simple filesystem cache because, amazingly, nothing on npm seemed
@@ -11,7 +21,7 @@ const duration = 1000 * 60 * 60 * 24
 
 const basedir = join(process.cwd(), ".cache")
 mkdirSync(basedir, { recursive: true })
-console.log(`Cache base directory is ${basedir}`)
+log("base directory is %s", basedir)
 
 const keyToFilename = (key: string): string => {
   const hash = crypto.createHash("sha1")
@@ -22,23 +32,39 @@ const keyToFilename = (key: string): string => {
 const get = (key: string): any => {
   const path = join(basedir, keyToFilename(key))
   if (!existsSync(path)) {
-    console.log(`Cache miss for key "${key}"`)
+    log("miss for %s", key)
     return null
   }
+
   const obj = JSON.parse(readFileSync(path, "utf8"))
   if (obj?.expiration >= Date.now()) {
     return obj?.data
   } else {
-    console.log(`Cache expired for key "${key}"`)
+    log("expired %s", key)
     return null
   }
 }
 
 const set = (key: string, data: any): void => {
+  log("write %s", key)
   const path = join(basedir, keyToFilename(key))
   const obj = JSON.stringify({ expiration: Date.now() + duration, data })
   writeFileSync(path, obj, "utf8")
-  console.log(`Cache write for key "${key}"`)
 }
 
-export { get, set }
+const clear = (key: string): void => {
+  log("clear %s", key)
+  const path = join(basedir, keyToFilename(key))
+  if (existsSync(path)) unlinkSync(path)
+}
+
+// Syntactic sugar to heop with the most common pattern.
+const fetch = async (key: string, fn: () => Promise<any>): Promise<any> => {
+  const cached = get(key)
+  if (cached) return cached
+
+  const fresh = await fn()
+  if (fresh) set(key, fresh)
+}
+
+export { get, set, clear, fetch }

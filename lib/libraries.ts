@@ -1,10 +1,13 @@
+import debug from "debug"
 import { readdirSync, readFileSync } from "fs"
 import * as yaml from "js-yaml"
 import { basename, join } from "path"
 import * as rt from "runtypes"
-import * as cache from "./cache"
 import { Features } from "./features"
-import { throttledFetch } from "./utils"
+import fetcher from "./fetcher"
+
+const log = debug("libraries")
+log.enabled = true
 
 //
 // Yes, these types and things seem pretty overcomplicated, but it sure makes
@@ -107,6 +110,7 @@ export const getLibraries = async (): Promise<LibraryInfo[]> => {
       if (typeof obj !== "object") {
         throw new Error(`Expected ${path} to be an object`)
       }
+
       let item: AugmentedInfo
       try {
         ImportedYAMLInfo.check(obj)
@@ -116,6 +120,7 @@ export const getLibraries = async (): Promise<LibraryInfo[]> => {
           `In ${path}, key "${err.key}" failed validation: ${err.message}`
         )
       }
+
       for (const key in item.features) {
         if (!allowedFeatures.has(key)) {
           throw new Error(`In ${path}, unexpected feature "${key}"`)
@@ -124,89 +129,60 @@ export const getLibraries = async (): Promise<LibraryInfo[]> => {
 
       // Populate GitHub data if the library has a GitHub repo.
       if (item.githubRepo) {
-        const key1 = `gh-${item.githubRepo}-info`
-        let data: any = cache.get(key1)
-        if (!data) {
-          try {
-            const res = await throttledFetch(
-              `https://api.github.com/repos/${item.githubRepo}`
-            )
-            data = res.data
-
-            if (data.error)
-              throw new Error(
-                `GitHub repo ${item.githubRepo} error: ${data.error}`
-              )
-
-            if (data.full_name !== item.githubRepo)
-              throw new Error(
-                `GitHub repo ${item.githubRepo} has moved to ${data.full_name}`
-              )
-
-            cache.set(key1, data)
-          } catch (err) {
-            throw new Error(`Error getting GitHub data for ${id}: ${err}`)
-          }
+        const { data: repo } = await fetcher(
+          `https://api.github.com/repos/${item.githubRepo}`
+        )
+        if (repo.error) {
+          throw new Error(`GitHub repo ${item.githubRepo} error: ${repo.error}`)
+        }
+        if (repo.full_name !== item.githubRepo) {
+          console.log("XXX", repo)
+          throw new Error(
+            `GitHub repo ${item.githubRepo} has moved to ${repo.full_name}`
+          )
         }
 
-        const key2 = `gh-${item.githubRepo}-contributors`
-        let stats: any = cache.get(key2)
-        if (!stats) {
-          try {
-            const pageSize = 100
-            const url = `https://api.github.com/repos/${item.githubRepo}/contributors?per_page=${pageSize}`
-            const res1 = await throttledFetch(url)
-            const data: any = res1.data
-            if (data.length < pageSize || !res1.headers.get("link")) {
-              stats = { contributors: data.length }
-            } else {
-              const link = res1.headers.get("link") ?? ""
-              const parts = link.split(",")
-              const lastPart = parts.find((s) => /rel="last"/.test(s)) ?? ""
-              const match = lastPart.match(/\bpage=(\d+)/)
-              const lastPage = Number(match ? match[1] : 1)
-              const res2 = await throttledFetch(`${url}&page=${lastPage}`)
-              const data: any = res2.data
-              const total = pageSize * (lastPage - 1) + data.length
-              stats = { contributors: total }
-            }
-            cache.set(key2, stats)
-          } catch (err) {
-            throw new Error(`Error getting GitHub stats for ${id}: ${err}`)
-          }
+        const pageSize = 100
+        const url = `https://api.github.com/repos/${item.githubRepo}/contributors?per_page=${pageSize}`
+        const res1 = await fetcher(url)
+        const data2: any = res1.data
+        let contributors
+        if (data2.length < pageSize || !res1.headers.link) {
+          contributors = data2.length
+        } else {
+          const link = res1.headers.link ?? ""
+          const parts = link.split(",")
+          const lastPart = parts.find((s) => /rel="last"/.test(s)) ?? ""
+          const match = lastPart.match(/\bpage=(\d+)/)
+          const lastPage = Number(match ? match[1] : 1)
+          const res2 = await fetcher(`${url}&page=${lastPage}`)
+          const data3: any = res2.data
+          const total = pageSize * (lastPage - 1) + data3.length
+          contributors = total
         }
 
         item.github = {
-          url: data.html_url,
-          stars: data.stargazers_count,
-          forks: data.forks_count,
-          openIssues: data.open_issues_count,
-          watchers: data.watchers_count,
-          subscribers: data.subscribers_count,
-          network: data.network_count,
-          contributors: stats.contributors,
+          url: repo.html_url,
+          stars: repo.stargazers_count,
+          forks: repo.forks_count,
+          openIssues: repo.open_issues_count,
+          watchers: repo.watchers_count,
+          subscribers: repo.subscribers_count,
+          network: repo.network_count,
+          contributors,
         }
       }
 
       // Populate NPM data if the library has an NPM package name.
       if (item.npmPackage) {
         const name = item.npmPackage
-        const key = `npm-${name}`
-        let npm = cache.get(key)
-        if (!npm) {
-          try {
-            const res = await throttledFetch(
-              `https://api.npmjs.org/downloads/point/last-week/${name}`
-            )
-            const data: any = res.data
-            npm = {
-              url: `https://www.npmjs.com/package/${name}`,
-              downloads: data.downloads,
-            }
-            cache.set(key, npm)
-          } catch (err) {
-            throw new Error(`Error getting NPM data for ${name}: ${err}`)
-          }
+        const res = await fetcher(
+          `https://api.npmjs.org/downloads/point/last-week/${name}`
+        )
+        const data: any = res.data
+        const npm = {
+          url: `https://www.npmjs.com/package/${name}`,
+          downloads: data.downloads,
         }
         item.npm = npm
       }
@@ -214,34 +190,13 @@ export const getLibraries = async (): Promise<LibraryInfo[]> => {
       // Grab bundle sizes from Bundlephobia.
       if (item.npmPackage && item.ignoreBundlephobia !== true) {
         const name = item.npmPackage
-        const key = `bundlephobia-${name}`
-        let bundlephobia = cache.get(key)
-        if (!bundlephobia) {
-          try {
-            const res = await throttledFetch(
-              `https://bundlephobia.com/api/size?package=${name}`
-            )
-            const data: any = res.data
-            bundlephobia = {
-              url: `https://bundlephobia.com/result?p=${name}`,
-              rawSize: data.size,
-              gzipSize: data.gzip,
-            }
-            cache.set(key, bundlephobia)
-          } catch (err: any) {
-            bundlephobia = null
-            // For now, some packages like pqgrid seem to break their build system, so
-            // ignore 500 errors.
-            // throw new Error(
-            //   err.response
-            //     ? `Bundlephobia API returned ${err.response.status} for package ${name}`
-            //     : `Bundlephobia failed for package ${name}: ${err}`
-            // )
-          }
-        }
-        if (!bundlephobia.rawSize) {
-          cache.set(key, null)
-          bundlephobia = null
+        const { data } = await fetcher(
+          `https://bundlephobia.com/api/size?package=${name}`
+        )
+        const bundlephobia = {
+          url: `https://bundlephobia.com/result?p=${name}`,
+          rawSize: data.size || 0,
+          gzipSize: data.gzip || 0,
         }
         item.bundlephobia = bundlephobia
       }

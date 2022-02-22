@@ -132,7 +132,7 @@ const Metric: React.FC<{
   )
   const contents = (
     <HStack cursor="pointer" _hover={{ opacity: 0.75 }}>
-      {icon}
+      <Text>{icon}</Text>
       <Text>{formattedValue}</Text>
     </HStack>
   )

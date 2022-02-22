@@ -1,11 +1,10 @@
-import { Button, chakra, Flex, HStack, Text, Tooltip } from "@chakra-ui/react"
+import { Button, chakra, HStack, Text, Tooltip } from "@chakra-ui/react"
 import MultiItemPicker from "components/MultiItemPicker"
 import SingleItemPicker from "components/SingleItemPicker"
 import { FeatureName, FeatureNames, Features } from "lib/features"
 import { FrameworkIcons, FrameworkNames, FrameworkTitles } from "lib/frameworks"
 import { FrameworkName, LibraryInfo } from "lib/libraries"
-import { SortOptionKey, SortOptions } from "lib/sorting"
-import { hasAllKeys } from "lib/utils"
+import { hasAllKeys, SortOptionKey, SortOptions } from "lib/sorting"
 import { useState } from "react"
 
 interface FilterState {

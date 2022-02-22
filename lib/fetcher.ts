@@ -1,11 +1,16 @@
-import fetch from "node-fetch"
+import debug from "debug"
 import pThrottle from "p-throttle"
+import fetch from "cross-fetch"
+import * as cache from "./cache"
+
+const log = debug("fetcher")
+log.enabled = true
 
 const throttler = pThrottle({ limit: 1, interval: 300 })
 
 // Hammering APIs usually leads to trouble, and we don't really care about build
 // time, so let's be nice.
-export const throttledFetch = throttler(async (url: string) => {
+const throttledFetch = throttler(async (url: string) => {
   const { GITHUB_TOKEN, VERCEL_URL, VERCEL_GITHUB_COMMIT_SHA } = process.env
   if (!GITHUB_TOKEN) {
     throw new Error(
@@ -13,7 +18,7 @@ export const throttledFetch = throttler(async (url: string) => {
     )
   }
 
-  console.log(`Fetching ${url}`)
+  log("get %s", url)
   try {
     // Be nice to our APIs. (File a GitHub issue if we aren't!)
     const ua = VERCEL_URL
@@ -22,9 +27,11 @@ export const throttledFetch = throttler(async (url: string) => {
     const headers: any = {
       "User-Agent": ua,
     }
+
     if (GITHUB_TOKEN && /github.com/.test(url)) {
       headers.Authorization = `token ${GITHUB_TOKEN}`
     }
+
     if (/bundlephobia/.test(url)) {
       // bundle-phobia-cli does something like this so let's follow suit.
       headers["X-Bundlephobia-User"] = ua
@@ -32,22 +39,17 @@ export const throttledFetch = throttler(async (url: string) => {
 
     const res = await fetch(url, { headers })
     const data = await res.json()
-    return { headers: res.headers, data }
+    return { headers: JSON.parse(JSON.stringify(res.headers)), data }
   } catch (err) {
     const status = err.response?.status
     const headers = JSON.stringify(err.response?.headers, null, "  ")
-    console.error(
-      `Request to ${url} failed. status=${status} headers=${headers}`
-    )
+    log("failed %s - status=%s, headers=%o - %s", url, status, headers, err)
     throw err
   }
 })
 
-export const hasAllKeys = (obj: Object, keys: Iterable<string>) => {
-  for (const key of Array.from(keys)) {
-    if (!obj[key]) {
-      return false
-    }
-  }
-  return true
+const cachedThrottledFetch = async (url: string) => {
+  return cache.fetch(url, () => throttledFetch(url))
 }
+
+export default cachedThrottledFetch
