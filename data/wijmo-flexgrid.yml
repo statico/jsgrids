@@ -1,7 +1,7 @@
 title: Wijmo FlexGrid
-homeURL: https://www.grapecity.com/wijmo/flexgrid-javascript-data-grid
-demoURL: https://www.grapecity.com/wijmo/demos/Grid/Overview/purejs
-githubRepo: https://github.com/wijmo
+homeUrl: https://www.grapecity.com/wijmo/flexgrid-javascript-data-grid
+demoUrl: https://www.grapecity.com/wijmo/demos/Grid/Overview/purejs
+githubRepo:
 npmPackage: "@grapecity/wijmo.all"
 license: Custom License
 revenueModel: Commercial License

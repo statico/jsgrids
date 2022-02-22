@@ -1,8 +1,8 @@
 title: DevExtreme
 homeUrl: https://js.devexpress.com/Overview/DataGrid/
 demoUrl: https://js.devexpress.com/Demos/WidgetsGallery/Demo/DataGrid/Overview/jQuery/Light/
-githubRepo: 
-npmPackage: 
+githubRepo:
+npmPackage:
 license: Custom License
 revenueModel: Free for non-commerical use; Paid commercial license
 description: >
@@ -17,16 +17,16 @@ frameworks:
   vue: true
 features:
   accessible: true
-#  copyPaste: "?"
-  csvExport: true
+  copyPaste: false
+  csvExport: false
   customEditors: true
   customFormatters: true
   draggableRows: true
   editable: true
-#  fillDown: "?"
-#  fillRight: "?"
+  fillDown: false
+  fillRight: false
   filtering: true
-#  formulas: "?"
+  formulas: false
   freezableCols: true
   i18n: true
   maintained: true
@@ -36,11 +36,11 @@ features:
   pivots: Separate component, see https://js.devexpress.com/Documentation/Guide/UI_Components/PivotGrid
   rangeSelection: false
   resizableCols: true
-#  responsive: "?"
-#  rowGrouping: "?"
+  responsive: false
+  rowGrouping: true
   rowSelection: true
   serverSide: true
   sorting: true
-#  trees: "?"
+  trees: Separate component, see https://js.devexpress.com/Documentation/Guide/UI_Components/TreeList/Getting_Started_with_TreeList/
   xlsxExport: true
   virtualization: true

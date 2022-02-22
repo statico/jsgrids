@@ -229,14 +229,19 @@ export const getLibraries = async (): Promise<LibraryInfo[]> => {
             }
             cache.set(key, bundlephobia)
           } catch (err: any) {
+            bundlephobia = null
             // For now, some packages like pqgrid seem to break their build system, so
             // ignore 500 errors.
-            throw new Error(
-              err.response
-                ? `Bundlephobia API returned ${err.response.status} for package ${name}`
-                : `Bundlephobia failed for package ${name}: ${err}`
-            )
+            // throw new Error(
+            //   err.response
+            //     ? `Bundlephobia API returned ${err.response.status} for package ${name}`
+            //     : `Bundlephobia failed for package ${name}: ${err}`
+            // )
           }
+        }
+        if (!bundlephobia.rawSize) {
+          cache.set(key, null)
+          bundlephobia = null
         }
         item.bundlephobia = bundlephobia
       }
