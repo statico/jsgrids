@@ -133,11 +133,15 @@ export const getLibraries = async (): Promise<LibraryInfo[]> => {
             )
             data = res.data
 
-            if (data.full_name !== item.githubRepo) {
+            if (data.error)
+              throw new Error(
+                `GitHub repo ${item.githubRepo} error: ${data.error}`
+              )
+
+            if (data.full_name !== item.githubRepo)
               throw new Error(
                 `GitHub repo ${item.githubRepo} has moved to ${data.full_name}`
               )
-            }
 
             cache.set(key1, data)
           } catch (err) {
