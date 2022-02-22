@@ -1,0 +1,7 @@
+.cache/
+.husky/_/
+.next/
+node_modules/
+out/
+tsconfig.tsbuildinfo
+yarn-error.log

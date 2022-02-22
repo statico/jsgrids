@@ -7,7 +7,8 @@
     "dev": "next",
     "build": "next build",
     "export": "next export",
-    "start": "next start"
+    "start": "next start",
+    "prepare": "husky install"
   },
   "dependencies": {
     "@chakra-ui/react": "^1.8.5",
@@ -44,6 +45,6 @@
     }
   },
   "lint-staged": {
-    "*.{js,css,md}": "prettier --write"
+    "**/*": "prettier --write --ignore-unknown"
   }
 }
