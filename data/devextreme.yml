@@ -1,0 +1,46 @@
+title: DevExtreme
+homeUrl: https://js.devexpress.com/Overview/DataGrid/
+demoUrl: https://js.devexpress.com/Demos/WidgetsGallery/Demo/DataGrid/Overview/jQuery/Light/
+githubRepo: 
+npmPackage: 
+license: Custom License
+revenueModel: Free for non-commerical use; Paid commercial license
+description: >
+  A Feature-Complete Client-Side Data Grid by DevExpress.
+  The DevExtreme Data Grid is built for speed and ready to tackle your toughest business challenge.
+  With integrated server-side support for data filtering, paging, sorting, record grouping, and summary
+  computations extremely large datasets are never an issue for the DevExtreme Data Grid.
+frameworks:
+  vanilla: true
+  react: https://devexpress.github.io/devextreme-reactive/react/grid/
+  angular: true
+  vue: true
+features:
+  accessible: true
+#  copyPaste: "?"
+  csvExport: true
+  customEditors: true
+  customFormatters: true
+  draggableRows: true
+  editable: true
+#  fillDown: "?"
+#  fillRight: "?"
+  filtering: true
+#  formulas: "?"
+  freezableCols: true
+  i18n: true
+  maintained: true
+  openSource: false
+  pagination: true
+  pdfExport: true
+  pivots: Separate component, see https://js.devexpress.com/Documentation/Guide/UI_Components/PivotGrid
+  rangeSelection: false
+  resizableCols: true
+#  responsive: "?"
+#  rowGrouping: "?"
+  rowSelection: true
+  serverSide: true
+  sorting: true
+#  trees: "?"
+  xlsxExport: true
+  virtualization: true
