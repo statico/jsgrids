@@ -2,68 +2,69 @@ import { GetStaticProps, NextPage } from "next"
 import React from "react"
 import Head from "next/head"
 import { getLibraries, LibraryInfo } from "../lib/libraries"
+import {
+  Container,
+  Heading,
+  Link,
+  Table,
+  Tbody,
+  Td,
+  Th,
+  Thead,
+  Tr,
+} from "@chakra-ui/react"
 
 interface Props {
   items: LibraryInfo[]
 }
 
-const Link: React.FC<{ name: string; url?: string }> = ({ url, name }) =>
-  url ? (
-    <a className="text-blue-700 dark:text-blue-400" href={url}>
-      {name}
-    </a>
-  ) : null
-
-const TH: React.FC = ({ children }) => (
-  <th className="px-4 py-2 text-left">{children}</th>
-)
-const TD: React.FC = ({ children }) => (
-  <td className="border px-4 py-2">{children}</td>
-)
+const LinkTo = ({ href }: { href?: string }) =>
+  href ? <Link href={href}>Link</Link> : <span />
 
 const Page: NextPage<Props> = ({ items }) => (
-  <div className="container mx-auto py-4">
+  <Container maxW="full">
     <Head>
       <title>Library List</title>
       <meta name="robots" content="noindex, nofollow" />
     </Head>
-    <table>
-      <thead>
-        <tr>
-          <TH>Name</TH>
-          <TH>ID</TH>
-          <TH>Source</TH>
-          <TH>Home</TH>
-          <TH>Demo</TH>
-          <TH>NPM</TH>
-          <TH>Bundlephobia</TH>
-        </tr>
-      </thead>
-      <tbody>
+    <Heading>All Libraries</Heading>
+    <Table size="sm">
+      <Thead>
+        <Tr>
+          <Th>Name</Th>
+          <Th>ID</Th>
+          <Th>Source</Th>
+          <Th>Home</Th>
+          <Th>Demo</Th>
+          <Th>NPM</Th>
+          <Th>Bundlephobia</Th>
+        </Tr>
+      </Thead>
+      <Tbody>
         {items.map((item) => (
-          <tr key={item.id}>
-            <TD>{item.title}</TD>
-            <TD>{item.id}</TD>
-            <TD>
-              <Link name="Source" url={item.github?.url} />
-            </TD>
-            <TD>
-              <Link name="Home" url={item.homeUrl} />
-            </TD>
-            <TD>
-              <Link name="Demo" url={item.demoUrl} />
-            </TD>
-            <TD>
-              <Link name="NPM" url={item.npm?.url} />
-            </TD>
-            <TD>
-              <Link name="Bundlephobia" url={item.bundlephobia?.url} />
-            </TD>
-          </tr>
+          <Tr key={item.id}>
+            <Td>{item.title}</Td>
+            <Td>{item.id}</Td>
+            <Td>
+              <LinkTo href={item.github?.url} />
+            </Td>
+            <Td>
+              <LinkTo href={item.homeUrl} />
+            </Td>
+            <Td>
+              <LinkTo href={item.demoUrl} />
+            </Td>
+            <Td>
+              <LinkTo href={item.npm?.url} />
+            </Td>
+            <Td>
+              <LinkTo href={item.bundlephobia?.url} />
+            </Td>
+          </Tr>
         ))}
-      </tbody>
-    </table>
-  </div>
+      </Tbody>
+    </Table>
+  </Container>
 )
 
 export default Page

@@ -4,10 +4,9 @@ demoUrl: https://js.devexpress.com/Demos/WidgetsGallery/Demo/DataGrid/Overview/j
 githubRepo:
 npmPackage:
 license: Custom License
-revenueModel: Free for non-commerical use; Paid commercial license
+revenueModel: Free for Personal Use
 description: >
-  A Feature-Complete Client-Side Data Grid by DevExpress.
-  The DevExtreme Data Grid is built for speed and ready to tackle your toughest business challenge.
+  Built for speed and ready to tackle your toughest business challenge.
   With integrated server-side support for data filtering, paging, sorting, record grouping, and summary
   computations extremely large datasets are never an issue for the DevExtreme Data Grid.
 frameworks:

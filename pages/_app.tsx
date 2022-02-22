@@ -1,10 +1,12 @@
-import "../styles/index.css"
-import "react-tippy/dist/tippy.css"
-
-// This file exists so we can import CSS above.
+import { ChakraProvider } from "@chakra-ui/react"
+import theme from "../theme"
 
 function MyApp({ Component, pageProps }) {
-  return <Component {...pageProps} />
+  return (
+    <ChakraProvider theme={theme}>
+      <Component {...pageProps} />
+    </ChakraProvider>
+  )
 }
 
 export default MyApp

@@ -1,5 +1,22 @@
-import classnames from "classnames"
+import {
+  Box,
+  Button,
+  chakra,
+  Flex,
+  Heading,
+  HStack,
+  Link,
+  SimpleGrid,
+  Stack,
+  Text,
+  Tooltip,
+} from "@chakra-ui/react"
 import { fileSize } from "humanize-plus"
+import { Features } from "lib/features"
+import { FrameworkIcons, FrameworkTitles } from "lib/frameworks"
+import { LibraryInfo } from "lib/libraries"
+import { sortedFeatureNames } from "lib/sorting"
+import { JSXElementConstructor } from "react"
 import {
   FaCheckCircle,
   FaDollarSign,
@@ -15,21 +32,17 @@ import {
   GoStar,
 } from "react-icons/go"
 import { IoMdDownload } from "react-icons/io"
-import { Features } from "../lib/features"
-import { FrameworkIcons, FrameworkTitles } from "../lib/frameworks"
-import { LibraryInfo } from "../lib/libraries"
-import { sortedFeatureNames } from "../lib/sorting"
-import Button from "./Button"
-import Tooltip from "./Tooltip"
 
-const FeatureList: React.FC<{ features: LibraryInfo["features"] }> = ({
-  features,
+const ColoredIcon = ({
+  icon: Icon,
+  color,
+}: {
+  icon: JSXElementConstructor<any>
+  color: string
 }) => (
-  <div className="leading-tight text-xs grid grid-cols-2 gap-y-1 lg:gap-y-0">
-    {sortedFeatureNames(features).map((name) => (
-      <Feature key={name} name={name} value={features[name]} />
-    ))}
-  </div>
+  <Text color={color}>
+    <Icon />
+  </Text>
 )
 
 const Feature: React.FC<{
@@ -40,30 +53,26 @@ const Feature: React.FC<{
     throw new Error(`Unknown feature name: ${name}`)
   }
   const { title, description, important } = Features[name]
-  const cls = classnames(
-    "flex flex-row items-center uppercase mb-3/2",
-    "hover:opacity-75 transition-opacity duration-75 cursor-default"
-  )
   if (value) {
     return (
-      <Tooltip tip={typeof value === "string" ? value : description}>
-        <span className={cls}>
+      <Tooltip label={typeof value === "string" ? value : description}>
+        <HStack spacing={1} cursor="help" _hover={{ opacity: 0.75 }}>
           {value === true ? (
-            <FaCheckCircle className="flex-none w-3 text-green-400" />
+            <ColoredIcon icon={FaCheckCircle} color="green.400" />
           ) : (
-            <FaInfoCircle className="flex-none w-3 text-yellow-500" />
+            <ColoredIcon icon={FaInfoCircle} color="orange.300" />
           )}
-          <span className="ml-1">{title}</span>
-        </span>
+          <Text>{title}</Text>
+        </HStack>
       </Tooltip>
     )
   } else if (!value && important) {
     return (
-      <Tooltip tip={typeof value === "string" ? value : description}>
-        <span className={cls}>
-          <FaTimesCircle className="flex-none w-3 text-red-500" />
-          <span className="ml-1">{`Not ${title}`}</span>
-        </span>
+      <Tooltip label={typeof value === "string" ? value : description}>
+        <HStack spacing={1} cursor="help" _hover={{ opacity: 0.75 }}>
+          <ColoredIcon icon={FaTimesCircle} color="red.500" />
+          <Text>{`Not ${title}`}</Text>
+        </HStack>
       </Tooltip>
     )
   } else {
@@ -72,7 +81,7 @@ const Feature: React.FC<{
 }
 
 const FrameworkList: React.FC<{ info: LibraryInfo }> = ({ info }) => (
-  <div className="flex flex-row items-center justify-center text-2xl">
+  <Flex fontSize="2xl">
     {Object.keys(info.frameworks).map((name) => {
       const value = info.frameworks[name]
       const isThirdParty = typeof value === "string"
@@ -82,23 +91,25 @@ const FrameworkList: React.FC<{ info: LibraryInfo }> = ({ info }) => (
         : `Built-in support for ${FrameworkTitles[name]}`
       const Icon = FrameworkIcons[name]
       return (
-        <Tooltip tip={title} key={name}>
-          <a href={url} className="relative inline-block">
-            <Icon className="hover:opacity-75" />
+        <Tooltip label={title} key={name}>
+          <Link href={url} position="relative" _hover={{ opacity: 0.75 }}>
+            <Icon />
             {isThirdParty && (
-              <div
-                className={classnames(
-                  "absolute bottom-0 right-0 w-3 h-3",
-                  "border-2 rounded-full border-white dark:border-gray-800",
-                  "bg-yellow-500"
-                )}
+              <chakra.div
+                position="absolute"
+                bottom={0}
+                right={0}
+                boxSize={3}
+                border="2px solid white"
+                bg="yellow.500"
+                borderRadius={999}
               />
             )}
-          </a>
+          </Link>
         </Tooltip>
       )
     })}
-  </div>
+  </Flex>
 )
 
 const Metric: React.FC<{
@@ -114,32 +125,23 @@ const Metric: React.FC<{
   formatter = (x) => Number(x).toLocaleString(),
   href,
 }) => {
-  const cls = classnames(
-    "flex flex-row items-center leading-tight text-sm",
-    "hover:opacity-75",
-    !value && "text-gray-500"
-  )
   const formattedValue = value === undefined ? "n/a" : formatter(value)
   const formattedTitle = title.replace(
     "%s",
     value === undefined ? "unknown" : formattedValue
   )
   const contents = (
-    <>
-      <span className="mr-2">{icon}</span>
-      {formattedValue}
-    </>
+    <HStack cursor="pointer" _hover={{ opacity: 0.75 }}>
+      {icon}
+      <Text>{formattedValue}</Text>
+    </HStack>
   )
   return value ? (
-    <Tooltip tip={formattedTitle}>
-      <a href={href} className={cls}>
-        {contents}
-      </a>
+    <Tooltip label={formattedTitle}>
+      <Link href={href}>{contents}</Link>
     </Tooltip>
   ) : (
-    <Tooltip tip={formattedTitle}>
-      <span className={cls}>{contents}</span>
-    </Tooltip>
+    <Tooltip label={formattedTitle}>{contents}</Tooltip>
   )
 }
 
@@ -147,28 +149,31 @@ const Card: React.FC<{ info: LibraryInfo }> = ({ info }) => {
   const id = `card-${info.id}`
   const gh = info.github
   return (
-    <section
-      className={classnames(
-        "bg-white text-gray-900 dark:bg-gray-800 dark:text-gray-100",
-        "block p-4 sm:p-8 shadow-md rounded-md",
-        "flex flex-col justify-start"
-      )}
+    <Stack
+      as="section"
+      bg="white"
+      shadow="lg"
+      borderRadius="md"
+      p={8}
+      spacing={4}
       aria-labelledby={id}
     >
-      <div className="mb-4 flex flex-row items-center justify-between">
-        <a
-          className="text-2xl text-left font-semibold no-underline"
-          id={id}
+      <Flex alignItems="center" justifyContent="space-between">
+        <Heading
+          size="lg"
+          as="a"
           href={info.homeUrl}
+          fontWeight="semibold"
+          id={id}
         >
           {info.title}
-        </a>
-        <div>
-          <FrameworkList info={info} />
-        </div>
-      </div>
-      <div className="mb-4">{info.description}</div>
-      <div className="mb-5 text-gray-800 dark:text-gray-200 grid grid-cols-3 gap-y-2 gap-x-12">
+        </Heading>
+        <FrameworkList info={info} />
+      </Flex>
+
+      <Text>{info.description}</Text>
+
+      <SimpleGrid columns={3} spacingX={12} spacingY={1} fontSize="sm">
         <Metric
           icon={<GoStar />}
           value={gh?.stars}
@@ -206,26 +211,50 @@ const Card: React.FC<{ info: LibraryInfo }> = ({ info }) => {
           title={"%s open issues on GitHub"}
           href={gh?.url + "/issues"}
         />
-      </div>
-      <div className="mb-4 text-gray-800 dark:text-gray-200">
-        <FeatureList features={info.features} />
-      </div>
-      <div className="mb-6 text-gray-800 dark:text-gray-200 text-sm grid grid-cols-1 gap-y-1">
-        <div className="flex flex-row items-center">
-          <GoLaw className="inline mr-2" /> {info.license}
-        </div>
-        <div className="flex flex-row items-center">
-          {/* Wishlist: Use a localized currency symbol instead of $ for everyone */}
-          <FaDollarSign className="inline mr-2" /> {info.revenueModel}
-        </div>
-      </div>
-      <div className="flex-grow">{/* Make buttons appear at bottom */}</div>
-      <div className="grid grid-cols-3 gap-x-4">
-        <Button href={info.demoUrl} title="Demo" />
-        <Button href={info.github?.url} title="Source" />
-        <Button href={info.homeUrl} title="Home" />
-      </div>
-    </section>
+      </SimpleGrid>
+
+      <SimpleGrid
+        columns={2}
+        spacingX={4}
+        fontSize="xs"
+        textTransform="uppercase"
+      >
+        {sortedFeatureNames(info.features).map((name) => (
+          <Feature key={name} name={name} value={info.features[name]} />
+        ))}
+      </SimpleGrid>
+
+      <Box fontSize="sm">
+        <HStack spacing={2}>
+          <GoLaw />
+          <Text>{info.license}</Text>
+        </HStack>
+        <HStack spacing={2}>
+          <FaDollarSign />
+          <Text>{info.revenueModel}</Text>
+        </HStack>
+      </Box>
+
+      <Flex flexGrow={1} flexDir="column" justifyContent="end">
+        <HStack justifyContent="space-between" spacing={6}>
+          {info.demoUrl && (
+            <Button as="a" href={info.demoUrl} flex={1}>
+              Demo
+            </Button>
+          )}
+          {info.github?.url && (
+            <Button as="a" href={info.github?.url} flex={1}>
+              Source
+            </Button>
+          )}
+          {info.homeUrl && (
+            <Button as="a" href={info.homeUrl} flex={1}>
+              Home
+            </Button>
+          )}
+        </HStack>
+      </Flex>
+    </Stack>
   )
 }
 

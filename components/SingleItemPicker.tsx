@@ -1,7 +1,14 @@
+import {
+  Box,
+  Button,
+  Menu,
+  MenuButton,
+  MenuItem,
+  MenuList,
+  Text,
+} from "@chakra-ui/react"
 import React from "react"
-import { GoChevronDown } from "react-icons/go"
-import Dropdown from "./Dropdown"
-import FilterBarButton from "./FilterBarButton"
+import { GoCheck, GoChevronDown } from "react-icons/go"
 
 interface Option {
   key: string
@@ -9,61 +16,47 @@ interface Option {
   description?: string
 }
 
+const BlankIcon = () => <Box boxSize="1em" />
+
 export const SingleItemPicker: React.FC<{
   selected: string | null
   options: Option[]
   allowNull?: boolean
   onChange: (newValue: string) => void
-}> = ({ children, selected, options, onChange, allowNull = true }) => (
-  <Dropdown
-    button={
-      <FilterBarButton>
+}> = ({ children, selected, options, onChange, allowNull = true }) => {
+  return (
+    <Menu>
+      <MenuButton as={Button} rightIcon={<GoChevronDown />} fontWeight="normal">
         {children}
-        <GoChevronDown className="ml-1" />
-      </FilterBarButton>
-    }
-  >
-    <fieldset
-      className="w-full px-4 py-3 text-sm whitespace-no-wrap grid grid-cols-1 gap-y-2 md:gap-y-1"
-      role="menu"
-    >
-      {allowNull && (
-        <label className="cursor-pointer hover:bg-gray-100 px-1 py-1 rounded-sm">
-          <input
-            type="radio"
-            className="align-middle mb-1 mr-3"
-            checked={!selected}
-            onChange={() => {
+      </MenuButton>
+      <MenuList>
+        {allowNull && (
+          <MenuItem
+            icon={!selected ? <GoCheck /> : <BlankIcon />}
+            aria-selected={!selected}
+            onClick={() => {
               onChange(null)
             }}
-            role="menuitem"
-            tabIndex={-1}
-          />
-          Any License
-        </label>
-      )}
-      {options.map(({ key, title, description }) => (
-        <label key={key} className="cursor-pointer hover:opacity-75 px-1 py-1">
-          <input
-            type="radio"
-            className="align-middle mb-1 mr-3"
-            checked={selected === key}
-            onChange={() => {
+          >
+            Any
+          </MenuItem>
+        )}
+        {options.map(({ key, title, description }) => (
+          <MenuItem
+            key={key}
+            icon={selected === key ? <GoCheck /> : <BlankIcon />}
+            aria-selected={selected === key}
+            onClick={() => {
               onChange(key)
             }}
-            role="menuitem"
-            tabIndex={-1}
-          />
-          {title}
-          {description && (
-            <div className="text-xs text-gray-700 dark:text-gray-500 ml-6">
-              {description}
-            </div>
-          )}
-        </label>
-      ))}
-    </fieldset>
-  </Dropdown>
-)
+          >
+            {title}
+            {description ? <Text size="xs">{description}</Text> : false}
+          </MenuItem>
+        ))}
+      </MenuList>
+    </Menu>
+  )
+}
 
 export default SingleItemPicker

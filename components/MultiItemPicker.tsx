@@ -1,9 +1,16 @@
+import {
+  Button,
+  Checkbox,
+  Menu,
+  MenuButton,
+  MenuList,
+  SimpleGrid,
+  Stack,
+  Text,
+  Tooltip,
+} from "@chakra-ui/react"
 import React from "react"
 import { GoChevronDown } from "react-icons/go"
-import Button from "./Button"
-import Dropdown from "./Dropdown"
-import FilterBarButton from "./FilterBarButton"
-import Tooltip from "./Tooltip"
 
 interface Option {
   key: string
@@ -16,26 +23,17 @@ export const MultiItemPicker: React.FC<{
   options: Option[]
   onChange: (newValue: Set<string>) => void
 }> = ({ children, selected, options, onChange }) => (
-  <Dropdown
-    button={
-      <FilterBarButton>
-        {children}
-        <GoChevronDown className="ml-1" />
-      </FilterBarButton>
-    }
-  >
-    <fieldset
-      className="block w-full p-3 text-sm whitespace-no-wrap"
-      role="menu"
-    >
-      <div className="mb-3">Choose one or more:</div>
-      <div className="grid grid-cols-2 gap-y-1 lg:gap-y-0 gap-x-3 mb-3">
-        {options.map(({ key, title, description }) => (
-          <Tooltip key={key} tip={description}>
-            <label className="cursor-pointer hover:opacity-75 px-1 py-1 rounded-sm leading-relaxed">
-              <input
-                type="checkbox"
-                className="align-middle mb-1 mr-2"
+  <Menu>
+    <MenuButton as={Button} rightIcon={<GoChevronDown />} fontWeight="normal">
+      {children}
+    </MenuButton>
+    <MenuList p={3}>
+      <Stack>
+        <Text>Choose one or more:</Text>
+        <SimpleGrid columns={2} spacingX={3} spacingY={1}>
+          {options.map(({ key, title, description }) => (
+            <Tooltip key={key} title={description}>
+              <Checkbox
                 checked={selected.has(key)}
                 onChange={(event) => {
                   const newValue = new Set(selected)
@@ -46,24 +44,23 @@ export const MultiItemPicker: React.FC<{
                   }
                   onChange(newValue)
                 }}
-                role="menuitem"
-                tabIndex={-1}
-              />
-              {title}
-            </label>
-          </Tooltip>
-        ))}
-      </div>
-      <Button
-        small
-        title="Clear All"
-        disabled={selected.size === 0}
-        onClick={() => {
-          onChange(new Set())
-        }}
-      />
-    </fieldset>
-  </Dropdown>
+              >
+                {title}
+              </Checkbox>
+            </Tooltip>
+          ))}
+        </SimpleGrid>
+        <Button
+          disabled={selected.size === 0}
+          onClick={() => {
+            onChange(new Set())
+          }}
+        >
+          Reset
+        </Button>
+      </Stack>
+    </MenuList>
+  </Menu>
 )
 
 export default MultiItemPicker
