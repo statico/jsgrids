@@ -9,10 +9,8 @@ import {
   Thead,
   Tr,
 } from "@chakra-ui/react"
+import { getLibraries, LibraryInfo } from "lib/libraries"
 import { GetStaticProps, NextPage } from "next"
-import { Head } from "next/document"
-import React from "react"
-import { getLibraries, LibraryInfo } from "../lib/libraries"
 
 interface Props {
   items: LibraryInfo[]
@@ -23,9 +21,6 @@ const LinkTo = ({ href }: { href?: string | null }) =>
 
 const Page: NextPage<Props> = ({ items }) => (
   <Container maxW="full">
-    <Head>
-      <title>jsgrids - All libraries</title>
-    </Head>
     <Heading>All Libraries</Heading>
     <Table size="sm">
       <Thead>
