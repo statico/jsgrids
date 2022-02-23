@@ -10,7 +10,7 @@ import {
   Tr,
 } from "@chakra-ui/react"
 import { GetStaticProps, NextPage } from "next"
-import { NextSeo } from "next-seo"
+import { Head } from "next/document"
 import React from "react"
 import { getLibraries, LibraryInfo } from "../lib/libraries"
 
@@ -23,7 +23,9 @@ const LinkTo = ({ href }: { href?: string | null }) =>
 
 const Page: NextPage<Props> = ({ items }) => (
   <Container maxW="full">
-    <NextSeo title="All Libraries" />
+    <Head>
+      <title>jsgrids - All libraries</title>
+    </Head>
     <Heading>All Libraries</Heading>
     <Table size="sm">
       <Thead>

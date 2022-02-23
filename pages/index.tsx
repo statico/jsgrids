@@ -3,6 +3,7 @@ import Card from "components/Card"
 import FilterBar from "components/FilterBar"
 import { getLibraries, LibraryInfo } from "lib/libraries"
 import { GetStaticProps, NextPage } from "next"
+import Head from "next/head"
 import GithubCorner from "react-github-corner"
 
 interface Props {
@@ -11,6 +12,12 @@ interface Props {
 
 const Page: NextPage<Props> = ({ items }) => (
   <>
+    <Head>
+      <title>
+        jsgrids - Spreadsheets and data grid libraries for JavaScript
+      </title>
+    </Head>
+
     <Box
       as="header"
       color="white"
