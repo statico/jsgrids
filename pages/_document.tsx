@@ -1,5 +1,7 @@
+import { ColorModeScript, ChakraProvider } from "@chakra-ui/react"
 import Document, { Head, Html, Main, NextScript } from "next/document"
 import * as React from "react"
+import theme from "lib/theme"
 
 const title = "jsgrids | Spreadsheets and Data Grid Libraries for JavaScript"
 const description = "A List of JavaScript Spreadsheets and Data Grid Libraries"
@@ -21,6 +23,7 @@ class MyDocument extends Document {
           <link rel="shortcut icon" href="/favicon.jpg" />
         </Head>
         <body>
+          <ColorModeScript initialColorMode={theme.config.initialColorMode} />
           <Main />
           <NextScript />
         </body>

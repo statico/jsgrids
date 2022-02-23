@@ -10,6 +10,7 @@ import {
   Stack,
   Text,
   Tooltip,
+  useColorModeValue,
 } from "@chakra-ui/react"
 import { fileSize } from "humanize-plus"
 import { Features } from "lib/features"
@@ -44,6 +45,8 @@ const ColoredIcon = ({
     <Icon />
   </Text>
 )
+
+const useCardBackgroundColor = () => useColorModeValue("white", "gray.700")
 
 const Feature: React.FC<{
   name: string
@@ -80,43 +83,47 @@ const Feature: React.FC<{
   }
 }
 
-const FrameworkList: React.FC<{ info: LibraryInfo }> = ({ info }) => (
-  <Flex fontSize="2xl">
-    {Object.keys(info.frameworks).map((name) => {
-      const value = info.frameworks[name]
-      const isThirdParty = typeof value === "string"
-      const url = isThirdParty ? value : info.homeUrl
-      const title = isThirdParty
-        ? `Go to the separate solution for ${FrameworkTitles[name]}`
-        : `Built-in support for ${FrameworkTitles[name]}`
-      const Icon = FrameworkIcons[name]
-      return (
-        <Tooltip label={title} key={name}>
-          <Link
-            href={url}
-            position="relative"
-            _hover={{ opacity: 0.75 }}
-            title={title}
-            aria-label={title}
-          >
-            <Icon />
-            {isThirdParty && (
-              <chakra.div
-                position="absolute"
-                bottom={0}
-                right={0}
-                boxSize={3}
-                border="2px solid white"
-                bg="yellow.500"
-                borderRadius={999}
-              />
-            )}
-          </Link>
-        </Tooltip>
-      )
-    })}
-  </Flex>
-)
+const FrameworkList: React.FC<{ info: LibraryInfo }> = ({ info }) => {
+  const bg = useCardBackgroundColor()
+  return (
+    <Flex fontSize="2xl">
+      {Object.keys(info.frameworks).map((name) => {
+        const value = info.frameworks[name]
+        const isThirdParty = typeof value === "string"
+        const url = isThirdParty ? value : info.homeUrl
+        const title = isThirdParty
+          ? `Go to the separate solution for ${FrameworkTitles[name]}`
+          : `Built-in support for ${FrameworkTitles[name]}`
+        const Icon = FrameworkIcons[name]
+        return (
+          <Tooltip label={title} key={name}>
+            <Link
+              href={url}
+              position="relative"
+              _hover={{ opacity: 0.75 }}
+              title={title}
+              aria-label={title}
+            >
+              <Icon />
+              {isThirdParty && (
+                <chakra.div
+                  position="absolute"
+                  bottom={0}
+                  right={0}
+                  boxSize={3}
+                  border={`2px solid`}
+                  borderColor={bg}
+                  bg="yellow.500"
+                  borderRadius={999}
+                />
+              )}
+            </Link>
+          </Tooltip>
+        )
+      })}
+    </Flex>
+  )
+}
 
 const Metric: React.FC<{
   icon: React.ReactNode
@@ -152,12 +159,13 @@ const Metric: React.FC<{
 }
 
 const Card: React.FC<{ info: LibraryInfo }> = ({ info }) => {
+  const bg = useCardBackgroundColor()
   const id = `card-${info.id}`
   const gh = info.github
   return (
     <Stack
       as="section"
-      bg="white"
+      bg={bg}
       shadow="lg"
       borderRadius="md"
       p={8}
