@@ -92,7 +92,13 @@ const FrameworkList: React.FC<{ info: LibraryInfo }> = ({ info }) => (
       const Icon = FrameworkIcons[name]
       return (
         <Tooltip label={title} key={name}>
-          <Link href={url} position="relative" _hover={{ opacity: 0.75 }}>
+          <Link
+            href={url}
+            position="relative"
+            _hover={{ opacity: 0.75 }}
+            title={title}
+            aria-label={title}
+          >
             <Icon />
             {isThirdParty && (
               <chakra.div

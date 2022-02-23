@@ -40,6 +40,8 @@ const FrameworkSelector: React.FC<{
               p={1}
               onClick={handleToggle(name)}
               background={selected === name ? "gray.500" : "transparent"}
+              title={title}
+              aria-label={title}
             >
               <Icon style={{ width: 32, height: 32 }} />
             </Button>
