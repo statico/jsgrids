@@ -4,7 +4,7 @@ import Document, { Head, Html, Main, NextScript } from "next/document"
 import * as React from "react"
 
 const name = "jsgrids"
-const title = "jsgrids - Spreadsheets and data grid libraries for JavaScript"
+const title = "jsgrids - Spreadsheet and data grid libraries for JavaScript"
 const description =
   "A searchable list of popular spreadsheets and data grid libraries for JavaScript with framework (React, Vue, Angular, Ember, jQuery, Vanilla JS), popularity, and feature information."
 const url = "https://jsgrids.statico.io"
