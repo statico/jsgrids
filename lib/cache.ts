@@ -65,6 +65,7 @@ const fetch = async (key: string, fn: () => Promise<any>): Promise<any> => {
 
   const fresh = await fn()
   if (fresh) set(key, fresh)
+  return fresh
 }
 
 export { get, set, clear, fetch }

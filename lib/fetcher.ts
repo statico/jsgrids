@@ -48,8 +48,7 @@ const throttledFetch = throttler(async (url: string) => {
   }
 })
 
-const cachedThrottledFetch = async (url: string) => {
-  return cache.fetch(url, () => throttledFetch(url))
-}
+const cachedThrottledFetch = async (url: string) =>
+  cache.fetch(url, () => throttledFetch(url))
 
 export default cachedThrottledFetch
