@@ -40,7 +40,7 @@ const throttledFetch = throttler(async (url: string) => {
     const res = await fetch(url, { headers })
     const data = await res.json()
     return { headers: JSON.parse(JSON.stringify(res.headers)), data }
-  } catch (err) {
+  } catch (err: any) {
     const status = err.response?.status
     const headers = JSON.stringify(err.response?.headers, null, "  ")
     log("failed %s - status=%s, headers=%o - %s", url, status, headers, err)

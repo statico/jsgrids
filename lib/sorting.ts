@@ -1,3 +1,4 @@
+import { FeatureName } from "./features"
 import { LibraryInfo } from "./libraries"
 
 export interface SortOption {
@@ -35,7 +36,7 @@ export const SortOptions: SortOption[] = [
 // Only important negative features are shown, which is why they're first.
 export const sortedFeatureNames = (
   features: LibraryInfo["features"]
-): string[] =>
+): FeatureName[] =>
   Object.keys(features).sort((a, b) => {
     const av = features[a]
     const bv = features[b]
@@ -54,9 +55,9 @@ export const sortedFeatureNames = (
     } else {
       return a.localeCompare(b)
     }
-  })
+  }) as FeatureName[]
 
-export const hasAllKeys = (obj: Object, keys: Iterable<string>) => {
+export const hasAllKeys = (obj: any, keys: Iterable<string>) => {
   for (const key of Array.from(keys)) {
     if (!obj[key]) {
       return false

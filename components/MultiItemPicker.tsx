@@ -21,7 +21,7 @@ interface Option {
 export const MultiItemPicker: React.FC<{
   selected: Set<string>
   options: Option[]
-  onChange: (newValue: Set<string>) => void
+  onChange: (newValue: any) => void
 }> = ({ children, selected, options, onChange }) => (
   <Menu>
     <MenuButton as={Button} rightIcon={<GoChevronDown />} fontWeight="normal">

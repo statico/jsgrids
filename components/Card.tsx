@@ -13,9 +13,9 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react"
 import { fileSize } from "humanize-plus"
-import { Features } from "lib/features"
+import { FeatureName, Features } from "lib/features"
 import { FrameworkIcons, FrameworkTitles } from "lib/frameworks"
-import { LibraryInfo } from "lib/libraries"
+import { FrameworkName, LibraryInfo } from "lib/libraries"
 import { sortedFeatureNames } from "lib/sorting"
 import { JSXElementConstructor } from "react"
 import {
@@ -49,7 +49,7 @@ const ColoredIcon = ({
 const useCardBackgroundColor = () => useColorModeValue("white", "gray.700")
 
 const Feature: React.FC<{
-  name: string
+  name: FeatureName
   value: boolean | string | null
 }> = ({ name, value }) => {
   if (!Features[name]) {
@@ -85,9 +85,10 @@ const Feature: React.FC<{
 
 const FrameworkList: React.FC<{ info: LibraryInfo }> = ({ info }) => {
   const bg = useCardBackgroundColor()
+  const names = Object.keys(info.frameworks) as FrameworkName[]
   return (
     <Flex fontSize="2xl">
-      {Object.keys(info.frameworks).map((name) => {
+      {names.map((name) => {
         const value = info.frameworks[name]
         const isThirdParty = typeof value === "string"
         const url = isThirdParty ? value : info.homeUrl
@@ -98,7 +99,7 @@ const FrameworkList: React.FC<{ info: LibraryInfo }> = ({ info }) => {
         return (
           <Tooltip label={title} key={name}>
             <Link
-              href={url}
+              href={url ?? undefined}
               position="relative"
               _hover={{ opacity: 0.75 }}
               title={title}
@@ -176,7 +177,7 @@ const Card: React.FC<{ info: LibraryInfo }> = ({ info }) => {
         <Heading
           size="lg"
           as="a"
-          href={info.homeUrl}
+          href={info.homeUrl ?? undefined}
           fontWeight="semibold"
           id={id}
         >

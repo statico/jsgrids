@@ -22,8 +22,8 @@ const ResponsiveText = ({ short, long }: { short: string; long: string }) => (
 )
 
 const FrameworkSelector: React.FC<{
-  selected: FrameworkName
-  onChange: (newSelected: FrameworkName) => void
+  selected: FrameworkName | null
+  onChange: (newSelected: FrameworkName | null) => void
 }> = ({ selected, onChange }) => {
   const handleToggle = (name: FrameworkName) => () => {
     onChange(selected === name ? null : name)
@@ -107,7 +107,7 @@ const SortSelector: React.FC<{
       options={SortOptions}
       allowNull={false}
     >
-      <ResponsiveText short="Sort" long={`Sort by ${selectedOption.title}`} />
+      <ResponsiveText short="Sort" long={`Sort by ${selectedOption?.title}`} />
     </SingleItemPicker>
   )
 }
@@ -137,7 +137,9 @@ const FilterBar: React.FC<FilteredItemsProps> = ({ items, children }) => {
   clone.sort(sortOption.fn)
 
   if (filters.framework) {
-    clone = clone.filter((item) => item.frameworks[filters.framework])
+    clone = clone.filter(
+      (item) => filters.framework && item.frameworks[filters.framework]
+    )
   }
   if (filters.features.size) {
     clone = clone.filter((item) => hasAllKeys(item.features, filters.features))
@@ -174,7 +176,7 @@ const FilterBar: React.FC<FilteredItemsProps> = ({ items, children }) => {
         }}
       />
       <LicenseSelector
-        licenses={new Set(items.map((i) => i.license))}
+        licenses={new Set<string>(items.map((i: any) => i.license))}
         selected={filters.license}
         onChange={(license) => {
           setFilters({ ...filters, license })

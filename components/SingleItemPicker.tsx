@@ -22,7 +22,7 @@ export const SingleItemPicker: React.FC<{
   selected: string | null
   options: Option[]
   allowNull?: boolean
-  onChange: (newValue: string) => void
+  onChange: (newValue: any) => void
 }> = ({ children, selected, options, onChange, allowNull = true }) => {
   return (
     <Menu>

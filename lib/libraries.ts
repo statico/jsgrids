@@ -152,7 +152,7 @@ export const getLibraries = async (): Promise<LibraryInfo[]> => {
         } else {
           const link = res1.headers.link ?? ""
           const parts = link.split(",")
-          const lastPart = parts.find((s) => /rel="last"/.test(s)) ?? ""
+          const lastPart = parts.find((s: string) => /rel="last"/.test(s)) ?? ""
           const match = lastPart.match(/\bpage=(\d+)/)
           const lastPage = Number(match ? match[1] : 1)
           const res2 = await fetcher(`${url}&page=${lastPage}`)

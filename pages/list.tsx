@@ -18,7 +18,7 @@ interface Props {
   items: LibraryInfo[]
 }
 
-const LinkTo = ({ href }: { href?: string }) =>
+const LinkTo = ({ href }: { href?: string | null }) =>
   href ? <Link href={href}>Link</Link> : <span />
 
 const Page: NextPage<Props> = ({ items }) => (
