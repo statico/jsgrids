@@ -1,10 +1,9 @@
-import GithubCorner from "react-github-corner"
-import { Link, Box, SimpleGrid, Heading, Stack } from "@chakra-ui/react"
+import { Box, Heading, Link, SimpleGrid, Stack } from "@chakra-ui/react"
 import Card from "components/Card"
 import FilterBar from "components/FilterBar"
 import { getLibraries, LibraryInfo } from "lib/libraries"
 import { GetStaticProps, NextPage } from "next"
-import Head from "next/head"
+import GithubCorner from "react-github-corner"
 
 interface Props {
   items: LibraryInfo[]
@@ -12,12 +11,6 @@ interface Props {
 
 const Page: NextPage<Props> = ({ items }) => (
   <>
-    <Head>
-      <title>
-        jsgrids | Spreadsheets and Data Grid Libraries for JavaScript
-      </title>
-    </Head>
-
     <Box
       as="header"
       color="white"

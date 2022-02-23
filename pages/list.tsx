@@ -1,7 +1,3 @@
-import { GetStaticProps, NextPage } from "next"
-import React from "react"
-import Head from "next/head"
-import { getLibraries, LibraryInfo } from "../lib/libraries"
 import {
   Container,
   Heading,
@@ -13,6 +9,10 @@ import {
   Thead,
   Tr,
 } from "@chakra-ui/react"
+import { GetStaticProps, NextPage } from "next"
+import { NextSeo } from "next-seo"
+import React from "react"
+import { getLibraries, LibraryInfo } from "../lib/libraries"
 
 interface Props {
   items: LibraryInfo[]
@@ -23,10 +23,7 @@ const LinkTo = ({ href }: { href?: string }) =>
 
 const Page: NextPage<Props> = ({ items }) => (
   <Container maxW="full">
-    <Head>
-      <title>Library List</title>
-      <meta name="robots" content="noindex, nofollow" />
-    </Head>
+    <NextSeo title="All Libraries" />
     <Heading>All Libraries</Heading>
     <Table size="sm">
       <Thead>
