@@ -1,0 +1,44 @@
+title: Glide Data Grid
+homeUrl: https://grid.glideapps.com/
+demoUrl: https://glideapps.github.io/glide-data-grid/?path=/story/glide-data-grid-dataeditor-demos--add-data
+githubRepo: glideapps/glide-data-grid
+npmPackage: "@glideapps/glide-data-grid"
+license: MIT
+revenueModel: Free
+description: >
+  Glide Data Grid is a no compromise, outrageously fast data grid for your React project, with rich rendering and TypeScript support.
+frameworks:
+  vanilla: false
+  react: true
+  angular: false
+  vue: false
+features:
+  accessible: true
+  copyPaste: true
+  csvExport: false
+  customEditors: true
+  customFormatters: true
+  draggableRows: true
+  editable: true
+  fillDown: true
+  fillRight: true
+  filtering: false
+  formulas: false
+  freezableCols: true
+  headless: false
+  i18n: Internationalization is up to you.
+  maintained: true
+  openSource: true
+  pagination: false
+  pdfExport: false
+  pivots: true
+  rangeSelection: true
+  resizableCols: true
+  responsive: false
+  rowGrouping: false
+  rowSelection: true
+  serverSide: false
+  sorting: true
+  trees: false
+  xlsxExport: false
+  virtualization: true
