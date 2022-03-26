@@ -37,7 +37,7 @@ features:
   responsive: false
   rowGrouping: false
   rowSelection: true
-  serverSide: false
+  serverSide: Support lazy load of rows
   sorting: true
   trees: false
   xlsxExport: false
