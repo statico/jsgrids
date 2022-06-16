@@ -7,7 +7,7 @@ import {
   MenuList,
   Text,
 } from "@chakra-ui/react"
-import React from "react"
+import React, { ReactNode } from "react"
 import { GoCheck, GoChevronDown } from "react-icons/go"
 
 interface Option {
@@ -18,12 +18,21 @@ interface Option {
 
 const BlankIcon = () => <Box boxSize="1em" />
 
-export const SingleItemPicker: React.FC<{
+interface Props {
+  children: ReactNode
   selected: string | null
   options: Option[]
   allowNull?: boolean
   onChange: (newValue: any) => void
-}> = ({ children, selected, options, onChange, allowNull = true }) => {
+}
+
+export const SingleItemPicker = ({
+  children,
+  selected,
+  options,
+  onChange,
+  allowNull = true,
+}: Props) => {
   return (
     <Menu>
       <MenuButton as={Button} rightIcon={<GoChevronDown />} fontWeight="normal">

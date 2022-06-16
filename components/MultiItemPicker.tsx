@@ -9,7 +9,7 @@ import {
   Text,
   Tooltip,
 } from "@chakra-ui/react"
-import React from "react"
+import React, { ReactNode } from "react"
 import { GoChevronDown } from "react-icons/go"
 
 interface Option {
@@ -18,11 +18,19 @@ interface Option {
   description: string
 }
 
-export const MultiItemPicker: React.FC<{
+interface Props {
+  children: ReactNode
   selected: Set<string>
   options: Option[]
   onChange: (newValue: any) => void
-}> = ({ children, selected, options, onChange }) => (
+}
+
+export const MultiItemPicker = ({
+  children,
+  selected,
+  options,
+  onChange,
+}: Props) => (
   <Menu>
     <MenuButton as={Button} rightIcon={<GoChevronDown />} fontWeight="normal">
       {children}
