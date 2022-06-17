@@ -46,7 +46,7 @@ class MyDocument extends Document {
           <meta name="twitter:image" content={image.url} />
         </Head>
         <body>
-          <ColorModeScript initialColorMode={theme.config.initialColorMode} />
+          <ColorModeScript />
           <Main />
           <NextScript />
         </body>
