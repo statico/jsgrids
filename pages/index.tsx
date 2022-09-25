@@ -16,6 +16,11 @@ const Page: NextPage<Props> = ({ items }) => (
       <title>
         jsgrids - Spreadsheets and data grid libraries for JavaScript
       </title>
+      <script
+        src="https://s.langworth.com/script.js"
+        data-token="575bca33"
+        defer
+      ></script>
     </Head>
 
     <Box
