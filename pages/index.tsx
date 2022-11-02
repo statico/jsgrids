@@ -4,6 +4,7 @@ import FilterBar from "components/FilterBar";
 import { getLibraries, LibraryInfo } from "lib/libraries";
 import { GetStaticProps, NextPage } from "next";
 import Head from "next/head";
+import Script from "next/script";
 import GithubCorner from "react-github-corner";
 
 interface Props {
@@ -16,11 +17,11 @@ const Page: NextPage<Props> = ({ items }) => (
       <title>
         jsgrids - Spreadsheets and data grid libraries for JavaScript
       </title>
-      <script
+      <Script
         src="https://s.langworth.com/script.js"
         data-token="575bca33"
         defer
-      ></script>
+      ></Script>
     </Head>
 
     <Box
