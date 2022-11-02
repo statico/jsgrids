@@ -1,19 +1,19 @@
-import { ColorModeScript } from "@chakra-ui/react"
-import theme from "lib/theme"
-import Document, { Head, Html, Main, NextScript } from "next/document"
-import * as React from "react"
+import { ColorModeScript } from "@chakra-ui/react";
+import theme from "lib/theme";
+import Document, { Head, Html, Main, NextScript } from "next/document";
+import * as React from "react";
 
-const name = "jsgrids"
-const title = "jsgrids - Spreadsheet and data grid libraries for JavaScript"
+const name = "jsgrids";
+const title = "jsgrids - Spreadsheet and data grid libraries for JavaScript";
 const description =
-  "A searchable list of popular spreadsheets and data grid libraries for JavaScript with framework (React, Vue, Angular, Ember, jQuery, Vanilla JS), popularity, and feature information."
-const url = "https://jsgrids.statico.io"
+  "A searchable list of popular spreadsheets and data grid libraries for JavaScript with framework (React, Vue, Angular, Ember, jQuery, Vanilla JS), popularity, and feature information.";
+const url = "https://jsgrids.statico.io";
 const image = {
   url: url + "/jsgrids.png",
   width: "1200",
   height: "630",
   alt: "Screenshot of jsgrids",
-}
+};
 
 class MyDocument extends Document {
   render() {
@@ -51,8 +51,8 @@ class MyDocument extends Document {
           <NextScript />
         </body>
       </Html>
-    )
+    );
   }
 }
 
-export default MyDocument
+export default MyDocument;

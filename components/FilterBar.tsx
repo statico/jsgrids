@@ -1,17 +1,21 @@
-import { Button, chakra, HStack, Text, Tooltip } from "@chakra-ui/react"
-import MultiItemPicker from "components/MultiItemPicker"
-import SingleItemPicker from "components/SingleItemPicker"
-import { FeatureName, FeatureNames, Features } from "lib/features"
-import { FrameworkIcons, FrameworkNames, FrameworkTitles } from "lib/frameworks"
-import { FrameworkName, LibraryInfo } from "lib/libraries"
-import { hasAllKeys, SortOptionKey, SortOptions } from "lib/sorting"
-import { useState } from "react"
+import { Button, chakra, HStack, Text, Tooltip } from "@chakra-ui/react";
+import MultiItemPicker from "components/MultiItemPicker";
+import SingleItemPicker from "components/SingleItemPicker";
+import { FeatureName, FeatureNames, Features } from "lib/features";
+import {
+  FrameworkIcons,
+  FrameworkNames,
+  FrameworkTitles,
+} from "lib/frameworks";
+import { FrameworkName, LibraryInfo } from "lib/libraries";
+import { hasAllKeys, SortOptionKey, SortOptions } from "lib/sorting";
+import { useState } from "react";
 
 interface FilterState {
-  sort: SortOptionKey
-  framework: FrameworkName | null
-  features: Set<FeatureName>
-  license: string | null
+  sort: SortOptionKey;
+  framework: FrameworkName | null;
+  features: Set<FeatureName>;
+  license: string | null;
 }
 
 const ResponsiveText = ({ short, long }: { short: string; long: string }) => (
@@ -19,21 +23,21 @@ const ResponsiveText = ({ short, long }: { short: string; long: string }) => (
     <Text display={["inline", null, null, "none"]}>{short}</Text>
     <Text display={["none", null, null, "inline"]}>{long}</Text>
   </>
-)
+);
 
 const FrameworkSelector: React.FC<{
-  selected: FrameworkName | null
-  onChange: (newSelected: FrameworkName | null) => void
+  selected: FrameworkName | null;
+  onChange: (newSelected: FrameworkName | null) => void;
 }> = ({ selected, onChange }) => {
   const handleToggle = (name: FrameworkName) => () => {
-    onChange(selected === name ? null : name)
-  }
+    onChange(selected === name ? null : name);
+  };
   return (
     <HStack spacing={1}>
       <ResponsiveText short="Show:" long="Frameworks:" />
       {FrameworkNames.map((name) => {
-        const Icon = FrameworkIcons[name]
-        const title = FrameworkTitles[name]
+        const Icon = FrameworkIcons[name];
+        const title = FrameworkTitles[name];
         return (
           <Tooltip key={name} title={title}>
             <Button
@@ -46,15 +50,15 @@ const FrameworkSelector: React.FC<{
               <Icon style={{ width: 32, height: 32 }} />
             </Button>
           </Tooltip>
-        )
+        );
       })}
     </HStack>
-  )
-}
+  );
+};
 
 const FeaturesSelector: React.FC<{
-  selected: Set<FeatureName>
-  onChange: (newSelected: Set<FeatureName>) => void
+  selected: Set<FeatureName>;
+  onChange: (newSelected: Set<FeatureName>) => void;
 }> = ({ selected, onChange }) => {
   return (
     <MultiItemPicker
@@ -71,13 +75,13 @@ const FeaturesSelector: React.FC<{
         long={selected.size ? `${selected.size} Features` : "Any Feature"}
       />
     </MultiItemPicker>
-  )
-}
+  );
+};
 
 const LicenseSelector: React.FC<{
-  licenses: Set<string>
-  selected: string | null
-  onChange: (newSelected: string) => void
+  licenses: Set<string>;
+  selected: string | null;
+  onChange: (newSelected: string) => void;
 }> = ({ licenses, selected, onChange }) => {
   return (
     <SingleItemPicker
@@ -92,14 +96,14 @@ const LicenseSelector: React.FC<{
     >
       <ResponsiveText short="License" long={selected || "Any License"} />
     </SingleItemPicker>
-  )
-}
+  );
+};
 
 const SortSelector: React.FC<{
-  selected: SortOptionKey
-  onChange: (newSelected: SortOptionKey) => void
+  selected: SortOptionKey;
+  onChange: (newSelected: SortOptionKey) => void;
 }> = ({ selected, onChange }) => {
-  const selectedOption = SortOptions.find((s) => s.key === selected)
+  const selectedOption = SortOptions.find((s) => s.key === selected);
   return (
     <SingleItemPicker
       selected={selected}
@@ -109,15 +113,15 @@ const SortSelector: React.FC<{
     >
       <ResponsiveText short="Sort" long={`Sort by ${selectedOption?.title}`} />
     </SingleItemPicker>
-  )
-}
+  );
+};
 
 interface FilteredItemsProps {
-  items: LibraryInfo[]
+  items: LibraryInfo[];
   children: (
     filteredItems: LibraryInfo[],
     filterBar: React.ReactNode
-  ) => React.ReactNode
+  ) => React.ReactNode;
 }
 
 const FilterBar: React.FC<FilteredItemsProps> = ({ items, children }) => {
@@ -126,26 +130,26 @@ const FilterBar: React.FC<FilteredItemsProps> = ({ items, children }) => {
     framework: null,
     features: new Set(),
     license: null,
-  })
+  });
 
-  let clone = items.slice() // Shallow copy
+  let clone = items.slice(); // Shallow copy
 
-  const sortOption = SortOptions.find((s) => s.key === filters.sort)
+  const sortOption = SortOptions.find((s) => s.key === filters.sort);
   if (!sortOption) {
-    throw new Error(`Unknown sort option ${filters.sort}`)
+    throw new Error(`Unknown sort option ${filters.sort}`);
   }
-  clone.sort(sortOption.fn)
+  clone.sort(sortOption.fn);
 
   if (filters.framework) {
     clone = clone.filter(
       (item) => filters.framework && item.frameworks[filters.framework]
-    )
+    );
   }
   if (filters.features.size) {
-    clone = clone.filter((item) => hasAllKeys(item.features, filters.features))
+    clone = clone.filter((item) => hasAllKeys(item.features, filters.features));
   }
   if (filters.license) {
-    clone = clone.filter((item) => item.license === filters.license)
+    clone = clone.filter((item) => item.license === filters.license);
   }
 
   const filterBar = (
@@ -161,7 +165,7 @@ const FilterBar: React.FC<FilteredItemsProps> = ({ items, children }) => {
       <FrameworkSelector
         selected={filters.framework}
         onChange={(framework) => {
-          setFilters({ ...filters, framework })
+          setFilters({ ...filters, framework });
         }}
       />
       <chakra.div
@@ -172,27 +176,27 @@ const FilterBar: React.FC<FilteredItemsProps> = ({ items, children }) => {
       <FeaturesSelector
         selected={filters.features}
         onChange={(features) => {
-          setFilters({ ...filters, features })
+          setFilters({ ...filters, features });
         }}
       />
       <LicenseSelector
         licenses={new Set<string>(items.map((i: any) => i.license))}
         selected={filters.license}
         onChange={(license) => {
-          setFilters({ ...filters, license })
+          setFilters({ ...filters, license });
         }}
       />
       <SortSelector
         selected={filters.sort}
         onChange={(sort) => {
-          setFilters({ ...filters, sort })
+          setFilters({ ...filters, sort });
         }}
       />
       <Text display={["none", null, "inline"]}>{clone.length} results</Text>
     </HStack>
-  )
+  );
 
-  return <>{children(clone, filterBar)}</>
-}
+  return <>{children(clone, filterBar)}</>;
+};
 
-export default FilterBar
+export default FilterBar;

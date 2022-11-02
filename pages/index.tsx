@@ -1,13 +1,13 @@
-import { Box, Heading, Link, SimpleGrid, Stack } from "@chakra-ui/react"
-import Card from "components/Card"
-import FilterBar from "components/FilterBar"
-import { getLibraries, LibraryInfo } from "lib/libraries"
-import { GetStaticProps, NextPage } from "next"
-import Head from "next/head"
-import GithubCorner from "react-github-corner"
+import { Box, Heading, Link, SimpleGrid, Stack } from "@chakra-ui/react";
+import Card from "components/Card";
+import FilterBar from "components/FilterBar";
+import { getLibraries, LibraryInfo } from "lib/libraries";
+import { GetStaticProps, NextPage } from "next";
+import Head from "next/head";
+import GithubCorner from "react-github-corner";
 
 interface Props {
-  items: LibraryInfo[]
+  items: LibraryInfo[];
 }
 
 const Page: NextPage<Props> = ({ items }) => (
@@ -75,10 +75,10 @@ const Page: NextPage<Props> = ({ items }) => (
       <Link href="/list">View data as table</Link>
     </Stack>
   </>
-)
+);
 
-export default Page
+export default Page;
 
 export const getStaticProps: GetStaticProps = async () => {
-  return { props: { items: await getLibraries() } }
-}
+  return { props: { items: await getLibraries() } };
+};

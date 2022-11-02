@@ -8,21 +8,21 @@ import {
   Stack,
   Text,
   Tooltip,
-} from "@chakra-ui/react"
-import React, { ReactNode } from "react"
-import { GoChevronDown } from "react-icons/go"
+} from "@chakra-ui/react";
+import React, { ReactNode } from "react";
+import { GoChevronDown } from "react-icons/go";
 
 interface Option {
-  key: string
-  title: string
-  description: string
+  key: string;
+  title: string;
+  description: string;
 }
 
 interface Props {
-  children: ReactNode
-  selected: Set<string>
-  options: Option[]
-  onChange: (newValue: any) => void
+  children: ReactNode;
+  selected: Set<string>;
+  options: Option[];
+  onChange: (newValue: any) => void;
 }
 
 export const MultiItemPicker = ({
@@ -44,13 +44,13 @@ export const MultiItemPicker = ({
               <Checkbox
                 checked={selected.has(key)}
                 onChange={(event) => {
-                  const newValue = new Set(selected)
+                  const newValue = new Set(selected);
                   if (event.target.checked) {
-                    newValue.add(key)
+                    newValue.add(key);
                   } else {
-                    newValue.delete(key)
+                    newValue.delete(key);
                   }
-                  onChange(newValue)
+                  onChange(newValue);
                 }}
               >
                 {title}
@@ -61,7 +61,7 @@ export const MultiItemPicker = ({
         <Button
           disabled={selected.size === 0}
           onClick={() => {
-            onChange(new Set())
+            onChange(new Set());
           }}
         >
           Reset
@@ -69,6 +69,6 @@ export const MultiItemPicker = ({
       </Stack>
     </MenuList>
   </Menu>
-)
+);
 
-export default MultiItemPicker
+export default MultiItemPicker;

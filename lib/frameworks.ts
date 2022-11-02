@@ -1,7 +1,7 @@
-import { DiJqueryLogo } from "react-icons/di"
-import { FaAngular, FaReact, FaVuejs, FaEmber } from "react-icons/fa"
-import { IoLogoJavascript } from "react-icons/io"
-import { FrameworkName } from "./libraries"
+import { DiJqueryLogo } from "react-icons/di";
+import { FaAngular, FaReact, FaVuejs, FaEmber } from "react-icons/fa";
+import { IoLogoJavascript } from "react-icons/io";
+import { FrameworkName } from "./libraries";
 
 // An ordered set of all framework names.
 export const FrameworkNames: FrameworkName[] = [
@@ -11,7 +11,7 @@ export const FrameworkNames: FrameworkName[] = [
   "ember",
   "jquery",
   "vanilla",
-]
+];
 
 export const FrameworkTitles = {
   react: "React",
@@ -20,7 +20,7 @@ export const FrameworkTitles = {
   ember: "Ember.js",
   jquery: "jQuery",
   vanilla: "Vanilla JavaScript (no framework)",
-}
+};
 
 export const FrameworkIcons = {
   react: FaReact,
@@ -29,4 +29,4 @@ export const FrameworkIcons = {
   ember: FaEmber,
   jquery: DiJqueryLogo,
   vanilla: IoLogoJavascript,
-}
+};

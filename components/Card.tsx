@@ -11,51 +11,51 @@ import {
   Text,
   Tooltip,
   useColorModeValue,
-} from "@chakra-ui/react"
-import { fileSize } from "humanize-plus"
-import { FeatureName, Features } from "lib/features"
-import { FrameworkIcons, FrameworkTitles } from "lib/frameworks"
-import { FrameworkName, LibraryInfo } from "lib/libraries"
-import { sortedFeatureNames } from "lib/sorting"
-import { JSXElementConstructor } from "react"
+} from "@chakra-ui/react";
+import { fileSize } from "humanize-plus";
+import { FeatureName, Features } from "lib/features";
+import { FrameworkIcons, FrameworkTitles } from "lib/frameworks";
+import { FrameworkName, LibraryInfo } from "lib/libraries";
+import { sortedFeatureNames } from "lib/sorting";
+import { JSXElementConstructor } from "react";
 import {
   FaCheckCircle,
   FaDollarSign,
   FaInfoCircle,
   FaTimesCircle,
   FaUsers,
-} from "react-icons/fa"
+} from "react-icons/fa";
 import {
   GoIssueOpened,
   GoLaw,
   GoPackage,
   GoRepoForked,
   GoStar,
-} from "react-icons/go"
-import { IoMdDownload } from "react-icons/io"
+} from "react-icons/go";
+import { IoMdDownload } from "react-icons/io";
 
 const ColoredIcon = ({
   icon: Icon,
   color,
 }: {
-  icon: JSXElementConstructor<any>
-  color: string
+  icon: JSXElementConstructor<any>;
+  color: string;
 }) => (
   <Text color={color}>
     <Icon />
   </Text>
-)
+);
 
-const useCardBackgroundColor = () => useColorModeValue("white", "gray.700")
+const useCardBackgroundColor = () => useColorModeValue("white", "gray.700");
 
 const Feature: React.FC<{
-  name: FeatureName
-  value: boolean | string | null
+  name: FeatureName;
+  value: boolean | string | null;
 }> = ({ name, value }) => {
   if (!Features[name]) {
-    throw new Error(`Unknown feature name: ${name}`)
+    throw new Error(`Unknown feature name: ${name}`);
   }
-  const { title, description, important } = Features[name]
+  const { title, description, important } = Features[name];
   if (value) {
     return (
       <Tooltip label={typeof value === "string" ? value : description}>
@@ -68,7 +68,7 @@ const Feature: React.FC<{
           <Text>{title}</Text>
         </HStack>
       </Tooltip>
-    )
+    );
   } else if (!value && important) {
     return (
       <Tooltip label={typeof value === "string" ? value : description}>
@@ -77,25 +77,25 @@ const Feature: React.FC<{
           <Text>{`Not ${title}`}</Text>
         </HStack>
       </Tooltip>
-    )
+    );
   } else {
-    return null
+    return null;
   }
-}
+};
 
 const FrameworkList: React.FC<{ info: LibraryInfo }> = ({ info }) => {
-  const bg = useCardBackgroundColor()
-  const names = Object.keys(info.frameworks) as FrameworkName[]
+  const bg = useCardBackgroundColor();
+  const names = Object.keys(info.frameworks) as FrameworkName[];
   return (
     <Flex fontSize="2xl">
       {names.map((name) => {
-        const value = info.frameworks[name]
-        const isThirdParty = typeof value === "string"
-        const url = isThirdParty ? value : info.homeUrl
+        const value = info.frameworks[name];
+        const isThirdParty = typeof value === "string";
+        const url = isThirdParty ? value : info.homeUrl;
         const title = isThirdParty
           ? `Go to the separate solution for ${FrameworkTitles[name]}`
-          : `Built-in support for ${FrameworkTitles[name]}`
-        const Icon = FrameworkIcons[name]
+          : `Built-in support for ${FrameworkTitles[name]}`;
+        const Icon = FrameworkIcons[name];
         return (
           <Tooltip label={title} key={name}>
             <Link
@@ -120,18 +120,18 @@ const FrameworkList: React.FC<{ info: LibraryInfo }> = ({ info }) => {
               )}
             </Link>
           </Tooltip>
-        )
+        );
       })}
     </Flex>
-  )
-}
+  );
+};
 
 const Metric: React.FC<{
-  icon: React.ReactNode
-  title: string
-  value?: any
-  formatter?: (value: any) => string
-  href?: string
+  icon: React.ReactNode;
+  title: string;
+  value?: any;
+  formatter?: (value: any) => string;
+  href?: string;
 }> = ({
   icon,
   title,
@@ -139,30 +139,30 @@ const Metric: React.FC<{
   formatter = (x) => Number(x).toLocaleString(),
   href,
 }) => {
-  const formattedValue = value === undefined ? "n/a" : formatter(value)
+  const formattedValue = value === undefined ? "n/a" : formatter(value);
   const formattedTitle = title.replace(
     "%s",
     value === undefined ? "unknown" : formattedValue
-  )
+  );
   const contents = (
     <HStack cursor="pointer" _hover={{ opacity: 0.75 }}>
       <Text>{icon}</Text>
       <Text>{formattedValue}</Text>
     </HStack>
-  )
+  );
   return value ? (
     <Tooltip label={formattedTitle}>
       <Link href={href}>{contents}</Link>
     </Tooltip>
   ) : (
     <Tooltip label={formattedTitle}>{contents}</Tooltip>
-  )
-}
+  );
+};
 
 const Card: React.FC<{ info: LibraryInfo }> = ({ info }) => {
-  const bg = useCardBackgroundColor()
-  const id = `card-${info.id}`
-  const gh = info.github
+  const bg = useCardBackgroundColor();
+  const id = `card-${info.id}`;
+  const gh = info.github;
   return (
     <Stack
       as="section"
@@ -270,7 +270,7 @@ const Card: React.FC<{ info: LibraryInfo }> = ({ info }) => {
         </HStack>
       </Flex>
     </Stack>
-  )
-}
+  );
+};
 
-export default Card
+export default Card;

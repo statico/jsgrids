@@ -6,24 +6,24 @@ import {
   MenuItem,
   MenuList,
   Text,
-} from "@chakra-ui/react"
-import React, { ReactNode } from "react"
-import { GoCheck, GoChevronDown } from "react-icons/go"
+} from "@chakra-ui/react";
+import React, { ReactNode } from "react";
+import { GoCheck, GoChevronDown } from "react-icons/go";
 
 interface Option {
-  key: string
-  title: string
-  description?: string
+  key: string;
+  title: string;
+  description?: string;
 }
 
-const BlankIcon = () => <Box boxSize="1em" />
+const BlankIcon = () => <Box boxSize="1em" />;
 
 interface Props {
-  children: ReactNode
-  selected: string | null
-  options: Option[]
-  allowNull?: boolean
-  onChange: (newValue: any) => void
+  children: ReactNode;
+  selected: string | null;
+  options: Option[];
+  allowNull?: boolean;
+  onChange: (newValue: any) => void;
 }
 
 export const SingleItemPicker = ({
@@ -44,7 +44,7 @@ export const SingleItemPicker = ({
             icon={!selected ? <GoCheck /> : <BlankIcon />}
             aria-selected={!selected}
             onClick={() => {
-              onChange(null)
+              onChange(null);
             }}
           >
             Any
@@ -56,7 +56,7 @@ export const SingleItemPicker = ({
             icon={selected === key ? <GoCheck /> : <BlankIcon />}
             aria-selected={selected === key}
             onClick={() => {
-              onChange(key)
+              onChange(key);
             }}
           >
             {title}
@@ -65,7 +65,7 @@ export const SingleItemPicker = ({
         ))}
       </MenuList>
     </Menu>
-  )
-}
+  );
+};
 
-export default SingleItemPicker
+export default SingleItemPicker;

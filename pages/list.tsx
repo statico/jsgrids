@@ -8,16 +8,16 @@ import {
   Th,
   Thead,
   Tr,
-} from "@chakra-ui/react"
-import { getLibraries, LibraryInfo } from "lib/libraries"
-import { GetStaticProps, NextPage } from "next"
+} from "@chakra-ui/react";
+import { getLibraries, LibraryInfo } from "lib/libraries";
+import { GetStaticProps, NextPage } from "next";
 
 interface Props {
-  items: LibraryInfo[]
+  items: LibraryInfo[];
 }
 
 const LinkTo = ({ href }: { href?: string | null }) =>
-  href ? <Link href={href}>Link</Link> : <span />
+  href ? <Link href={href}>Link</Link> : <span />;
 
 const Page: NextPage<Props> = ({ items }) => (
   <Container maxW="full">
@@ -59,10 +59,10 @@ const Page: NextPage<Props> = ({ items }) => (
       </Tbody>
     </Table>
   </Container>
-)
+);
 
-export default Page
+export default Page;
 
 export const getStaticProps: GetStaticProps = async () => {
-  return { props: { items: await getLibraries() } }
-}
+  return { props: { items: await getLibraries() } };
+};

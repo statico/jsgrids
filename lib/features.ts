@@ -168,9 +168,9 @@ export const Features = {
       "Uses a technique to greatly reduce DOM elements and increase performance.",
     important: false,
   },
-} as const
+} as const;
 
-export type FeatureName = keyof typeof Features
+export type FeatureName = keyof typeof Features;
 
-export const FeatureNames = Object.keys(Features) as FeatureName[]
-FeatureNames.sort()
+export const FeatureNames = Object.keys(Features) as FeatureName[];
+FeatureNames.sort();
