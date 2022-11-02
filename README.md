@@ -13,9 +13,9 @@ Pull requests are welcome to help keep this project up to date. Please make sure
 ## Development
 
 1. Create a [GitHub Personal Access Token](https://github.com/settings/tokens). You don't need to give it any scopes -- it's just to increase the API rate limit.
-1. Make sure you have [Node.js](https://nodejs.org/) version 12.0 or later and the [Yarn package manager](https://yarnpkg.com/) installed.
-1. Checkout the repo, run `yarn install`
-1. Run `GITHUB_TOKEN=<your token here> yarn dev`
+1. Make sure you have [Node.js](https://nodejs.org/) version 12.0 or later and the [pnpm package manager](https://pnpm.io/) installed.
+1. Checkout the repo, run `pnpm install`
+1. Run `GITHUB_TOKEN=<your token here> pnpm dev`
 1. Go to http://localhost:3000/ and bask in the wild splendor that is jsgrids
 
 Information on each library is in `data/` and is parsed in `lib/libraries.ts`. Enjoy!
