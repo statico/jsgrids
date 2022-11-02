@@ -136,7 +136,6 @@ export const getLibraries = async (): Promise<LibraryInfo[]> => {
           throw new Error(`GitHub repo ${item.githubRepo} error: ${repo.error}`)
         }
         if (repo.full_name !== item.githubRepo) {
-          console.log("XXX", repo)
           throw new Error(
             `GitHub repo ${item.githubRepo} has moved to ${repo.full_name}`
           )
