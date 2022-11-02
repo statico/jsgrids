@@ -3,6 +3,8 @@ lockfileVersion: 5.4
 specifiers:
   "@babel/core": ^7.19.6
   "@chakra-ui/react": ^2.3.6
+  "@chakra-ui/styled-system": ^2.3.4
+  "@chakra-ui/theme-tools": ^2.0.12
   "@emotion/react": ^11
   "@emotion/styled": ^11
   "@types/debug": ^4.1.7
@@ -30,6 +32,8 @@ specifiers:
 dependencies:
   "@babel/core": 7.19.6
   "@chakra-ui/react": 2.3.6_jv7ytp3eoicvwawlynwdu2nyd4
+  "@chakra-ui/styled-system": 2.3.4
+  "@chakra-ui/theme-tools": 2.0.12_kzevwk2hxgy6fnrjqv25jdmqp4
   "@emotion/react": 11.10.5_5ihuxrpe4zse4p4tf6ubxcyzuu
   "@emotion/styled": 11.10.5_z7x6wqqd37fzu777gq3gq2bxru
   cross-fetch: 3.1.5
