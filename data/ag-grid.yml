@@ -39,7 +39,7 @@ features:
   responsive: false
   rowGrouping: true
   rowSelection: true
-  serverSide: true
+  serverSide: Premium feature
   sorting: true
   trees: true
   xlsxExport: true
