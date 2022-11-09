@@ -62,7 +62,7 @@ const Feature: React.FC<{
         <HStack spacing={1} cursor="help" _hover={{ opacity: 0.75 }}>
           {value === true ? (
             <ColoredIcon icon={FaCheckCircle} color="green.400" />
-          ) : value.toLowerCase().includes("premium") ? (
+          ) : /premium/i.test(value) ? (
             <ColoredIcon icon={FaDollarSign} color="gray.400" />
           ) : (
             <ColoredIcon icon={FaInfoCircle} color="orange.300" />
