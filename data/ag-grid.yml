@@ -16,16 +16,16 @@ frameworks:
   vue: true
 features:
   accessible: true
-  copyPaste: true
-  csvExport: true
+  copyPaste: Premium feature
+  csvExport: Premium feature
   customEditors: true
   customFormatters: true
   draggableRows: true
   editable: true
-  fillDown: true
-  fillRight: true
-  filtering: true
-  formulas: false
+  fillDown: Premium feature
+  fillRight: Premium feature
+  filtering: Set filtering is premium, the rest is free
+  formulas: Premium feature
   freezableCols: true
   headless: false
   i18n: true
@@ -33,14 +33,14 @@ features:
   openSource: true
   pagination: true
   pdfExport: false
-  pivots: true
-  rangeSelection: true
+  pivots: Premium feature
+  rangeSelection: Premium feature
   resizableCols: true
   responsive: false
-  rowGrouping: true
+  rowGrouping: Premium feature
   rowSelection: true
   serverSide: Premium feature
-  sorting: true
-  trees: true
+  sorting: Premium feature
+  trees: Premium feature
   xlsxExport: true
   virtualization: true
