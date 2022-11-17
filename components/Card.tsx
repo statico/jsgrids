@@ -63,7 +63,7 @@ const Feature: React.FC<{
           {value === true ? (
             <ColoredIcon icon={FaCheckCircle} color="green.400" />
           ) : /premium/i.test(value) ? (
-            <ColoredIcon icon={FaDollarSign} color="gray.400" />
+            <ColoredIcon icon={FaDollarSign} color="blue.400" />
           ) : (
             <ColoredIcon icon={FaInfoCircle} color="orange.300" />
           )}
