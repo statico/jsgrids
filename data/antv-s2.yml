@@ -1,0 +1,44 @@
+title: AntV S2
+homeUrl: https://s2.antv.antgroup.com/
+demoUrl: https://s2.antv.antgroup.com/examples/
+githubRepo: antvis/S2
+npmPackage: "@antv/s2"
+license: MIT
+revenueModel: Free for Personal Use
+description: >
+  ⚡️ A practical visualization library for tabular analysis.
+frameworks:
+  vanilla: true
+  react: true
+  angular: false
+  vue: true
+features:
+  accessible: true
+  copyPaste: true
+  csvExport: true
+  customEditors: true
+  customFormatters: true
+  draggableRows: false
+  editable: true
+  fillDown: false
+  fillRight: false
+  filtering: true
+  formulas: false
+  freezableCols: true
+  headless: true
+  i18n: true
+  maintained: true
+  openSource: true
+  pagination: true
+  pdfExport: false
+  pivots: true
+  rangeSelection: true
+  resizableCols: true
+  responsive: true
+  rowGrouping: true
+  rowSelection: true
+  serverSide: false
+  sorting: true
+  trees: true
+  xlsxExport: false
+  virtualization: true
