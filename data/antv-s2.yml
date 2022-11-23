@@ -4,13 +4,12 @@ demoUrl: https://s2.antv.antgroup.com/examples/
 githubRepo: antvis/S2
 npmPackage: "@antv/s2"
 license: MIT
-revenueModel: Free for Personal Use
+revenueModel: Free
 description: >
-  ⚡️ A practical visualization library for tabular analysis.
+  ⚡️ A practical visualization library for tabular analysis with support for up to millions of data.
 frameworks:
   vanilla: true
   react: true
-  angular: false
   vue: true
 features:
   accessible: true
