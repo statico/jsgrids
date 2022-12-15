@@ -3,7 +3,7 @@ homeUrl: https://s2.antv.antgroup.com/
 demoUrl: https://s2.antv.antgroup.com/examples/
 githubRepo: antvis/S2
 npmPackage: "@antv/s2"
-license: MIT
+license: MIT License
 revenueModel: Free
 description: >
   A practical visualization library for tabular analysis with support for up to millions of data.
