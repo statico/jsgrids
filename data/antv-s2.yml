@@ -6,7 +6,7 @@ npmPackage: "@antv/s2"
 license: MIT
 revenueModel: Free
 description: >
-  ⚡️ A practical visualization library for tabular analysis with support for up to millions of data.
+  A practical visualization library for tabular analysis with support for up to millions of data.
 frameworks:
   vanilla: true
   react: true
