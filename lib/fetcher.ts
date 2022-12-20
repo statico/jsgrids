@@ -1,6 +1,7 @@
-import debug from "debug";
-import pThrottle from "p-throttle";
 import fetch from "cross-fetch";
+import debug from "debug";
+import pRetry from "p-retry";
+import pThrottle from "p-throttle";
 import * as cache from "./cache";
 
 const log = debug("fetcher");
@@ -37,7 +38,7 @@ const throttledFetch = throttler(async (url: string) => {
       headers["X-Bundlephobia-User"] = ua;
     }
 
-    const res = await fetch(url, { headers });
+    const res = await pRetry(() => fetch(url, { headers }));
     const data = await res.json();
     return { headers: JSON.parse(JSON.stringify(res.headers)), data };
   } catch (err: any) {
