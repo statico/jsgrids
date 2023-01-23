@@ -38,7 +38,17 @@ const throttledFetch = throttler(async (url: string) => {
       headers["X-Bundlephobia-User"] = ua;
     }
 
-    const res = await pRetry(() => fetch(url, { headers }));
+    const res = await pRetry(() => fetch(url, { headers }), {
+      minTimeout: 2000,
+      onFailedAttempt: (err) => {
+        log(
+          "failed %s, attempt number = %d, retries left = %d",
+          url,
+          err.attemptNumber,
+          err.retriesLeft
+        );
+      },
+    });
     const data = await res.json();
     return { headers: JSON.parse(JSON.stringify(res.headers)), data };
   } catch (err: any) {
