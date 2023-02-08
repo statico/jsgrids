@@ -12,6 +12,7 @@ frameworks:
   react: true
   typescript: true
   vue: true
+  svelte: true
 features:
   accessible: Adding these tags is up to you.
   copyPaste: false

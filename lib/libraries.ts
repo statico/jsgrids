@@ -29,6 +29,7 @@ const Frameworks = rt.Record({
   typescript: FrameworkValue,
   react: FrameworkValue,
   vue: FrameworkValue,
+  svelte: FrameworkValue,
   angular: FrameworkValue,
   jquery: FrameworkValue,
   ember: FrameworkValue,

@@ -15,6 +15,7 @@ frameworks:
   react: true
   angular: true
   vue: true
+  svelte: true
 features:
   accessible: true
   copyPaste: Only within the grid. System clipboard not supported.
