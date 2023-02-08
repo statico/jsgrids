@@ -1,4 +1,12 @@
-import { Box, Heading, Link, SimpleGrid, Stack } from "@chakra-ui/react";
+import {
+  Box,
+  Heading,
+  Icon,
+  Link,
+  SimpleGrid,
+  Stack,
+  Text,
+} from "@chakra-ui/react";
 import Card from "components/Card";
 import FilterBar from "components/FilterBar";
 import { getLibraries, LibraryInfo } from "lib/libraries";
@@ -6,12 +14,24 @@ import { GetStaticProps, NextPage } from "next";
 import Head from "next/head";
 import Script from "next/script";
 import GithubCorner from "react-github-corner";
+import { DateTime } from "luxon";
+import { FaExternalLinkAlt } from "react-icons/fa";
 
 interface Props {
   items: LibraryInfo[];
+  ts: string;
 }
 
-const Page: NextPage<Props> = ({ items }) => (
+export const getStaticProps: GetStaticProps = async () => {
+  return {
+    props: {
+      items: await getLibraries(),
+      ts: DateTime.now().toISO(),
+    },
+  };
+};
+
+const Page: NextPage<Props> = ({ items, ts }) => (
   <>
     <Head>
       <title>
@@ -40,12 +60,21 @@ const Page: NextPage<Props> = ({ items }) => (
         bannerColor="#fff"
         octoColor="#3182ce"
       />
-      <Heading as="h1" size="2xl" mb={2}>
-        jsgrids.statico.io
-      </Heading>
-      <Heading as="h2" size="lg" fontWeight="normal">
-        A List of JavaScript Spreadsheets and Data Grid Libraries
-      </Heading>
+      <Stack>
+        <Heading as="h1" size="2xl">
+          jsgrids.statico.io
+        </Heading>
+        <Heading as="h2" size="lg" fontWeight="normal">
+          A List of JavaScript Spreadsheets and Data Grid Libraries
+        </Heading>
+        <Text size="md" fontWeight="normal" suppressHydrationWarning>
+          Last Update: {DateTime.fromISO(ts).toLocaleString(DateTime.DATE_MED)}{" "}
+          -{" "}
+          <Link href="https://github.com/statico/jsgrids#contributing">
+            Contributions welcome! <Icon as={FaExternalLinkAlt} boxSize={3} />
+          </Link>
+        </Text>
+      </Stack>
     </Box>
 
     <FilterBar items={items}>
@@ -79,7 +108,3 @@ const Page: NextPage<Props> = ({ items }) => (
 );
 
 export default Page;
-
-export const getStaticProps: GetStaticProps = async () => {
-  return { props: { items: await getLibraries() } };
-};
