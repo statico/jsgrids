@@ -18,13 +18,13 @@ features:
   csvExport: Premium feature
   customEditors: false
   customFormatters: true
-  draggableRows: Pro feature
+  draggableRows: Premium feature
   editable: true
   fillDown: false
   fillRight: false
   filtering: true
   formulas: false
-  freezableCols: Pro feature
+  freezableCols: Premium feature
   headless: false
   i18n: true
   maintained: true

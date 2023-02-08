@@ -46,6 +46,10 @@ export const sortedFeatureNames = (
       return 1;
     } else if (av === true && bv === true) {
       return a.localeCompare(b);
+    } else if (typeof av === "string" && /premium/i.test(av)) {
+      return 1;
+    } else if (typeof bv === "string" && /premium/i.test(bv)) {
+      return -1;
     } else if (typeof av === "string" && typeof bv === "string") {
       return a.localeCompare(b);
     } else if (av === true) {
