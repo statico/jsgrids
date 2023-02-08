@@ -89,7 +89,7 @@ const FrameworkList: React.FC<{ info: LibraryInfo }> = ({ info }) => {
   const bg = useCardBackgroundColor();
   const names = Object.keys(info.frameworks) as FrameworkName[];
   return (
-    <Flex fontSize="2xl">
+    <HStack fontSize="2xl">
       {names.map((name) => {
         const value = info.frameworks[name];
         const isThirdParty = typeof value === "string";
@@ -108,23 +108,21 @@ const FrameworkList: React.FC<{ info: LibraryInfo }> = ({ info }) => {
               aria-label={title}
             >
               <Icon />
-              {isThirdParty && (
-                <chakra.div
-                  position="absolute"
-                  bottom={0}
-                  right={0}
-                  boxSize={3}
-                  border={`2px solid`}
-                  borderColor={bg}
-                  bg="yellow.500"
-                  borderRadius={999}
-                />
-              )}
+              <chakra.div
+                position="absolute"
+                top={-1}
+                right={-1}
+                boxSize={3}
+                border={`2px solid`}
+                borderColor={bg}
+                bg={isThirdParty ? "yellow.500" : "green.400"}
+                borderRadius={999}
+              />
             </Link>
           </Tooltip>
         );
       })}
-    </Flex>
+    </HStack>
   );
 };
 
