@@ -1,0 +1,43 @@
+title: MUI X Data Grid
+homeUrl: https://mui.com/x/
+demoUrl: https://mui.com/x/react-data-grid/demo/
+githubRepo: mui/mui-x
+npmPackage: "@mui/x-data-grid"
+license: MIT or Commercial License
+revenueModel: Premium Features and Support
+description: >
+  Build complex and data-rich applications using a growing list of advanced
+  React components. We're kicking it off with the most powerful Data Grid on the
+  market.
+frameworks:
+  react: true
+  typescript: true
+features:
+  accessible: true
+  copyPaste: false
+  csvExport: Premium feature
+  customEditors: false
+  customFormatters: true
+  draggableRows: Pro feature
+  editable: true
+  fillDown: false
+  fillRight: false
+  filtering: true
+  formulas: false
+  freezableCols: Pro feature
+  headless: false
+  i18n: true
+  maintained: true
+  openSource: true
+  pagination: true
+  pdfExport: Premium feature
+  pivots: Premium feature
+  rangeSelection: false
+  resizableCols: true
+  responsive: false
+  rowGrouping: Premium feature
+  serverSide: true
+  sorting: true
+  trees: Premium feature
+  xlsxExport: Premium feature
+  virtualization: true
