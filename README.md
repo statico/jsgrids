@@ -1,6 +1,6 @@
 # jsgrids
 
-A List of JavaScript Spreadsheets and Data Grid Libraries - https://jsgrids.statico.io/
+A List of JavaScript Spreadsheet and Data Grid Libraries - https://jsgrids.statico.io/
 
 ## Motivation
 

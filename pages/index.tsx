@@ -35,7 +35,7 @@ const Page: NextPage<Props> = ({ items, ts }) => (
   <>
     <Head>
       <title>
-        jsgrids - Spreadsheets and data grid libraries for JavaScript
+        jsgrids - Spreadsheet and data grid libraries for JavaScript
       </title>
       <Script
         src="https://s.langworth.com/script.js"
@@ -65,7 +65,7 @@ const Page: NextPage<Props> = ({ items, ts }) => (
           jsgrids.statico.io
         </Heading>
         <Heading as="h2" size="lg" fontWeight="normal">
-          A List of JavaScript Spreadsheets and Data Grid Libraries
+          A List of JavaScript Spreadsheet and Data Grid Libraries
         </Heading>
         <Text size="md" fontWeight="normal" suppressHydrationWarning>
           Last Update: {DateTime.fromISO(ts).toLocaleString(DateTime.DATE_MED)}{" "}
