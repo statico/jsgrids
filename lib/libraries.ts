@@ -26,6 +26,7 @@ const FrameworkValue = rt.Optional(URL.Or(rt.Boolean));
 
 const Frameworks = rt.Record({
   vanilla: FrameworkValue,
+  typescript: FrameworkValue,
   react: FrameworkValue,
   vue: FrameworkValue,
   angular: FrameworkValue,

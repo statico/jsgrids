@@ -9,6 +9,7 @@ description: >
   React components for efficiently rendering large lists and tabular data.
 frameworks:
   react: true
+  typescript: https://definitelytyped.github.io/
 features:
   accessible: false
   copyPaste: false

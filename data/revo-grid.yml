@@ -11,6 +11,7 @@ description: >
   Super fast, full of features with advanced customization level.
 frameworks:
   vanilla: true
+  typescript: true
   react: true
   angular: true
   vue: true

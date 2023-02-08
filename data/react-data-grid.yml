@@ -11,6 +11,7 @@ description: >
   Excel features.
 frameworks:
   react: true
+  typescript: true
 features:
   accessible: false
   copyPaste: Only within the grid. System clipboard not supported.

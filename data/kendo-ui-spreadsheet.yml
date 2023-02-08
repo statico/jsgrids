@@ -13,6 +13,7 @@ description: >
   much more.
 frameworks:
   jquery: true
+  typescript: true
 features:
   accessible: true
   copyPaste: true

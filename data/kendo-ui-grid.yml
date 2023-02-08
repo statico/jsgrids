@@ -12,6 +12,7 @@ description: >
   accessibility, globalization and RTL support.
 frameworks:
   jquery: true
+  typescript: true
 features:
   accessible: true
   copyPaste: false

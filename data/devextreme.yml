@@ -11,6 +11,7 @@ description: >
   computations extremely large datasets are never an issue for the DevExtreme Data Grid.
 frameworks:
   vanilla: true
+  typescript: true
   react: https://devexpress.github.io/devextreme-reactive/react/grid/
   angular: true
   vue: true

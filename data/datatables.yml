@@ -12,6 +12,7 @@ frameworks:
   jquery: true
   react: https://www.npmjs.com/package/datatables-react
   angular: https://www.npmjs.com/package/angular-datatables
+  typescript: https://definitelytyped.github.io/
 features:
   accessible: true
   copyPaste: false

@@ -10,6 +10,8 @@ description: >
   fast and extendable datagrids for React.
 frameworks:
   react: true
+  typescript: true
+  vue: true
 features:
   accessible: Adding these tags is up to you.
   copyPaste: false

@@ -11,6 +11,7 @@ description: >
   compatible with other spreadsheet softwares.
 frameworks:
   vanilla: true
+  typescript: https://definitelytyped.github.io/
   react: true
   angular: true
   vue: true

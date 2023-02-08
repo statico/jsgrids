@@ -11,6 +11,7 @@ frameworks:
   angular: true
   react: true
   vanilla: true
+  typescript: true
   vue: true
 features:
   accessible: false

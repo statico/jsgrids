@@ -11,6 +11,7 @@ description: >
   side project to becoming the leading JavaScript datagrid on the market.
 frameworks:
   vanilla: true
+  typescript: true
   react: true
   angular: true
   vue: true

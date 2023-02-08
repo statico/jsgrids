@@ -13,6 +13,7 @@ description: >
 frameworks:
   jquery: true
   angular: https://github.com/ghiscoding/Angular-Slickgrid
+  typescript: https://definitelytyped.github.io/
 features:
   accessible: false
   copyPaste: false

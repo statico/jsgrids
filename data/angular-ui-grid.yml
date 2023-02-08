@@ -12,6 +12,7 @@ description: >
   Plugin architecture allows you to use only the features you need.
 frameworks:
   angular: true
+  typescript: https://definitelytyped.github.io/
 features:
   accessible: true
   copyPaste: false
