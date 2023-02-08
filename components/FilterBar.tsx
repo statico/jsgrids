@@ -1,4 +1,11 @@
-import { Button, chakra, HStack, Text, Tooltip } from "@chakra-ui/react";
+import {
+  BoxProps,
+  Button,
+  chakra,
+  HStack,
+  Text,
+  Tooltip,
+} from "@chakra-ui/react";
 import MultiItemPicker from "components/MultiItemPicker";
 import SingleItemPicker from "components/SingleItemPicker";
 import { FeatureName, FeatureNames, Features } from "lib/features";
@@ -25,15 +32,17 @@ const ResponsiveText = ({ short, long }: { short: string; long: string }) => (
   </>
 );
 
-const FrameworkSelector: React.FC<{
-  selected: FrameworkName | null;
-  onChange: (newSelected: FrameworkName | null) => void;
-}> = ({ selected, onChange }) => {
+const FrameworkSelector: React.FC<
+  {
+    selected: FrameworkName | null;
+    onChange: (newSelected: FrameworkName | null) => void;
+  } & Omit<BoxProps, "onChange">
+> = ({ selected, onChange, ...props }) => {
   const handleToggle = (name: FrameworkName) => () => {
     onChange(selected === name ? null : name);
   };
   return (
-    <HStack spacing={1}>
+    <HStack spacing={1} {...props}>
       <ResponsiveText short="Show:" long="Frameworks:" />
       {FrameworkNames.map((name) => {
         const Icon = FrameworkIcons[name];
@@ -167,6 +176,7 @@ const FilterBar: React.FC<FilteredItemsProps> = ({ items, children }) => {
         onChange={(framework) => {
           setFilters({ ...filters, framework });
         }}
+        mb={[2, null, null, null, 0]}
       />
       <chakra.div
         flexBasis="100%"
