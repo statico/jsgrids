@@ -46,6 +46,7 @@ const throttledFetch = throttler(async (url: string) => {
 
     return await pRetry(fn, {
       minTimeout: 2000,
+      factor: 1,
       onFailedAttempt: (err) => {
         log(
           "failed %s, attempt number = %d, retries left = %d",
