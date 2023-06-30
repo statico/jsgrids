@@ -3,10 +3,10 @@ homeUrl: https://bossanova.uk/jspreadsheet/v4
 demoUrl: https://bossanova.uk/jspreadsheet/v4/examples
 githubRepo: jspreadsheet/ce
 npmPackage: jspreadsheet-ce
-license: MIT or Commercial License
-revenueModel: Free for Older v4, Subscription for Newer v5
+license: MIT
+revenueModel: Free
 description: >
-  Jspreadsheet (formerly Jexcel) is a lightweight vanilla javascript plugin to
+  Jspreadsheet CE (formerly Jexcel) is a lightweight vanilla javascript plugin to
   create amazing web-based online interactive tables and spreadsheets
   compatible with other spreadsheet softwares.
 frameworks:
@@ -22,7 +22,7 @@ features:
   csvExport: true
   customEditors: true
   customFormatters: true
-  draggableRows: false
+  draggableRows: true
   editable: true
   fillDown: true
   fillRight: true
@@ -33,7 +33,8 @@ features:
   i18n: false
   maintained: true
   openSource: true
-  pagination: false
+  search: true
+  pagination: true
   pdfExport: false
   pivots: false
   rangeSelection: true
@@ -45,4 +46,4 @@ features:
   sorting: true
   trees: false
   xlsxExport: true
-  virtualization: "Only lazy-loading of rows. Vertical scrollbar is jumpy."
+  virtualization: "Only lazy-loading of rows."
