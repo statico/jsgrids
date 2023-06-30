@@ -1,1 +1,48 @@
-
+title: Jspreadsheet Pro
+homeUrl: https://jspreadsheet.com
+demoUrl: https://jspreadsheet.com/demo
+githubRepo: jspreadsheet/pro
+npmPackage: jspreadsheet
+license: Commercial License
+revenueModel: Subscription or One time fee
+description: >
+  Jspreadsheet is a lightweight Vanilla JavaScript plugin that help developers to create exceptional web-based interactive data grid with spreadsheet controls.
+frameworks:
+  vanilla: true
+  typescript: true
+  react: true
+  angular: true
+  vue: true
+  jquery: true
+features:
+  accessible: false
+  copyPaste: true
+  csvExport: true
+  customEditors: true
+  customFormatters: true
+  draggableRows: true
+  editable: true
+  fillDown: true
+  fillRight: true
+  filtering: true
+  formulas: true
+  freezableCols: true
+  headless: true
+  i18n: false
+  maintained: true
+  openSource: false
+  pagination: true
+  pdfExport: true
+  pivots: true
+  rangeSelection: true
+  resizableCols: true
+  resizableRows: true
+  responsive: true
+  rowGrouping: true
+  colGrouping: true
+  rowSelection: true
+  serverSide: false
+  sorting: true
+  trees: false
+  xlsxExport: true
+  virtualization: true
