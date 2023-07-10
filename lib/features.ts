@@ -139,6 +139,11 @@ export const Features = {
     description: "Entire rows can be selected.",
     important: false,
   },
+  search: {
+    title: "Search",
+    description: "Lets users search for text in the grid.",
+    important: false,
+  },
   serverSide: {
     title: "Server-Side",
     description:

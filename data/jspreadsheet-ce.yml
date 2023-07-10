@@ -33,7 +33,6 @@ features:
   i18n: false
   maintained: true
   openSource: true
-  search: true
   pagination: true
   pdfExport: false
   pivots: false
@@ -42,6 +41,7 @@ features:
   responsive: false
   rowGrouping: false
   rowSelection: true
+  search: true
   serverSide: false
   sorting: true
   trees: false

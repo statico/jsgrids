@@ -4,7 +4,7 @@ demoUrl: https://jspreadsheet.com/demo
 githubRepo: jspreadsheet/pro
 npmPackage: jspreadsheet
 license: Commercial License
-revenueModel: Subscription or One time fee
+revenueModel: Subscription or One-Time Fee
 description: >
   Jspreadsheet is a lightweight Vanilla JavaScript plugin that help developers to create exceptional web-based interactive data grid with spreadsheet controls.
 frameworks:
@@ -36,10 +36,8 @@ features:
   pivots: true
   rangeSelection: true
   resizableCols: true
-  resizableRows: true
   responsive: true
   rowGrouping: true
-  colGrouping: true
   rowSelection: true
   serverSide: false
   sorting: true
