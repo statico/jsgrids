@@ -15,18 +15,18 @@ import { GoChevronDown } from "react-icons/go";
 // We use "T extends string" instead of string because we want to be able to
 // limit the strings that can be used as keys, such as with FeatureName.
 
-interface Option<T extends string> {
+type Option<T extends string> = {
   key: T;
   title: string;
   description: string;
-}
+};
 
-interface MultiItemPickerProps<T extends string> {
+type MultiItemPickerProps<T extends string> = {
   children: ReactNode;
   selected: Set<T>;
   options: Option<T>[];
   onChange: (newValue: Set<T>) => void;
-}
+};
 
 export const MultiItemPicker = <T extends string>({
   children,

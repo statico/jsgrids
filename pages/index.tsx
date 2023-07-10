@@ -17,10 +17,10 @@ import GithubCorner from "react-github-corner";
 import { DateTime } from "luxon";
 import { FaExternalLinkAlt } from "react-icons/fa";
 
-interface Props {
+type PageProps = {
   items: LibraryInfo[];
   ts: string;
-}
+};
 
 export const getStaticProps: GetStaticProps = async () => {
   return {
@@ -31,7 +31,7 @@ export const getStaticProps: GetStaticProps = async () => {
   };
 };
 
-const Page: NextPage<Props> = ({ items, ts }) => (
+const Page: NextPage<PageProps> = ({ items, ts }) => (
   <>
     <Head>
       <title>

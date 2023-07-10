@@ -10,21 +10,21 @@ import {
 import React, { ReactNode } from "react";
 import { GoCheck, GoChevronDown } from "react-icons/go";
 
-interface Option {
+type Option = {
   key: string;
   title: string;
   description?: string;
-}
+};
 
 const BlankIcon = () => <Box boxSize="1em" />;
 
-interface Props {
+type SingleItemPickerProps = {
   children: ReactNode;
   selected: string | null;
   options: Option[];
   allowNull?: boolean;
   onChange: (newValue: any) => void;
-}
+};
 
 export const SingleItemPicker = ({
   children,
@@ -32,7 +32,7 @@ export const SingleItemPicker = ({
   options,
   onChange,
   allowNull = true,
-}: Props) => {
+}: SingleItemPickerProps) => {
   return (
     <Menu>
       <MenuButton as={Button} rightIcon={<GoChevronDown />} fontWeight="normal">

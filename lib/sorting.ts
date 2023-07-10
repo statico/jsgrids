@@ -1,12 +1,12 @@
 import { FeatureName } from "./features";
 import { LibraryInfo } from "./libraries";
 
-export interface SortOption {
+export type SortOption = {
   key: "popularity" | "stars" | "downloads";
   title: string;
   description?: string;
   fn: (a: LibraryInfo, b: LibraryInfo) => number;
-}
+};
 
 export type SortOptionKey = SortOption["key"];
 export const SortOptions: SortOption[] = [
@@ -35,7 +35,7 @@ export const SortOptions: SortOption[] = [
 // Sort the features by negative ones first, then positive, then middling.
 // Only important negative features are shown, which is why they're first.
 export const sortedFeatureNames = (
-  features: LibraryInfo["features"]
+  features: LibraryInfo["features"],
 ): FeatureName[] =>
   Object.keys(features).sort((a, b) => {
     const av = features[a];

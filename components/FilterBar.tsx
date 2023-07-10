@@ -19,12 +19,12 @@ import { hasAllKeys, SortOptionKey, SortOptions } from "lib/sorting";
 import { ReactNode } from "react";
 import { atom, useRecoilState, useRecoilValue } from "recoil";
 
-interface FilterState {
+type FilterState = {
   sort: SortOptionKey;
   framework: FrameworkName | null;
   features: Set<FeatureName>;
   license: string | null;
-}
+};
 
 const filterState = atom<FilterState>({
   key: "filters",

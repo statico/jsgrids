@@ -12,14 +12,14 @@ import {
 import { getLibraries, LibraryInfo } from "lib/libraries";
 import { GetStaticProps, NextPage } from "next";
 
-interface Props {
+type PageProps = {
   items: LibraryInfo[];
-}
+};
 
 const LinkTo = ({ href }: { href?: string | null }) =>
   href ? <Link href={href}>Link</Link> : <span />;
 
-const Page: NextPage<Props> = ({ items }) => (
+const Page: NextPage<PageProps> = ({ items }) => (
   <Container maxW="full">
     <Heading>All Libraries</Heading>
     <Table size="sm">
