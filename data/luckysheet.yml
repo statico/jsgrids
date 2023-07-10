@@ -38,6 +38,7 @@ features:
   responsive: false
   rowGrouping: false
   rowSelection: true
+  search: true
   serverSide: false
   sorting: true
   trees: false

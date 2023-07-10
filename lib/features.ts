@@ -58,7 +58,7 @@ export const Features = {
   filtering: {
     title: "Filtering",
     description:
-      "The library or interface has provisions for only showing rows that meet certain criteria.",
+      "The library or interface has provisions for only showing rows that meet certain criteria. (Different from searching.)",
     important: false,
   },
   formulas: {
@@ -141,7 +141,8 @@ export const Features = {
   },
   search: {
     title: "Search",
-    description: "Lets users search for text in the grid.",
+    description:
+      "Lets users search cells and jump to their location, and maybe replace values, too. (Different from filtering.)",
     important: false,
   },
   serverSide: {
