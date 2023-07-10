@@ -12,25 +12,28 @@ import {
 import React, { ReactNode } from "react";
 import { GoChevronDown } from "react-icons/go";
 
-interface Option {
-  key: string;
+// We use "T extends string" instead of string because we want to be able to
+// limit the strings that can be used as keys, such as with FeatureName.
+
+interface Option<T extends string> {
+  key: T;
   title: string;
   description: string;
 }
 
-interface Props {
+interface MultiItemPickerProps<T extends string> {
   children: ReactNode;
-  selected: Set<string>;
-  options: Option[];
-  onChange: (newValue: any) => void;
+  selected: Set<T>;
+  options: Option<T>[];
+  onChange: (newValue: Set<T>) => void;
 }
 
-export const MultiItemPicker = ({
+export const MultiItemPicker = <T extends string>({
   children,
   selected,
   options,
   onChange,
-}: Props) => (
+}: MultiItemPickerProps<T>) => (
   <Menu>
     <MenuButton as={Button} rightIcon={<GoChevronDown />} fontWeight="normal">
       {children}

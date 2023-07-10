@@ -16,7 +16,7 @@ import {
 } from "lib/frameworks";
 import { FrameworkName, LibraryInfo } from "lib/libraries";
 import { hasAllKeys, SortOptionKey, SortOptions } from "lib/sorting";
-import { useState } from "react";
+import { atom, useRecoilState, useRecoilValue } from "recoil";
 
 interface FilterState {
   sort: SortOptionKey;
@@ -25,6 +25,16 @@ interface FilterState {
   license: string | null;
 }
 
+const filterState = atom<FilterState>({
+  key: "filters",
+  default: {
+    sort: SortOptions[0].key,
+    framework: null,
+    features: new Set(),
+    license: null,
+  },
+});
+
 const ResponsiveText = ({ short, long }: { short: string; long: string }) => (
   <>
     <Text display={["inline", null, null, "none"]}>{short}</Text>
@@ -32,14 +42,13 @@ const ResponsiveText = ({ short, long }: { short: string; long: string }) => (
   </>
 );
 
-const FrameworkSelector: React.FC<
-  {
-    selected: FrameworkName | null;
-    onChange: (newSelected: FrameworkName | null) => void;
-  } & Omit<BoxProps, "onChange">
-> = ({ selected, onChange, ...props }) => {
+const FrameworkSelector: React.FC<BoxProps> = (props) => {
+  const [{ framework }, setFilters] = useRecoilState(filterState);
   const handleToggle = (name: FrameworkName) => () => {
-    onChange(selected === name ? null : name);
+    setFilters((prev) => ({
+      ...prev,
+      framework: framework === name ? null : name,
+    }));
   };
   return (
     <HStack spacing={1} {...props}>
@@ -52,7 +61,7 @@ const FrameworkSelector: React.FC<
             <Button
               p={1}
               onClick={handleToggle(name)}
-              background={selected === name ? "gray.500" : "transparent"}
+              background={framework === name ? "gray.500" : "transparent"}
               title={title}
               aria-label={title}
             >
@@ -65,14 +74,15 @@ const FrameworkSelector: React.FC<
   );
 };
 
-const FeaturesSelector: React.FC<{
-  selected: Set<FeatureName>;
-  onChange: (newSelected: Set<FeatureName>) => void;
-}> = ({ selected, onChange }) => {
+const FeaturesSelector: React.FC<{}> = () => {
+  const [{ features }, setFilters] = useRecoilState(filterState);
+  const handleChange = (newFeatures: Set<FeatureName>) => {
+    setFilters((prev) => ({ ...prev, features: newFeatures }));
+  };
   return (
-    <MultiItemPicker
-      selected={selected}
-      onChange={onChange}
+    <MultiItemPicker<FeatureName>
+      selected={features}
+      onChange={handleChange}
       options={FeatureNames.map((name) => ({
         key: name,
         title: Features[name].title,
@@ -81,7 +91,7 @@ const FeaturesSelector: React.FC<{
     >
       <ResponsiveText
         short="Features"
-        long={selected.size ? `${selected.size} Features` : "Any Feature"}
+        long={features.size ? `${features.size} Features` : "Any Feature"}
       />
     </MultiItemPicker>
   );
@@ -89,13 +99,15 @@ const FeaturesSelector: React.FC<{
 
 const LicenseSelector: React.FC<{
   licenses: Set<string>;
-  selected: string | null;
-  onChange: (newSelected: string) => void;
-}> = ({ licenses, selected, onChange }) => {
+}> = ({ licenses }) => {
+  const [{ license }, setFilters] = useRecoilState(filterState);
+  const handleChange = (newLicense: string | null) => {
+    setFilters((prev) => ({ ...prev, license: newLicense }));
+  };
   return (
     <SingleItemPicker
-      selected={selected}
-      onChange={onChange}
+      selected={license}
+      onChange={handleChange}
       options={Array.from(licenses)
         .sort()
         .map((name) => ({
@@ -103,20 +115,21 @@ const LicenseSelector: React.FC<{
           title: name,
         }))}
     >
-      <ResponsiveText short="License" long={selected || "Any License"} />
+      <ResponsiveText short="License" long={license || "Any License"} />
     </SingleItemPicker>
   );
 };
 
-const SortSelector: React.FC<{
-  selected: SortOptionKey;
-  onChange: (newSelected: SortOptionKey) => void;
-}> = ({ selected, onChange }) => {
-  const selectedOption = SortOptions.find((s) => s.key === selected);
+const SortSelector: React.FC<{}> = ({}) => {
+  const [{ sort }, setFilters] = useRecoilState(filterState);
+  const handleChange = (newSort: SortOptionKey) => {
+    setFilters((prev) => ({ ...prev, sort: newSort }));
+  };
+  const selectedOption = SortOptions.find((s) => s.key === sort);
   return (
     <SingleItemPicker
-      selected={selected}
-      onChange={onChange}
+      selected={sort}
+      onChange={handleChange}
       options={SortOptions}
       allowNull={false}
     >
@@ -129,17 +142,12 @@ interface FilteredItemsProps {
   items: LibraryInfo[];
   children: (
     filteredItems: LibraryInfo[],
-    filterBar: React.ReactNode
+    filterBar: React.ReactNode,
   ) => React.ReactNode;
 }
 
 const FilterBar: React.FC<FilteredItemsProps> = ({ items, children }) => {
-  const [filters, setFilters] = useState<FilterState>({
-    sort: SortOptions[0].key,
-    framework: null,
-    features: new Set(),
-    license: null,
-  });
+  const filters = useRecoilValue(filterState);
 
   let clone = items.slice(); // Shallow copy
 
@@ -151,12 +159,14 @@ const FilterBar: React.FC<FilteredItemsProps> = ({ items, children }) => {
 
   if (filters.framework) {
     clone = clone.filter(
-      (item) => filters.framework && item.frameworks[filters.framework]
+      (item) => filters.framework && item.frameworks[filters.framework],
     );
   }
+
   if (filters.features.size) {
     clone = clone.filter((item) => hasAllKeys(item.features, filters.features));
   }
+
   if (filters.license) {
     clone = clone.filter((item) => item.license === filters.license);
   }
@@ -171,37 +181,15 @@ const FilterBar: React.FC<FilteredItemsProps> = ({ items, children }) => {
       justifyContent="center"
       flexWrap={["wrap", null, null, null, "nowrap"]}
     >
-      <FrameworkSelector
-        selected={filters.framework}
-        onChange={(framework) => {
-          setFilters({ ...filters, framework });
-        }}
-        mb={[2, null, null, null, 0]}
-      />
+      <FrameworkSelector mb={[2, null, null, null, 0]} />
       <chakra.div
         flexBasis="100%"
         width={0}
         display={["inherit", null, null, null, "none"]}
       />
-      <FeaturesSelector
-        selected={filters.features}
-        onChange={(features) => {
-          setFilters({ ...filters, features });
-        }}
-      />
-      <LicenseSelector
-        licenses={new Set<string>(items.map((i: any) => i.license))}
-        selected={filters.license}
-        onChange={(license) => {
-          setFilters({ ...filters, license });
-        }}
-      />
-      <SortSelector
-        selected={filters.sort}
-        onChange={(sort) => {
-          setFilters({ ...filters, sort });
-        }}
-      />
+      <FeaturesSelector />
+      <LicenseSelector licenses={new Set(items.map((i: any) => i.license))} />
+      <SortSelector />
       <Text display={["none", null, "inline"]}>{clone.length} results</Text>
     </HStack>
   );

@@ -29,6 +29,7 @@
     "react-dom": "^18",
     "react-github-corner": "^2.5.0",
     "react-icons": "^4.10.1",
+    "recoil": "^0.7.7",
     "runtypes": "^6.7.0"
   },
   "devDependencies": {
