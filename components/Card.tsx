@@ -49,10 +49,12 @@ const ColoredIcon = ({
 
 const useCardBackgroundColor = () => useColorModeValue("white", "gray.700");
 
-const Feature: React.FC<{
+type FeatureProps = {
   name: FeatureName;
   value: boolean | string | null;
-}> = ({ name, value }) => {
+};
+
+const Feature = ({ name, value }: FeatureProps) => {
   if (!Features[name]) {
     throw new Error(`Unknown feature name: ${name}`);
   }
@@ -86,7 +88,11 @@ const Feature: React.FC<{
   }
 };
 
-const FrameworkList: React.FC<{ info: LibraryInfo }> = ({ info }) => {
+type FrameworkListProps = {
+  info: LibraryInfo;
+};
+
+const FrameworkList = ({ info }: FrameworkListProps) => {
   const bg = useCardBackgroundColor();
   const names = Object.keys(info.frameworks) as FrameworkName[];
   return (
@@ -127,23 +133,25 @@ const FrameworkList: React.FC<{ info: LibraryInfo }> = ({ info }) => {
   );
 };
 
-const Metric: React.FC<{
+type MetricProps = {
   icon: React.ReactNode;
   title: string;
   value?: any;
   formatter?: (value: any) => string;
   href?: string;
-}> = ({
+};
+
+const Metric = ({
   icon,
   title,
   value,
   formatter = (x) => Number(x).toLocaleString(),
   href,
-}) => {
+}: MetricProps) => {
   const formattedValue = value === undefined ? "n/a" : formatter(value);
   const formattedTitle = title.replace(
     "%s",
-    value === undefined ? "unknown" : formattedValue
+    value === undefined ? "unknown" : formattedValue,
   );
   const contents = (
     <HStack cursor="pointer" _hover={{ opacity: 0.75 }}>
@@ -160,7 +168,11 @@ const Metric: React.FC<{
   );
 };
 
-const Card: React.FC<{ info: LibraryInfo }> = ({ info }) => {
+type CardProps = {
+  info: LibraryInfo;
+};
+
+const Card = ({ info }: CardProps) => {
   const bg = useCardBackgroundColor();
   const id = `card-${info.id}`;
   const gh = info.github;

@@ -16,6 +16,7 @@ import {
 } from "lib/frameworks";
 import { FrameworkName, LibraryInfo } from "lib/libraries";
 import { hasAllKeys, SortOptionKey, SortOptions } from "lib/sorting";
+import { ReactNode } from "react";
 import { atom, useRecoilState, useRecoilValue } from "recoil";
 
 interface FilterState {
@@ -42,7 +43,7 @@ const ResponsiveText = ({ short, long }: { short: string; long: string }) => (
   </>
 );
 
-const FrameworkSelector: React.FC<BoxProps> = (props) => {
+const FrameworkSelector = (props: BoxProps) => {
   const [{ framework }, setFilters] = useRecoilState(filterState);
   const handleToggle = (name: FrameworkName) => () => {
     setFilters((prev) => ({
@@ -74,7 +75,7 @@ const FrameworkSelector: React.FC<BoxProps> = (props) => {
   );
 };
 
-const FeaturesSelector: React.FC<{}> = () => {
+const FeaturesSelector = () => {
   const [{ features }, setFilters] = useRecoilState(filterState);
   const handleChange = (newFeatures: Set<FeatureName>) => {
     setFilters((prev) => ({ ...prev, features: newFeatures }));
@@ -97,9 +98,11 @@ const FeaturesSelector: React.FC<{}> = () => {
   );
 };
 
-const LicenseSelector: React.FC<{
+type LicenseSelectorProps = {
   licenses: Set<string>;
-}> = ({ licenses }) => {
+};
+
+const LicenseSelector = ({ licenses }: LicenseSelectorProps) => {
   const [{ license }, setFilters] = useRecoilState(filterState);
   const handleChange = (newLicense: string | null) => {
     setFilters((prev) => ({ ...prev, license: newLicense }));
@@ -120,7 +123,7 @@ const LicenseSelector: React.FC<{
   );
 };
 
-const SortSelector: React.FC<{}> = ({}) => {
+const SortSelector = () => {
   const [{ sort }, setFilters] = useRecoilState(filterState);
   const handleChange = (newSort: SortOptionKey) => {
     setFilters((prev) => ({ ...prev, sort: newSort }));
@@ -138,15 +141,12 @@ const SortSelector: React.FC<{}> = ({}) => {
   );
 };
 
-interface FilteredItemsProps {
+type FilterBarProps = {
   items: LibraryInfo[];
-  children: (
-    filteredItems: LibraryInfo[],
-    filterBar: React.ReactNode,
-  ) => React.ReactNode;
-}
+  children: (filteredItems: LibraryInfo[], filterBar: ReactNode) => ReactNode;
+};
 
-const FilterBar: React.FC<FilteredItemsProps> = ({ items, children }) => {
+const FilterBar = ({ items, children }: FilterBarProps) => {
   const filters = useRecoilValue(filterState);
 
   let clone = items.slice(); // Shallow copy
