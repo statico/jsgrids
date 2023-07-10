@@ -1,4 +1,3 @@
-import fetch from "cross-fetch";
 import debug from "debug";
 import pRetry from "p-retry";
 import pThrottle from "p-throttle";
@@ -15,7 +14,7 @@ const throttledFetch = throttler(async (url: string) => {
   const { GITHUB_TOKEN, VERCEL_URL, VERCEL_GITHUB_COMMIT_SHA } = process.env;
   if (!GITHUB_TOKEN) {
     throw new Error(
-      "Please set a GITHUB_TOKEN. Otherwise you'll quickly exceed GitHub's API rate limits."
+      "Please set a GITHUB_TOKEN. Otherwise you'll quickly exceed GitHub's API rate limits.",
     );
   }
 
@@ -52,7 +51,7 @@ const throttledFetch = throttler(async (url: string) => {
           "failed %s, attempt number = %d, retries left = %d",
           url,
           err.attemptNumber,
-          err.retriesLeft
+          err.retriesLeft,
         );
       },
     });
