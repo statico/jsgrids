@@ -22,7 +22,7 @@ import {
   FaCheckCircle,
   FaDollarSign,
   FaInfoCircle,
-  FaPlusCircle,
+  FaArrowCircleUp,
   FaTimesCircle,
   FaUsers,
 } from "react-icons/fa";
@@ -66,7 +66,7 @@ const Feature = ({ name, value }: FeatureProps) => {
           {value === true ? (
             <ColoredIcon icon={FaCheckCircle} color="green.400" />
           ) : /premium/i.test(value) ? (
-            <ColoredIcon icon={FaPlusCircle} color="blue.400" />
+            <ColoredIcon icon={FaArrowCircleUp} color="blue.400" />
           ) : (
             <ColoredIcon icon={FaInfoCircle} color="orange.300" />
           )}
