@@ -1,7 +1,7 @@
 title: Glide Data Grid
 homeUrl: https://grid.glideapps.com/
-demoUrl: https://glideapps.github.io/glide-data-grid/?path=/story/glide-data-grid-dataeditor-demos--add-data
-githubRepo: glideapps/glide-data-grid
+demoUrl: https://quicktype.github.io/glide-data-grid/?path=/story/glide-data-grid-docs--getting-started
+githubRepo: quicktype/glide-data-grid
 npmPackage: "@glideapps/glide-data-grid"
 license: MIT License
 revenueModel: Free
