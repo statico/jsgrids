@@ -1,0 +1,36 @@
+title: VisActor VTable
+homeUrl: https://visactor.io/vtable
+demoUrl: https://visactor.io/vtable/example
+githubRepo: VisActor/VTable
+npmPackage: "@visactor/vtable"
+license: MIT License
+revenueModel: Free
+description: >
+  VTable is not just a high-performance multidimensional data analysis table, but also a grid artist that creates art between rows and columns.
+frameworks:
+  vanilla: true
+  react: true
+features:
+  accessible: true
+  copyPaste: true
+  customFormatters: true
+  draggableRows: true
+  filtering: true
+  formulas: false
+  freezableCols: true
+  headless: true
+  i18n: true
+  maintained: true
+  openSource: true
+  pagination: true
+  imgExport: true
+  pivots: true
+  rangeSelection: true
+  resizableCols: true
+  responsive: true
+  rowGrouping: true
+  rowSelection: true
+  sorting: true
+  trees: true
+  virtualization: true
+  treeHierarchy: true
