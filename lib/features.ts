@@ -108,18 +108,6 @@ export const Features = {
       "The library has built-in functionality which lets you download a PDF.",
     important: false,
   },
-  imgExport: {
-    title: "image Export",
-    description:
-      "The library has built-in functionality which lets you export image.",
-    important: false,
-  },
-  treeHierarchy: {
-    title: "tree hierarchy",
-    description:
-      "The library has built-in functionality which can show struct data with tree hierarchy.",
-    important: false,
-  },
   pivots: {
     title: "Pivot Tables",
     description: "Has support for pivot tables.",
