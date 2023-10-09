@@ -32,7 +32,7 @@ features:
   pagination: false
   pdfExport: false
   pivots: false
-  rangeSelection: true
+  rangeSelection: false
   resizableCols: true
   responsive: false
   rowGrouping: true
