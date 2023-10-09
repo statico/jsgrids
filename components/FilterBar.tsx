@@ -187,7 +187,7 @@ const FilterBar = ({ items, children }: FilterBarProps) => {
         width={0}
         display={["inherit", null, null, null, "none"]}
       />
-      <HStack spacing={0} alignItems="center">
+      <HStack spacing={1} alignItems="center">
         <FeaturesSelector />
         <LicenseSelector licenses={new Set(items.map((i: any) => i.license))} />
         <SortSelector />
