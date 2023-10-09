@@ -187,9 +187,11 @@ const FilterBar = ({ items, children }: FilterBarProps) => {
         width={0}
         display={["inherit", null, null, null, "none"]}
       />
-      <FeaturesSelector />
-      <LicenseSelector licenses={new Set(items.map((i: any) => i.license))} />
-      <SortSelector />
+      <HStack spacing={0} alignItems="center">
+        <FeaturesSelector />
+        <LicenseSelector licenses={new Set(items.map((i: any) => i.license))} />
+        <SortSelector />
+      </HStack>
       <Text display={["none", null, "inline"]}>{clone.length} results</Text>
     </HStack>
   );
