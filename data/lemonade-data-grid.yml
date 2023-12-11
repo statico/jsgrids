@@ -3,7 +3,7 @@ homeUrl: https://lemonadejs.net/components/data-grid
 demoUrl: https://lemonadejs.net/components/data-grid#examples
 githubRepo: lemonadejs/data-grid
 npmPackage: "@lemonadejs/data-grid"
-license: MIT
+license: MIT License
 revenueModel: Free
 description: >
   The LemonadeJS data grid is a lightweight and highly customizable JavaScript component that provides a solution for rendering data in rows and columns. It offers features like search, filter, pagination, and in-cell editing.

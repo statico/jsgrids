@@ -1,6 +1,6 @@
 title: Glide Data Grid
 homeUrl: https://grid.glideapps.com/
-demoUrl: https://glideapps.github.io/glide-data-grid/?path=/story/glide-data-grid-dataeditor-demos--add-data
+demoUrl: https://quicktype.github.io/glide-data-grid/?path=/story/glide-data-grid-docs--getting-started
 githubRepo: glideapps/glide-data-grid
 npmPackage: "@glideapps/glide-data-grid"
 license: MIT License
@@ -35,6 +35,7 @@ features:
   responsive: true
   rowGrouping: false
   rowSelection: true
+  search: true
   serverSide: true
   sorting: true
   trees: false

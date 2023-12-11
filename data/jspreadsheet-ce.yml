@@ -3,7 +3,7 @@ homeUrl: https://bossanova.uk/jspreadsheet/v4
 demoUrl: https://bossanova.uk/jspreadsheet/v4/examples
 githubRepo: jspreadsheet/ce
 npmPackage: jspreadsheet-ce
-license: MIT
+license: MIT License
 revenueModel: Free
 description: >
   Jspreadsheet CE (formerly Jexcel) is a lightweight vanilla javascript plugin to
