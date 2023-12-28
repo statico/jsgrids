@@ -10,7 +10,6 @@ import {
 import { join } from "path";
 
 const log = debug("cache");
-log.enabled = true;
 
 //
 // This is a simple filesystem cache because, amazingly, nothing on npm seemed
