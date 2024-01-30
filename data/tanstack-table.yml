@@ -1,13 +1,11 @@
-title: React Table
-homeUrl: https://react-table.tanstack.com/
-demoUrl: https://react-table.tanstack.com/docs/examples/basic
+title: Tanstack Table
+homeUrl: https://tanstack.com/table/latest
+demoUrl: https://tanstack.com/table/latest/docs/framework/react/examples/basic
 githubRepo: TanStack/table
-npmPackage: react-table
+npmPackage: @tanstack/react-table
 license: MIT License
 revenueModel: Free
-description: >
-  Headless (bring-your-own UI) library with hoos for building lightweight,
-  fast and extendable datagrids for React.
+description: Headless UI for building powerful tables & datagrids for React, Solid, Vue, Svelte and TS/JS.
 frameworks:
   react: true
   typescript: true
