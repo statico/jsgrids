@@ -6,7 +6,7 @@ import * as cache from "./cache";
 const log = debug("fetcher");
 log.enabled = true;
 
-const throttler = pThrottle({ limit: 1, interval: 300 });
+const throttler = pThrottle({ limit: 1, interval: 750 });
 
 // Hammering APIs usually leads to trouble, and we don't really care about build
 // time, so let's be nice.
