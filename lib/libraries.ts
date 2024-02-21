@@ -15,10 +15,10 @@ log.enabled = true;
 //
 
 const URL = rt.String.withConstraint(
-  (str) => /^https?:\/\//.test(str) || `${str} is not a valid URL`
+  (str) => /^https?:\/\//.test(str) || `${str} is not a valid URL`,
 );
 const GitHubRepo = rt.String.withConstraint(
-  (str) => /^\S+\/\S+$/.test(str) || `${str} is not a username/repo pair`
+  (str) => /^\S+\/\S+$/.test(str) || `${str} is not a username/repo pair`,
 );
 const Feature = rt.Boolean.Or(URL).Or(rt.String);
 
@@ -66,13 +66,13 @@ const AugmentedInfo = rt.Record({
       subscribers: rt.Number,
       network: rt.Number,
       contributors: rt.Number,
-    })
+    }),
   ),
   npm: rt.Optional(
     rt.Record({
       url: URL,
       downloads: rt.Number,
-    })
+    }),
   ),
   bundlephobia: rt.Optional(
     rt
@@ -81,7 +81,7 @@ const AugmentedInfo = rt.Record({
         rawSize: rt.Number,
         gzipSize: rt.Number,
       })
-      .Or(rt.Null)
+      .Or(rt.Null),
   ),
 });
 
@@ -119,7 +119,7 @@ export const getLibraries = async (): Promise<LibraryInfo[]> => {
         item = AugmentedInfo.check({ id, ...obj });
       } catch (err: any) {
         throw new Error(
-          `In ${path}, key "${err.key}" failed validation: ${err.message}`
+          `In ${path}, key "${err.key}" failed validation: ${err.message}`,
         );
       }
 
@@ -132,16 +132,16 @@ export const getLibraries = async (): Promise<LibraryInfo[]> => {
       // Populate GitHub data if the library has a GitHub repo.
       if (item.githubRepo) {
         const { data: repo } = await fetcher(
-          `https://api.github.com/repos/${item.githubRepo}`
+          `https://api.github.com/repos/${item.githubRepo}`,
         );
         if (repo.error) {
           throw new Error(
-            `GitHub repo ${item.githubRepo} error: ${repo.error}`
+            `GitHub repo ${item.githubRepo} error: ${repo.error}`,
           );
         }
         if (repo.full_name !== item.githubRepo) {
           throw new Error(
-            `GitHub repo ${item.githubRepo} has moved to ${repo.full_name}`
+            `GitHub repo ${item.githubRepo} has moved to ${repo.full_name}`,
           );
         }
 
@@ -181,7 +181,7 @@ export const getLibraries = async (): Promise<LibraryInfo[]> => {
       if (item.npmPackage) {
         const name = item.npmPackage;
         const res = await fetcher(
-          `https://api.npmjs.org/downloads/point/last-week/${name}`
+          `https://api.npmjs.org/downloads/point/last-week/${name}`,
         );
         const data: any = res.data;
         const npm = {
@@ -194,15 +194,22 @@ export const getLibraries = async (): Promise<LibraryInfo[]> => {
       // Grab bundle sizes from Bundlephobia.
       if (item.npmPackage && item.ignoreBundlephobia !== true) {
         const name = item.npmPackage;
-        const { data } = await fetcher(
-          `https://bundlephobia.com/api/size?package=${name}`
-        );
-        const bundlephobia = {
-          url: `https://bundlephobia.com/result?p=${name}`,
-          rawSize: data.size || 0,
-          gzipSize: data.gzip || 0,
-        };
-        item.bundlephobia = bundlephobia;
+        const url = `https://bundlephobia.com/result?p=${name}`;
+        try {
+          const { data } = await fetcher(
+            `https://bundlephobia.com/api/size?package=${name}`,
+          );
+          item.bundlephobia = {
+            url,
+            rawSize: data.size || 0,
+            gzipSize: data.gzip || 0,
+          };
+        } catch (err) {
+          // Bundlephobia constantly errors out, even after retrying. So let's do
+          // the best we can and signal to the frontend that the API is broken.
+          log("giving up getting bundle size for %s", name);
+          item.bundlephobia = { url, rawSize: -1, gzipSize: -1 };
+        }
       }
 
       try {
@@ -211,13 +218,13 @@ export const getLibraries = async (): Promise<LibraryInfo[]> => {
         const details = JSON.stringify(err.details);
         throw new Error(`AugmentedInfo for ${path}: ${details}`);
       }
-    })
+    }),
   );
 
   // Just a quick sanity check here.
   if (items.length !== paths.length) {
     throw new Error(
-      `Incomplete data. Parsed ${paths.length} YAML files but only got ${items.length} info objects.`
+      `Incomplete data. Parsed ${paths.length} YAML files but only got ${items.length} info objects.`,
     );
   }
 

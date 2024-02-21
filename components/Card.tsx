@@ -223,7 +223,7 @@ const Card = ({ info }: CardProps) => {
         <Metric
           icon={<GoPackage />}
           value={info.bundlephobia?.gzipSize}
-          formatter={fileSize}
+          formatter={(n: number) => (n >= 0 ? fileSize(n) : "?? KB")}
           title={"Gzipped package size is %s"}
           href={info.bundlephobia?.url}
         />
