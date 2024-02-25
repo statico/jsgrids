@@ -18,7 +18,7 @@ frameworks:
   vue: https://www.npmjs.com/package/vue-tabulator
 features:
   accessible: true
-  copyPaste: false
+  copyPaste: true
   csvExport: true
   customEditors: true
   customFormatters: true
@@ -36,7 +36,7 @@ features:
   pagination: false
   pdfExport: false
   pivots: false
-  rangeSelection: false
+  rangeSelection: true
   resizableCols: true
   responsive: true
   rowGrouping: true
