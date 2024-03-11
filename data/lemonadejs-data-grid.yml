@@ -1,0 +1,46 @@
+title: Lemonadejs Data Grid
+homeUrl: https://lemonadejs.net/docs/plugins/data-grid
+demoUrl: https://lemonadejs.net/docs/plugins/data-grid
+githubRepo: lemonadejs/packages/src/plugins/datagrid
+npmPackage: @lemodanejs/data-grid
+license: MIT
+revenueModel: Free
+description: >
+The JavaScript Data Grid is a lightweight library that effortlessly enables you to embed lightweight data grids into your applications. Compatible with Vanilla JavaScript, LemonadeJS, React, VueJS, and Angular, this versatile component allows you to conveniently load JSON data, define columns, and seamlessly render the grid within your HTML. Enjoy robust features like search, pagination, and editable rows, empowering you to build interactive and feature-rich data grid experiences.
+frameworks:
+  vanilla: true
+  typescript: true
+  react: true
+  angular: true
+  vue: true
+  jquery: true
+features:
+  accessible: false
+  copyPaste: false
+  csvExport: false
+  customEditors: true
+  customFormatters: true
+  draggableRows: false
+  editable: true
+  fillDown: false
+  fillRight: false
+  filtering: true
+  formulas: false
+  freezableCols: false
+  headless: false
+  i18n: false
+  maintained: true
+  openSource: true
+  pagination: true
+  pdfExport: false
+  pivots: false
+  rangeSelection: false
+  resizableCols: false
+  responsive: true
+  rowGrouping: false
+  rowSelection: false
+  serverSide: false
+  sorting: true
+  trees: false
+  xlsxExport: false
+  virtualization: false
