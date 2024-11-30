@@ -43,8 +43,8 @@ const Page: NextPage<PageProps> = ({ items, ts }) => {
           jsgrids - Spreadsheet and data grid libraries for JavaScript
         </title>
         <Script
-          src="https://s.langworth.com/script.js"
-          data-token="575bca33"
+          src="https://s.langworth.com/data.js"
+          data-token="ed5bc6ab"
           defer
         ></Script>
       </Head>
