@@ -1,7 +1,6 @@
 import { ColorModeScript } from "@chakra-ui/react";
 import theme from "lib/theme";
 import Document, { Head, Html, Main, NextScript } from "next/document";
-import * as React from "react";
 
 const name = "jsgrids";
 const title = "jsgrids - Spreadsheet and data grid libraries for JavaScript";

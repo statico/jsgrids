@@ -11,12 +11,11 @@ import {
 } from "@chakra-ui/react";
 import Card from "components/Card";
 import FilterBar from "components/FilterBar";
-import { getLibraries, LibraryInfo } from "lib/libraries";
+import { LibraryInfo, getLibraries } from "lib/libraries";
+import { DateTime } from "luxon";
 import { GetStaticProps, NextPage } from "next";
 import Head from "next/head";
-import Script from "next/script";
 import GithubCorner from "react-github-corner";
-import { DateTime } from "luxon";
 import { FaExternalLinkAlt, FaMoon, FaSun } from "react-icons/fa";
 
 type PageProps = {
@@ -42,11 +41,6 @@ const Page: NextPage<PageProps> = ({ items, ts }) => {
         <title>
           jsgrids - Spreadsheet and data grid libraries for JavaScript
         </title>
-        <Script
-          src="https://s.langworth.com/data.js"
-          data-token="ed5bc6ab"
-          defer
-        ></Script>
       </Head>
 
       <Box
