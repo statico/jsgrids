@@ -1,0 +1,45 @@
+title: SpreadJS
+homeUrl: https://developer.mescius.com/spreadjs
+demoUrl: https://developer.mescius.com/spreadjs/demos/
+githubRepo: null
+npmPackage: "@grapecity/spread-sheets"
+license: Commercial
+revenueModel: Custom License
+description: >
+  Deliver true Excel-like spreadsheet experiences, fast - with zero dependencies on Excel. Create financial, budgeting/forecasting, scientific, engineering, healthcare, insurance, and many other similar JavaScript spreadsheet business applications.
+frameworks:
+  vanilla: true
+  typescript: true
+  react: true
+  vue: true
+  angular: true
+features:
+  accessible: Keyboard controls work well, but the entire sheet is rendered to a canvas, which can hinder accessibility
+  copyPaste: true
+  csvExport: true
+  customEditors: true
+  customFormatters: true
+  draggableRows: true
+  editable: true
+  fillDown: true
+  fillRight: true
+  filtering: true
+  formulas: true
+  freezableCols: true
+  headless: false
+  i18n: true
+  maintained: true
+  openSource: false
+  pagination: true
+  pdfExport: true
+  pivots: true
+  rangeSelection: true
+  resizableCols: true
+  responsive: false
+  rowGrouping: true
+  rowSelection: true
+  serverSide: true
+  sorting: true
+  trees: false
+  xlsxExport: true
+  virtualization: true
