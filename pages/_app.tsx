@@ -19,7 +19,7 @@ function MyApp({ Component, pageProps }: AppProps) {
           <Script
             id="femtostats"
             src="https://s.langworth.com/data.js"
-            data-token="ed5bc6ab"
+            data-token="575bca33"
             defer
           />
         )}
