@@ -30,6 +30,7 @@ const throttledFetch = throttler(async (url: string) => {
 
     if (GITHUB_TOKEN && /github.com/.test(url)) {
       headers.Authorization = `token ${GITHUB_TOKEN}`;
+      headers.Accept = "application/vnd.github.v3+json";
     }
 
     if (/bundlephobia/.test(url)) {
@@ -39,8 +40,9 @@ const throttledFetch = throttler(async (url: string) => {
 
     const fn = async () => {
       const res = await fetch(url, { headers });
+      const resHeaders = Object.fromEntries(res.headers.entries());
       const data = await res.json();
-      return { headers: JSON.parse(JSON.stringify(res.headers)), data };
+      return { headers: resHeaders, data };
     };
 
     return await pRetry(fn, {
@@ -56,9 +58,10 @@ const throttledFetch = throttler(async (url: string) => {
       },
     });
   } catch (err: any) {
-    const status = err.response?.status;
-    const headers = JSON.stringify(err.response?.headers, null, "  ");
-    log("failed %s - status=%s, headers=%o - %s", url, status, headers, err);
+    const res = err.response;
+    const status = res?.status;
+    const resHeaders = Object.fromEntries(res?.headers.entries());
+    log("failed %s - status=%s, headers=%o - %s", url, status, resHeaders, err);
     throw err;
   }
 });
