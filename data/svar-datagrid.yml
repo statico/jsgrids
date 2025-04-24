@@ -1,0 +1,36 @@
+title: SVAR DataGrid
+homeUrl: https://svar.dev/svelte/datagrid/
+demoUrl: https://docs.svar.dev/svelte/grid/samples/#/base/willow
+githubRepo: https://github.com/svar-widgets/grid
+npmPackage: wx-svelte-grid
+license: MIT
+revenueModel: Free
+description: >
+  SVAR DataGrid is a lightweight and blazing-fast data grid component 
+  with a rich feature set including in-cell editing, sorting, filtering, 
+  virtual scrolling, pagination, keyboard navigation, and special helper 
+  for server-side integration. Available in both Svelte and React versions. 
+frameworks:
+  react: true
+  svelte: true
+features:
+  accessible: true
+  customEditors: true
+  customFormatters: true
+  draggableRows: true
+  editable: true
+  filtering: true
+  freezableCols: true
+  i18n: true
+  maintained: true
+  openSource: true
+  pagination: true
+  resizableCols: true
+  responsive: true
+  rowGrouping: true
+  rowSelection: true
+  serverSide: true
+  sorting: true
+  trees: true
+  xlsxExport: true
+  virtualization: true
