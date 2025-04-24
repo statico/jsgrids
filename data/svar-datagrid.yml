@@ -6,7 +6,10 @@ npmPackage: wx-svelte-grid
 license: MIT
 revenueModel: Free
 description: >
-  SVAR DataGrid is a lightweight and blazing-fast data grid component with a rich feature set including in-cell editing, sorting, filtering, virtual scrolling, pagination, keyboard navigation, and special helper for server-side integration. Available in both Svelte and React versions. 
+  SVAR DataGrid is a lightweight and blazing-fast data grid component 
+  with a rich feature set including in-cell editing, sorting, filtering, 
+  virtual scrolling, pagination, keyboard navigation, and special helper 
+  for server-side integration. Available in both Svelte and React versions. 
 frameworks:
   react: true
   svelte: true
