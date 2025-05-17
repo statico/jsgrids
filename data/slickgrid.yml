@@ -11,9 +11,11 @@ description: >
   SlickGrid should be compatible with a wide range of modern data-centric
   frameworks.
 frameworks:
-  jquery: true
-  angular: https://github.com/ghiscoding/Angular-Slickgrid
-  typescript: https://definitelytyped.github.io/
+  vanilla: true
+  typescript: true
+  angular: https://github.com/ghiscoding/slickgrid-universal
+  react: https://github.com/ghiscoding/slickgrid-universal
+  vue: https://github.com/ghiscoding/slickgrid-universal
 features:
   accessible: false
   copyPaste: false
