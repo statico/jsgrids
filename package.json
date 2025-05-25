@@ -22,7 +22,7 @@
     "humanize-plus": "^1.8.2",
     "js-yaml": "^4.1.0",
     "luxon": "^3.4.3",
-    "next": "^13.5.4",
+    "next": "^14.2.26",
     "p-retry": "^6.1.0",
     "p-throttle": "^5.1.0",
     "react": "^18",
