@@ -1,0 +1,46 @@
+title: Mantine React Table
+homeUrl: https://www.mantine-react-table.com/
+demoUrl: https://www.mantine-react-table.com/docs/examples/basic
+githubRepo: KevinVandy/mantine-react-table
+npmPackage: mantine-react-table
+license: MIT License
+revenueModel: Free
+description: >
+  A fully featured Mantine V7 implementation of TanStack React Table V8,
+  forked from Material React Table. Built with Mantine components instead
+  of Material UI, making it more suitable for Tailwind users and those
+  preferring a more "pure" CSS component library.
+frameworks:
+  react: true
+features:
+  accessible: true
+  copyPaste: true
+  csvExport: true
+  customEditors: true
+  customFormatters: true
+  draggableRows: true
+  editable: true
+  fillDown: false
+  fillRight: false
+  filtering: true
+  formulas: false
+  freezableCols: true
+  headless: false
+  i18n: true
+  maintained: true
+  openSource: true
+  pagination: true
+  pdfExport: true
+  pivots: false
+  rangeSelection: true
+  resizableCols: true
+  responsive: true
+  rowGrouping: true
+  rowSelection: true
+  search: true
+  serverSide: true
+  sorting: true
+  trees: true
+  typescript: true
+  xlsxExport: true
+  virtualization: true
