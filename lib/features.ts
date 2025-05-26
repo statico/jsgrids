@@ -195,7 +195,7 @@ export const Features = {
     abbreviation: "TS",
     description:
       "The library provides TypeScript type definitions or is written in TypeScript.",
-    important: false,
+    important: true,
   },
   xlsxExport: {
     title: "XLSX Export",
