@@ -1,17 +1,4 @@
-import {
-  Box,
-  Button,
-  chakra,
-  Flex,
-  Heading,
-  HStack,
-  Link,
-  SimpleGrid,
-  Stack,
-  Text,
-  Tooltip,
-  useColorModeValue,
-} from "@chakra-ui/react";
+import React, { useState } from "react";
 import { filesize } from "filesize";
 import { FeatureName, Features } from "lib/features";
 import { FrameworkIcons, FrameworkTitles } from "lib/frameworks";
@@ -42,12 +29,39 @@ const ColoredIcon = ({
   icon: JSXElementConstructor<any>;
   color: string;
 }) => (
-  <Text color={color}>
+  <span style={{ color }}>
     <Icon />
-  </Text>
+  </span>
 );
 
-const useCardBackgroundColor = () => useColorModeValue("white", "gray.700");
+// Simple Tooltip component
+const Tooltip = ({
+  children,
+  label,
+  className = "",
+}: {
+  children: React.ReactNode;
+  label: string;
+  className?: string;
+}) => {
+  const [isVisible, setIsVisible] = useState(false);
+
+  return (
+    <div
+      className={`relative inline-block ${className}`}
+      onMouseEnter={() => setIsVisible(true)}
+      onMouseLeave={() => setIsVisible(false)}
+    >
+      {children}
+      {isVisible && (
+        <div className="absolute z-10 px-2 py-1 text-sm text-white bg-gray-900 rounded shadow-lg bottom-full left-1/2 transform -translate-x-1/2 mb-1 whitespace-nowrap">
+          {label}
+          <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-gray-900"></div>
+        </div>
+      )}
+    </div>
+  );
+};
 
 type FeatureProps = {
   name: FeatureName;
@@ -62,25 +76,25 @@ const Feature = ({ name, value }: FeatureProps) => {
   if (value) {
     return (
       <Tooltip label={typeof value === "string" ? value : description}>
-        <HStack spacing={1} cursor="help" _hover={{ opacity: 0.75 }}>
+        <div className="flex items-center space-x-1 cursor-help hover:opacity-75">
           {value === true ? (
-            <ColoredIcon icon={FaCheckCircle} color="green.400" />
+            <ColoredIcon icon={FaCheckCircle} color="#48bb78" />
           ) : /premium/i.test(value) ? (
-            <ColoredIcon icon={FaArrowCircleUp} color="blue.400" />
+            <ColoredIcon icon={FaArrowCircleUp} color="#4299e1" />
           ) : (
-            <ColoredIcon icon={FaInfoCircle} color="orange.300" />
+            <ColoredIcon icon={FaInfoCircle} color="#ed8936" />
           )}
-          <Text>{title}</Text>
-        </HStack>
+          <span className="text-sm">{title}</span>
+        </div>
       </Tooltip>
     );
   } else if (!value && important) {
     return (
       <Tooltip label={typeof value === "string" ? value : description}>
-        <HStack spacing={1} cursor="help" _hover={{ opacity: 0.75 }}>
-          <ColoredIcon icon={FaTimesCircle} color="red.500" />
-          <Text>{`Not ${title}`}</Text>
-        </HStack>
+        <div className="flex items-center space-x-1 cursor-help hover:opacity-75">
+          <ColoredIcon icon={FaTimesCircle} color="#f56565" />
+          <span className="text-sm">{`Not ${title}`}</span>
+        </div>
       </Tooltip>
     );
   } else {
@@ -93,10 +107,9 @@ type FrameworkListProps = {
 };
 
 const FrameworkList = ({ info }: FrameworkListProps) => {
-  const bg = useCardBackgroundColor();
   const names = Object.keys(info.frameworks) as FrameworkName[];
   return (
-    <HStack fontSize="2xl">
+    <div className="flex space-x-2 text-2xl">
       {names.map((name) => {
         const value = info.frameworks[name];
         const isThirdParty = typeof value === "string";
@@ -107,29 +120,23 @@ const FrameworkList = ({ info }: FrameworkListProps) => {
         const Icon = FrameworkIcons[name];
         return (
           <Tooltip label={title} key={name}>
-            <Link
+            <a
               href={url ?? undefined}
-              position="relative"
-              _hover={{ opacity: 0.75 }}
+              className="relative hover:opacity-75"
               title={title}
               aria-label={title}
             >
               <Icon />
-              <chakra.div
-                position="absolute"
-                top={-1}
-                right={-1}
-                boxSize={3}
-                border={`2px solid`}
-                borderColor={bg}
-                bg={isThirdParty ? "yellow.500" : "green.400"}
-                borderRadius={999}
+              <div
+                className={`absolute -top-1 -right-1 w-3 h-3 border-2 border-white dark:border-gray-700 rounded-full ${
+                  isThirdParty ? "bg-yellow-500" : "bg-green-400"
+                }`}
               />
-            </Link>
+            </a>
           </Tooltip>
         );
       })}
-    </HStack>
+    </div>
   );
 };
 
@@ -154,14 +161,14 @@ const Metric = ({
     value === undefined ? "unknown" : formattedValue,
   );
   const contents = (
-    <HStack cursor="pointer" _hover={{ opacity: 0.75 }}>
-      <Text>{icon}</Text>
-      <Text>{formattedValue}</Text>
-    </HStack>
+    <div className="flex items-center space-x-1 cursor-pointer hover:opacity-75">
+      <span>{icon}</span>
+      <span>{formattedValue}</span>
+    </div>
   );
   return value ? (
     <Tooltip label={formattedTitle}>
-      <Link href={href}>{contents}</Link>
+      <a href={href}>{contents}</a>
     </Tooltip>
   ) : (
     <Tooltip label={formattedTitle}>{contents}</Tooltip>
@@ -173,35 +180,29 @@ type CardProps = {
 };
 
 const Card = ({ info }: CardProps) => {
-  const bg = useCardBackgroundColor();
   const id = `card-${info.id}`;
   const gh = info.github;
   return (
-    <Stack
-      as="section"
-      bg={bg}
-      shadow="lg"
-      borderRadius="md"
-      p={8}
-      spacing={4}
+    <section
+      className="bg-white dark:bg-gray-700 shadow-lg rounded-md p-8 space-y-4 flex flex-col"
       aria-labelledby={id}
     >
-      <Flex alignItems="center" justifyContent="space-between">
-        <Heading
-          size="lg"
-          as="a"
-          href={info.homeUrl ?? undefined}
-          fontWeight="semibold"
-          id={id}
-        >
-          {info.title}
-        </Heading>
+      <div className="flex items-center justify-between">
+        <h3 className="text-lg font-semibold">
+          <a
+            href={info.homeUrl ?? undefined}
+            id={id}
+            className="hover:underline"
+          >
+            {info.title}
+          </a>
+        </h3>
         <FrameworkList info={info} />
-      </Flex>
+      </div>
 
-      <Text>{info.description}</Text>
+      <p className="text-gray-700 dark:text-gray-300">{info.description}</p>
 
-      <SimpleGrid columns={3} spacingX={12} spacingY={1} fontSize="sm">
+      <div className="grid grid-cols-3 gap-x-12 gap-y-1 text-sm">
         <Metric
           icon={<GoStar />}
           value={gh?.stars}
@@ -239,50 +240,54 @@ const Card = ({ info }: CardProps) => {
           title={"%s open issues on GitHub"}
           href={gh?.url + "/issues"}
         />
-      </SimpleGrid>
+      </div>
 
-      <SimpleGrid
-        columns={2}
-        spacingX={4}
-        fontSize="xs"
-        textTransform="uppercase"
-      >
+      <div className="grid grid-cols-2 gap-x-4 text-xs uppercase">
         {sortedFeatureNames(info.features).map((name) => (
           <Feature key={name} name={name} value={info.features[name]} />
         ))}
-      </SimpleGrid>
+      </div>
 
-      <Box fontSize="sm">
-        <HStack spacing={2}>
+      <div className="text-sm space-y-1">
+        <div className="flex items-center space-x-2">
           <GoLaw />
-          <Text>{info.license}</Text>
-        </HStack>
-        <HStack spacing={2}>
+          <span>{info.license}</span>
+        </div>
+        <div className="flex items-center space-x-2">
           <FaDollarSign />
-          <Text>{info.revenueModel}</Text>
-        </HStack>
-      </Box>
+          <span>{info.revenueModel}</span>
+        </div>
+      </div>
 
-      <Flex flexGrow={1} flexDir="column" justifyContent="end">
-        <HStack justifyContent="space-between" spacing={6}>
+      <div className="flex-grow flex flex-col justify-end">
+        <div className="flex justify-between space-x-6">
           {info.demoUrl && (
-            <Button as="a" href={info.demoUrl} flex={1}>
+            <a
+              href={info.demoUrl}
+              className="flex-1 bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded text-center"
+            >
               Demo
-            </Button>
+            </a>
           )}
           {info.github?.url && (
-            <Button as="a" href={info.github?.url} flex={1}>
+            <a
+              href={info.github?.url}
+              className="flex-1 bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded text-center"
+            >
               Source
-            </Button>
+            </a>
           )}
           {info.homeUrl && (
-            <Button as="a" href={info.homeUrl} flex={1}>
+            <a
+              href={info.homeUrl}
+              className="flex-1 bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded text-center"
+            >
               Home
-            </Button>
+            </a>
           )}
-        </HStack>
-      </Flex>
-    </Stack>
+        </div>
+      </div>
+    </section>
   );
 };
 

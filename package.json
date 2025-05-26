@@ -12,13 +12,7 @@
   },
   "dependencies": {
     "@babel/core": "^7.23.0",
-    "@chakra-ui/react": "^2.8.1",
-    "@chakra-ui/styled-system": "^2.9.1",
-    "@chakra-ui/theme-tools": "^2.1.1",
-    "@emotion/react": "^11",
-    "@emotion/styled": "^11",
     "date-fns": "^4.1.0",
-    "framer-motion": "^10",
     "filesize": "^10.1.6",
     "next": "^13.5.4",
     "p-retry": "^6.1.0",

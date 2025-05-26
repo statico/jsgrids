@@ -1,14 +1,4 @@
-import {
-  Box,
-  Button,
-  Heading,
-  Icon,
-  Link,
-  SimpleGrid,
-  Stack,
-  Text,
-  useColorMode,
-} from "@chakra-ui/react";
+import React, { useState, useEffect } from "react";
 import Card from "components/Card";
 import FilterBar from "components/FilterBar";
 import { LibraryInfo, getLibraries } from "lib/libraries";
@@ -33,93 +23,134 @@ export const getStaticProps: GetStaticProps = async () => {
 };
 
 const Page: NextPage<PageProps> = ({ items, ts }) => {
-  const { colorMode, toggleColorMode } = useColorMode();
-  const blue = colorMode === "dark" ? "#1c4a75" : "#3182ce";
+  const [darkMode, setDarkMode] = useState(false);
+
+  useEffect(() => {
+    // Check for saved theme preference or default to system preference
+    const savedTheme = localStorage.getItem("theme");
+    const prefersDark = window.matchMedia(
+      "(prefers-color-scheme: dark)",
+    ).matches;
+
+    if (savedTheme === "dark" || (!savedTheme && prefersDark)) {
+      setDarkMode(true);
+      document.documentElement.classList.add("dark");
+    } else {
+      setDarkMode(false);
+      document.documentElement.classList.remove("dark");
+    }
+  }, []);
+
+  const toggleColorMode = () => {
+    const newDarkMode = !darkMode;
+    setDarkMode(newDarkMode);
+
+    if (newDarkMode) {
+      document.documentElement.classList.add("dark");
+      localStorage.setItem("theme", "dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+      localStorage.setItem("theme", "light");
+    }
+  };
+
+  const blue = darkMode ? "#1c4a75" : "#3182ce";
+
   return (
-    <>
+    <div className={darkMode ? "dark" : ""}>
       <Head>
         <title>
           jsgrids - Spreadsheet and data grid libraries for JavaScript
         </title>
       </Head>
 
-      <Box
-        as="header"
-        color="white"
-        p={8}
-        textAlign="center"
-        // Generated with https://www.heropatterns.com/
+      <header
+        className="text-white p-8 text-center relative"
         style={{
           backgroundColor: blue,
           backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cg fill-rule='evenodd'%3E%3Cg fill='%2363B3ED' fill-opacity='0.4'%3E%3Cpath opacity='.5' d='M96 95h4v1h-4v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9zm-1 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9z'/%3E%3Cpath d='M6 5V0H5v5H0v1h5v94h1V6h94V5H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
         }}
       >
-        <Button
-          p={1}
+        <button
+          className="p-1 bg-transparent absolute top-2 left-2 text-white hover:opacity-75"
           onClick={toggleColorMode}
-          background="transparent"
-          position="absolute"
-          top={2}
-          left={2}
-          color="white"
-          title={`Set color mode to ${
-            colorMode === "light" ? "dark" : "light"
-          }`}
-          aria-label={`Set color mode to ${
-            colorMode === "light" ? "dark" : "light"
-          }`}
+          title={`Set color mode to ${darkMode ? "light" : "dark"}`}
+          aria-label={`Set color mode to ${darkMode ? "light" : "dark"}`}
         >
-          {colorMode === "light" ? <FaMoon /> : <FaSun />}
-        </Button>
+          {darkMode ? <FaSun /> : <FaMoon />}
+        </button>
         <GithubCorner
           href="https://github.com/statico/jsgrids"
           bannerColor="#fff"
           octoColor={blue}
         />
-        <Stack>
-          <Heading as="h1" size="2xl">
-            jsgrids.statico.io
-          </Heading>
-          <Heading as="h2" size="lg" fontWeight="normal">
+        <div className="space-y-4">
+          <h1 className="text-4xl font-bold">jsgrids.statico.io</h1>
+          <h2 className="text-2xl font-normal">
             A List of JavaScript Spreadsheet and Data Grid Libraries
-          </Heading>
-          <Text size="md" fontWeight="normal" suppressHydrationWarning>
+          </h2>
+          <p className="text-base font-normal" suppressHydrationWarning>
             Last Update: {format(new Date(ts), "MMM d, yyyy")} -{" "}
-            <Link href="https://github.com/statico/jsgrids#contributing">
-              Contributions welcome! <Icon as={FaExternalLinkAlt} boxSize={3} />
-            </Link>
-          </Text>
-        </Stack>
-      </Box>
+            <a
+              href="https://github.com/statico/jsgrids#contributing"
+              className="hover:underline"
+            >
+              Contributions welcome!{" "}
+              <FaExternalLinkAlt className="inline w-3 h-3" />
+            </a>
+          </p>
+        </div>
+      </header>
 
       <FilterBar items={items}>
         {(filteredItems, filterBar) => (
-          <Box px={6}>
-            <Box>{filterBar}</Box>
-            <SimpleGrid columns={[1, null, null, 2, 3]} as="main" spacing={8}>
+          <div className="px-6">
+            <div>{filterBar}</div>
+            <main className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8">
               {filteredItems.map((item) => (
                 <Card key={item.id} info={item} />
               ))}
-            </SimpleGrid>
-          </Box>
+            </main>
+          </div>
         )}
       </FilterBar>
 
-      <Stack as="footer" p={10} color="gray.600" textAlign="center">
-        <Link href="https://github.com/statico/jsgrids">
-          Help improve this list on GitHub
-        </Link>
-        <Link href="https://nextjs.org/">Built with Next.js</Link>
-        <Link href="https://vercel.com">Hosted on Vercel</Link>
-        <Link href="http://www.heropatterns.com">
-          Background from Hero Patterns
-        </Link>
-        <Link href="https://bundlephobia.com/">
-          Package sizes from Bundlephobia
-        </Link>
-        <Link href="/list">View data as table</Link>
-      </Stack>
-    </>
+      <footer className="p-10 text-gray-600 text-center space-y-2">
+        <div>
+          <a
+            href="https://github.com/statico/jsgrids"
+            className="hover:underline"
+          >
+            Help improve this list on GitHub
+          </a>
+        </div>
+        <div>
+          <a href="https://nextjs.org/" className="hover:underline">
+            Built with Next.js
+          </a>
+        </div>
+        <div>
+          <a href="https://vercel.com" className="hover:underline">
+            Hosted on Vercel
+          </a>
+        </div>
+        <div>
+          <a href="http://www.heropatterns.com" className="hover:underline">
+            Background from Hero Patterns
+          </a>
+        </div>
+        <div>
+          <a href="https://bundlephobia.com/" className="hover:underline">
+            Package sizes from Bundlephobia
+          </a>
+        </div>
+        <div>
+          <a href="/list" className="hover:underline">
+            View data as table
+          </a>
+        </div>
+      </footer>
+    </div>
   );
 };
 

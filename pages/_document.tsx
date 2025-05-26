@@ -1,5 +1,4 @@
-import { ColorModeScript } from "@chakra-ui/react";
-import theme from "lib/theme";
+import React from "react";
 import Document, { Head, Html, Main, NextScript } from "next/document";
 
 const name = "jsgrids";
@@ -43,9 +42,9 @@ class MyDocument extends Document {
           <meta name="twitter:description" content={description} />
           <meta name="twitter:site" content={name} />
           <meta name="twitter:image" content={image.url} />
+          <script src="https://cdn.tailwindcss.com"></script>
         </Head>
-        <body>
-          <ColorModeScript initialColorMode={theme.config.initialColorMode} />
+        <body className="bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-gray-100">
           <Main />
           <NextScript />
         </body>

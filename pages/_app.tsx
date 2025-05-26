@@ -1,11 +1,10 @@
-import { ChakraProvider } from "@chakra-ui/react";
-import theme from "lib/theme";
+import React from "react";
 import { AppProps } from "next/app";
 import Script from "next/script";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <ChakraProvider theme={theme}>
+    <>
       <Component {...pageProps} />
 
       {process.env.NODE_ENV === "production" && (
@@ -17,7 +16,7 @@ function MyApp({ Component, pageProps }: AppProps) {
           defer
         />
       )}
-    </ChakraProvider>
+    </>
   );
 }
 

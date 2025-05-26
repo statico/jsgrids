@@ -1,13 +1,4 @@
-import {
-  Box,
-  Button,
-  Menu,
-  MenuButton,
-  MenuItem,
-  MenuList,
-  Text,
-} from "@chakra-ui/react";
-import React, { ReactNode } from "react";
+import React, { ReactNode, useState, useRef, useEffect } from "react";
 import { GoCheck, GoChevronDown } from "react-icons/go";
 
 type Option = {
@@ -16,7 +7,7 @@ type Option = {
   description?: string;
 };
 
-const BlankIcon = () => <Box boxSize="1em" />;
+const BlankIcon = () => <div className="w-4 h-4" />;
 
 type SingleItemPickerProps = {
   children: ReactNode;
@@ -33,38 +24,71 @@ export const SingleItemPicker = ({
   onChange,
   allowNull = true,
 }: SingleItemPickerProps) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const menuRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
   return (
-    <Menu>
-      <MenuButton as={Button} rightIcon={<GoChevronDown />} fontWeight="normal">
-        {children}
-      </MenuButton>
-      <MenuList>
-        {allowNull && (
-          <MenuItem
-            icon={!selected ? <GoCheck /> : <BlankIcon />}
-            aria-selected={!selected}
-            onClick={() => {
-              onChange(null);
-            }}
-          >
-            Any
-          </MenuItem>
-        )}
-        {options.map(({ key, title, description }) => (
-          <MenuItem
-            key={key}
-            icon={selected === key ? <GoCheck /> : <BlankIcon />}
-            aria-selected={selected === key}
-            onClick={() => {
-              onChange(key);
-            }}
-          >
-            {title}
-            {description ? <Text size="xs">{description}</Text> : false}
-          </MenuItem>
-        ))}
-      </MenuList>
-    </Menu>
+    <div className="relative" ref={menuRef}>
+      <button
+        className="flex items-center space-x-2 px-3 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded hover:bg-gray-50 dark:hover:bg-gray-600 font-normal"
+        onClick={() => setIsOpen(!isOpen)}
+      >
+        <span>{children}</span>
+        <GoChevronDown />
+      </button>
+
+      {isOpen && (
+        <div className="absolute z-10 mt-1 w-48 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md shadow-lg">
+          {allowNull && (
+            <button
+              className="w-full flex items-center space-x-2 px-3 py-2 text-left hover:bg-gray-100 dark:hover:bg-gray-600"
+              onClick={() => {
+                onChange(null);
+                setIsOpen(false);
+              }}
+            >
+              {!selected ? <GoCheck className="w-4 h-4" /> : <BlankIcon />}
+              <span>Any</span>
+            </button>
+          )}
+          {options.map(({ key, title, description }) => (
+            <button
+              key={key}
+              className="w-full flex items-center space-x-2 px-3 py-2 text-left hover:bg-gray-100 dark:hover:bg-gray-600"
+              onClick={() => {
+                onChange(key);
+                setIsOpen(false);
+              }}
+            >
+              {selected === key ? (
+                <GoCheck className="w-4 h-4" />
+              ) : (
+                <BlankIcon />
+              )}
+              <div>
+                <div>{title}</div>
+                {description && (
+                  <div className="text-xs text-gray-500">{description}</div>
+                )}
+              </div>
+            </button>
+          ))}
+        </div>
+      )}
+    </div>
   );
 };
 

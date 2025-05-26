@@ -1,11 +1,4 @@
-import {
-  BoxProps,
-  Button,
-  chakra,
-  HStack,
-  Text,
-  Tooltip,
-} from "@chakra-ui/react";
+import React from "react";
 import MultiItemPicker from "components/MultiItemPicker";
 import SingleItemPicker from "components/SingleItemPicker";
 import { FeatureName, FeatureNames, Features } from "lib/features";
@@ -19,40 +12,70 @@ import { hasAllKeys, SortOptionKey, SortOptions } from "lib/sorting";
 import { useFilterStore } from "lib/store";
 import { ReactNode } from "react";
 
+// Simple Tooltip component
+const Tooltip = ({
+  children,
+  title,
+  className = "",
+}: {
+  children: React.ReactNode;
+  title: string;
+  className?: string;
+}) => {
+  const [isVisible, setIsVisible] = React.useState(false);
+
+  return (
+    <div
+      className={`relative inline-block ${className}`}
+      onMouseEnter={() => setIsVisible(true)}
+      onMouseLeave={() => setIsVisible(false)}
+    >
+      {children}
+      {isVisible && (
+        <div className="absolute z-10 px-2 py-1 text-sm text-white bg-gray-900 rounded shadow-lg bottom-full left-1/2 transform -translate-x-1/2 mb-1 whitespace-nowrap">
+          {title}
+          <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-gray-900"></div>
+        </div>
+      )}
+    </div>
+  );
+};
+
 const ResponsiveText = ({ short, long }: { short: string; long: string }) => (
   <>
-    <Text display={["inline", null, null, "none"]}>{short}</Text>
-    <Text display={["none", null, null, "inline"]}>{long}</Text>
+    <span className="inline md:hidden">{short}</span>
+    <span className="hidden md:inline">{long}</span>
   </>
 );
 
-const FrameworkSelector = (props: BoxProps) => {
+const FrameworkSelector = ({ className = "" }: { className?: string }) => {
   const framework = useFilterStore((state) => state.framework);
   const setFramework = useFilterStore((state) => state.setFramework);
   const handleToggle = (name: FrameworkName) => () => {
     setFramework(framework === name ? null : name);
   };
   return (
-    <HStack spacing={1} {...props}>
+    <div className={`flex items-center space-x-1 ${className}`}>
       <ResponsiveText short="Show:" long="Frameworks:" />
       {FrameworkNames.map((name) => {
         const Icon = FrameworkIcons[name];
         const title = FrameworkTitles[name];
         return (
-          <Tooltip key={name} title={title}>
-            <Button
-              p={1}
+          <Tooltip title={title} key={name}>
+            <button
+              className={`p-1 ${
+                framework === name ? "bg-gray-500" : "bg-transparent"
+              } hover:opacity-75`}
               onClick={handleToggle(name)}
-              background={framework === name ? "gray.500" : "transparent"}
               title={title}
               aria-label={title}
             >
               <Icon style={{ width: 32, height: 32 }} />
-            </Button>
+            </button>
           </Tooltip>
         );
       })}
-    </HStack>
+    </div>
   );
 };
 
@@ -161,28 +184,16 @@ const FilterBar = ({ items, children }: FilterBarProps) => {
   }
 
   const filterBar = (
-    <HStack
-      spacing={2}
-      m={6}
-      as="nav"
-      userSelect="none"
-      alignItems="center"
-      justifyContent="center"
-      flexWrap={["wrap", null, null, null, "nowrap"]}
-    >
-      <FrameworkSelector mb={[2, null, null, null, 0]} />
-      <chakra.div
-        flexBasis="100%"
-        width={0}
-        display={["inherit", null, null, null, "none"]}
-      />
-      <HStack spacing={1} alignItems="center">
+    <nav className="flex flex-wrap items-center justify-center space-x-2 m-6 select-none">
+      <FrameworkSelector className="mb-2 xl:mb-0" />
+      <div className="flex-basis-full w-0 xl:hidden" />
+      <div className="flex items-center space-x-1">
         <FeaturesSelector />
         <LicenseSelector licenses={new Set(items.map((i: any) => i.license))} />
         <SortSelector />
-      </HStack>
-      <Text display={["none", null, "inline"]}>{clone.length} results</Text>
-    </HStack>
+      </div>
+      <span className="hidden sm:inline">{clone.length} results</span>
+    </nav>
   );
 
   return <>{children(clone, filterBar)}</>;
