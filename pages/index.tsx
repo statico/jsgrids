@@ -12,7 +12,7 @@ import {
 import Card from "components/Card";
 import FilterBar from "components/FilterBar";
 import { LibraryInfo, getLibraries } from "lib/libraries";
-import { DateTime } from "luxon";
+import { format } from "date-fns";
 import { GetStaticProps, NextPage } from "next";
 import Head from "next/head";
 import GithubCorner from "react-github-corner";
@@ -27,7 +27,7 @@ export const getStaticProps: GetStaticProps = async () => {
   return {
     props: {
       items: await getLibraries(),
-      ts: DateTime.now().toISO(),
+      ts: new Date().toISOString(),
     },
   };
 };
@@ -84,8 +84,7 @@ const Page: NextPage<PageProps> = ({ items, ts }) => {
             A List of JavaScript Spreadsheet and Data Grid Libraries
           </Heading>
           <Text size="md" fontWeight="normal" suppressHydrationWarning>
-            Last Update:{" "}
-            {DateTime.fromISO(ts).toLocaleString(DateTime.DATE_MED)} -{" "}
+            Last Update: {format(new Date(ts), "MMM d, yyyy")} -{" "}
             <Link href="https://github.com/statico/jsgrids#contributing">
               Contributions welcome! <Icon as={FaExternalLinkAlt} boxSize={3} />
             </Link>
