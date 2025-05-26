@@ -21,6 +21,20 @@ import {
   GoStar,
 } from "react-icons/go";
 import { IoMdDownload } from "react-icons/io";
+import { Button } from "@/components/ui/button";
+import {
+  Card as ShadcnCard,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 const IconWithColor = ({
   icon: Icon,
@@ -34,35 +48,6 @@ const IconWithColor = ({
   </span>
 );
 
-// Simple Tooltip component
-const Tooltip = ({
-  children,
-  label,
-  className = "",
-}: {
-  children: React.ReactNode;
-  label: string;
-  className?: string;
-}) => {
-  const [isVisible, setIsVisible] = useState(false);
-
-  return (
-    <div
-      className={`relative inline-block ${className}`}
-      onMouseEnter={() => setIsVisible(true)}
-      onMouseLeave={() => setIsVisible(false)}
-    >
-      {children}
-      {isVisible && (
-        <div className="absolute z-10 px-2 py-1 text-sm text-white bg-gray-900 rounded shadow-lg bottom-full left-1/2 transform -translate-x-1/2 mb-1 whitespace-nowrap">
-          {label}
-          <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-gray-900"></div>
-        </div>
-      )}
-    </div>
-  );
-};
-
 type FeatureProps = {
   name: FeatureName;
   value: boolean | string | null;
@@ -75,26 +60,36 @@ const Feature = ({ name, value }: FeatureProps) => {
   const { title, description, important } = Features[name];
   if (value) {
     return (
-      <Tooltip label={typeof value === "string" ? value : description}>
-        <div className="flex items-center space-x-1.5 cursor-help hover:opacity-75">
-          {value === true ? (
-            <IconWithColor icon={FaCheckCircle} color="#48bb78" />
-          ) : /premium/i.test(value) ? (
-            <IconWithColor icon={FaArrowCircleUp} color="#4299e1" />
-          ) : (
-            <IconWithColor icon={FaInfoCircle} color="#ed8936" />
-          )}
-          <span className="text-xs">{title}</span>
-        </div>
+      <Tooltip>
+        <TooltipTrigger asChild>
+          <div className="flex items-center space-x-1.5 cursor-help hover:opacity-75">
+            {value === true ? (
+              <IconWithColor icon={FaCheckCircle} color="#48bb78" />
+            ) : /premium/i.test(value) ? (
+              <IconWithColor icon={FaArrowCircleUp} color="#4299e1" />
+            ) : (
+              <IconWithColor icon={FaInfoCircle} color="#ed8936" />
+            )}
+            <span className="text-xs">{title}</span>
+          </div>
+        </TooltipTrigger>
+        <TooltipContent>
+          <p>{typeof value === "string" ? value : description}</p>
+        </TooltipContent>
       </Tooltip>
     );
   } else if (!value && important) {
     return (
-      <Tooltip label={typeof value === "string" ? value : description}>
-        <div className="flex items-center space-x-1.5 cursor-help hover:opacity-75">
-          <IconWithColor icon={FaTimesCircle} color="#f56565" />
-          <span className="text-xs">{`Not ${title}`}</span>
-        </div>
+      <Tooltip>
+        <TooltipTrigger asChild>
+          <div className="flex items-center space-x-1.5 cursor-help hover:opacity-75">
+            <IconWithColor icon={FaTimesCircle} color="#f56565" />
+            <span className="text-xs">{`Not ${title}`}</span>
+          </div>
+        </TooltipTrigger>
+        <TooltipContent>
+          <p>{typeof value === "string" ? value : description}</p>
+        </TooltipContent>
       </Tooltip>
     );
   } else {
@@ -119,20 +114,25 @@ const FrameworkList = ({ info }: FrameworkListProps) => {
           : `Built-in support for ${FrameworkTitles[name]}`;
         const Icon = FrameworkIcons[name];
         return (
-          <Tooltip label={title} key={name}>
-            <a
-              href={url ?? undefined}
-              className="relative hover:opacity-75"
-              title={title}
-              aria-label={title}
-            >
-              <Icon />
-              <div
-                className={`absolute -top-1 -right-1 w-3 h-3 border-2 border-white dark:border-gray-700 rounded-full ${
-                  isThirdParty ? "bg-yellow-500" : "bg-green-400"
-                }`}
-              />
-            </a>
+          <Tooltip key={name}>
+            <TooltipTrigger asChild>
+              <a
+                href={url ?? undefined}
+                className="relative hover:opacity-75"
+                title={title}
+                aria-label={title}
+              >
+                <Icon />
+                <div
+                  className={`absolute -top-1 -right-1 w-3 h-3 border-2 border-white dark:border-gray-700 rounded-full ${
+                    isThirdParty ? "bg-yellow-500" : "bg-green-400"
+                  }`}
+                />
+              </a>
+            </TooltipTrigger>
+            <TooltipContent>
+              <p>{title}</p>
+            </TooltipContent>
           </Tooltip>
         );
       })}
@@ -167,11 +167,21 @@ const Metric = ({
     </div>
   );
   return value ? (
-    <Tooltip label={formattedTitle}>
-      <a href={href}>{contents}</a>
+    <Tooltip>
+      <TooltipTrigger asChild>
+        <a href={href}>{contents}</a>
+      </TooltipTrigger>
+      <TooltipContent>
+        <p>{formattedTitle}</p>
+      </TooltipContent>
     </Tooltip>
   ) : (
-    <Tooltip label={formattedTitle}>{contents}</Tooltip>
+    <Tooltip>
+      <TooltipTrigger asChild>{contents}</TooltipTrigger>
+      <TooltipContent>
+        <p>{formattedTitle}</p>
+      </TooltipContent>
+    </Tooltip>
   );
 };
 
@@ -183,111 +193,102 @@ const Card = ({ info }: CardProps) => {
   const id = `card-${info.id}`;
   const gh = info.github;
   return (
-    <section
-      className="bg-white dark:bg-gray-700 shadow-lg rounded-md p-8 space-y-4 flex flex-col"
-      aria-labelledby={id}
-    >
-      <div className="flex items-center justify-between">
-        <h3 className="text-lg font-semibold">
-          <a
-            href={info.homeUrl ?? undefined}
-            id={id}
-            className="hover:underline"
-          >
-            {info.title}
-          </a>
-        </h3>
-        <FrameworkList info={info} />
-      </div>
-
-      <p className="text-gray-700 dark:text-gray-300">{info.description}</p>
-
-      <div className="grid grid-cols-3 gap-x-12 gap-y-1 text-sm">
-        <Metric
-          icon={<GoStar />}
-          value={gh?.stars}
-          title={"%s stars on GitHub"}
-          href={gh?.url}
-        />
-        <Metric
-          icon={<IoMdDownload />}
-          value={info.npm?.downloads}
-          title={"%s downloads on NPM in the last week"}
-          href={info.npm?.url}
-        />
-        <Metric
-          icon={<GoRepoForked />}
-          value={gh?.forks}
-          title={"%s forks on GitHub"}
-          href={gh?.url}
-        />
-        <Metric
-          icon={<GoPackage />}
-          value={info.bundlephobia?.gzipSize}
-          formatter={(n: number) => (n >= 0 ? filesize(n) : "?? KB")}
-          title={"Gzipped package size is %s"}
-          href={info.bundlephobia?.url}
-        />
-        <Metric
-          icon={<FaUsers />}
-          value={gh?.contributors}
-          title={"%s contributors on GitHub"}
-          href={gh?.url}
-        />
-        <Metric
-          icon={<GoIssueOpened />}
-          value={gh?.openIssues}
-          title={"%s open issues on GitHub"}
-          href={gh?.url + "/issues"}
-        />
-      </div>
-
-      <div className="grid grid-cols-2 gap-x-4 gap-y-1 text-xs uppercase">
-        {sortedFeatureNames(info.features).map((name) => (
-          <Feature key={name} name={name} value={info.features[name]} />
-        ))}
-      </div>
-
-      <div className="text-sm space-y-1">
-        <div className="flex items-center space-x-2">
-          <GoLaw />
-          <span>{info.license}</span>
-        </div>
-        <div className="flex items-center space-x-2">
-          <FaDollarSign />
-          <span>{info.revenueModel}</span>
-        </div>
-      </div>
-
-      <div className="flex-grow flex flex-col justify-end">
-        <div className="flex justify-between space-x-6">
-          {info.demoUrl && (
+    <ShadcnCard className="flex flex-col h-full">
+      <CardHeader>
+        <div className="flex items-center justify-between">
+          <CardTitle>
             <a
-              href={info.demoUrl}
-              className="flex-1 bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded text-center"
+              href={info.homeUrl ?? undefined}
+              id={id}
+              className="hover:underline"
             >
-              Demo
+              {info.title}
             </a>
+          </CardTitle>
+          <FrameworkList info={info} />
+        </div>
+        <CardDescription>{info.description}</CardDescription>
+      </CardHeader>
+
+      <CardContent className="flex-grow space-y-4">
+        <div className="grid grid-cols-3 gap-x-12 gap-y-1 text-sm">
+          <Metric
+            icon={<GoStar />}
+            value={gh?.stars}
+            title={"%s stars on GitHub"}
+            href={gh?.url}
+          />
+          <Metric
+            icon={<IoMdDownload />}
+            value={info.npm?.downloads}
+            title={"%s downloads on NPM in the last week"}
+            href={info.npm?.url}
+          />
+          <Metric
+            icon={<GoRepoForked />}
+            value={gh?.forks}
+            title={"%s forks on GitHub"}
+            href={gh?.url}
+          />
+          <Metric
+            icon={<GoPackage />}
+            value={info.bundlephobia?.gzipSize}
+            formatter={(n: number) => (n >= 0 ? filesize(n) : "?? KB")}
+            title={"Gzipped package size is %s"}
+            href={info.bundlephobia?.url}
+          />
+          <Metric
+            icon={<FaUsers />}
+            value={gh?.contributors}
+            title={"%s contributors on GitHub"}
+            href={gh?.url}
+          />
+          <Metric
+            icon={<GoIssueOpened />}
+            value={gh?.openIssues}
+            title={"%s open issues on GitHub"}
+            href={gh?.url + "/issues"}
+          />
+        </div>
+
+        <div className="grid grid-cols-2 gap-x-4 gap-y-1 text-xs uppercase">
+          {sortedFeatureNames(info.features).map((name) => (
+            <Feature key={name} name={name} value={info.features[name]} />
+          ))}
+        </div>
+
+        <div className="text-sm space-y-1">
+          <div className="flex items-center space-x-2">
+            <GoLaw />
+            <span>{info.license}</span>
+          </div>
+          <div className="flex items-center space-x-2">
+            <FaDollarSign />
+            <span>{info.revenueModel}</span>
+          </div>
+        </div>
+      </CardContent>
+
+      <CardFooter>
+        <div className="flex justify-between space-x-6 w-full">
+          {info.demoUrl && (
+            <Button asChild className="flex-1">
+              <a href={info.demoUrl}>Demo</a>
+            </Button>
           )}
           {info.github?.url && (
-            <a
-              href={info.github?.url}
-              className="flex-1 bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded text-center"
-            >
-              Source
-            </a>
+            <Button asChild className="flex-1">
+              <a href={info.github?.url}>Source</a>
+            </Button>
           )}
           {info.homeUrl && (
-            <a
-              href={info.homeUrl}
-              className="flex-1 bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded text-center"
-            >
-              Home
-            </a>
+            <Button asChild className="flex-1">
+              <a href={info.homeUrl}>Home</a>
+            </Button>
           )}
         </div>
-      </div>
-    </section>
+      </CardFooter>
+    </ShadcnCard>
   );
 };
 

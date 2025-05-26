@@ -2,6 +2,7 @@ import React from "react";
 import Script from "next/script";
 import type { Metadata } from "next";
 import "./globals.css";
+import { TooltipProvider } from "@/components/ui/tooltip";
 
 const name = "jsgrids";
 const title = "jsgrids - Spreadsheet and data grid libraries for JavaScript";

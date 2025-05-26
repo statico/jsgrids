@@ -12,35 +12,12 @@ import { FrameworkName, LibraryInfo } from "@/lib/libraries";
 import { hasAllKeys, SortOptionKey, SortOptions } from "@/lib/sorting";
 import { useFilterStore } from "@/lib/store";
 import { ReactNode } from "react";
-
-// Simple Tooltip component
-const Tooltip = ({
-  children,
-  title,
-  className = "",
-}: {
-  children: React.ReactNode;
-  title: string;
-  className?: string;
-}) => {
-  const [isVisible, setIsVisible] = React.useState(false);
-
-  return (
-    <div
-      className={`relative inline-block ${className}`}
-      onMouseEnter={() => setIsVisible(true)}
-      onMouseLeave={() => setIsVisible(false)}
-    >
-      {children}
-      {isVisible && (
-        <div className="absolute z-10 px-2 py-1 text-sm text-white bg-gray-900 rounded shadow-lg bottom-full left-1/2 transform -translate-x-1/2 mb-1 whitespace-nowrap">
-          {title}
-          <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-gray-900"></div>
-        </div>
-      )}
-    </div>
-  );
-};
+import { Button } from "@/components/ui/button";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 const ResponsiveText = ({ short, long }: { short: string; long: string }) => (
   <>
@@ -62,17 +39,22 @@ const FrameworkSelector = ({ className = "" }: { className?: string }) => {
         const Icon = FrameworkIcons[name];
         const title = FrameworkTitles[name];
         return (
-          <Tooltip title={title} key={name}>
-            <button
-              className={`p-1 ${
-                framework === name ? "bg-gray-500" : "bg-transparent"
-              } hover:opacity-75`}
-              onClick={handleToggle(name)}
-              title={title}
-              aria-label={title}
-            >
-              <Icon style={{ width: 32, height: 32 }} />
-            </button>
+          <Tooltip key={name}>
+            <TooltipTrigger asChild>
+              <Button
+                variant={framework === name ? "default" : "ghost"}
+                size="icon"
+                onClick={handleToggle(name)}
+                title={title}
+                aria-label={title}
+                className="p-1 w-10 h-10"
+              >
+                <Icon style={{ width: 32, height: 32 }} />
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent>
+              <p>{title}</p>
+            </TooltipContent>
           </Tooltip>
         );
       })}
@@ -198,7 +180,7 @@ const FilterBarContent = ({ items, children }: FilterBarProps) => {
     </nav>
   );
 
-  return <>{children(filteredItems, filterBar)}</>;
+  return children(filteredItems, filterBar);
 };
 
 const FilterBar = ({ items, children }: FilterBarProps) => {
