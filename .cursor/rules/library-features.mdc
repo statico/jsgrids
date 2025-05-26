@@ -1,0 +1,6 @@
+---
+description:
+globs: *.yml
+alwaysApply: false
+---
+When editing feature data files in `data/`, *DO NOT* create new features in libraries.ts unless explicitly asked to. Use only the features already available in `features.ts` when describing a library.
