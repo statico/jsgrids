@@ -3,7 +3,7 @@ homeUrl: https://developer.mescius.com/spreadjs
 demoUrl: https://developer.mescius.com/spreadjs/demos/
 githubRepo: null
 npmPackage: "@grapecity/spread-sheets"
-license: Commercial
+license: Commercial License
 revenueModel: Custom License
 description: >
   Deliver true Excel-like spreadsheet experiences, fast - with zero dependencies on Excel. Create financial, budgeting/forecasting, scientific, engineering, healthcare, insurance, and many other similar JavaScript spreadsheet business applications.
