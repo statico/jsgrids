@@ -8,7 +8,6 @@ import GithubCorner from "react-github-corner";
 import { FaExternalLinkAlt } from "react-icons/fa";
 import { ModeToggle } from "@/components/mode-toggle";
 import { HERO_PATTERN_GRID_BACKGROUND } from "@/lib/ui-constants";
-import { useTheme } from "next-themes";
 
 type IndexPageProps = {
   items: LibraryInfo[];
@@ -16,16 +15,11 @@ type IndexPageProps = {
 };
 
 export default function IndexPage({ items, ts }: IndexPageProps) {
-  const { theme } = useTheme();
-  const isDark = theme === "dark";
-  const blue = isDark ? "#1c4a75" : "#3182ce";
-
   return (
     <div>
       <header
-        className="text-white p-8 text-center relative"
+        className="text-white p-8 text-center relative bg-[#3182ce] dark:bg-[#1c4a75] transition-colors duration-200"
         style={{
-          backgroundColor: blue,
           backgroundImage: HERO_PATTERN_GRID_BACKGROUND,
         }}
       >
@@ -35,7 +29,8 @@ export default function IndexPage({ items, ts }: IndexPageProps) {
         <GithubCorner
           href="https://github.com/statico/jsgrids"
           bannerColor="#fff"
-          octoColor={blue}
+          octoColor="#3182ce"
+          className="[&>svg]:fill-[#3182ce] dark:[&>svg]:fill-[#1c4a75]"
         />
         <div className="space-y-4">
           <h1 className="text-4xl font-bold">jsgrids.statico.io</h1>

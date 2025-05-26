@@ -18,6 +18,7 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { GoChevronDown } from "react-icons/go";
 
 const ResponsiveText = ({ short, long }: { short: string; long: string }) => (
   <>
@@ -192,6 +193,9 @@ const FilterBar = ({ items, children }: FilterBarProps) => {
 
   // During SSR and before hydration, show all items with a simple filter bar
   if (!isClient) {
+    // Apply default sorting during SSR to prevent unsorted cards
+    const sortedItems = items.slice().sort(SortOptions[0].fn);
+
     const defaultFilterBar = (
       <nav className="flex flex-wrap items-center justify-center space-x-2 m-6 select-none">
         <div className="flex items-center space-x-1 mb-2 xl:mb-0">
@@ -200,38 +204,61 @@ const FilterBar = ({ items, children }: FilterBarProps) => {
             const Icon = FrameworkIcons[name];
             const title = FrameworkTitles[name];
             return (
-              <button
+              <Button
                 key={name}
-                className="p-1 bg-transparent hover:opacity-75"
+                variant="ghost"
+                size="icon"
+                className="p-1 w-10 h-10"
                 title={title}
                 aria-label={title}
                 disabled
               >
                 <Icon style={{ width: 32, height: 32 }} />
-              </button>
+              </Button>
             );
           })}
         </div>
         <div className="flex-basis-full w-0 xl:hidden" />
         <div className="flex items-center space-x-1">
-          <div className="px-3 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded">
-            <ResponsiveText short="Features" long="Any Feature" />
-          </div>
-          <div className="px-3 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded">
-            <ResponsiveText short="License" long="Any License" />
-          </div>
-          <div className="px-3 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded">
-            <ResponsiveText
-              short="Sort"
-              long={`Sort by ${SortOptions[0].title}`}
-            />
-          </div>
+          <Button
+            variant="outline"
+            className="flex items-center space-x-2 font-normal"
+            disabled
+          >
+            <span>
+              <ResponsiveText short="Features" long="Any Feature" />
+            </span>
+            <GoChevronDown />
+          </Button>
+          <Button
+            variant="outline"
+            className="flex items-center space-x-2 font-normal"
+            disabled
+          >
+            <span>
+              <ResponsiveText short="License" long="Any License" />
+            </span>
+            <GoChevronDown />
+          </Button>
+          <Button
+            variant="outline"
+            className="flex items-center space-x-2 font-normal"
+            disabled
+          >
+            <span>
+              <ResponsiveText
+                short="Sort"
+                long={`Sort by ${SortOptions[0].title}`}
+              />
+            </span>
+            <GoChevronDown />
+          </Button>
         </div>
-        <span className="hidden sm:inline">{items.length} results</span>
+        <span className="hidden sm:inline">{sortedItems.length} results</span>
       </nav>
     );
 
-    return <>{children(items, defaultFilterBar)}</>;
+    return <>{children(sortedItems, defaultFilterBar)}</>;
   }
 
   return <FilterBarContent items={items} children={children} />;
