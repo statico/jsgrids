@@ -20,7 +20,7 @@
     "date-fns": "^4.1.0",
     "debug": "^4.3.4",
     "framer-motion": "^10",
-    "humanize-plus": "^1.8.2",
+    "filesize": "^10.1.6",
     "next": "^13.5.4",
     "p-retry": "^6.1.0",
     "p-throttle": "^5.1.0",
@@ -34,7 +34,6 @@
   },
   "devDependencies": {
     "@types/debug": "^4.1.9",
-    "@types/humanize-plus": "^1.8.0",
     "@types/node": "^20.8.3",
     "@types/react": "^18.2.25",
     "husky": ">=8",

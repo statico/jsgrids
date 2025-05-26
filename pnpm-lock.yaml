@@ -31,12 +31,12 @@ importers:
       debug:
         specifier: ^4.3.4
         version: 4.3.4
+      filesize:
+        specifier: ^10.1.6
+        version: 10.1.6
       framer-motion:
         specifier: ^10
         version: 10.12.18(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
-      humanize-plus:
-        specifier: ^1.8.2
-        version: 1.8.2
       next:
         specifier: ^13.5.4
         version: 13.5.4(@babel/core@7.23.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
@@ -71,9 +71,6 @@ importers:
       "@types/debug":
         specifier: ^4.1.9
         version: 4.1.9
-      "@types/humanize-plus":
-        specifier: ^1.8.0
-        version: 1.8.0
       "@types/node":
         specifier: ^20.8.3
         version: 20.8.3
@@ -1273,12 +1270,6 @@ packages:
         integrity: sha512-8Hz50m2eoS56ldRlepxSBa6PWEVCtzUo/92HgLc2qTMnotJNIm7xP+UZhyWoYsyOdd5dxZ+NZLb24rsKyFs2ow==,
       }
 
-  "@types/humanize-plus@1.8.0":
-    resolution:
-      {
-        integrity: sha512-c7QNInYzgvbrNZvbwI/iYvHDTik/GqONxAvRUqwYF0AjgycoiyELrRR3RrILGXdZcaLt6Y+ds0+gSRQFzc71IQ==,
-      }
-
   "@types/lodash.mergewith@4.6.7":
     resolution:
       {
@@ -1625,6 +1616,13 @@ packages:
       }
     engines: { node: ^14.18.0 || ^16.14.0 || >=18.0.0 }
 
+  filesize@10.1.6:
+    resolution:
+      {
+        integrity: sha512-sJslQKU2uM33qH5nqewAwVB2QgR6w1aMNsYUp3aN5rMRyXEwJGmZvaWzeJFNTOXWlHQyBFCWrdj3fV/fsTOX8w==,
+      }
+    engines: { node: ">= 10.4.0" }
+
   fill-range@7.1.1:
     resolution:
       {
@@ -1737,13 +1735,6 @@ packages:
         integrity: sha512-nZXjEF2nbo7lIw3mgYjItAfgQXog3OjJogSbKa2CQIIvSGWcKgeJnQlNXip6NglNzYH45nSRiEVimMvYL8DDqQ==,
       }
     engines: { node: ">=14.18.0" }
-
-  humanize-plus@1.8.2:
-    resolution:
-      {
-        integrity: sha512-jaLeQyyzjjINGv7O9JJegjsaUcWjSj/1dcXvLEgU3pGdqCdP1PiC/uwr+saJXhTNBHZtmKnmpXyazgh+eceRxA==,
-      }
-    engines: { node: ">= 0.8.0" }
 
   husky@8.0.1:
     resolution:
@@ -3524,8 +3515,6 @@ snapshots:
     dependencies:
       "@types/ms": 0.7.31
 
-  "@types/humanize-plus@1.8.0": {}
-
   "@types/lodash.mergewith@4.6.7":
     dependencies:
       "@types/lodash": 4.14.187
@@ -3698,6 +3687,8 @@ snapshots:
       signal-exit: 3.0.7
       strip-final-newline: 3.0.0
 
+  filesize@10.1.6: {}
+
   fill-range@7.1.1:
     dependencies:
       to-regex-range: 5.0.1
@@ -3745,8 +3736,6 @@ snapshots:
       react-is: 16.13.1
 
   human-signals@4.3.1: {}
-
-  humanize-plus@1.8.2: {}
 
   husky@8.0.1: {}
 

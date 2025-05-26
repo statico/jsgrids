@@ -12,7 +12,7 @@ import {
   Tooltip,
   useColorModeValue,
 } from "@chakra-ui/react";
-import { fileSize } from "humanize-plus";
+import { filesize } from "filesize";
 import { FeatureName, Features } from "lib/features";
 import { FrameworkIcons, FrameworkTitles } from "lib/frameworks";
 import { FrameworkName, LibraryInfo } from "lib/libraries";
@@ -223,7 +223,7 @@ const Card = ({ info }: CardProps) => {
         <Metric
           icon={<GoPackage />}
           value={info.bundlephobia?.gzipSize}
-          formatter={(n: number) => (n >= 0 ? fileSize(n) : "?? KB")}
+          formatter={(n: number) => (n >= 0 ? filesize(n) : "?? KB")}
           title={"Gzipped package size is %s"}
           href={info.bundlephobia?.url}
         />
