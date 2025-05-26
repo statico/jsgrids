@@ -1,19 +1,19 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
 import Card from "@/components/Card";
 import FilterBar from "@/components/FilterBar";
 import { LibraryInfo } from "@/lib/libraries";
 import { format } from "date-fns";
+import { useEffect, useState } from "react";
 import GithubCorner from "react-github-corner";
 import { FaExternalLinkAlt, FaMoon, FaSun } from "react-icons/fa";
 
-type ClientPageProps = {
+type IndexPageProps = {
   items: LibraryInfo[];
   ts: string;
 };
 
-export default function ClientPage({ items, ts }: ClientPageProps) {
+export default function IndexPage({ items, ts }: IndexPageProps) {
   const [darkMode, setDarkMode] = useState(false);
 
   useEffect(() => {
