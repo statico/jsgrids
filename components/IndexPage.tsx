@@ -46,9 +46,9 @@ export default function IndexPage({ items, ts }: IndexPageProps) {
             Last Update: {format(new Date(ts), "MMM d, yyyy")} -{" "}
             <a
               href="https://github.com/statico/jsgrids#contributing"
-              className="hover:underline"
+              className="hover:underline inline-flex flex-row gap-2 items-center"
             >
-              Contributions welcome!{" "}
+              Contributions welcome!
               <FaExternalLinkAlt className="inline w-3 h-3" />
             </a>
           </p>
