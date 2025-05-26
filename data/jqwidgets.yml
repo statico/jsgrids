@@ -1,0 +1,51 @@
+title: jQWidgets
+homeUrl: https://www.jqwidgets.com/
+demoUrl: https://www.jqwidgets.com/jquery-widgets-demo/demos/jqxgrid/index.htm
+githubRepo: jqwidgets/jQWidgets
+npmPackage: null
+license: Commercial or Creative Commons (Non-Commercial)
+revenueModel: Commercial License Required for Commercial Use
+description: >
+  A comprehensive JavaScript UI library with 70+ widgets built entirely
+  from scratch. Features a powerful jQuery Grid widget with advanced data
+  visualization, editing, sorting, filtering, and grouping capabilities.
+  Works across devices and browsers with professional themes and
+  localization support.
+frameworks:
+  jquery: true
+  angular: true
+  react: true
+  vue: true
+  vanilla: true
+features:
+  accessible: true
+  copyPaste: true
+  csvExport: true
+  customEditors: true
+  customFormatters: true
+  draggableRows: true
+  editable: true
+  fillDown: false
+  fillRight: false
+  filtering: true
+  formulas: false
+  freezableCols: true
+  headless: false
+  i18n: true
+  maintained: true
+  openSource: false
+  pagination: true
+  pdfExport: true
+  pivots: false
+  rangeSelection: true
+  resizableCols: true
+  responsive: true
+  rowGrouping: true
+  rowSelection: true
+  search: true
+  serverSide: true
+  sorting: true
+  trees: true
+  typescript: true
+  xlsxExport: true
+  virtualization: true
