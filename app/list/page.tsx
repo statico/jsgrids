@@ -2,7 +2,7 @@ import React from "react";
 import { getLibraries } from "@/lib/libraries";
 import type { Metadata } from "next";
 
-export const maxDuration = 300;
+export const maxDuration = 60;
 
 export const metadata: Metadata = {
   title: "All Libraries - jsgrids",
