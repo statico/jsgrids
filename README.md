@@ -2,7 +2,7 @@
 
 A List of JavaScript Spreadsheet and Data Grid Libraries - https://jsgrids.statico.io/
 
-<img src="https://github.com/user-attachments/assets/16e159b1-fa27-4237-89c7-600f3aeaa250" width="600" alt="screenshot of the jsgrids web interface" />
+[<img src="https://github.com/user-attachments/assets/16e159b1-fa27-4237-89c7-600f3aeaa250" width="600" alt="screenshot of the jsgrids web interface" />](https://jsgrids.statico.io)
 
 ## Motivation
 
