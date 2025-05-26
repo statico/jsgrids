@@ -44,7 +44,7 @@ export const SingleItemPicker = ({
         </Button>
       </PopoverTrigger>
 
-      <PopoverContent className="w-48 p-0">
+      <PopoverContent className="w-96 p-0">
         {allowNull && (
           <button
             className="w-full flex items-center space-x-2 px-3 py-2 text-left hover:bg-accent hover:text-accent-foreground"
@@ -54,7 +54,7 @@ export const SingleItemPicker = ({
             }}
           >
             {!selected ? <GoCheck className="w-4 h-4" /> : <BlankIcon />}
-            <span>Any</span>
+            <span className="text-xs">Any</span>
           </button>
         )}
         {options.map(({ key, title, description }) => (
@@ -68,7 +68,7 @@ export const SingleItemPicker = ({
           >
             {selected === key ? <GoCheck className="w-4 h-4" /> : <BlankIcon />}
             <div>
-              <div>{title}</div>
+              <div className="text-xs">{title}</div>
               {description && (
                 <div className="text-xs text-muted-foreground">
                   {description}
