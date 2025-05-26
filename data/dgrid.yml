@@ -1,0 +1,50 @@
+title: dGrid
+homeUrl: https://dgrid.io/
+demoUrl: null
+githubRepo: dojo/dojo1-dgrid
+npmPackage: dgrid
+license: BSD
+revenueModel: Free
+description: Next-generation grid component that takes full advantage of modern browsers and object stores. Lightweight, modular, and easily extensible, built by SitePen for the Dojo ecosystem.
+
+frameworks:
+  react: false
+  svelte: false
+  vue: false
+  angular: false
+  ember: false
+  jquery: false
+  vanilla: true
+
+features:
+  accessible: true
+  copyPaste: false
+  csvExport: false
+  customEditors: true
+  customFormatters: true
+  draggableRows: false
+  editable: true
+  fillDown: false
+  fillRight: false
+  filtering: false
+  formulas: false
+  freezableCols: true
+  headless: false
+  i18n: false
+  maintained: false
+  openSource: true
+  pagination: true
+  pdfExport: false
+  pivots: false
+  rangeSelection: false
+  resizableCols: true
+  responsive: true
+  rowGrouping: false
+  rowSelection: true
+  search: false
+  serverSide: true
+  sorting: true
+  trees: true
+  typescript: false
+  xlsxExport: false
+  virtualization: true

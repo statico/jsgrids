@@ -1,0 +1,48 @@
+title: Cheetah Grid
+homeUrl: https://future-architect.github.io/cheetah-grid/
+demoUrl: https://future-architect.github.io/cheetah-grid/#/
+githubRepo: future-architect/cheetah-grid
+npmPackage: cheetah-grid
+license: MIT
+revenueModel: Free
+description: High-performance JavaScript data table component that works on canvas. Designed for handling large datasets with 1M+ records efficiently through canvas-based rendering.
+frameworks:
+  react: true
+  svelte: false
+  vue: true
+  angular: true
+  ember: false
+  jquery: false
+  vanilla: true
+features:
+  accessible: false
+  copyPaste: false
+  csvExport: false
+  customEditors: true
+  customFormatters: true
+  draggableRows: false
+  editable: true
+  fillDown: false
+  fillRight: false
+  filtering: true
+  formulas: false
+  freezableCols: true
+  headless: false
+  i18n: false
+  maintained: true
+  openSource: true
+  pagination: false
+  pdfExport: false
+  pivots: false
+  rangeSelection: false
+  resizableCols: true
+  responsive: false
+  rowGrouping: false
+  rowSelection: true
+  search: false
+  serverSide: false
+  sorting: true
+  trees: false
+  typescript: true
+  xlsxExport: false
+  virtualization: true

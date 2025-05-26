@@ -1,0 +1,50 @@
+title: Wijmo Grid
+homeUrl: https://www.grapecity.com/wijmo
+demoUrl: https://www.grapecity.com/wijmo/demos/Grid/Overview/purejs
+githubRepo: null
+npmPackage: wijmo
+license: Commercial
+revenueModel: Commercial
+description: Enterprise-grade JavaScript data grid component by GrapeCity. Part of the Wijmo UI controls suite, offering comprehensive data visualization and editing capabilities for business applications.
+
+frameworks:
+  react: true
+  svelte: false
+  vue: true
+  angular: true
+  ember: false
+  jquery: false
+  vanilla: true
+
+features:
+  accessible: true
+  copyPaste: true
+  csvExport: true
+  customEditors: true
+  customFormatters: true
+  draggableRows: true
+  editable: true
+  fillDown: true
+  fillRight: true
+  filtering: true
+  formulas: false
+  freezableCols: true
+  headless: false
+  i18n: true
+  maintained: true
+  openSource: false
+  pagination: true
+  pdfExport: true
+  pivots: false
+  rangeSelection: true
+  resizableCols: true
+  responsive: true
+  rowGrouping: true
+  rowSelection: true
+  search: true
+  serverSide: true
+  sorting: true
+  trees: true
+  typescript: true
+  xlsxExport: true
+  virtualization: true

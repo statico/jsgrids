@@ -1,0 +1,50 @@
+title: Frappe DataTable
+homeUrl: https://frappe.io/datatable
+demoUrl: https://frappe.io/datatable
+githubRepo: frappe/datatable
+npmPackage: frappe-datatable
+license: MIT
+revenueModel: Free
+description: Modern datatable library for the web. Built by Frappe Technologies for ERPNext, it's a simple, modern and interactive datatable library for displaying tabular data with no jQuery dependency.
+
+frameworks:
+  react: false
+  svelte: false
+  vue: false
+  angular: false
+  ember: false
+  jquery: false
+  vanilla: true
+
+features:
+  accessible: false
+  copyPaste: false
+  csvExport: false
+  customEditors: false
+  customFormatters: true
+  draggableRows: false
+  editable: true
+  fillDown: false
+  fillRight: false
+  filtering: true
+  formulas: false
+  freezableCols: false
+  headless: false
+  i18n: false
+  maintained: true
+  openSource: true
+  pagination: false
+  pdfExport: false
+  pivots: false
+  rangeSelection: false
+  resizableCols: true
+  responsive: true
+  rowGrouping: false
+  rowSelection: true
+  search: false
+  serverSide: false
+  sorting: true
+  trees: true
+  typescript: false
+  xlsxExport: false
+  virtualization: false
