@@ -7,11 +7,6 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
 
 // We use "T extends string" instead of string because we want to be able to
 // limit the strings that can be used as keys, such as with FeatureName.
@@ -54,28 +49,24 @@ export const MultiItemPicker = <T extends string>({
           <div className="text-sm font-medium">Choose one or more:</div>
           <div className="grid grid-cols-2 gap-x-3 gap-y-1 max-h-64 overflow-y-auto">
             {options.map(({ key, title, description }) => (
-              <Tooltip key={key}>
-                <TooltipTrigger asChild>
-                  <label className="flex items-center space-x-2 cursor-pointer hover:bg-accent hover:text-accent-foreground p-1 rounded">
-                    <Checkbox
-                      checked={selected.has(key)}
-                      onCheckedChange={(checked) => {
-                        const newValue = new Set(selected);
-                        if (checked) {
-                          newValue.add(key);
-                        } else {
-                          newValue.delete(key);
-                        }
-                        onChange(newValue);
-                      }}
-                    />
-                    <span className="text-sm">{title}</span>
-                  </label>
-                </TooltipTrigger>
-                <TooltipContent>
-                  <p>{description}</p>
-                </TooltipContent>
-              </Tooltip>
+              <label
+                key={key}
+                className="flex items-center space-x-2 cursor-pointer hover:bg-accent hover:text-accent-foreground p-1 rounded"
+              >
+                <Checkbox
+                  checked={selected.has(key)}
+                  onCheckedChange={(checked) => {
+                    const newValue = new Set(selected);
+                    if (checked) {
+                      newValue.add(key);
+                    } else {
+                      newValue.delete(key);
+                    }
+                    onChange(newValue);
+                  }}
+                />
+                <span className="text-sm">{title}</span>
+              </label>
             ))}
           </div>
           <Button
