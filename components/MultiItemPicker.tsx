@@ -44,7 +44,7 @@ export const MultiItemPicker = <T extends string>({
         </Button>
       </PopoverTrigger>
 
-      <PopoverContent className="w-80 p-3">
+      <PopoverContent className="w-96 p-3">
         <div className="space-y-3">
           <div className="text-sm font-medium">Choose one or more:</div>
           <div className="grid grid-cols-2 gap-x-3 gap-y-1 max-h-64 overflow-y-auto">
@@ -65,7 +65,7 @@ export const MultiItemPicker = <T extends string>({
                     onChange(newValue);
                   }}
                 />
-                <span className="text-sm">{title}</span>
+                <span className="text-xs">{title}</span>
               </label>
             ))}
           </div>
