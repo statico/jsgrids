@@ -2,6 +2,8 @@
 
 A List of JavaScript Spreadsheet and Data Grid Libraries - https://jsgrids.statico.io/
 
+<img src="https://github.com/user-attachments/assets/16e159b1-fa27-4237-89c7-600f3aeaa250" width="600" alt="screenshot of the jsgrids web interface" />
+
 ## Motivation
 
 I build a lot of internal tools for data auditing and workflows, and every few months I end up looking for the best data grid or spreadsheet-like library for JavaScript. Other lists and sites are out of date and unmaintained. My goal here is to make the best list for all data grid and spreadsheet libraries for the top JavaScript frontend frameworks ([1](https://2019.stateofjs.com/front-end-frameworks/), [2](https://2019.stateofjs.com/other-tools/)). You're welcome to help!
