@@ -163,7 +163,7 @@ export const Features = {
     important: false,
   },
   typescript: {
-    title: "TypeScript Support",
+    title: "TypeScript",
     description:
       "The library provides TypeScript type definitions or is written in TypeScript.",
     important: false,
