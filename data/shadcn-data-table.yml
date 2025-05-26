@@ -1,0 +1,45 @@
+title: shadcn/ui Data Table
+homeUrl: https://ui.shadcn.com/docs/components/data-table
+demoUrl: https://ui.shadcn.com/blocks
+githubRepo: null
+npmPackage: null
+license: MIT License
+revenueModel: Free
+description: >
+  Powerful table and datagrids built using TanStack Table with shadcn/ui components.
+  A comprehensive guide for building custom data tables with sorting, filtering,
+  pagination, and row selection using headless UI principles.
+frameworks:
+  react: true
+features:
+  accessible: true
+  copyPaste: false
+  csvExport: false
+  customEditors: true
+  customFormatters: true
+  draggableRows: false
+  editable: false
+  fillDown: false
+  fillRight: false
+  filtering: true
+  formulas: false
+  freezableCols: false
+  headless: false
+  i18n: true
+  maintained: true
+  mergeCells: false
+  openSource: true
+  pagination: true
+  pdfExport: false
+  pivots: false
+  rangeSelection: false
+  resizableCols: false
+  responsive: false
+  rowGrouping: false
+  rowSelection: true
+  serverSide: true
+  sorting: true
+  trees: false
+  typescript: true
+  xlsxExport: false
+  virtualization: false
