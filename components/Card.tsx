@@ -279,17 +279,17 @@ const Card = memo(({ info }: CardProps) => {
       <CardFooter>
         <div className="flex justify-between space-x-6 w-full">
           {info.demoUrl && (
-            <Button asChild className="flex-1">
+            <Button asChild variant="outline" className="flex-1">
               <a href={info.demoUrl}>Demo</a>
             </Button>
           )}
           {info.github?.url && (
-            <Button asChild className="flex-1">
+            <Button asChild variant="outline" className="flex-1">
               <a href={info.github?.url}>Source</a>
             </Button>
           )}
           {info.homeUrl && (
-            <Button asChild className="flex-1">
+            <Button asChild variant="outline" className="flex-1">
               <a href={info.homeUrl}>Home</a>
             </Button>
           )}
