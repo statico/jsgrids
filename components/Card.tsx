@@ -1,15 +1,28 @@
-import React, { useState } from "react";
-import { filesize } from "filesize";
+import { Button } from "@/components/ui/button";
+import {
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+  Card as ShadcnCard,
+} from "@/components/ui/card";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 import { FeatureName, Features } from "@/lib/features";
 import { FrameworkIcons, FrameworkTitles } from "@/lib/frameworks";
 import { FrameworkName, LibraryInfo } from "@/lib/libraries";
 import { sortedFeatureNames } from "@/lib/sorting";
-import { JSXElementConstructor } from "react";
+import { filesize } from "filesize";
+import { memo, JSXElementConstructor, ReactNode } from "react";
 import {
+  FaArrowCircleUp,
   FaCheckCircle,
   FaDollarSign,
   FaInfoCircle,
-  FaArrowCircleUp,
   FaTimesCircle,
   FaUsers,
 } from "react-icons/fa";
@@ -21,39 +34,28 @@ import {
   GoStar,
 } from "react-icons/go";
 import { IoMdDownload } from "react-icons/io";
-import { Button } from "@/components/ui/button";
-import {
-  Card as ShadcnCard,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
 
-const IconWithColor = ({
-  icon: Icon,
-  color,
-}: {
-  icon: JSXElementConstructor<any>;
-  color: string;
-}) => (
-  <span style={{ color }}>
-    <Icon />
-  </span>
+const IconWithColor = memo(
+  ({
+    icon: Icon,
+    color,
+  }: {
+    icon: JSXElementConstructor<any>;
+    color: string;
+  }) => (
+    <span style={{ color }}>
+      <Icon />
+    </span>
+  ),
 );
+IconWithColor.displayName = "IconWithColor";
 
 type FeatureProps = {
   name: FeatureName;
   value: boolean | string | null;
 };
 
-const Feature = ({ name, value }: FeatureProps) => {
+const Feature = memo(({ name, value }: FeatureProps) => {
   if (!Features[name]) {
     throw new Error(`Unknown feature name: ${name}`);
   }
@@ -95,13 +97,14 @@ const Feature = ({ name, value }: FeatureProps) => {
   } else {
     return null;
   }
-};
+});
+Feature.displayName = "Feature";
 
 type FrameworkListProps = {
   info: LibraryInfo;
 };
 
-const FrameworkList = ({ info }: FrameworkListProps) => {
+const FrameworkList = memo(({ info }: FrameworkListProps) => {
   const names = Object.keys(info.frameworks) as FrameworkName[];
   return (
     <div className="flex space-x-2 text-2xl">
@@ -138,58 +141,62 @@ const FrameworkList = ({ info }: FrameworkListProps) => {
       })}
     </div>
   );
-};
+});
+FrameworkList.displayName = "FrameworkList";
 
 type MetricProps = {
-  icon: React.ReactNode;
+  icon: ReactNode;
   title: string;
   value?: any;
   formatter?: (value: any) => string;
   href?: string;
 };
 
-const Metric = ({
-  icon,
-  title,
-  value,
-  formatter = (x) => Number(x).toLocaleString(),
-  href,
-}: MetricProps) => {
-  const formattedValue = value === undefined ? "n/a" : formatter(value);
-  const formattedTitle = title.replace(
-    "%s",
-    value === undefined ? "unknown" : formattedValue,
-  );
-  const contents = (
-    <div className="flex items-center space-x-1 cursor-pointer hover:opacity-75">
-      <span>{icon}</span>
-      <span>{formattedValue}</span>
-    </div>
-  );
-  return value ? (
-    <Tooltip>
-      <TooltipTrigger asChild>
-        <a href={href}>{contents}</a>
-      </TooltipTrigger>
-      <TooltipContent>
-        <p>{formattedTitle}</p>
-      </TooltipContent>
-    </Tooltip>
-  ) : (
-    <Tooltip>
-      <TooltipTrigger asChild>{contents}</TooltipTrigger>
-      <TooltipContent>
-        <p>{formattedTitle}</p>
-      </TooltipContent>
-    </Tooltip>
-  );
-};
+const Metric = memo(
+  ({
+    icon,
+    title,
+    value,
+    formatter = (x) => Number(x).toLocaleString(),
+    href,
+  }: MetricProps) => {
+    const formattedValue = value === undefined ? "n/a" : formatter(value);
+    const formattedTitle = title.replace(
+      "%s",
+      value === undefined ? "unknown" : formattedValue,
+    );
+    const contents = (
+      <div className="flex items-center space-x-1 cursor-pointer hover:opacity-75">
+        <span>{icon}</span>
+        <span>{formattedValue}</span>
+      </div>
+    );
+    return value ? (
+      <Tooltip>
+        <TooltipTrigger asChild>
+          <a href={href}>{contents}</a>
+        </TooltipTrigger>
+        <TooltipContent>
+          <p>{formattedTitle}</p>
+        </TooltipContent>
+      </Tooltip>
+    ) : (
+      <Tooltip>
+        <TooltipTrigger asChild>{contents}</TooltipTrigger>
+        <TooltipContent>
+          <p>{formattedTitle}</p>
+        </TooltipContent>
+      </Tooltip>
+    );
+  },
+);
+Metric.displayName = "Metric";
 
 type CardProps = {
   info: LibraryInfo;
 };
 
-const Card = ({ info }: CardProps) => {
+const Card = memo(({ info }: CardProps) => {
   const id = `card-${info.id}`;
   const gh = info.github;
   return (
@@ -290,6 +297,7 @@ const Card = ({ info }: CardProps) => {
       </CardFooter>
     </ShadcnCard>
   );
-};
+});
+Card.displayName = "Card";
 
 export default Card;
