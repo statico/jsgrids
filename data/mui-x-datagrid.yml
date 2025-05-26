@@ -11,7 +11,6 @@ description: >
   market.
 frameworks:
   react: true
-  typescript: true
 features:
   accessible: true
   copyPaste: false
@@ -39,5 +38,6 @@ features:
   serverSide: true
   sorting: true
   trees: Premium feature
+  typescript: true
   xlsxExport: Premium feature
   virtualization: true

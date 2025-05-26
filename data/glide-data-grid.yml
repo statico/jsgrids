@@ -9,7 +9,6 @@ description: >
   Glide Data Grid is a no compromise, outrageously fast data grid for your React project, with rich rendering and TypeScript support.
 frameworks:
   react: true
-  typescript: true
 features:
   accessible: true
   copyPaste: true
@@ -39,5 +38,6 @@ features:
   serverSide: true
   sorting: true
   trees: false
+  typescript: true
   xlsxExport: false
   virtualization: true

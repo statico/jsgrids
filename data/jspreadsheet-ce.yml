@@ -11,7 +11,6 @@ description: >
   compatible with other spreadsheet softwares.
 frameworks:
   vanilla: true
-  typescript: https://definitelytyped.github.io/
   react: true
   angular: true
   vue: true
@@ -45,5 +44,6 @@ features:
   serverSide: false
   sorting: true
   trees: false
+  typescript: Third-party types available via DefinitelyTyped
   xlsxExport: true
   virtualization: "Only lazy-loading of rows."

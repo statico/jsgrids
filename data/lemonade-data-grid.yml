@@ -9,7 +9,6 @@ description: >
   The LemonadeJS data grid is a lightweight and highly customizable JavaScript component that provides a solution for rendering data in rows and columns. It offers features like search, filter, pagination, and in-cell editing.
 frameworks:
   vanilla: true
-  typescript: true
   react: true
   jquery: true
 features:
@@ -21,3 +20,4 @@ features:
   openSource: true
   pagination: true
   search: true
+  typescript: true

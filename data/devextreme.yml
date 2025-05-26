@@ -11,7 +11,6 @@ description: >
   computations extremely large datasets are never an issue for the DevExtreme Data Grid.
 frameworks:
   vanilla: true
-  typescript: true
   react: https://devexpress.github.io/devextreme-reactive/react/grid/
   angular: true
   vue: true
@@ -42,5 +41,6 @@ features:
   serverSide: true
   sorting: true
   trees: Separate component, see https://js.devexpress.com/Documentation/Guide/UI_Components/TreeList/Getting_Started_with_TreeList/
+  typescript: true
   xlsxExport: true
   virtualization: true

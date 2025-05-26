@@ -8,7 +8,6 @@ revenueModel: Free
 description: Headless UI for building powerful tables & datagrids for React, Solid, Vue, Svelte and TS/JS.
 frameworks:
   react: true
-  typescript: true
   vue: true
   svelte: true
 features:
@@ -39,5 +38,6 @@ features:
   serverSide: false
   sorting: true
   trees: true
+  typescript: true
   xlsxExport: false
   virtualization: Using react-window (see examples)

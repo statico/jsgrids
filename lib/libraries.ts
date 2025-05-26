@@ -24,7 +24,6 @@ const FrameworkValue = z.union([URL, z.boolean()]).optional();
 
 const Frameworks = z.object({
   vanilla: FrameworkValue,
-  typescript: FrameworkValue,
   react: FrameworkValue,
   vue: FrameworkValue,
   svelte: FrameworkValue,

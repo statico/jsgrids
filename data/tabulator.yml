@@ -11,7 +11,6 @@ description: >
   Table, JavaScript Array, AJAX data source or JSON formatted data.
 frameworks:
   vanilla: true
-  typescript: https://definitelytyped.github.io/
   jquery: true
   react: https://www.npmjs.com/package/react-tabulator
   angular: https://www.npmjs.com/package/ng-tabulator-tables
@@ -44,5 +43,6 @@ features:
   serverSide: "Support lazy loading of rows."
   sorting: true
   trees: false
+  typescript: Third-party types available via DefinitelyTyped
   xlsxExport: true
   virtualization: true

@@ -10,7 +10,6 @@ description: >
   Grid.js is a free and open-source HTML table plugin written in TypeScript.
 frameworks:
   vanilla: true
-  typescript: true
   react: true
 features:
   accessible: true
@@ -40,5 +39,6 @@ features:
   serverSide: true
   sorting: true
   trees: false
+  typescript: true
   xlsxExport: false
   virtualization: false

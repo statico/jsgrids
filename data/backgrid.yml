@@ -10,7 +10,6 @@ description: >
   representing and manipulating tabular data on the web.
 frameworks:
   jquery: true
-  typescript: https://definitelytyped.github.io/
 features:
   accessible: true
   copyPaste: false
@@ -39,5 +38,6 @@ features:
   serverSide: false
   sorting: true
   trees: false
+  typescript: Third-party types available via DefinitelyTyped
   xlsxExport: false
   virtualization: false

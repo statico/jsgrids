@@ -9,7 +9,6 @@ description: >
   Jspreadsheet is a lightweight Vanilla JavaScript plugin that help developers to create exceptional web-based interactive data grid with spreadsheet controls.
 frameworks:
   vanilla: true
-  typescript: true
   react: true
   angular: true
   vue: true
@@ -42,5 +41,6 @@ features:
   serverSide: false
   sorting: true
   trees: false
+  typescript: true
   xlsxExport: true
   virtualization: true

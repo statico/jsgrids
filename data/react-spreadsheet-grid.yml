@@ -10,7 +10,6 @@ description: >
   scroll & resizable columns.
 frameworks:
   react: true
-  typescript: true
 features:
   accessible: true
   copyPaste: false
@@ -39,5 +38,6 @@ features:
   serverSide: false
   sorting: false
   trees: false
+  typescript: true
   xlsxExport: false
   virtualization: true

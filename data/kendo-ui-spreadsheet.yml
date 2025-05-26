@@ -13,7 +13,6 @@ description: >
   much more.
 frameworks:
   jquery: true
-  typescript: true
 features:
   accessible: true
   copyPaste: true
@@ -42,5 +41,6 @@ features:
   serverSide: true
   sorting: true
   trees: A dedicated TreeList widget is available for working with hierarchical data.
+  typescript: true
   xlsxExport: true
   virtualization: false

@@ -9,7 +9,6 @@ description: >
   Deliver true Excel-like spreadsheet experiences, fast - with zero dependencies on Excel. Create financial, budgeting/forecasting, scientific, engineering, healthcare, insurance, and many other similar JavaScript spreadsheet business applications.
 frameworks:
   vanilla: true
-  typescript: true
   react: true
   vue: true
   angular: true
@@ -41,5 +40,6 @@ features:
   serverSide: true
   sorting: true
   trees: false
+  typescript: true
   xlsxExport: true
   virtualization: true

@@ -162,6 +162,12 @@ export const Features = {
     description: "Has support for hierarchical data.",
     important: false,
   },
+  typescript: {
+    title: "TypeScript Support",
+    description:
+      "The library provides TypeScript type definitions or is written in TypeScript.",
+    important: false,
+  },
   xlsxExport: {
     title: "XLSX Export",
     description:

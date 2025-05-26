@@ -9,7 +9,6 @@ description: >
   Improve your applications by leveraging the best JavaScript datagrid in the industry with Wijmo's FlexGrid. FlexGrid provides a familiar, Excel-like experience. FlexGrid provides customizable cells with cell templates and themes. With extensive API documentation and hundreds of demos, as well as first-class support, we've got the tools to help you create the datagrid that your application needs.
 frameworks:
   vanilla: true
-  typescript: true
   react: true
   angular: true
   vue: true
@@ -41,5 +40,6 @@ features:
   serverSide: true
   sorting: true
   trees: true
+  typescript: true
   xlsxExport: true
   virtualization: true
