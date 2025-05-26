@@ -200,7 +200,7 @@ const Card = memo(({ info }: CardProps) => {
   const id = `card-${info.id}`;
   const gh = info.github;
   return (
-    <ShadcnCard className="flex flex-col h-full">
+    <ShadcnCard className="flex flex-col h-full gap-4">
       <CardHeader>
         <div className="flex items-center justify-between">
           <CardTitle>
