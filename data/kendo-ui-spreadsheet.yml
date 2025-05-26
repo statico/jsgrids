@@ -29,6 +29,7 @@ features:
   headless: false
   i18n: true
   maintained: true
+  mergeCells: false
   openSource: false
   pagination: false
   pdfExport: true

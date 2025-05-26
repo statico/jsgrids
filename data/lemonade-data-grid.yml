@@ -17,6 +17,7 @@ features:
   sorting: true
   formulas: true
   maintained: true
+  mergeCells: false
   openSource: true
   pagination: true
   search: true

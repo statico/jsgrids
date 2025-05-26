@@ -105,6 +105,12 @@ export const Features = {
       "Whether this library is under active development, or has recently-fixed bugs, or is so wonderfully stable that it doesn't need maintenance.",
     important: true,
   },
+  mergeCells: {
+    title: "Merge Cells",
+    abbreviation: "Merge",
+    description: "Supports merging cells.",
+    important: false,
+  },
   openSource: {
     title: "Open-source",
     abbreviation: "OSS",

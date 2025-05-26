@@ -25,6 +25,7 @@ features:
   headless: false
   i18n: true
   maintained: true
+  mergeCells: Partial (column spanning but not row spanning)
   openSource: true
   pagination: false
   pdfExport: false

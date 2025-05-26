@@ -23,6 +23,7 @@ features:
   freezableCols: true
   i18n: true
   maintained: true
+  mergeCells: false
   openSource: true
   pagination: true
   resizableCols: true

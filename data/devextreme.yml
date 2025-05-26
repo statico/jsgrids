@@ -29,6 +29,7 @@ features:
   freezableCols: true
   i18n: true
   maintained: true
+  mergeCells: false
   openSource: false
   pagination: true
   pdfExport: true

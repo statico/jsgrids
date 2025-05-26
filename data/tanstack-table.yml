@@ -26,6 +26,7 @@ features:
   headless: true
   i18n: Internationalization is up to you.
   maintained: true
+  mergeCells: false
   openSource: true
   pagination: true
   pdfExport: false
