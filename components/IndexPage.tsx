@@ -4,11 +4,11 @@ import Card from "@/components/Card";
 import FilterBar from "@/components/FilterBar";
 import { LibraryInfo } from "@/lib/libraries";
 import { format } from "date-fns";
-import { useEffect, useState } from "react";
 import GithubCorner from "react-github-corner";
-import { FaExternalLinkAlt, FaMoon, FaSun } from "react-icons/fa";
-import { Button } from "@/components/ui/button";
+import { FaExternalLinkAlt } from "react-icons/fa";
+import { ModeToggle } from "@/components/mode-toggle";
 import { HERO_PATTERN_GRID_BACKGROUND } from "@/lib/ui-constants";
+import { useTheme } from "next-themes";
 
 type IndexPageProps = {
   items: LibraryInfo[];
@@ -16,41 +16,12 @@ type IndexPageProps = {
 };
 
 export default function IndexPage({ items, ts }: IndexPageProps) {
-  const [darkMode, setDarkMode] = useState(false);
-
-  useEffect(() => {
-    // Check for saved theme preference or default to system preference
-    const savedTheme = localStorage.getItem("theme");
-    const prefersDark = window.matchMedia(
-      "(prefers-color-scheme: dark)",
-    ).matches;
-
-    if (savedTheme === "dark" || (!savedTheme && prefersDark)) {
-      setDarkMode(true);
-      document.documentElement.classList.add("dark");
-    } else {
-      setDarkMode(false);
-      document.documentElement.classList.remove("dark");
-    }
-  }, []);
-
-  const toggleColorMode = () => {
-    const newDarkMode = !darkMode;
-    setDarkMode(newDarkMode);
-
-    if (newDarkMode) {
-      document.documentElement.classList.add("dark");
-      localStorage.setItem("theme", "dark");
-    } else {
-      document.documentElement.classList.remove("dark");
-      localStorage.setItem("theme", "light");
-    }
-  };
-
-  const blue = darkMode ? "#1c4a75" : "#3182ce";
+  const { theme } = useTheme();
+  const isDark = theme === "dark";
+  const blue = isDark ? "#1c4a75" : "#3182ce";
 
   return (
-    <div className={darkMode ? "dark" : ""}>
+    <div>
       <header
         className="text-white p-8 text-center relative"
         style={{
@@ -58,16 +29,9 @@ export default function IndexPage({ items, ts }: IndexPageProps) {
           backgroundImage: HERO_PATTERN_GRID_BACKGROUND,
         }}
       >
-        <Button
-          variant="ghost"
-          size="icon"
-          className="absolute top-2 left-2 text-white hover:bg-white/20"
-          onClick={toggleColorMode}
-          title={`Set color mode to ${darkMode ? "light" : "dark"}`}
-          aria-label={`Set color mode to ${darkMode ? "light" : "dark"}`}
-        >
-          {darkMode ? <FaSun /> : <FaMoon />}
-        </Button>
+        <div className="absolute top-2 left-2">
+          <ModeToggle />
+        </div>
         <GithubCorner
           href="https://github.com/statico/jsgrids"
           bannerColor="#fff"

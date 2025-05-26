@@ -3,6 +3,7 @@ import Script from "next/script";
 import type { Metadata } from "next";
 import "./globals.css";
 import { TooltipProvider } from "@/components/ui/tooltip";
+import { ThemeProvider } from "@/components/theme-provider";
 
 const name = "jsgrids";
 const title = "jsgrids - Spreadsheet and data grid libraries for JavaScript";
@@ -54,9 +55,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body className="bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-gray-100">
-        {children}
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <TooltipProvider>{children}</TooltipProvider>
+        </ThemeProvider>
 
         {process.env.NODE_ENV === "production" && (
           // https://github.com/statico/femtostats
