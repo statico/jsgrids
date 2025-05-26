@@ -47,7 +47,7 @@ export const MultiItemPicker = <T extends string>({
       <PopoverContent className="w-96 p-3">
         <div className="space-y-3">
           <div className="text-sm font-medium">Choose one or more:</div>
-          <div className="grid grid-cols-2 gap-x-3 gap-y-1 max-h-64 overflow-y-auto">
+          <div className="grid grid-cols-2 gap-x-3 gap-y-1 max-h-64 lg:max-h-[90vh] overflow-y-auto">
             {options.map(({ key, title, description }) => (
               <label
                 key={key}
