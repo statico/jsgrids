@@ -1,6 +1,7 @@
 import React from "react";
 import Script from "next/script";
 import type { Metadata } from "next";
+import "./globals.css";
 
 const name = "jsgrids";
 const title = "jsgrids - Spreadsheet and data grid libraries for JavaScript";
@@ -52,10 +53,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en-US">
-      <head>
-        <script src="https://cdn.tailwindcss.com"></script>
-      </head>
+    <html lang="en">
       <body className="bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-gray-100">
         {children}
 

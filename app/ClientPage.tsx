@@ -1,9 +1,9 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import Card from "components/Card";
-import FilterBar from "components/FilterBar";
-import { LibraryInfo } from "lib/libraries";
+import Card from "@/components/Card";
+import FilterBar from "@/components/FilterBar";
+import { LibraryInfo } from "@/lib/libraries";
 import { format } from "date-fns";
 import GithubCorner from "react-github-corner";
 import { FaExternalLinkAlt, FaMoon, FaSun } from "react-icons/fa";

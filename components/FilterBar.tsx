@@ -1,15 +1,15 @@
 import React from "react";
-import MultiItemPicker from "components/MultiItemPicker";
-import SingleItemPicker from "components/SingleItemPicker";
-import { FeatureName, FeatureNames, Features } from "lib/features";
+import MultiItemPicker from "@/components/MultiItemPicker";
+import SingleItemPicker from "@/components/SingleItemPicker";
+import { FeatureName, FeatureNames, Features } from "@/lib/features";
 import {
   FrameworkIcons,
   FrameworkNames,
   FrameworkTitles,
-} from "lib/frameworks";
-import { FrameworkName, LibraryInfo } from "lib/libraries";
-import { hasAllKeys, SortOptionKey, SortOptions } from "lib/sorting";
-import { useFilterStore } from "lib/store";
+} from "@/lib/frameworks";
+import { FrameworkName, LibraryInfo } from "@/lib/libraries";
+import { hasAllKeys, SortOptionKey, SortOptions } from "@/lib/sorting";
+import { useFilterStore } from "@/lib/store";
 import { ReactNode } from "react";
 
 // Simple Tooltip component

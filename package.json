@@ -26,12 +26,14 @@
     "zustand": "^5.0.5"
   },
   "devDependencies": {
+    "@tailwindcss/postcss": "^4",
     "@types/node": "^22.15.21",
     "@types/react": "^19.1.5",
     "husky": ">=9.1.7",
     "lint-staged": ">=16.0.0",
     "prettier": "^3.5.3",
-    "typescript": "^5.8.3"
+    "typescript": "^5.8.3",
+    "tailwindcss": "^4"
   },
   "lint-staged": {
     "**/*": "prettier --write --ignore-unknown",

@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { filesize } from "filesize";
-import { FeatureName, Features } from "lib/features";
-import { FrameworkIcons, FrameworkTitles } from "lib/frameworks";
-import { FrameworkName, LibraryInfo } from "lib/libraries";
-import { sortedFeatureNames } from "lib/sorting";
+import { FeatureName, Features } from "@/lib/features";
+import { FrameworkIcons, FrameworkTitles } from "@/lib/frameworks";
+import { FrameworkName, LibraryInfo } from "@/lib/libraries";
+import { sortedFeatureNames } from "@/lib/sorting";
 import { JSXElementConstructor } from "react";
 import {
   FaCheckCircle,
