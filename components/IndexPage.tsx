@@ -2,12 +2,14 @@
 
 import Card from "@/components/Card";
 import FilterBar from "@/components/FilterBar";
+import { ModeToggle } from "@/components/mode-toggle";
+import TableView from "@/components/TableView";
 import { LibraryInfo } from "@/lib/libraries";
+import { useFilterStore } from "@/lib/store";
+import { HERO_PATTERN_GRID_BACKGROUND } from "@/lib/ui-constants";
 import { format } from "date-fns";
 import GithubCorner from "react-github-corner";
 import { FaExternalLinkAlt } from "react-icons/fa";
-import { ModeToggle } from "@/components/mode-toggle";
-import { HERO_PATTERN_GRID_BACKGROUND } from "@/lib/ui-constants";
 
 type IndexPageProps = {
   items: LibraryInfo[];
@@ -15,6 +17,8 @@ type IndexPageProps = {
 };
 
 export default function IndexPage({ items, ts }: IndexPageProps) {
+  const viewMode = useFilterStore((state) => state.viewMode);
+
   return (
     <div>
       <header
@@ -54,10 +58,16 @@ export default function IndexPage({ items, ts }: IndexPageProps) {
         {(filteredItems, filterBar) => (
           <div className="px-6">
             <div>{filterBar}</div>
-            <main className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8">
-              {filteredItems.map((item) => (
-                <Card key={item.id} info={item} />
-              ))}
+            <main>
+              {viewMode === "table" ? (
+                <TableView items={filteredItems} />
+              ) : (
+                <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
+                  {filteredItems.map((item) => (
+                    <Card key={item.id} info={item} />
+                  ))}
+                </div>
+              )}
             </main>
           </div>
         )}

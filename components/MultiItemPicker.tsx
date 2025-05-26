@@ -37,6 +37,7 @@ export const MultiItemPicker = <T extends string>({
       <PopoverTrigger asChild>
         <Button
           variant="outline"
+          size="sm"
           className="flex items-center space-x-2 font-normal"
         >
           <span>{children}</span>

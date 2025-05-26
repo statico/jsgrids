@@ -19,11 +19,12 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { GoChevronDown } from "react-icons/go";
+import { FaTable, FaTh } from "react-icons/fa";
 
 const ResponsiveText = ({ short, long }: { short: string; long: string }) => (
   <>
-    <span className="inline md:hidden">{short}</span>
-    <span className="hidden md:inline">{long}</span>
+    <span className="inline md:hidden text-xs">{short}</span>
+    <span className="hidden md:inline text-xs">{long}</span>
   </>
 );
 
@@ -48,9 +49,9 @@ const FrameworkSelector = ({ className = "" }: { className?: string }) => {
                 onClick={handleToggle(name)}
                 title={title}
                 aria-label={title}
-                className="p-1 w-10 h-10"
+                className="p-1 w-8 h-8"
               >
-                <Icon style={{ width: 32, height: 32 }} />
+                <Icon style={{ width: 24, height: 24 }} />
               </Button>
             </TooltipTrigger>
             <TooltipContent>
@@ -132,6 +133,48 @@ const SortSelector = () => {
   );
 };
 
+const ViewModeToggle = () => {
+  const viewMode = useFilterStore((state) => state.viewMode);
+  const setViewMode = useFilterStore((state) => state.setViewMode);
+
+  return (
+    <div className="flex items-center space-x-1">
+      <Tooltip>
+        <TooltipTrigger asChild>
+          <Button
+            variant={viewMode === "cards" ? "default" : "ghost"}
+            size="icon"
+            onClick={() => setViewMode("cards")}
+            aria-label="Cards view"
+            className="w-8 h-8"
+          >
+            <FaTh className="w-4 h-4" />
+          </Button>
+        </TooltipTrigger>
+        <TooltipContent>
+          <p>Cards view</p>
+        </TooltipContent>
+      </Tooltip>
+      <Tooltip>
+        <TooltipTrigger asChild>
+          <Button
+            variant={viewMode === "table" ? "default" : "ghost"}
+            size="icon"
+            onClick={() => setViewMode("table")}
+            aria-label="Table view"
+            className="w-8 h-8"
+          >
+            <FaTable className="w-4 h-4" />
+          </Button>
+        </TooltipTrigger>
+        <TooltipContent>
+          <p>Table view</p>
+        </TooltipContent>
+      </Tooltip>
+    </div>
+  );
+};
+
 type FilterBarProps = {
   items: LibraryInfo[];
   children: (filteredItems: LibraryInfo[], filterBar: ReactNode) => ReactNode;
@@ -169,15 +212,16 @@ const FilterBarContent = ({ items, children }: FilterBarProps) => {
   }, [items, sort, framework, features, license]);
 
   const filterBar = (
-    <nav className="flex flex-wrap items-center justify-center space-x-2 m-6 select-none">
-      <FrameworkSelector className="mb-2 xl:mb-0" />
-      <div className="flex-basis-full w-0 xl:hidden" />
+    <nav className="flex flex-wrap items-center justify-center space-x-2 m-6 select-none text-xs">
+      <FrameworkSelector className="mb-2 md:mb-0" />
+      <div className="flex-basis-full w-0 md:hidden" />
       <div className="flex items-center space-x-3">
         <FeaturesSelector />
         <LicenseSelector licenses={new Set(items.map((i: any) => i.license))} />
         <SortSelector />
+        <ViewModeToggle />
       </div>
-      <span className="hidden sm:inline ml-2">
+      <span className="hidden sm:inline ml-2 text-xs">
         {filteredItems.length} results
       </span>
     </nav>
@@ -199,8 +243,8 @@ const FilterBar = ({ items, children }: FilterBarProps) => {
     const sortedItems = items.slice().sort(SortOptions[0].fn);
 
     const defaultFilterBar = (
-      <nav className="flex flex-wrap items-center justify-center space-x-2 m-6 select-none">
-        <div className="flex items-center space-x-1 mb-2 xl:mb-0">
+      <nav className="flex flex-wrap items-center justify-center space-x-2 m-6 select-none text-xs">
+        <div className="flex items-center space-x-1 mb-2 md:mb-0">
           <ResponsiveText short="Show:" long="Frameworks:" />
           {FrameworkNames.map((name) => {
             const Icon = FrameworkIcons[name];
@@ -220,7 +264,7 @@ const FilterBar = ({ items, children }: FilterBarProps) => {
             );
           })}
         </div>
-        <div className="flex-basis-full w-0 xl:hidden" />
+        <div className="flex-basis-full w-0 md:hidden" />
         <div className="flex items-center space-x-3">
           <Button
             variant="outline"
@@ -255,8 +299,28 @@ const FilterBar = ({ items, children }: FilterBarProps) => {
             </span>
             <GoChevronDown />
           </Button>
+          <div className="flex items-center space-x-1">
+            <Button
+              variant="ghost"
+              size="icon"
+              className="w-8 h-8"
+              disabled
+              aria-label="Cards view"
+            >
+              <FaTh className="w-4 h-4" />
+            </Button>
+            <Button
+              variant="default"
+              size="icon"
+              className="w-8 h-8"
+              disabled
+              aria-label="Table view"
+            >
+              <FaTable className="w-4 h-4" />
+            </Button>
+          </div>
         </div>
-        <span className="hidden sm:inline ml-2">
+        <span className="hidden sm:inline ml-2 text-xs">
           {sortedItems.length} results
         </span>
       </nav>

@@ -8,6 +8,7 @@ type FilterState = {
   framework: FrameworkName | null;
   features: Set<FeatureName>;
   license: string | null;
+  viewMode: "cards" | "table";
 };
 
 type FilterActions = {
@@ -15,6 +16,7 @@ type FilterActions = {
   setFramework: (framework: FrameworkName | null) => void;
   setFeatures: (features: Set<FeatureName>) => void;
   setLicense: (license: string | null) => void;
+  setViewMode: (viewMode: "cards" | "table") => void;
   updateFilters: (updater: (prev: FilterState) => FilterState) => void;
 };
 
@@ -26,12 +28,14 @@ export const useFilterStore = create<FilterStore>((set) => ({
   framework: null,
   features: new Set(),
   license: null,
+  viewMode: "cards",
 
   // Actions
   setSort: (sort) => set({ sort }),
   setFramework: (framework) => set({ framework }),
   setFeatures: (features) => set({ features }),
   setLicense: (license) => set({ license }),
+  setViewMode: (viewMode) => set({ viewMode }),
   updateFilters: (updater) =>
     set((state) => {
       const {
@@ -39,6 +43,7 @@ export const useFilterStore = create<FilterStore>((set) => ({
         setFramework,
         setFeatures,
         setLicense,
+        setViewMode,
         updateFilters,
         ...currentState
       } = state;
