@@ -1,5 +1,5 @@
 import React from "react";
-import { getLibraries } from "lib/libraries";
+import { getLibraries } from "@/lib/libraries";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
