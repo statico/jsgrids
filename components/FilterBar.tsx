@@ -16,25 +16,8 @@ import {
 } from "lib/frameworks";
 import { FrameworkName, LibraryInfo } from "lib/libraries";
 import { hasAllKeys, SortOptionKey, SortOptions } from "lib/sorting";
+import { useFilterStore } from "lib/store";
 import { ReactNode } from "react";
-import { atom, useRecoilState, useRecoilValue } from "recoil";
-
-type FilterState = {
-  sort: SortOptionKey;
-  framework: FrameworkName | null;
-  features: Set<FeatureName>;
-  license: string | null;
-};
-
-const filterState = atom<FilterState>({
-  key: "filters",
-  default: {
-    sort: SortOptions[0].key,
-    framework: null,
-    features: new Set(),
-    license: null,
-  },
-});
 
 const ResponsiveText = ({ short, long }: { short: string; long: string }) => (
   <>
@@ -44,12 +27,10 @@ const ResponsiveText = ({ short, long }: { short: string; long: string }) => (
 );
 
 const FrameworkSelector = (props: BoxProps) => {
-  const [{ framework }, setFilters] = useRecoilState(filterState);
+  const framework = useFilterStore((state) => state.framework);
+  const setFramework = useFilterStore((state) => state.setFramework);
   const handleToggle = (name: FrameworkName) => () => {
-    setFilters((prev) => ({
-      ...prev,
-      framework: framework === name ? null : name,
-    }));
+    setFramework(framework === name ? null : name);
   };
   return (
     <HStack spacing={1} {...props}>
@@ -76,9 +57,10 @@ const FrameworkSelector = (props: BoxProps) => {
 };
 
 const FeaturesSelector = () => {
-  const [{ features }, setFilters] = useRecoilState(filterState);
+  const features = useFilterStore((state) => state.features);
+  const setFeatures = useFilterStore((state) => state.setFeatures);
   const handleChange = (newFeatures: Set<FeatureName>) => {
-    setFilters((prev) => ({ ...prev, features: newFeatures }));
+    setFeatures(newFeatures);
   };
   return (
     <MultiItemPicker<FeatureName>
@@ -103,9 +85,10 @@ type LicenseSelectorProps = {
 };
 
 const LicenseSelector = ({ licenses }: LicenseSelectorProps) => {
-  const [{ license }, setFilters] = useRecoilState(filterState);
+  const license = useFilterStore((state) => state.license);
+  const setLicense = useFilterStore((state) => state.setLicense);
   const handleChange = (newLicense: string | null) => {
-    setFilters((prev) => ({ ...prev, license: newLicense }));
+    setLicense(newLicense);
   };
   return (
     <SingleItemPicker
@@ -124,9 +107,10 @@ const LicenseSelector = ({ licenses }: LicenseSelectorProps) => {
 };
 
 const SortSelector = () => {
-  const [{ sort }, setFilters] = useRecoilState(filterState);
+  const sort = useFilterStore((state) => state.sort);
+  const setSort = useFilterStore((state) => state.setSort);
   const handleChange = (newSort: SortOptionKey) => {
-    setFilters((prev) => ({ ...prev, sort: newSort }));
+    setSort(newSort);
   };
   const selectedOption = SortOptions.find((s) => s.key === sort);
   return (
@@ -147,7 +131,12 @@ type FilterBarProps = {
 };
 
 const FilterBar = ({ items, children }: FilterBarProps) => {
-  const filters = useRecoilValue(filterState);
+  const filters = useFilterStore((state) => ({
+    sort: state.sort,
+    framework: state.framework,
+    features: state.features,
+    license: state.license,
+  }));
 
   let clone = items.slice(); // Shallow copy
 

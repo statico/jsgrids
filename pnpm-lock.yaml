@@ -58,15 +58,15 @@ importers:
       react-icons:
         specifier: ^4.11.0
         version: 4.11.0(react@18.2.0)
-      recoil:
-        specifier: ^0.7.7
-        version: 0.7.7(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       yaml:
         specifier: ^2.8.0
         version: 2.8.0
       zod:
         specifier: ^3.25.28
         version: 3.25.28
+      zustand:
+        specifier: ^4.5.7
+        version: 4.5.7(@types/react@18.2.25)(react@18.2.0)
     devDependencies:
       "@types/debug":
         specifier: ^4.1.9
@@ -1711,12 +1711,6 @@ packages:
         integrity: sha512-RbJ5/jmFcNNCcDV5o9eTnBLJ/HszWV0P73bc+Ff4nS/rJj+YaS6IGyiOL0VoBYX+l1Wrl3k63h/KrH+nhJ0XvQ==,
       }
 
-  hamt_plus@1.0.2:
-    resolution:
-      {
-        integrity: sha512-t2JXKaehnMb9paaYA7J0BX8QQAY8lwfQ9Gjf4pg/mk4krt+cmwmU652HOoWonf+7+EQV97ARPMhhVgU1ra2GhA==,
-      }
-
   has-flag@3.0.0:
     resolution:
       {
@@ -2198,21 +2192,6 @@ packages:
       }
     engines: { node: ">=0.10.0" }
 
-  recoil@0.7.7:
-    resolution:
-      {
-        integrity: sha512-8Og5KPQW9LwC577Vc7Ug2P0vQshkv1y3zG3tSSkWMqkWSwHmE+by06L8JtnGocjW6gcCvfwB3YtrJG6/tWivNQ==,
-      }
-    peerDependencies:
-      react: ">=16.13.1"
-      react-dom: "*"
-      react-native: "*"
-    peerDependenciesMeta:
-      react-dom:
-        optional: true
-      react-native:
-        optional: true
-
   regenerator-runtime@0.13.10:
     resolution:
       {
@@ -2466,6 +2445,14 @@ packages:
       "@types/react":
         optional: true
 
+  use-sync-external-store@1.5.0:
+    resolution:
+      {
+        integrity: sha512-Rb46I4cGGVBmjamjphe8L/UnvJD+uPPtTkNvX5mZgqdbavhI4EbgIWJiIHXJ8bc/i9EQGPRh4DwEURJ552Do0A==,
+      }
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
+
   watchpack@2.4.0:
     resolution:
       {
@@ -2521,6 +2508,24 @@ packages:
       {
         integrity: sha512-/nt/67WYKnr5by3YS7LroZJbtcCBurDKKPBPWWzaxvVCGuG/NOsiKkrjoOhI8mJ+SQUXEbUzeB3S+6XDUEEj7Q==,
       }
+
+  zustand@4.5.7:
+    resolution:
+      {
+        integrity: sha512-CHOUy7mu3lbD6o6LJLfllpjkzhHXSBlX8B9+qPddUsIfeF5S/UZ5q0kmCsnRqT1UHFQZchNFDDzMbQsuesHWlw==,
+      }
+    engines: { node: ">=12.7.0" }
+    peerDependencies:
+      "@types/react": ">=16.8"
+      immer: ">=9.0.6"
+      react: ">=16.8"
+    peerDependenciesMeta:
+      "@types/react":
+        optional: true
+      immer:
+        optional: true
+      react:
+        optional: true
 
 snapshots:
   "@ampproject/remapping@2.2.0":
@@ -3729,8 +3734,6 @@ snapshots:
 
   graceful-fs@4.2.11: {}
 
-  hamt_plus@1.0.2: {}
-
   has-flag@3.0.0: {}
 
   has@1.0.3:
@@ -3997,13 +4000,6 @@ snapshots:
     dependencies:
       loose-envify: 1.4.0
 
-  recoil@0.7.7(react-dom@18.2.0(react@18.2.0))(react@18.2.0):
-    dependencies:
-      hamt_plus: 1.0.2
-      react: 18.2.0
-    optionalDependencies:
-      react-dom: 18.2.0(react@18.2.0)
-
   regenerator-runtime@0.13.10: {}
 
   resolve-from@4.0.0: {}
@@ -4116,6 +4112,10 @@ snapshots:
     optionalDependencies:
       "@types/react": 18.2.25
 
+  use-sync-external-store@1.5.0(react@18.2.0):
+    dependencies:
+      react: 18.2.0
+
   watchpack@2.4.0:
     dependencies:
       glob-to-regexp: 0.4.1
@@ -4140,3 +4140,10 @@ snapshots:
   yaml@2.8.0: {}
 
   zod@3.25.28: {}
+
+  zustand@4.5.7(@types/react@18.2.25)(react@18.2.0):
+    dependencies:
+      use-sync-external-store: 1.5.0(react@18.2.0)
+    optionalDependencies:
+      "@types/react": 18.2.25
+      react: 18.2.0
