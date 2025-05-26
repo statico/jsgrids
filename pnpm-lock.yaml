@@ -37,9 +37,6 @@ importers:
       humanize-plus:
         specifier: ^1.8.2
         version: 1.8.2
-      js-yaml:
-        specifier: ^4.1.0
-        version: 4.1.0
       next:
         specifier: ^13.5.4
         version: 13.5.4(@babel/core@7.23.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
@@ -64,6 +61,9 @@ importers:
       recoil:
         specifier: ^0.7.7
         version: 0.7.7(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+      yaml:
+        specifier: ^2.8.0
+        version: 2.8.0
       zod:
         specifier: ^3.25.28
         version: 3.25.28
@@ -74,9 +74,6 @@ importers:
       "@types/humanize-plus":
         specifier: ^1.8.0
         version: 1.8.0
-      "@types/js-yaml":
-        specifier: ^4.0.6
-        version: 4.0.6
       "@types/node":
         specifier: ^20.8.3
         version: 20.8.3
@@ -1282,12 +1279,6 @@ packages:
         integrity: sha512-c7QNInYzgvbrNZvbwI/iYvHDTik/GqONxAvRUqwYF0AjgycoiyELrRR3RrILGXdZcaLt6Y+ds0+gSRQFzc71IQ==,
       }
 
-  "@types/js-yaml@4.0.6":
-    resolution:
-      {
-        integrity: sha512-ACTuifTSIIbyksx2HTon3aFtCKWcID7/h3XEmRpDYdMCXxPbl+m9GteOJeaAkiAta/NJaSFuA7ahZ0NkwajDSw==,
-      }
-
   "@types/lodash.mergewith@4.6.7":
     resolution:
       {
@@ -1387,12 +1378,6 @@ packages:
         integrity: sha512-bN798gFfQX+viw3R7yrGWRqnrN2oRkEkUjjl4JNn4E8GxxbjtG3FbrEIIY3l8/hrwUwIeCZvi4QuOTP4MErVug==,
       }
     engines: { node: ">=12" }
-
-  argparse@2.0.1:
-    resolution:
-      {
-        integrity: sha512-8+9WqebbFzpX9OR+Wa6O29asIogeRMzcGtAINdpMHHyAg10f05aSFVBbcEqGf/PXw1EjAZ+q2/bEBg3DvurK3Q==,
-      }
 
   aria-hidden@1.2.3:
     resolution:
@@ -1838,13 +1823,6 @@ packages:
       {
         integrity: sha512-RdJUflcE3cUzKiMqQgsCu06FPu9UdIJO0beYbPhHN4k6apgJtifcoCtT9bcxOpYBtpD2kCM6Sbzg4CausW/PKQ==,
       }
-
-  js-yaml@4.1.0:
-    resolution:
-      {
-        integrity: sha512-wpxZs9NoxZaJESJGIZTyDEaYpl0FKSA+FB9aJiyemKhMwkxQg63h4T1KJgUGHpTqPDNRcmmYLugrRjJlBtWvRA==,
-      }
-    hasBin: true
 
   jsesc@2.5.2:
     resolution:
@@ -2529,6 +2507,14 @@ packages:
         integrity: sha512-2eHWfjaoXgTBC2jNM1LRef62VQa0umtvRiDSk6HSzW7RvS5YtkabJrwYLLEKWBc8a5U2PTSCs+dJjUTJdlHsWQ==,
       }
     engines: { node: ">= 14" }
+
+  yaml@2.8.0:
+    resolution:
+      {
+        integrity: sha512-4lLa/EcQCB0cJkyts+FpIRx5G/llPxfP6VQU5KByHEhLxY3IJCH0f0Hy1MHI8sClTvsIb8qwRJ6R/ZdlDJ/leQ==,
+      }
+    engines: { node: ">= 14.6" }
+    hasBin: true
 
   zod@3.25.28:
     resolution:
@@ -3535,8 +3521,6 @@ snapshots:
 
   "@types/humanize-plus@1.8.0": {}
 
-  "@types/js-yaml@4.0.6": {}
-
   "@types/lodash.mergewith@4.6.7":
     dependencies:
       "@types/lodash": 4.14.187
@@ -3580,8 +3564,6 @@ snapshots:
       color-convert: 1.9.3
 
   ansi-styles@6.2.1: {}
-
-  argparse@2.0.1: {}
 
   aria-hidden@1.2.3:
     dependencies:
@@ -3791,10 +3773,6 @@ snapshots:
   isexe@2.0.0: {}
 
   js-tokens@4.0.0: {}
-
-  js-yaml@4.1.0:
-    dependencies:
-      argparse: 2.0.1
 
   jsesc@2.5.2: {}
 
@@ -4158,5 +4136,7 @@ snapshots:
   yaml@1.10.2: {}
 
   yaml@2.3.1: {}
+
+  yaml@2.8.0: {}
 
   zod@3.25.28: {}

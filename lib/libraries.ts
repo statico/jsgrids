@@ -1,6 +1,6 @@
 import debug from "debug";
 import { readdirSync, readFileSync } from "fs";
-import * as yaml from "js-yaml";
+import { parse as parseYaml } from "yaml";
 import { basename, join } from "path";
 import { z } from "zod";
 import { Features } from "./features";
@@ -111,7 +111,7 @@ export const getLibraries = async (): Promise<LibraryInfo[]> => {
       const id = basename(path, ".yml");
 
       // Load raw YAML data and make sure it validates.
-      const obj = yaml.load(readFileSync(path, "utf8"));
+      const obj = parseYaml(readFileSync(path, "utf8"));
       if (typeof obj !== "object") {
         throw new Error(`Expected ${path} to be an object`);
       }
