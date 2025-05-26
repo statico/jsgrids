@@ -2,6 +2,8 @@
 
 A List of JavaScript Spreadsheet and Data Grid Libraries - https://jsgrids.statico.io/
 
+[![GitHub repo](https://img.shields.io/badge/github-repo-green)](https://github.com/statico/jsgrids) [![GitHub contributors](https://img.shields.io/github/contributors/statico/jsgrids)](https://github.com/statico/jsgrids/graphs/contributors) [![GitHub last commit](https://img.shields.io/github/last-commit/statico/jsgrids)](https://github.com/statico/jsgrids/commits/main) [![GitHub branch status](https://img.shields.io/github/checks-status/statico/jsgrids/main)](https://github.com/statico/jsgrids)
+
 [<img src="https://github.com/user-attachments/assets/16e159b1-fa27-4237-89c7-600f3aeaa250" width="600" alt="screenshot of the jsgrids web interface" />](https://jsgrids.statico.io)
 
 ## Motivation
