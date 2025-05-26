@@ -30,7 +30,7 @@
     "react-github-corner": "^2.5.0",
     "react-icons": "^4.11.0",
     "recoil": "^0.7.7",
-    "runtypes": "^6.7.0"
+    "zod": "^3.25.28"
   },
   "devDependencies": {
     "@types/debug": "^4.1.9",

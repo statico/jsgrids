@@ -2,7 +2,7 @@ import debug from "debug";
 import { readdirSync, readFileSync } from "fs";
 import * as yaml from "js-yaml";
 import { basename, join } from "path";
-import * as rt from "runtypes";
+import { z } from "zod";
 import { Features } from "./features";
 import fetcher from "./fetcher";
 
@@ -14,17 +14,19 @@ log.enabled = true;
 // importing data and working with TypeScript a lot easier.
 //
 
-const URL = rt.String.withConstraint(
-  (str) => /^https?:\/\//.test(str) || `${str} is not a valid URL`,
-);
-const GitHubRepo = rt.String.withConstraint(
-  (str) => /^\S+\/\S+$/.test(str) || `${str} is not a username/repo pair`,
-);
-const Feature = rt.Boolean.Or(URL).Or(rt.String);
+const URL = z.string().refine((str: string) => /^https?:\/\//.test(str), {
+  message: "Must be a valid URL",
+});
 
-const FrameworkValue = rt.Optional(URL.Or(rt.Boolean));
+const GitHubRepo = z.string().refine((str: string) => /^\S+\/\S+$/.test(str), {
+  message: "Must be a username/repo pair",
+});
 
-const Frameworks = rt.Record({
+const Feature = z.union([z.boolean(), URL, z.string()]);
+
+const FrameworkValue = z.union([URL, z.boolean()]).optional();
+
+const Frameworks = z.object({
   vanilla: FrameworkValue,
   typescript: FrameworkValue,
   react: FrameworkValue,
@@ -35,62 +37,63 @@ const Frameworks = rt.Record({
   ember: FrameworkValue,
 });
 
-export type FrameworkName = keyof rt.Static<typeof Frameworks>;
+export type FrameworkName = keyof z.infer<typeof Frameworks>;
 
 // Validate and type the data we get from the YAML files in `data`.
-const ImportedYAMLInfo = rt.Record({
-  title: rt.String,
-  description: rt.String,
-  homeUrl: URL.Or(rt.Null),
-  demoUrl: URL.Or(rt.Null),
-  githubRepo: GitHubRepo.Or(rt.Null),
-  npmPackage: rt.String.Or(rt.Null),
-  ignoreBundlephobia: rt.Optional(rt.Boolean),
-  license: rt.String.Or(rt.Null),
-  revenueModel: rt.String.Or(rt.Null),
+const ImportedYAMLInfo = z.object({
+  title: z.string(),
+  description: z.string(),
+  homeUrl: z.union([URL, z.null()]),
+  demoUrl: z.union([URL, z.null()]),
+  githubRepo: z.union([GitHubRepo, z.null()]),
+  npmPackage: z.union([z.string(), z.null()]),
+  ignoreBundlephobia: z.boolean().optional(),
+  license: z.union([z.string(), z.null()]),
+  revenueModel: z.union([z.string(), z.null()]),
   frameworks: Frameworks,
-  features: rt.Dictionary(Feature),
+  features: z.record(z.string(), Feature),
 });
 
 // Allow additional information to be added to the library info dictionaries.
-const AugmentedInfo = rt.Record({
-  ...ImportedYAMLInfo.fields,
-  id: rt.String,
-  github: rt.Optional(
-    rt.Record({
+const AugmentedInfo = z.object({
+  ...ImportedYAMLInfo.shape,
+  id: z.string(),
+  github: z
+    .object({
       url: URL,
-      stars: rt.Number,
-      forks: rt.Number,
-      openIssues: rt.Number,
-      watchers: rt.Number,
-      subscribers: rt.Number,
-      network: rt.Number,
-      contributors: rt.Number,
-    }),
-  ),
-  npm: rt.Optional(
-    rt.Record({
+      stars: z.number(),
+      forks: z.number(),
+      openIssues: z.number(),
+      watchers: z.number(),
+      subscribers: z.number(),
+      network: z.number(),
+      contributors: z.number(),
+    })
+    .optional(),
+  npm: z
+    .object({
       url: URL,
-      downloads: rt.Number,
-    }),
-  ),
-  bundlephobia: rt.Optional(
-    rt
-      .Record({
+      downloads: z.number(),
+    })
+    .optional(),
+  bundlephobia: z
+    .union([
+      z.object({
         url: URL,
-        rawSize: rt.Number,
-        gzipSize: rt.Number,
-      })
-      .Or(rt.Null),
-  ),
+        rawSize: z.number(),
+        gzipSize: z.number(),
+      }),
+      z.null(),
+    ])
+    .optional(),
 });
 
 // Make the final thing we return read-only.
-const LibraryInfo = rt.Record(AugmentedInfo.fields).asReadonly();
+const LibraryInfo = AugmentedInfo.readonly();
 
-type ImportedYAMLInfo = rt.Static<typeof ImportedYAMLInfo>;
-type AugmentedInfo = rt.Static<typeof AugmentedInfo>;
-export type LibraryInfo = rt.Static<typeof LibraryInfo>;
+type ImportedYAMLInfo = z.infer<typeof ImportedYAMLInfo>;
+type AugmentedInfo = z.infer<typeof AugmentedInfo>;
+export type LibraryInfo = z.infer<typeof LibraryInfo>;
 
 const allowedFeatures = new Set(Object.keys(Features));
 
@@ -115,12 +118,10 @@ export const getLibraries = async (): Promise<LibraryInfo[]> => {
 
       let item: AugmentedInfo;
       try {
-        ImportedYAMLInfo.check(obj);
-        item = AugmentedInfo.check({ id, ...obj });
+        const importedData = ImportedYAMLInfo.parse(obj);
+        item = AugmentedInfo.parse({ id, ...importedData });
       } catch (err: any) {
-        throw new Error(
-          `In ${path}, key "${err.key}" failed validation: ${err.message}`,
-        );
+        throw new Error(`In ${path}, validation failed: ${err.message}`);
       }
 
       for (const key in item.features) {
@@ -213,10 +214,9 @@ export const getLibraries = async (): Promise<LibraryInfo[]> => {
       }
 
       try {
-        items.push(AugmentedInfo.check(item));
+        items.push(AugmentedInfo.parse(item));
       } catch (err: any) {
-        const details = JSON.stringify(err.details);
-        throw new Error(`AugmentedInfo for ${path}: ${details}`);
+        throw new Error(`AugmentedInfo for ${path}: ${err.message}`);
       }
     }),
   );
