@@ -1,6 +1,6 @@
 import React from "react";
 import { getLibraries } from "@/lib/libraries";
-import IndexPage from "../components/ClientPage";
+import IndexPage from "../components/IndexPage";
 
 export default async function Page() {
   const items = await getLibraries();
