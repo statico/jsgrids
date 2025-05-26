@@ -172,12 +172,14 @@ const FilterBarContent = ({ items, children }: FilterBarProps) => {
     <nav className="flex flex-wrap items-center justify-center space-x-2 m-6 select-none">
       <FrameworkSelector className="mb-2 xl:mb-0" />
       <div className="flex-basis-full w-0 xl:hidden" />
-      <div className="flex items-center space-x-1">
+      <div className="flex items-center space-x-3">
         <FeaturesSelector />
         <LicenseSelector licenses={new Set(items.map((i: any) => i.license))} />
         <SortSelector />
       </div>
-      <span className="hidden sm:inline">{filteredItems.length} results</span>
+      <span className="hidden sm:inline ml-2">
+        {filteredItems.length} results
+      </span>
     </nav>
   );
 
@@ -219,7 +221,7 @@ const FilterBar = ({ items, children }: FilterBarProps) => {
           })}
         </div>
         <div className="flex-basis-full w-0 xl:hidden" />
-        <div className="flex items-center space-x-1">
+        <div className="flex items-center space-x-3">
           <Button
             variant="outline"
             className="flex items-center space-x-2 font-normal"
@@ -254,7 +256,9 @@ const FilterBar = ({ items, children }: FilterBarProps) => {
             <GoChevronDown />
           </Button>
         </div>
-        <span className="hidden sm:inline">{sortedItems.length} results</span>
+        <span className="hidden sm:inline ml-2">
+          {sortedItems.length} results
+        </span>
       </nav>
     );
 
