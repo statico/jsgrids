@@ -20,7 +20,7 @@ mkdirSync(basedir, { recursive: true });
 console.log("cache: base directory is %s", basedir);
 
 const keyToFilename = (key: string): string => {
-  const hash = crypto.createHash("sha1");
+  const hash = crypto.createHash("sha256");
   hash.update(key);
   return hash.digest("hex") + ".json";
 };

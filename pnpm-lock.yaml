@@ -73,6 +73,9 @@ importers:
       zod:
         specifier: ^3.25.28
         version: 3.25.28
+      zod-validation-error:
+        specifier: ^3.4.1
+        version: 3.4.1(zod@3.25.28)
       zustand:
         specifier: ^5.0.5
         version: 5.0.5(@types/react@19.1.5)(react@19.1.0)(use-sync-external-store@1.5.0(react@19.1.0))
@@ -2175,6 +2178,15 @@ packages:
     engines: { node: ">= 14.6" }
     hasBin: true
 
+  zod-validation-error@3.4.1:
+    resolution:
+      {
+        integrity: sha512-1KP64yqDPQ3rupxNv7oXhf7KdhHHgaqbKuspVoiN93TT0xrBjql+Svjkdjq/Qh/7GSMmgQs3AfvBT0heE35thw==,
+      }
+    engines: { node: ">=18.0.0" }
+    peerDependencies:
+      zod: ^3.24.4
+
   zod@3.25.28:
     resolution:
       {
@@ -3366,6 +3378,10 @@ snapshots:
   yallist@5.0.0: {}
 
   yaml@2.8.0: {}
+
+  zod-validation-error@3.4.1(zod@3.25.28):
+    dependencies:
+      zod: 3.25.28
 
   zod@3.25.28: {}
 

@@ -33,6 +33,7 @@
     "tailwind-merge": "^3.3.0",
     "yaml": "^2.8.0",
     "zod": "^3.25.28",
+    "zod-validation-error": "^3.4.1",
     "zustand": "^5.0.5"
   },
   "devDependencies": {

@@ -38,6 +38,9 @@ const throttledFetch = throttler(async (url: string) => {
       const res = await fetch(url, { headers });
       const resHeaders = Object.fromEntries(res.headers.entries());
       const data = await res.json();
+      if (!res.ok) {
+        throw new Error(`Request to ${url} failed with status ${res.status}`);
+      }
       return { headers: resHeaders, data };
     };
 

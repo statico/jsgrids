@@ -1,7 +1,8 @@
 import { readdirSync, readFileSync } from "fs";
-import { parse as parseYaml } from "yaml";
 import { basename, join } from "path";
+import { parse as parseYaml } from "yaml";
 import { z } from "zod";
+import { fromZodError } from "zod-validation-error";
 import { Features } from "./features";
 import fetcher from "./fetcher";
 
@@ -10,17 +11,22 @@ import fetcher from "./fetcher";
 // importing data and working with TypeScript a lot easier.
 //
 
-const URL = z.string().refine((str: string) => /^https?:\/\//.test(str), {
-  message: "Must be a valid URL",
-});
+const URL = z.string().url("Must be a valid URL");
 
 const GitHubRepo = z.string().refine((str: string) => /^\S+\/\S+$/.test(str), {
   message: "Must be a username/repo pair",
 });
 
-const Feature = z.union([z.boolean(), URL, z.string()]);
+const Feature = z.union([z.boolean(), URL, z.string()], {
+  message:
+    "Must be a valid URL, boolean, or string (which will show a warming)",
+});
 
-const FrameworkValue = z.union([URL, z.boolean()]).optional();
+const FrameworkValue = z
+  .union([URL, z.boolean()], {
+    message: "Must be a valid URL or boolean",
+  })
+  .optional();
 
 const Frameworks = z.object({
   vanilla: FrameworkValue,
@@ -116,7 +122,8 @@ export const getLibraries = async (): Promise<LibraryInfo[]> => {
         const importedData = ImportedYAMLInfo.parse(obj);
         item = AugmentedInfo.parse({ id, ...importedData });
       } catch (err: any) {
-        throw new Error(`In ${path}, validation failed: ${err.message}`);
+        const validationError = fromZodError(err);
+        throw new Error(`${path} didn't validate: ${validationError}`);
       }
 
       for (const key in item.features) {
@@ -179,6 +186,9 @@ export const getLibraries = async (): Promise<LibraryInfo[]> => {
         const res = await fetcher(
           `https://api.npmjs.org/downloads/point/last-week/${name}`,
         );
+        if (!res.ok) {
+          throw new Error(`NPM API error for (${name}): ${res.status}`);
+        }
         const data: any = res.data;
         const npm = {
           url: `https://www.npmjs.com/package/${name}`,
@@ -211,7 +221,8 @@ export const getLibraries = async (): Promise<LibraryInfo[]> => {
       try {
         items.push(AugmentedInfo.parse(item));
       } catch (err: any) {
-        throw new Error(`AugmentedInfo for ${path}: ${err.message}`);
+        const validationError = fromZodError(err);
+        throw new Error(`AugmentedInfo for ${path}: ${validationError}`);
       }
     }),
   );
