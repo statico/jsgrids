@@ -1,4 +1,5 @@
 import React from "react";
+import { useEffect, useState, useMemo } from "react";
 import MultiItemPicker from "@/components/MultiItemPicker";
 import SingleItemPicker from "@/components/SingleItemPicker";
 import { FeatureName, FeatureNames, Features } from "@/lib/features";
@@ -153,35 +154,36 @@ type FilterBarProps = {
   children: (filteredItems: LibraryInfo[], filterBar: ReactNode) => ReactNode;
 };
 
-const FilterBar = ({ items, children }: FilterBarProps) => {
-  const filters = useFilterStore((state) => ({
-    sort: state.sort,
-    framework: state.framework,
-    features: state.features,
-    license: state.license,
-  }));
+const FilterBarContent = ({ items, children }: FilterBarProps) => {
+  // Use individual selectors instead of creating a new object
+  const sort = useFilterStore((state) => state.sort);
+  const framework = useFilterStore((state) => state.framework);
+  const features = useFilterStore((state) => state.features);
+  const license = useFilterStore((state) => state.license);
 
-  let clone = items.slice(); // Shallow copy
+  const filteredItems = useMemo(() => {
+    let clone = items.slice(); // Shallow copy
 
-  const sortOption = SortOptions.find((s) => s.key === filters.sort);
-  if (!sortOption) {
-    throw new Error(`Unknown sort option ${filters.sort}`);
-  }
-  clone.sort(sortOption.fn);
+    const sortOption = SortOptions.find((s) => s.key === sort);
+    if (!sortOption) {
+      throw new Error(`Unknown sort option ${sort}`);
+    }
+    clone.sort(sortOption.fn);
 
-  if (filters.framework) {
-    clone = clone.filter(
-      (item) => filters.framework && item.frameworks[filters.framework],
-    );
-  }
+    if (framework) {
+      clone = clone.filter((item) => framework && item.frameworks[framework]);
+    }
 
-  if (filters.features.size) {
-    clone = clone.filter((item) => hasAllKeys(item.features, filters.features));
-  }
+    if (features.size) {
+      clone = clone.filter((item) => hasAllKeys(item.features, features));
+    }
 
-  if (filters.license) {
-    clone = clone.filter((item) => item.license === filters.license);
-  }
+    if (license) {
+      clone = clone.filter((item) => item.license === license);
+    }
+
+    return clone;
+  }, [items, sort, framework, features, license]);
 
   const filterBar = (
     <nav className="flex flex-wrap items-center justify-center space-x-2 m-6 select-none">
@@ -192,11 +194,65 @@ const FilterBar = ({ items, children }: FilterBarProps) => {
         <LicenseSelector licenses={new Set(items.map((i: any) => i.license))} />
         <SortSelector />
       </div>
-      <span className="hidden sm:inline">{clone.length} results</span>
+      <span className="hidden sm:inline">{filteredItems.length} results</span>
     </nav>
   );
 
-  return <>{children(clone, filterBar)}</>;
+  return <>{children(filteredItems, filterBar)}</>;
+};
+
+const FilterBar = ({ items, children }: FilterBarProps) => {
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  // During SSR and before hydration, show all items with a simple filter bar
+  if (!isClient) {
+    const defaultFilterBar = (
+      <nav className="flex flex-wrap items-center justify-center space-x-2 m-6 select-none">
+        <div className="flex items-center space-x-1 mb-2 xl:mb-0">
+          <ResponsiveText short="Show:" long="Frameworks:" />
+          {FrameworkNames.map((name) => {
+            const Icon = FrameworkIcons[name];
+            const title = FrameworkTitles[name];
+            return (
+              <button
+                key={name}
+                className="p-1 bg-transparent hover:opacity-75"
+                title={title}
+                aria-label={title}
+                disabled
+              >
+                <Icon style={{ width: 32, height: 32 }} />
+              </button>
+            );
+          })}
+        </div>
+        <div className="flex-basis-full w-0 xl:hidden" />
+        <div className="flex items-center space-x-1">
+          <div className="px-3 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded">
+            <ResponsiveText short="Features" long="Any Feature" />
+          </div>
+          <div className="px-3 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded">
+            <ResponsiveText short="License" long="Any License" />
+          </div>
+          <div className="px-3 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded">
+            <ResponsiveText
+              short="Sort"
+              long={`Sort by ${SortOptions[0].title}`}
+            />
+          </div>
+        </div>
+        <span className="hidden sm:inline">{items.length} results</span>
+      </nav>
+    );
+
+    return <>{children(items, defaultFilterBar)}</>;
+  }
+
+  return <FilterBarContent items={items} children={children} />;
 };
 
 export default FilterBar;
