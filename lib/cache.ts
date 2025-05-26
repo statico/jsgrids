@@ -15,7 +15,9 @@ import { join } from "path";
 
 const expiryInSeconds = 1000 * 60 * 60 * 24;
 
-const basedir = join(process.cwd(), ".cache");
+// Put the cache in the .next/cache/jsgrids directory so that it is
+// automatically cached by Vercel.
+const basedir = join(process.cwd(), ".next/cache/jsgrids");
 mkdirSync(basedir, { recursive: true });
 console.log("cache: base directory is %s", basedir);
 
