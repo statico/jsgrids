@@ -186,9 +186,6 @@ export const getLibraries = async (): Promise<LibraryInfo[]> => {
         const res = await fetcher(
           `https://api.npmjs.org/downloads/point/last-week/${name}`,
         );
-        if (!res.ok) {
-          throw new Error(`NPM API error for (${name}): ${res.status}`);
-        }
         const data: any = res.data;
         const npm = {
           url: `https://www.npmjs.com/package/${name}`,
