@@ -76,7 +76,7 @@ const Feature = ({ name, value }: FeatureProps) => {
   if (value) {
     return (
       <Tooltip label={typeof value === "string" ? value : description}>
-        <div className="flex items-center space-x-1 cursor-help hover:opacity-75">
+        <div className="flex items-center space-x-1.5 cursor-help hover:opacity-75">
           {value === true ? (
             <IconWithColor icon={FaCheckCircle} color="#48bb78" />
           ) : /premium/i.test(value) ? (
@@ -84,16 +84,16 @@ const Feature = ({ name, value }: FeatureProps) => {
           ) : (
             <IconWithColor icon={FaInfoCircle} color="#ed8936" />
           )}
-          <span className="text-sm">{title}</span>
+          <span className="text-xs">{title}</span>
         </div>
       </Tooltip>
     );
   } else if (!value && important) {
     return (
       <Tooltip label={typeof value === "string" ? value : description}>
-        <div className="flex items-center space-x-1 cursor-help hover:opacity-75">
+        <div className="flex items-center space-x-1.5 cursor-help hover:opacity-75">
           <IconWithColor icon={FaTimesCircle} color="#f56565" />
-          <span className="text-sm">{`Not ${title}`}</span>
+          <span className="text-xs">{`Not ${title}`}</span>
         </div>
       </Tooltip>
     );
@@ -242,7 +242,7 @@ const Card = ({ info }: CardProps) => {
         />
       </div>
 
-      <div className="grid grid-cols-2 gap-x-4 text-xs uppercase">
+      <div className="grid grid-cols-2 gap-x-4 gap-y-1 text-xs uppercase">
         {sortedFeatureNames(info.features).map((name) => (
           <Feature key={name} name={name} value={info.features[name]} />
         ))}
