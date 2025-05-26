@@ -1,0 +1,108 @@
+---
+description:
+globs:
+alwaysApply: true
+---
+---
+description: JSGrids project overview and architecture guide
+globs:
+  - "**/*.ts"
+  - "**/*.tsx"
+  - "**/*.yml"
+  - "**/*.yaml"
+alwaysApply: false
+---
+
+# JSGrids Project Overview
+
+JSGrids is a curated directory of JavaScript spreadsheet and data grid libraries hosted at https://jsgrids.statico.io/. This is a Next.js application that helps developers discover and compare data grid solutions for their projects.
+
+## Project Purpose
+
+- **Mission**: Maintain the most comprehensive and up-to-date list of JavaScript data grid and spreadsheet libraries
+- **Target Audience**: Frontend developers building internal tools, data auditing interfaces, and workflow applications
+- **Value Proposition**: Provides current, maintained information where other lists are outdated
+
+## Architecture Overview
+
+### Tech Stack
+- **Framework**: Next.js 15 with App Router and React 19
+- **Styling**: Tailwind CSS 4 with shadcn/ui components
+- **Language**: TypeScript with strict typing
+- **Package Manager**: pnpm
+- **Deployment**: Vercel
+- **Data**: YAML files for library definitions
+
+### Key Directories
+
+- `app/` - Next.js App Router pages and layouts
+- `components/` - React components including shadcn/ui components
+- `data/` - YAML files containing library information (60+ libraries)
+- `lib/` - Core business logic, data processing, and utilities
+- `public/` - Static assets
+
+### Data Structure
+
+Each library is defined in a YAML file in `data/` with the following structure:
+- **Metadata**: title, homeUrl, demoUrl, githubRepo, npmPackage, license
+- **Business**: revenueModel (Free/Commercial/Freemium)
+- **Frameworks**: Support for vanilla JS, React, Angular, Vue
+- **Features**: 25+ feature flags (editable, filtering, sorting, virtualization, etc.)
+
+### Core Components
+
+- **IndexPage**: Main listing page with filtering and search
+- **Card**: Individual library display component
+- **FilterBar**: Multi-faceted filtering interface
+- **ItemPickers**: Framework and feature selection components
+
+### Key Libraries & Utilities
+
+- **lib/libraries.ts**: Core data loading and GitHub API integration
+- **lib/features.ts**: Feature definitions and categorization
+- **lib/frameworks.ts**: Framework definitions
+- **lib/store.ts**: Zustand state management for filters
+- **lib/fetcher.ts**: GitHub API client with rate limiting
+
+## Development Guidelines
+
+### Code Style
+- Use TypeScript for all new code
+- Follow React best practices with hooks and functional components
+- Use Tailwind CSS for styling with consistent design tokens
+- Implement proper error handling and loading states
+
+### Data Management
+- Library data is stored in YAML files for easy editing
+- GitHub API integration fetches real-time repository statistics
+- Zod schemas validate data structure and types
+- Caching layer reduces API calls and improves performance
+
+### UI/UX Principles
+- Mobile-responsive design
+- Dark/light theme support via next-themes
+- Accessible components using Radix UI primitives
+- Fast filtering and search with client-side state management
+
+### Performance Considerations
+- GitHub API rate limiting with p-throttle
+- Efficient data fetching with retry logic
+- Optimized bundle size with proper imports
+- Static generation where possible
+
+## Contributing Workflow
+
+1. Library data updates go in `data/*.yml` files
+2. UI changes use shadcn/ui components and Tailwind
+3. All code must pass Prettier formatting
+4. Vercel deployment validates builds automatically
+
+## External Dependencies
+
+- **GitHub API**: For repository statistics and activity data
+- **Vercel**: For hosting and deployment
+- **shadcn/ui**: For consistent, accessible UI components
+- **Lucide React**: For iconography (only shadcn components)
+- **react-icons**: For additional icon sets (everywhere else)
+
+This project serves as a valuable resource for the JavaScript community by maintaining current information about data grid solutions and their capabilities.
