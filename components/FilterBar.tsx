@@ -304,7 +304,7 @@ const FilterBar = ({ items, children }: FilterBarProps) => {
           </Button>
           <div className="flex items-center space-x-1">
             <Button
-              variant="ghost"
+              variant="default"
               size="icon"
               className="w-8 h-8"
               disabled
@@ -313,7 +313,7 @@ const FilterBar = ({ items, children }: FilterBarProps) => {
               <FaTh className="w-4 h-4" />
             </Button>
             <Button
-              variant="default"
+              variant="ghost"
               size="icon"
               className="w-8 h-8"
               disabled
