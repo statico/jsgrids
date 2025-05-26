@@ -1,5 +1,4 @@
 import * as crypto from "crypto";
-import debug from "debug";
 import {
   existsSync,
   mkdirSync,
@@ -8,8 +7,6 @@ import {
   writeFileSync,
 } from "fs";
 import { join } from "path";
-
-const log = debug("cache");
 
 //
 // This is a simple filesystem cache because, amazingly, nothing on npm seemed
@@ -20,7 +17,7 @@ const duration = 1000 * 60 * 60 * 24;
 
 const basedir = join(process.cwd(), ".cache");
 mkdirSync(basedir, { recursive: true });
-log("base directory is %s", basedir);
+console.log("cache: base directory is %s", basedir);
 
 const keyToFilename = (key: string): string => {
   const hash = crypto.createHash("sha1");
@@ -31,7 +28,7 @@ const keyToFilename = (key: string): string => {
 const get = (key: string): any => {
   const path = join(basedir, keyToFilename(key));
   if (!existsSync(path)) {
-    log("miss for %s", key);
+    console.log("cache: miss for %s", key);
     return null;
   }
 
@@ -39,20 +36,20 @@ const get = (key: string): any => {
   if (obj?.expiration >= Date.now()) {
     return obj?.data;
   } else {
-    log("expired %s", key);
+    console.log("cache: expired %s", key);
     return null;
   }
 };
 
 const set = (key: string, data: any): void => {
-  log("write %s", key);
+  console.log("cache: write %s", key);
   const path = join(basedir, keyToFilename(key));
   const obj = JSON.stringify({ expiration: Date.now() + duration, data });
   writeFileSync(path, obj, "utf8");
 };
 
 const clear = (key: string): void => {
-  log("clear %s", key);
+  console.log("cache: clear %s", key);
   const path = join(basedir, keyToFilename(key));
   if (existsSync(path)) unlinkSync(path);
 };

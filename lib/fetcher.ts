@@ -1,10 +1,6 @@
-import debug from "debug";
 import pRetry from "p-retry";
 import pThrottle from "p-throttle";
 import * as cache from "./cache";
-
-const log = debug("fetcher");
-log.enabled = true;
 
 const throttler = pThrottle({ limit: 1, interval: 750 });
 
@@ -18,7 +14,7 @@ const throttledFetch = throttler(async (url: string) => {
     );
   }
 
-  log("get %s", url);
+  console.log("fetcher: get %s", url);
   try {
     // Be nice to our APIs. (File a GitHub issue if we aren't!)
     const ua = VERCEL_URL
@@ -49,8 +45,8 @@ const throttledFetch = throttler(async (url: string) => {
       minTimeout: 2000,
       factor: 1,
       onFailedAttempt: (err) => {
-        log(
-          "failed %s, attempt number = %d, retries left = %d",
+        console.log(
+          "fetcher: failed %s, attempt number = %d, retries left = %d",
           url,
           err.attemptNumber,
           err.retriesLeft,
@@ -61,7 +57,13 @@ const throttledFetch = throttler(async (url: string) => {
     const res = err.response;
     const status = res?.status;
     const resHeaders = Object.fromEntries(res?.headers.entries());
-    log("failed %s - status=%s, headers=%o - %s", url, status, resHeaders, err);
+    console.log(
+      "fetcher: failed %s - status=%s, headers=%o - %s",
+      url,
+      status,
+      resHeaders,
+      err,
+    );
     throw err;
   }
 });

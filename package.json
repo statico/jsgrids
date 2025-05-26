@@ -18,7 +18,6 @@
     "@emotion/react": "^11",
     "@emotion/styled": "^11",
     "date-fns": "^4.1.0",
-    "debug": "^4.3.4",
     "framer-motion": "^10",
     "filesize": "^10.1.6",
     "next": "^13.5.4",
@@ -33,7 +32,6 @@
     "zustand": "^4.5.7"
   },
   "devDependencies": {
-    "@types/debug": "^4.1.9",
     "@types/node": "^20.8.3",
     "@types/react": "^18.2.25",
     "husky": ">=8",

@@ -1,13 +1,9 @@
-import debug from "debug";
 import { readdirSync, readFileSync } from "fs";
 import { parse as parseYaml } from "yaml";
 import { basename, join } from "path";
 import { z } from "zod";
 import { Features } from "./features";
 import fetcher from "./fetcher";
-
-const log = debug("libraries");
-log.enabled = true;
 
 //
 // Yes, these types and things seem pretty overcomplicated, but it sure makes
@@ -208,7 +204,7 @@ export const getLibraries = async (): Promise<LibraryInfo[]> => {
         } catch (err) {
           // Bundlephobia constantly errors out, even after retrying. So let's do
           // the best we can and signal to the frontend that the API is broken.
-          log("giving up getting bundle size for %s", name);
+          console.log("libraries: giving up getting bundle size for %s", name);
           item.bundlephobia = { url, rawSize: -1, gzipSize: -1 };
         }
       }
