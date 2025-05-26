@@ -7,9 +7,9 @@ import { FrameworkName } from "./libraries";
 // An ordered set of all framework names.
 export const FrameworkNames: FrameworkName[] = [
   "react",
+  "svelte",
   "vue",
   "angular",
-  "svelte",
   "ember",
   "jquery",
   "vanilla",
@@ -17,9 +17,9 @@ export const FrameworkNames: FrameworkName[] = [
 
 export const FrameworkTitles = {
   react: "React",
+  svelte: "Svelte",
   vue: "Vue.js",
   angular: "Angular",
-  svelte: "Svelte",
   ember: "Ember.js",
   jquery: "jQuery",
   vanilla: "Vanilla JavaScript (no framework)",

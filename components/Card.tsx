@@ -13,7 +13,11 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { FeatureName, Features } from "@/lib/features";
-import { FrameworkIcons, FrameworkTitles } from "@/lib/frameworks";
+import {
+  FrameworkIcons,
+  FrameworkNames,
+  FrameworkTitles,
+} from "@/lib/frameworks";
 import { FrameworkName, LibraryInfo } from "@/lib/libraries";
 import { sortedFeatureNames } from "@/lib/sorting";
 import { filesize } from "filesize";
@@ -105,7 +109,12 @@ type FrameworkListProps = {
 };
 
 const FrameworkList = memo(({ info }: FrameworkListProps) => {
-  const names = Object.keys(info.frameworks) as FrameworkName[];
+  // Sort the frameworks by their order in FrameworkNames.
+  const names = Object.keys(info.frameworks)
+    .filter((name): name is FrameworkName =>
+      FrameworkNames.includes(name as FrameworkName),
+    )
+    .sort((a, b) => FrameworkNames.indexOf(a) - FrameworkNames.indexOf(b));
   return (
     <div className="flex space-x-2 text-2xl">
       {names.map((name) => {
