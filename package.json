@@ -11,27 +11,27 @@
     "prepare": "husky install"
   },
   "dependencies": {
-    "@babel/core": "^7.23.0",
+    "@babel/core": "^7.27.1",
     "date-fns": "^4.1.0",
     "filesize": "^10.1.6",
-    "next": "^13.5.4",
-    "p-retry": "^6.1.0",
-    "p-throttle": "^5.1.0",
-    "react": "^18",
-    "react-dom": "^18",
+    "next": "^15.3.2",
+    "p-retry": "^6.2.1",
+    "p-throttle": "^7.0.0",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
     "react-github-corner": "^2.5.0",
-    "react-icons": "^4.11.0",
+    "react-icons": "^5.5.0",
     "yaml": "^2.8.0",
     "zod": "^3.25.28",
-    "zustand": "^4.5.7"
+    "zustand": "^5.0.5"
   },
   "devDependencies": {
-    "@types/node": "^20.8.3",
-    "@types/react": "^18.2.25",
-    "husky": ">=8",
-    "lint-staged": ">=14",
-    "prettier": "^3.0.3",
-    "typescript": "^5.2.2"
+    "@types/node": "^22.15.21",
+    "@types/react": "^19.1.5",
+    "husky": ">=9.1.7",
+    "lint-staged": ">=16.0.0",
+    "prettier": "^3.5.3",
+    "typescript": "^5.8.3"
   },
   "lint-staged": {
     "**/*": "prettier --write --ignore-unknown",
