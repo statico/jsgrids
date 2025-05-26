@@ -13,7 +13,7 @@ import { join } from "path";
 // to be this simple and this is easy to write.
 //
 
-const duration = 1000 * 60 * 60 * 24;
+const expiryInSeconds = 1000 * 60 * 60 * 24;
 
 const basedir = join(process.cwd(), ".cache");
 mkdirSync(basedir, { recursive: true });
@@ -44,7 +44,10 @@ const get = (key: string): any => {
 const set = (key: string, data: any): void => {
   console.log("cache: write %s", key);
   const path = join(basedir, keyToFilename(key));
-  const obj = JSON.stringify({ expiration: Date.now() + duration, data });
+  const obj = JSON.stringify({
+    expiration: Date.now() + expiryInSeconds,
+    data,
+  });
   writeFileSync(path, obj, "utf8");
 };
 
