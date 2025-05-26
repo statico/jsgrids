@@ -18,7 +18,7 @@ export default function IndexPage({ items, ts }: IndexPageProps) {
   return (
     <div>
       <header
-        className="text-white p-8 text-center relative bg-[#3182ce] dark:bg-[#1c4a75] transition-colors duration-200"
+        className="text-white p-8 text-center relative bg-slate-600 dark:bg-slate-800 transition-colors duration-200"
         style={{
           backgroundImage: HERO_PATTERN_GRID_BACKGROUND,
         }}
@@ -29,8 +29,8 @@ export default function IndexPage({ items, ts }: IndexPageProps) {
         <GithubCorner
           href="https://github.com/statico/jsgrids"
           bannerColor="#fff"
-          octoColor="#3182ce"
-          className="[&>svg]:fill-[#3182ce] dark:[&>svg]:fill-[#1c4a75]"
+          octoColor="#475569"
+          className="[&>svg]:fill-slate-600 dark:[&>svg]:fill-slate-800"
         />
         <div className="space-y-4">
           <h1 className="text-4xl font-bold">jsgrids.statico.io</h1>
