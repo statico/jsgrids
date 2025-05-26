@@ -254,12 +254,12 @@ const FilterBar = ({ items, children }: FilterBarProps) => {
                 key={name}
                 variant="ghost"
                 size="icon"
-                className="p-1 w-10 h-10"
+                className="p-1 w-8 h-8"
                 title={title}
                 aria-label={title}
                 disabled
               >
-                <Icon style={{ width: 32, height: 32 }} />
+                <Icon style={{ width: 24, height: 24 }} />
               </Button>
             );
           })}
@@ -268,6 +268,7 @@ const FilterBar = ({ items, children }: FilterBarProps) => {
         <div className="flex items-center space-x-3">
           <Button
             variant="outline"
+            size="sm"
             className="flex items-center space-x-2 font-normal"
             disabled
           >
@@ -278,6 +279,7 @@ const FilterBar = ({ items, children }: FilterBarProps) => {
           </Button>
           <Button
             variant="outline"
+            size="sm"
             className="flex items-center space-x-2 font-normal"
             disabled
           >
@@ -288,6 +290,7 @@ const FilterBar = ({ items, children }: FilterBarProps) => {
           </Button>
           <Button
             variant="outline"
+            size="sm"
             className="flex items-center space-x-2 font-normal"
             disabled
           >
