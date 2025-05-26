@@ -22,7 +22,7 @@ import {
 } from "react-icons/go";
 import { IoMdDownload } from "react-icons/io";
 
-const ColoredIcon = ({
+const IconWithColor = ({
   icon: Icon,
   color,
 }: {
@@ -78,11 +78,11 @@ const Feature = ({ name, value }: FeatureProps) => {
       <Tooltip label={typeof value === "string" ? value : description}>
         <div className="flex items-center space-x-1 cursor-help hover:opacity-75">
           {value === true ? (
-            <ColoredIcon icon={FaCheckCircle} color="#48bb78" />
+            <IconWithColor icon={FaCheckCircle} color="#48bb78" />
           ) : /premium/i.test(value) ? (
-            <ColoredIcon icon={FaArrowCircleUp} color="#4299e1" />
+            <IconWithColor icon={FaArrowCircleUp} color="#4299e1" />
           ) : (
-            <ColoredIcon icon={FaInfoCircle} color="#ed8936" />
+            <IconWithColor icon={FaInfoCircle} color="#ed8936" />
           )}
           <span className="text-sm">{title}</span>
         </div>
@@ -92,7 +92,7 @@ const Feature = ({ name, value }: FeatureProps) => {
     return (
       <Tooltip label={typeof value === "string" ? value : description}>
         <div className="flex items-center space-x-1 cursor-help hover:opacity-75">
-          <ColoredIcon icon={FaTimesCircle} color="#f56565" />
+          <IconWithColor icon={FaTimesCircle} color="#f56565" />
           <span className="text-sm">{`Not ${title}`}</span>
         </div>
       </Tooltip>
