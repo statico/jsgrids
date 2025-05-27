@@ -13,7 +13,7 @@ import { join } from "path";
 // to be this simple and this is easy to write.
 //
 
-const expiryInSeconds = 1000 * 60 * 60 * 24;
+const expiryInMs = 1000 * 60 * 60 * 24;
 
 // Put the cache in the .next/cache/jsgrids directory so that it is
 // automatically cached by Vercel.
@@ -47,7 +47,7 @@ const set = (key: string, data: any): void => {
   console.log("cache: write %s", key);
   const path = join(basedir, keyToFilename(key));
   const obj = JSON.stringify({
-    expiration: Date.now() + expiryInSeconds,
+    expiration: Date.now() + expiryInMs,
     data,
   });
   writeFileSync(path, obj, "utf8");
