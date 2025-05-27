@@ -6,10 +6,13 @@ npmPackage: "@tanstack/react-table"
 license: MIT License
 revenueModel: Free
 description: Headless UI for building powerful tables & datagrids for React, Solid, Vue, Svelte and TS/JS.
+
 frameworks:
+  vanilla: true
   react: true
   vue: true
   svelte: true
+
 features:
   accessible: Adding these tags is up to you.
   copyPaste: false
