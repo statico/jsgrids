@@ -1,12 +1,12 @@
 title: shadcn-table
 homeUrl: https://www.diceui.com/docs/components/data-table
 demoUrl: https://tablecn.com/
-githubRepo: https://github.com/sadmann7/shadcn-table
+githubRepo: sadmann7/shadcn-table
 npmPackage: null
 license: MIT License
 revenueModel: Free
 description: >
-  A powerful shadcn table component with server-side sorting, filtering, and pagination. 
+  A powerful shadcn table component with server-side sorting, filtering, and pagination.
   Built with TanStack Table and shadcn. Features advanced filtering with Notion/Airtable-like
   capabilities and Linear-style filter menu for command palette filtering.
 frameworks:
