@@ -9,7 +9,7 @@ description: Professional JavaScript data grid widget by DHTMLX. Feature-rich gr
 
 frameworks:
   react: true
-  svelte: false
+  svelte: true
   vue: true
   angular: true
   ember: false
