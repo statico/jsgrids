@@ -1,10 +1,10 @@
 title: DHTMLX Grid
-homeUrl: https://dhtmlx.com/docs/products/
-demoUrl: https://dhtmlx.com/docs/products/
+homeUrl: https://dhtmlx.com/docs/products/dhtmlxGrid/
+demoUrl: https://dhtmlx.com/docs/products/dhtmlxGrid/
 githubRepo: null
 npmPackage: null
 license: Commercial
-revenueModel: Commercial
+revenueModel: Commercial with 30-day Trial
 description: Professional JavaScript data grid widget by DHTMLX. Feature-rich grid component with advanced data management capabilities, export functionality, and extensive customization options for enterprise applications.
 
 frameworks:
@@ -17,7 +17,7 @@ frameworks:
   vanilla: true
 
 features:
-  accessible: false
+  accessible: true
   copyPaste: true
   csvExport: true
   customEditors: true
@@ -30,7 +30,7 @@ features:
   formulas: false
   freezableCols: true
   headless: false
-  i18n: false
+  i18n: true
   maintained: true
   mergeCells: false
   openSource: false
@@ -45,7 +45,7 @@ features:
   search: true
   serverSide: true
   sorting: true
-  trees: false
-  typescript: false
+  trees: true
+  typescript: true
   xlsxExport: true
   virtualization: true
