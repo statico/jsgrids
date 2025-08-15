@@ -14,6 +14,7 @@ frameworks:
   react: true
   angular: true
   vue: true
+  solid: true
 features:
   accessible: true
   copyPaste: Premium feature

@@ -12,6 +12,9 @@ frameworks:
   react: true
   vue: true
   svelte: true
+  solid: true
+  qwik: true
+  lit: true
 
 features:
   accessible: Adding these tags is up to you.

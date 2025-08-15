@@ -34,6 +34,9 @@ const Frameworks = z.object({
   vue: FrameworkValue,
   svelte: FrameworkValue,
   angular: FrameworkValue,
+  solid: FrameworkValue,
+  qwik: FrameworkValue,
+  lit: FrameworkValue,
   jquery: FrameworkValue,
   ember: FrameworkValue,
 });
