@@ -4,7 +4,7 @@ demoUrl: https://dhtmlx.com/docs/products/dhtmlxGrid/
 githubRepo: null
 npmPackage: null
 license: Commercial
-revenueModel: Commercial with 30-day Trial
+revenueModel: Commercial
 description: Professional JavaScript data grid widget by DHTMLX. Feature-rich grid component with advanced data management capabilities, export functionality, and extensive customization options for enterprise applications.
 
 frameworks:
