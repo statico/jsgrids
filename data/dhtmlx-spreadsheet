@@ -1,0 +1,51 @@
+title: DHTMLX Spreadsheet
+homeUrl: https://dhtmlx.com/docs/products/dhtmlxSpreadsheet/
+demoUrl: https://dhtmlx.com/docs/products/dhtmlxSpreadsheet/
+githubRepo: null
+npmPackage: null
+license: Commercial
+revenueModel: Commercial
+description: JavaScript Spreadsheet component that brings Excel-like functionality to web apps with formulas, formatting, range selection, and data import/export. It's lightweight, customizable, and designed to handle large datasets smoothly.
+
+frameworks:
+  react: true
+  svelte: true
+  vue: true
+  angular: true
+  ember: false
+  jquery: false
+  vanilla: true
+
+features:
+  accessible: true
+  copyPaste: true
+  csvExport: true
+  customEditors: true
+  customFormatters: true
+  draggableRows: false
+  editable: true
+  fillDown: true
+  fillRight: true
+  filtering: true
+  formulas: true
+  freezableCols: true
+  headless: false
+  i18n: true
+  maintained: true
+  mergeCells: true
+  openSource: false
+  pagination: false
+  pdfExport: false
+  pivots: false
+  rangeSelection: true
+  resizableCols: true
+  responsive: true
+  rowGrouping: true
+  rowSelection: true
+  search: true
+  serverSide: true
+  sorting: true
+  trees: false
+  typescript: true
+  xlsxExport: true
+  virtualization: true
