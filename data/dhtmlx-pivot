@@ -1,0 +1,50 @@
+title: DHTMLX Pivot
+homeUrl: https://dhtmlx.com/docs/products/dhtmlxPivot/
+demoUrl: https://dhtmlx.com/docs/products/dhtmlxPivot/
+githubRepo: null
+npmPackage: null
+license: Commercial
+revenueModel: Commercial
+description: JavaScript pivot table component that enables interactive data analysis in web apps. With drag-and-drop configuration, dynamic filtering, and aggregation, it's ideal for building responsive dashboards, analytics tools, and business intelligence platforms.
+frameworks:
+  react: true
+  svelte: true
+  vue: true
+  angular: true
+  ember: false
+  jquery: false
+  vanilla: true
+
+features:
+  accessible: true
+  copyPaste: true
+  csvExport: true
+  customEditors: false
+  customFormatters: true
+  draggableRows: false
+  editable: true
+  fillDown: false
+  fillRight: false
+  filtering: true
+  formulas: true
+  freezableCols: true
+  headless: false
+  i18n: true
+  maintained: true
+  mergeCells: true
+  openSource: false
+  pagination: false
+  pdfExport: false
+  pivots: true
+  rangeSelection: true
+  resizableCols: true
+  responsive: true
+  rowGrouping: true
+  rowSelection: true
+  search: false
+  serverSide: true
+  sorting: true
+  trees: true
+  typescript: true
+  xlsxExport: true
+  virtualization: true
