@@ -1,0 +1,39 @@
+title: Webix Grid
+homeUrl: https://grid.webix.com
+demoUrl: https://snippet.webix.com/gallery/grid/
+githubRepo: webix-hub/grid
+npmPackage: webix-grid-gpl
+license: GPLv3 or Commercial License
+revenueModel: Commercial License and Support
+description: >
+  Flexible and high-performance JavaScript Grid 
+  with rich API & advanced customization for any business logic.
+frameworks:
+  vanilla: true
+features:
+  accessible: true
+  copyPaste: true
+  csvExport: true
+  customEditors: true
+  customFormatters: true
+  draggableRows: true
+  editable: true
+  filtering: true
+  formulas: true
+  freezableCols: true
+  i18n: true
+  maintained: true
+  mergeCells: Premium feature
+  openSource: true
+  pagination: true
+  pdfExport: true
+  rangeSelection: true
+  resizableCols: true
+  responsive: true
+  rowGrouping: Premium feature
+  rowSelection: true
+  serverSide: true
+  sorting: true
+  typescript: true
+  xlsxExport: true
+  virtualization: true
