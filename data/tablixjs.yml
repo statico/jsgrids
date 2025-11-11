@@ -1,0 +1,45 @@
+title: TablixJS
+homeUrl: https://github.com/ivkeapp/TablixJS
+demoUrl: null
+githubRepo: ivkeapp/TablixJS
+npmPackage: null
+license: MIT License
+revenueModel: Free
+description: >
+  A lightweight, dependency-free JavaScript library for building powerful,
+  responsive data tables. Focuses on simplicity and performance without
+  external dependencies.
+frameworks:
+  vanilla: true
+features:
+  accessible: false
+  copyPaste: false
+  csvExport: false
+  customEditors: false
+  customFormatters: false
+  draggableRows: false
+  editable: false
+  fillDown: false
+  fillRight: false
+  filtering: true
+  formulas: false
+  freezableCols: false
+  headless: false
+  i18n: false
+  maintained: true
+  mergeCells: false
+  openSource: true
+  pagination: true
+  pdfExport: false
+  pivots: false
+  rangeSelection: false
+  resizableCols: false
+  responsive: true
+  rowGrouping: false
+  rowSelection: false
+  serverSide: false
+  sorting: true
+  trees: false
+  typescript: false
+  xlsxExport: false
+  virtualization: false

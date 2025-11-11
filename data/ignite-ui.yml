@@ -1,0 +1,48 @@
+title: Ignite UI
+homeUrl: https://www.infragistics.com/products/ignite-ui
+demoUrl: https://www.infragistics.com/products/ignite-ui
+githubRepo: IgniteUI/igniteui-react
+npmPackage: igniteui-react-grids
+license: Commercial License
+revenueModel: Commercial
+description: >
+  A comprehensive library of React components for building modern, data-rich,
+  and responsive web applications. Features a high-performance, virtualized
+  React Data Grid with Excel-like functionality, 60+ chart types, and complete
+  Microsoft Excel solution.
+frameworks:
+  vanilla: true
+  react: true
+  angular: true
+features:
+  accessible: true
+  copyPaste: true
+  csvExport: true
+  customEditors: true
+  customFormatters: true
+  draggableRows: true
+  editable: true
+  fillDown: true
+  fillRight: true
+  filtering: true
+  formulas: true
+  freezableCols: true
+  headless: false
+  i18n: true
+  maintained: true
+  mergeCells: true
+  openSource: false
+  pagination: true
+  pdfExport: false
+  pivots: true
+  rangeSelection: true
+  resizableCols: true
+  responsive: true
+  rowGrouping: true
+  rowSelection: true
+  serverSide: true
+  sorting: true
+  trees: true
+  typescript: true
+  xlsxExport: true
+  virtualization: true
