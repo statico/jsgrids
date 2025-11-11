@@ -3,6 +3,7 @@ homeUrl: https://www.grapecity.com/wijmo
 demoUrl: https://www.grapecity.com/wijmo/demos/Grid/Overview/purejs
 githubRepo: null
 npmPackage: wijmo
+ignoreBundlephobia: true
 license: Commercial
 revenueModel: Commercial
 description: Enterprise-grade JavaScript data grid component by GrapeCity. Part of the Wijmo UI controls suite, offering comprehensive data visualization and editing capabilities for business applications.
