@@ -3,7 +3,6 @@ homeUrl: https://www.sencha.com/products/extjs/
 demoUrl: https://examples.sencha.com/extjs/
 githubRepo: sencha/ext-gen
 npmPackage: "@sencha/ext-gen"
-ignoreBundlephobia: true
 license: Custom License
 revenueModel: Commercial 30-day Trial
 description: >

@@ -19,8 +19,8 @@ const throttledFetch = throttler(async (url: string) => {
   try {
     // Be nice to our APIs. (File a GitHub issue if we aren't!)
     const ua = VERCEL_URL
-      ? `jsgrids.statico.io (Netlify build ${VERCEL_URL} for commit ${VERCEL_GITHUB_COMMIT_SHA})`
-      : `jsgrids.statico.io (local development)`;
+      ? `https://jsgrids.statico.io (Netlify build ${VERCEL_URL} for commit ${VERCEL_GITHUB_COMMIT_SHA})`
+      : `https://jsgrids.statico.io (local development)`;
     const headers: any = {
       "User-Agent": ua,
     };
@@ -34,9 +34,10 @@ const throttledFetch = throttler(async (url: string) => {
       headers.Authorization = `Bearer ${NPM_TOKEN}`;
     }
 
-    if (/bundlephobia/.test(url)) {
-      // bundle-phobia-cli does something like this so let's follow suit.
-      headers["X-Bundlephobia-User"] = ua;
+    if (/packagephobia/.test(url)) {
+      // Package Phobia API requires User-Agent header to avoid being blocked.
+      // See: https://github.com/styfle/packagephobia/blob/main/API.md
+      headers["User-Agent"] = ua;
     }
 
     const fn = async () => {
@@ -49,10 +50,11 @@ const throttledFetch = throttler(async (url: string) => {
       return { headers: resHeaders, data };
     };
 
+    const isPackagePhobia = /packagephobia/.test(url);
     return await pRetry(fn, {
       minTimeout: 3000,
       factor: 1,
-      retries: 3,
+      retries: isPackagePhobia ? 1 : 3,
       onFailedAttempt: (err) => {
         console.log(
           "fetcher: failed %s, attempt number = %d, retries left = %d",

@@ -3,7 +3,6 @@ homeUrl: https://esvit.github.io/ng-table/
 demoUrl: null
 githubRepo: esvit/ng-table
 npmPackage: ng-table
-ignoreBundlephobia: true
 license: BSD 3-Clause License
 revenueModel: Free
 description: >

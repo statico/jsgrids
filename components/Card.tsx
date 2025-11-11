@@ -248,10 +248,10 @@ const Card = memo(({ info }: CardProps) => {
           />
           <Metric
             icon={<GoPackage />}
-            value={info.bundlephobia?.gzipSize}
+            value={info.packagephobia?.installSize}
             formatter={(n: number) => (n >= 0 ? filesize(n) : "?? KB")}
-            title={"Gzipped package size is %s"}
-            href={info.bundlephobia?.url}
+            title={"Package install size is %s"}
+            href={info.packagephobia?.url}
           />
           <Metric
             icon={<FaUsers />}

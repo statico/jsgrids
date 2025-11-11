@@ -3,7 +3,6 @@ homeUrl: http://ui-grid.info/
 demoUrl: http://ui-grid.info/
 githubRepo: angular-ui/ui-grid
 npmPackage: angular-ui-grid
-ignoreBundlephobia: true
 license: MIT License
 revenueModel: Free
 description: >

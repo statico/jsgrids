@@ -98,8 +98,8 @@ export default function IndexPage({ items, ts }: IndexPageProps) {
           </a>
         </div>
         <div>
-          <a href="https://bundlephobia.com/" className="hover:underline">
-            Package sizes from Bundlephobia
+          <a href="https://packagephobia.com/" className="hover:underline">
+            Package sizes from Package Phobia
           </a>
         </div>
         <div>

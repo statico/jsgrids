@@ -3,7 +3,6 @@ homeUrl: https://svar.dev/svelte/datagrid/
 demoUrl: https://docs.svar.dev/svelte/grid/samples/#/base/willow
 githubRepo: svar-widgets/grid
 npmPackage: wx-svelte-grid
-ignoreBundlephobia: true
 license: MIT License
 revenueModel: Free
 description: >

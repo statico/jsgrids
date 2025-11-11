@@ -184,7 +184,7 @@ const TableView = memo(({ items }: TableViewProps) => {
                   </div>
                 </TooltipTrigger>
                 <TooltipContent>
-                  <p>Gzipped Bundle Size</p>
+                  <p>Package Install Size</p>
                 </TooltipContent>
               </Tooltip>
             </TableHead>
@@ -263,9 +263,9 @@ const TableView = memo(({ items }: TableViewProps) => {
               </TableCell>
               <TableCell className="text-right">
                 <MetricCell
-                  value={item.bundlephobia?.gzipSize}
+                  value={item.packagephobia?.installSize}
                   formatter={(n: number) => (n >= 0 ? filesize(n) : "?? KB")}
-                  href={item.bundlephobia?.url}
+                  href={item.packagephobia?.url}
                 />
               </TableCell>
               <TableCell className="text-right">

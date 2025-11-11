@@ -51,7 +51,6 @@ const ImportedYAMLInfo = z.object({
   demoUrl: z.union([URL, z.null()]),
   githubRepo: z.union([GitHubRepo, z.null()]),
   npmPackage: z.union([z.string(), z.null()]),
-  ignoreBundlephobia: z.boolean().optional(),
   license: z.union([z.string(), z.null()]),
   revenueModel: z.union([z.string(), z.null()]),
   frameworks: Frameworks,
@@ -80,12 +79,12 @@ const AugmentedInfo = z.object({
       downloads: z.number(),
     })
     .optional(),
-  bundlephobia: z
+  packagephobia: z
     .union([
       z.object({
         url: URL,
-        rawSize: z.number(),
-        gzipSize: z.number(),
+        publishSize: z.number(),
+        installSize: z.number(),
       }),
       z.null(),
     ])
@@ -197,24 +196,29 @@ export const getLibraries = async (): Promise<LibraryInfo[]> => {
         item.npm = npm;
       }
 
-      // Grab bundle sizes from Bundlephobia.
-      if (item.npmPackage && item.ignoreBundlephobia !== true) {
+      // Grab package sizes from Package Phobia.
+      if (item.npmPackage) {
         const name = item.npmPackage;
-        const url = `https://bundlephobia.com/result?p=${name}`;
+        const url = `https://packagephobia.com/result?p=${name}`;
         try {
           const { data } = await fetcher(
-            `https://bundlephobia.com/api/size?package=${name}`,
+            `https://packagephobia.com/v2/api.json?p=${name}`,
           );
-          item.bundlephobia = {
+          // Package Phobia API returns publish and install sizes in bytes
+          const publishSize =
+            data.publish?.bytes ?? data.publishSize ?? data.size ?? 0;
+          const installSize =
+            data.install?.bytes ?? data.installSize ?? data.gzip ?? 0;
+          item.packagephobia = {
             url,
-            rawSize: data.size || 0,
-            gzipSize: data.gzip || 0,
+            publishSize,
+            installSize,
           };
         } catch (err) {
-          // Bundlephobia constantly errors out, even after retrying. So let's do
-          // the best we can and signal to the frontend that the API is broken.
-          console.log("libraries: giving up getting bundle size for %s", name);
-          item.bundlephobia = { url, rawSize: -1, gzipSize: -1 };
+          // Package Phobia might error out, so let's do the best we can and
+          // signal to the frontend that the API is broken.
+          console.log("libraries: giving up getting package size for %s", name);
+          item.packagephobia = { url, publishSize: -1, installSize: -1 };
         }
       }
 
