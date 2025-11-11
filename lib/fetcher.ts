@@ -7,7 +7,8 @@ const throttler = pThrottle({ limit: 1, interval: 750 });
 // Hammering APIs usually leads to trouble, and we don't really care about build
 // time, so let's be nice.
 const throttledFetch = throttler(async (url: string) => {
-  const { GITHUB_TOKEN, VERCEL_URL, VERCEL_GITHUB_COMMIT_SHA } = process.env;
+  const { GITHUB_TOKEN, NPM_TOKEN, VERCEL_URL, VERCEL_GITHUB_COMMIT_SHA } =
+    process.env;
   if (!GITHUB_TOKEN) {
     throw new Error(
       "Please set a GITHUB_TOKEN. Otherwise you'll quickly exceed GitHub's API rate limits.",
@@ -27,6 +28,10 @@ const throttledFetch = throttler(async (url: string) => {
     if (GITHUB_TOKEN && /github.com/.test(url)) {
       headers.Authorization = `token ${GITHUB_TOKEN}`;
       headers.Accept = "application/vnd.github.v3+json";
+    }
+
+    if (NPM_TOKEN && /npmjs\.org/.test(url)) {
+      headers.Authorization = `Bearer ${NPM_TOKEN}`;
     }
 
     if (/bundlephobia/.test(url)) {
