@@ -24,13 +24,16 @@ import { filesize } from "filesize";
 import { memo, JSXElementConstructor, ReactNode } from "react";
 import {
   FaArrowCircleUp,
+  FaAward,
   FaCheckCircle,
   FaDollarSign,
   FaInfoCircle,
   FaTimesCircle,
   FaUsers,
+  FaWrench,
 } from "react-icons/fa";
 import {
+  GoDatabase,
   GoIssueOpened,
   GoLaw,
   GoPackage,
@@ -264,6 +267,26 @@ const Card = memo(({ info }: CardProps) => {
             value={gh?.openIssues}
             title={"%s open issues on GitHub"}
             href={gh?.url + "/issues"}
+          />
+          <Metric
+            icon={<FaAward />}
+            value={info.npms?.quality}
+            formatter={(n: number) => `${n}%`}
+            title={"Quality score: %s"}
+            href={info.npms?.qualityUrl}
+          />
+          <Metric
+            icon={<FaWrench />}
+            value={info.npms?.maintenance}
+            formatter={(n: number) => `${n}%`}
+            title={"Maintenance score: %s"}
+            href={info.npms?.qualityUrl}
+          />
+          <Metric
+            icon={<GoDatabase />}
+            value={info.npms?.dependencies}
+            title={"%s dependencies"}
+            href={info.npms?.dependenciesUrl}
           />
         </div>
 

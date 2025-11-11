@@ -89,6 +89,15 @@ const AugmentedInfo = z.object({
       z.null(),
     ])
     .optional(),
+  npms: z
+    .object({
+      quality: z.number(),
+      maintenance: z.number(),
+      dependencies: z.number(),
+      qualityUrl: URL,
+      dependenciesUrl: URL,
+    })
+    .optional(),
 });
 
 // Make the final thing we return read-only.
@@ -219,6 +228,36 @@ export const getLibraries = async (): Promise<LibraryInfo[]> => {
           // signal to the frontend that the API is broken.
           console.log("libraries: giving up getting package size for %s", name);
           item.packagephobia = { url, publishSize: -1, installSize: -1 };
+        }
+      }
+
+      // Grab quality score and dependencies from npms.io.
+      if (item.npmPackage) {
+        const name = item.npmPackage;
+        try {
+          const { data } = await fetcher(
+            `https://api.npms.io/v2/package/${name}`,
+          );
+          // Extract quality score (score.final) and round up to percentage
+          const qualityScore = data.score?.final ?? 0;
+          const quality = Math.ceil(qualityScore * 100);
+          // Extract maintenance score (score.detail.maintenance) and round up to percentage
+          const maintenanceScore = data.score?.detail?.maintenance ?? 0;
+          const maintenance = Math.ceil(maintenanceScore * 100);
+          // Extract dependencies count
+          const dependencies = data.collected?.metadata?.dependencies
+            ? Object.keys(data.collected.metadata.dependencies).length
+            : 0;
+          item.npms = {
+            quality,
+            maintenance,
+            dependencies,
+            qualityUrl: "https://npms.io/about",
+            dependenciesUrl: `https://www.npmjs.com/package/${name}?activeTab=dependencies`,
+          };
+        } catch (err) {
+          // npms.io might error out, so we'll just skip it
+          console.log("libraries: giving up getting npms.io data for %s", name);
         }
       }
 
