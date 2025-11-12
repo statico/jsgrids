@@ -3,7 +3,7 @@ homeUrl: https://dhtmlx.com/docs/products/dhtmlxPivot/
 demoUrl: https://dhtmlx.com/docs/products/dhtmlxPivot/
 githubRepo: null
 npmPackage: null
-license: Commercial
+license: Commercial License
 revenueModel: Commercial
 description: JavaScript pivot table component that enables interactive data analysis in web apps. With drag-and-drop configuration, dynamic filtering, and aggregation, it's ideal for building responsive dashboards, analytics tools, and business intelligence platforms.
 frameworks:

@@ -3,7 +3,7 @@ homeUrl: https://dgrid.io/
 demoUrl: null
 githubRepo: dojo/dojo1-dgrid
 npmPackage: dgrid
-license: BSD
+license: BSD 3-Clause License
 revenueModel: Free
 description: Next-generation grid component that takes full advantage of modern browsers and object stores. Lightweight, modular, and easily extensible, built by SitePen for the Dojo ecosystem.
 

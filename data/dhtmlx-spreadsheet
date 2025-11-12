@@ -3,7 +3,7 @@ homeUrl: https://dhtmlx.com/docs/products/dhtmlxSpreadsheet/
 demoUrl: https://dhtmlx.com/docs/products/dhtmlxSpreadsheet/
 githubRepo: null
 npmPackage: null
-license: Commercial
+license: Commercial License
 revenueModel: Commercial
 description: JavaScript Spreadsheet component that brings Excel-like functionality to web apps with formulas, formatting, range selection, and data import/export. It's lightweight, customizable, and designed to handle large datasets smoothly.
 

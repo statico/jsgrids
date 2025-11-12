@@ -3,7 +3,7 @@ homeUrl: https://future-architect.github.io/cheetah-grid/
 demoUrl: https://future-architect.github.io/cheetah-grid/#/
 githubRepo: future-architect/cheetah-grid
 npmPackage: cheetah-grid
-license: MIT
+license: MIT License
 revenueModel: Free
 description: High-performance JavaScript data table component that works on canvas. Designed for handling large datasets with 1M+ records efficiently through canvas-based rendering.
 frameworks:

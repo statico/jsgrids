@@ -3,7 +3,7 @@ homeUrl: https://frappe.io/datatable
 demoUrl: https://frappe.io/datatable
 githubRepo: frappe/datatable
 npmPackage: frappe-datatable
-license: MIT
+license: MIT License
 revenueModel: Free
 description: Modern datatable library for the web. Built by Frappe Technologies for ERPNext, it's a simple, modern and interactive datatable library for displaying tabular data with no jQuery dependency.
 
