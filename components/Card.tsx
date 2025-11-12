@@ -250,6 +250,13 @@ const Card = memo(({ info }: CardProps) => {
             href={gh?.url}
           />
           <Metric
+            icon={<FaAward />}
+            value={info.npms?.quality}
+            formatter={(n: number) => `${n}%`}
+            title={"Quality score: %s"}
+            href={info.npms?.qualityUrl}
+          />
+          <Metric
             icon={<GoPackage />}
             value={info.packagephobia?.installSize}
             formatter={(n: number) => (n >= 0 ? filesize(n) : "?? KB")}
@@ -267,13 +274,6 @@ const Card = memo(({ info }: CardProps) => {
             value={gh?.openIssues}
             title={"%s open issues on GitHub"}
             href={gh?.url + "/issues"}
-          />
-          <Metric
-            icon={<FaAward />}
-            value={info.npms?.quality}
-            formatter={(n: number) => `${n}%`}
-            title={"Quality score: %s"}
-            href={info.npms?.qualityUrl}
           />
           <Metric
             icon={<FaWrench />}
