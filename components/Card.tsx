@@ -178,7 +178,7 @@ const Metric = memo(
       value === undefined ? "unknown" : formattedValue,
     );
     const contents = (
-      <div className="flex items-center space-x-1 cursor-pointer hover:opacity-75">
+      <div className="flex items-center space-x-1 cursor-pointer hover:opacity-75 whitespace-nowrap">
         <span>{icon}</span>
         <span>{formattedValue}</span>
       </div>
