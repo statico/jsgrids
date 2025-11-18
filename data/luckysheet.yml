@@ -28,7 +28,7 @@ features:
   freezableCols: false
   headless: false
   i18n: true
-  maintained: true
+  maintained: false
   mergeCells: false
   openSource: true
   pagination: false
