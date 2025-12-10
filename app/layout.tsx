@@ -65,16 +65,6 @@ export default function RootLayout({
         >
           <TooltipProvider>{children}</TooltipProvider>
         </ThemeProvider>
-
-        {process.env.NODE_ENV === "production" && (
-          // https://github.com/statico/femtostats
-          <Script
-            id="femtostats"
-            src="https://s.langworth.com/data.js"
-            data-token="575bca33"
-            defer
-          />
-        )}
       </body>
     </html>
   );
