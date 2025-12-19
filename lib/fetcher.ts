@@ -1,4 +1,4 @@
-import pRetry from "p-retry";
+import pRetry, { AbortError } from "p-retry";
 import pThrottle from "p-throttle";
 import * as cache from "./cache";
 
@@ -45,7 +45,12 @@ const throttledFetch = throttler(async (url: string) => {
       const resHeaders = Object.fromEntries(res.headers.entries());
       const data = await res.json();
       if (!res.ok) {
-        throw new Error(`Request to ${url} failed with status ${res.status}`);
+        const message = `Request to ${url} failed with status ${res.status}`;
+        // Don't retry on 403/404 - these are permanent failures
+        if (res.status === 403 || res.status === 404) {
+          throw new AbortError(message);
+        }
+        throw new Error(message);
       }
       return { headers: resHeaders, data };
     };
