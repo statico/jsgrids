@@ -43,7 +43,7 @@ const throttledFetch = throttler(async (url: string) => {
     const fn = async () => {
       const res = await fetch(url, { headers });
       const resHeaders = Object.fromEntries(res.headers.entries());
-      const data = await res.json();
+      // Check status before parsing JSON - error pages may return HTML
       if (!res.ok) {
         const message = `Request to ${url} failed with status ${res.status}`;
         // Don't retry on 403/404 - these are permanent failures
@@ -52,6 +52,7 @@ const throttledFetch = throttler(async (url: string) => {
         }
         throw new Error(message);
       }
+      const data = await res.json();
       return { headers: resHeaders, data };
     };
 
