@@ -67,7 +67,7 @@ const throttledFetch = throttler(async (url: string) => {
   } catch (err: any) {
     const res = err.response;
     const status = res?.status;
-    const resHeaders = Object.fromEntries(res?.headers.entries());
+    const resHeaders = Object.fromEntries(res?.headers?.entries() ?? []);
     console.log(
       "fetcher: failed %s - status=%s, headers=%o - %s",
       url,
