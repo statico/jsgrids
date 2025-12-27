@@ -22,7 +22,7 @@
     "date-fns": "^4.1.0",
     "filesize": "^11.0.13",
     "lucide-react": "^0.562.0",
-    "next": "^16.1.0",
+    "next": "^16.1.1",
     "next-themes": "^0.4.6",
     "p-retry": "^7.1.1",
     "p-throttle": "^8.1.0",
@@ -51,5 +51,5 @@
     "**/*": "prettier --write --ignore-unknown",
     "*.{js,ts,jsx,tsx,css,md}": "prettier --write"
   },
-  "packageManager": "pnpm@9.12.3+sha512.cce0f9de9c5a7c95bef944169cc5dfe8741abfb145078c0d508b868056848a87c81e626246cb60967cbd7fd29a6c062ef73ff840d96b3c86c40ac92cf4a813ee"
+  "packageManager": "pnpm@10.26.2"
 }
