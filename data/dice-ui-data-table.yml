@@ -1,14 +1,13 @@
-title: shadcn/ui Data Table
-homeUrl: https://ui.shadcn.com/docs/components/data-table
-demoUrl: https://ui.shadcn.com/blocks
-githubRepo: shadcn-ui/ui
+title: Dice UI Data Table
+homeUrl: https://www.diceui.com/docs/components/data-table
+demoUrl: https://www.diceui.com/docs/components/data-table
+githubRepo: sadmann7/diceui
 npmPackage: null
 license: MIT License
 revenueModel: Free
 description: >
-  Powerful table and datagrids built using TanStack Table with shadcn/ui components.
-  A comprehensive guide for building custom data tables with sorting, filtering,
-  pagination, and row selection using headless UI principles.
+  Extension of the shadcn/ui data table component with advanced filtering, URL
+  state management, server-side support, and more.
 frameworks:
   react: true
 features:
@@ -37,7 +36,7 @@ features:
   responsive: false
   rowGrouping: false
   rowSelection: true
-  serverSide: true
+  serverSide: false
   sorting: true
   trees: false
   typescript: true
