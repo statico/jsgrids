@@ -16,7 +16,7 @@ features:
   copyPaste: false
   csvExport: false
   customEditors: false
-  customFormatters: false
+  customFormatters: true
   draggableRows: false
   editable: false
   fillDown: false
@@ -25,7 +25,7 @@ features:
   formulas: false
   freezableCols: false
   headless: false
-  i18n: false
+  i18n: true
   maintained: true
   mergeCells: false
   openSource: true
@@ -36,8 +36,8 @@ features:
   resizableCols: false
   responsive: true
   rowGrouping: false
-  rowSelection: false
-  serverSide: false
+  rowSelection: true
+  serverSide: true
   sorting: true
   trees: false
   typescript: false
