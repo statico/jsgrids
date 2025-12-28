@@ -2,7 +2,7 @@ title: SpreadJS
 homeUrl: https://developer.mescius.com/spreadjs
 demoUrl: https://developer.mescius.com/spreadjs/demos/
 githubRepo: null
-npmPackage: "@grapecity/spread-sheets"
+npmPackage: "@mescius/spread-sheets"
 license: Commercial License
 revenueModel: Custom License
 description: >

@@ -1,0 +1,44 @@
+title: BW DataTable
+homeUrl: https://github.com/bw-ui/bw-datatable
+demoUrl: https://bw-ui.github.io/bw-datatable/
+githubRepo: bw-ui/bw-datatable
+npmPackage: "@bw-ui/datatable"
+license: MIT License
+revenueModel: Free
+description: >
+  High-performance virtual scrolling data table with zero dependencies.
+frameworks:
+  vanilla: true
+features:
+  accessible: true
+  copyPaste: true
+  csvExport: true
+  customEditors: true
+  customFormatters: true
+  draggableRows: false
+  editable: true
+  fillDown: false
+  fillRight: false
+  filtering: true
+  formulas: false
+  freezableCols: false
+  headless: false
+  i18n: false
+  maintained: true
+  mergeCells: false
+  openSource: true
+  pagination: true
+  pdfExport: false
+  pivots: false
+  rangeSelection: true
+  resizableCols: false
+  responsive: true
+  rowGrouping: false
+  rowSelection: true
+  search: true
+  serverSide: false
+  sorting: true
+  trees: false
+  typescript: true
+  xlsxExport: false
+  virtualization: false

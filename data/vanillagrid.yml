@@ -1,0 +1,46 @@
+title: VanillaGrid
+homeUrl: https://github.com/SimonWaldherr/vanillagrid.js
+demoUrl: https://simonwaldherr.github.io/vanillagrid.js/demo/
+githubRepo: SimonWaldherr/vanillagrid.js
+npmPackage: vanillagrid
+license: MIT License
+revenueModel: Free
+description: >
+  A tiny dependency-free data grid library written in vanilla JavaScript with
+  TypeScript support. Features sorting, filtering, pagination, hierarchical data,
+  row editing, and data export to CSV and Markdown formats.
+frameworks:
+  vanilla: true
+features:
+  accessible: true
+  copyPaste: false
+  csvExport: true
+  customEditors: true
+  customFormatters: true
+  draggableRows: false
+  editable: true
+  fillDown: false
+  fillRight: false
+  filtering: true
+  formulas: false
+  freezableCols: false
+  headless: false
+  i18n: false
+  maintained: true
+  mergeCells: false
+  openSource: true
+  pagination: true
+  pdfExport: false
+  pivots: true
+  rangeSelection: true
+  resizableCols: true
+  responsive: false
+  rowGrouping: true
+  rowSelection: true
+  search: true
+  serverSide: true
+  sorting: true
+  trees: true
+  typescript: true
+  xlsxExport: false
+  virtualization: false
