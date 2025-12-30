@@ -45,7 +45,8 @@ The `getLibraries()` function fetches from 4 external APIs:
 
 **Fetching strategy** (`lib/fetcher.ts`):
 
-- Throttled at 1 request per 750ms to respect rate limits
+- Throttled at 1 request per second (1000ms) for non-npm APIs (GitHub, Package Phobia, npms.io)
+- NPM API throttled at 1 request per minute (60s) with dynamic backoff on 429 errors (increases by 60s per 429)
 - Retries with exponential backoff (3 retries, 3s min timeout)
 - 24-hour filesystem cache in `.next/cache/jsgrids/` (survives Vercel builds)
 - Authentication via GitHub/NPM tokens for increased rate limits
@@ -146,7 +147,9 @@ Uses shadcn/ui components in `components/ui/`:
 - **API rate limits**: Use GitHub/NPM tokens in production to increase limits
 - **Caching**: Filesystem cache prevents repeated API calls during development
 - **Memoization**: Card components and filter computations use React.memo/useMemo
-- **Throttling**: API fetcher limits to 1 req/750ms to avoid rate limiting
+- **Throttling**:
+  - Non-npm APIs: 1 request per second (1000ms)
+  - NPM API: 1 request per minute (60s) with dynamic backoff on 429 errors
 
 ## Environment Variables
 
