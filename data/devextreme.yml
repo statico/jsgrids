@@ -1,8 +1,8 @@
 title: DevExtreme
 homeUrl: https://js.devexpress.com/Overview/DataGrid/
 demoUrl: https://js.devexpress.com/Demos/WidgetsGallery/Demo/DataGrid/Overview/jQuery/Light/
-githubRepo:
-npmPackage:
+githubRepo: null
+npmPackage: null
 license: Custom License
 revenueModel: Free for Personal Use
 description: >
