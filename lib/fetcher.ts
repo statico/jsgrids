@@ -6,8 +6,8 @@ import * as cache from "./cache";
 const throttler = pThrottle({ limit: 1, interval: 1000 });
 
 // Dynamic throttler for npm requests
-// Start at 60 seconds (1 per minute), increase on 429 errors
-let npmThrottleInterval = 60000; // 60 seconds in milliseconds
+// Start at 2 seconds (30 per minute), increase on 429 errors
+let npmThrottleInterval = 2000; // 2 seconds in milliseconds
 let npmThrottler = pThrottle({ limit: 1, interval: npmThrottleInterval });
 
 // Helper to recreate npm throttler with new interval
@@ -27,8 +27,9 @@ const isNpmRequest = (url: string): boolean => {
   return /npmjs\.org/.test(url);
 };
 
-// Request timeout in milliseconds (15 seconds)
-const REQUEST_TIMEOUT = 15000;
+// Request timeout in milliseconds (10 seconds for most, 5 seconds for packagephobia)
+const REQUEST_TIMEOUT = 10000;
+const PACKAGEPHOBIA_TIMEOUT = 5000;
 
 // Core fetch logic (shared between npm and non-npm requests)
 const fetchWithHeaders = async (url: string) => {
@@ -64,9 +65,12 @@ const fetchWithHeaders = async (url: string) => {
     headers["User-Agent"] = ua;
   }
 
-  // Add timeout using AbortController
+  // Add timeout using AbortController - shorter timeout for packagephobia
+  const timeout = /packagephobia/.test(url)
+    ? PACKAGEPHOBIA_TIMEOUT
+    : REQUEST_TIMEOUT;
   const controller = new AbortController();
-  const timeoutId = setTimeout(() => controller.abort(), REQUEST_TIMEOUT);
+  const timeoutId = setTimeout(() => controller.abort(), timeout);
 
   try {
     const res = await fetch(url, { headers, signal: controller.signal });
@@ -76,7 +80,10 @@ const fetchWithHeaders = async (url: string) => {
   } catch (err: any) {
     clearTimeout(timeoutId);
     if (err.name === "AbortError") {
-      throw new Error(`Request to ${url} timed out after ${REQUEST_TIMEOUT}ms`);
+      const timeout = /packagephobia/.test(url)
+        ? PACKAGEPHOBIA_TIMEOUT
+        : REQUEST_TIMEOUT;
+      throw new Error(`Request to ${url} timed out after ${timeout}ms`);
     }
     throw err;
   }
@@ -93,7 +100,7 @@ const createNpmFetchFunction = () => {
           const message = `Request to ${url} failed with status ${res.status}`;
           // Handle 429 rate limit errors with dynamic backoff
           if (res.status === 429) {
-            const newInterval = npmThrottleInterval + 60000; // Add 60 seconds
+            const newInterval = npmThrottleInterval * 2; // Double the interval
             recreateNpmThrottler(newInterval);
             // Throw error to trigger retry with new throttler
             throw new Error(message);
