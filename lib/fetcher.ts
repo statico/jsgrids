@@ -27,6 +27,9 @@ const isNpmRequest = (url: string): boolean => {
   return /npmjs\.org/.test(url);
 };
 
+// Request timeout in milliseconds (15 seconds)
+const REQUEST_TIMEOUT = 15000;
+
 // Core fetch logic (shared between npm and non-npm requests)
 const fetchWithHeaders = async (url: string) => {
   const { GITHUB_TOKEN, NPM_TOKEN, VERCEL_URL, VERCEL_GITHUB_COMMIT_SHA } =
@@ -61,9 +64,22 @@ const fetchWithHeaders = async (url: string) => {
     headers["User-Agent"] = ua;
   }
 
-  const res = await fetch(url, { headers });
-  const resHeaders = Object.fromEntries(res.headers.entries());
-  return { res, resHeaders };
+  // Add timeout using AbortController
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), REQUEST_TIMEOUT);
+
+  try {
+    const res = await fetch(url, { headers, signal: controller.signal });
+    clearTimeout(timeoutId);
+    const resHeaders = Object.fromEntries(res.headers.entries());
+    return { res, resHeaders };
+  } catch (err: any) {
+    clearTimeout(timeoutId);
+    if (err.name === "AbortError") {
+      throw new Error(`Request to ${url} timed out after ${REQUEST_TIMEOUT}ms`);
+    }
+    throw err;
+  }
 };
 
 // Create the npm fetch function (used to recreate throttled function)
@@ -93,9 +109,9 @@ const createNpmFetchFunction = () => {
       };
 
       return await pRetry(fn, {
-        minTimeout: 3000,
+        minTimeout: 2000,
         factor: 1,
-        retries: 3,
+        retries: 2, // Reduced from 3 to fail faster
         onFailedAttempt: (err) => {
           console.log(
             "fetcher: failed %s, attempt number = %d, retries left = %d",
@@ -144,10 +160,14 @@ const throttledFetch = throttler(async (url: string) => {
     };
 
     const isPackagePhobia = /packagephobia/.test(url);
+    const isNpms = /npms\.io/.test(url);
+    // Reduce retries for unreliable APIs - npms.io often returns 404s for valid packages
+    // and packagephobia can be slow/unreliable
+    const retries = isPackagePhobia || isNpms ? 0 : 3;
     return await pRetry(fn, {
-      minTimeout: 3000,
+      minTimeout: 2000,
       factor: 1,
-      retries: isPackagePhobia ? 1 : 3,
+      retries,
       onFailedAttempt: (err) => {
         console.log(
           "fetcher: failed %s, attempt number = %d, retries left = %d",
