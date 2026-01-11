@@ -32,14 +32,14 @@
     "react-icons": "^5.5.0",
     "tailwind-merge": "^3.4.0",
     "yaml": "^2.8.2",
-    "zod": "^4.2.1",
+    "zod": "^4.3.5",
     "zod-validation-error": "^5.0.0",
     "zustand": "^5.0.9"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4.1.18",
-    "@types/node": "^25.0.3",
-    "@types/react": "^19.2.7",
+    "@types/node": "^25.0.6",
+    "@types/react": "^19.2.8",
     "husky": "^9.1.7",
     "lint-staged": "^16.2.7",
     "prettier": "^3.7.4",
@@ -51,5 +51,5 @@
     "**/*": "prettier --write --ignore-unknown",
     "*.{js,ts,jsx,tsx,css,md}": "prettier --write"
   },
-  "packageManager": "pnpm@10.26.2"
+  "packageManager": "pnpm@10.28.0"
 }
