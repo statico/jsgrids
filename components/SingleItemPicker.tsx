@@ -23,7 +23,7 @@ type SingleItemPickerProps = {
   onChange: (newValue: any) => void;
 };
 
-export const SingleItemPicker = ({
+const SingleItemPicker = ({
   children,
   selected,
   options,

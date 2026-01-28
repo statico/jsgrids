@@ -24,7 +24,7 @@ type MultiItemPickerProps<T extends string> = {
   onChange: (newValue: Set<T>) => void;
 };
 
-export const MultiItemPicker = <T extends string>({
+const MultiItemPicker = <T extends string>({
   children,
   selected,
   options,
