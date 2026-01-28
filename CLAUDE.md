@@ -17,9 +17,6 @@ pnpm build
 
 # Start production server
 pnpm start
-
-# Format code (runs automatically on commit via husky)
-pnpm prettier --write .
 ```
 
 ## Architecture Overview

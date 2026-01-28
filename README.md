@@ -12,7 +12,7 @@ I build a lot of internal tools for data auditing and workflows, and every few m
 
 ## Contributing
 
-Pull requests are welcome to help keep this project up to date. Please make sure the Vercel build passes successfully, and please make sure all source is formatted with [Prettier](https://prettier.io/) (there's a git hook that should do it for you anyway).
+Pull requests are welcome to help keep this project up to date. Please make sure the Vercel build passes successfully.
 
 ## Development
 
