@@ -1,0 +1,50 @@
+title: HighTable
+homeUrl: https://github.com/hyparam/hightable/
+demoUrl: https://hyparam.github.io/demos/hightable/
+githubRepo: hyparam/hightable
+npmPackage: "hightable"
+license: MIT License
+revenueModel: Free
+description: A dynamic windowed scrolling table component for React.
+
+frameworks:
+  vanilla: false
+  react: true
+  vue: false
+  svelte: false
+  solid: false
+  qwik: false
+  lit: false
+
+features:
+  accessible: true
+  copyPaste: false
+  csvExport: false
+  customEditors: false
+  customFormatters: true
+  draggableRows: false
+  editable: false
+  fillDown: false
+  fillRight: false
+  filtering: false
+  formulas: false
+  freezableCols: false
+  headless: false
+  i18n: false
+  maintained: true
+  mergeCells: false
+  openSource: true
+  pagination: false
+  pdfExport: false
+  pivots: false
+  rangeSelection: false
+  resizableCols: true
+  responsive: true
+  rowGrouping: false
+  rowSelection: true
+  serverSide: false
+  sorting: true
+  trees: false
+  typescript: true
+  xlsxExport: false
+  virtualization: true
