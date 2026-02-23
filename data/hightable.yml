@@ -8,13 +8,7 @@ revenueModel: Free
 description: A dynamic windowed scrolling table component for React.
 
 frameworks:
-  vanilla: false
   react: true
-  vue: false
-  svelte: false
-  solid: false
-  qwik: false
-  lit: false
 
 features:
   accessible: true
