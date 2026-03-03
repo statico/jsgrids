@@ -1,0 +1,36 @@
+title: Highcharts Grid
+homeUrl: https://www.highcharts.com/products/grid/
+demoUrl: https://www.highcharts.com/demo#highcharts-grid-demo-general
+githubRepo: highcharts/highcharts
+npmPackage: "@highcharts/grid-lite"
+license: Commercial and Custom License
+revenueModel: Pro Features and Support
+description: >
+  Highcharts Grid delivers a fast, modern way to work with tabular data.
+  Start with Grid Lite for viewing and interacting with data, or step up to
+  Grid Pro for editing and extended functionality, all built to meet today’s web standards.
+frameworks:
+  vanilla: true
+  react: true
+  angular: https://www.highcharts.com/docs/grid/frameworks/grid-with-angular
+  vue: https://www.highcharts.com/docs/grid/frameworks/grid-with-vue
+features:
+  accessible: true
+  csvExport: Pro feature
+  customEditors: true
+  customFormatters: true
+  editable: true
+  filtering: true
+  i18n: true
+  maintained: true
+  pagination: true
+  resizableCols: true
+  responsive: true
+  rowSelection: true
+  rowPinning: true
+  serverSide: Pro feature
+  sorting: true
+  sparklines: Pro feature
+  theming: true
+  typescript: true
+  virtualization: true
