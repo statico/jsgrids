@@ -1,0 +1,47 @@
+title: "@witqq/spreadsheet"
+homeUrl: https://spreadsheet.witqq.dev
+demoUrl: https://spreadsheet.witqq.dev
+githubRepo: witqq/spreadsheet
+npmPackage: "@witqq/spreadsheet"
+license: BSL 1.1
+revenueModel: Free for Personal Use
+description: >
+  Canvas-based spreadsheet engine with zero external dependencies. Renders
+  100K+ rows at 60fps using multi-layer Canvas 2D pipeline. TypeScript strict.
+frameworks:
+  angular: true
+  react: true
+  vanilla: true
+  vue: true
+features:
+  accessible: true
+  copyPaste: true
+  csvExport: false
+  customEditors: true
+  customFormatters: true
+  draggableRows: false
+  editable: true
+  fillDown: true
+  fillRight: true
+  filtering: true
+  formulas: true
+  freezableCols: true
+  headless: false
+  i18n: false
+  maintained: true
+  mergeCells: true
+  openSource: true
+  pagination: false
+  pdfExport: false
+  pivots: true
+  rangeSelection: true
+  resizableCols: true
+  responsive: false
+  rowGrouping: true
+  rowSelection: true
+  serverSide: false
+  sorting: true
+  trees: false
+  xlsxExport: true
+  virtualization: true
+  typescript: true
