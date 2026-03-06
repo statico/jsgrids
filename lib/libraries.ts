@@ -118,7 +118,7 @@ export const getLibraries = async (): Promise<LibraryInfo[]> => {
     .map((name) => join(dataDir, name));
 
   const items: AugmentedInfo[] = [];
-  await Promise.all(
+  const results = await Promise.allSettled(
     paths.map(async (path) => {
       const id = basename(path, ".yml");
 
@@ -270,11 +270,23 @@ export const getLibraries = async (): Promise<LibraryInfo[]> => {
     }),
   );
 
-  // Just a quick sanity check here.
-  if (items.length !== paths.length) {
-    throw new Error(
-      `Incomplete data. Parsed ${paths.length} YAML files but only got ${items.length} info objects.`,
+  // Log any libraries that failed to fetch
+  const failures = results.filter(
+    (r): r is PromiseRejectedResult => r.status === "rejected",
+  );
+  if (failures.length > 0) {
+    console.log(
+      "libraries: %d/%d libraries failed to fetch:",
+      failures.length,
+      paths.length,
     );
+    for (const f of failures) {
+      console.log("  - %s", f.reason?.message ?? f.reason);
+    }
+  }
+
+  if (items.length === 0) {
+    throw new Error("No libraries were fetched successfully");
   }
 
   return items;

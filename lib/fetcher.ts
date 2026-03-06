@@ -39,6 +39,13 @@ const isNpmRequest = (url: string): boolean => {
 const REQUEST_TIMEOUT = 10000;
 const PACKAGEPHOBIA_TIMEOUT = 5000;
 
+// Global deadline for all fetches during page generation.
+// Default 14 minutes (1 min less than Hobby plan timeout), configurable via
+// FETCH_DEADLINE_MINUTES env var.
+const deadlineMinutes = Number(process.env.FETCH_DEADLINE_MINUTES) || 14;
+const fetchDeadline = Date.now() + deadlineMinutes * 60 * 1000;
+console.log("fetcher: deadline set to %d minutes", deadlineMinutes);
+
 // Core fetch logic (shared between npm and non-npm requests)
 const fetchWithHeaders = async (
   url: string,
@@ -230,6 +237,15 @@ const throttledFetch = throttler(
 
 const cachedThrottledFetch = async (url: string) => {
   const cached = cache.get(url);
+
+  // If we've exceeded the deadline, return cached data or throw
+  if (Date.now() > fetchDeadline) {
+    if (cached) {
+      console.log("fetcher: deadline exceeded, using cached data for %s", url);
+      return cached;
+    }
+    throw new Error(`Fetch deadline exceeded and no cached data for ${url}`);
+  }
 
   // Build conditional request headers from cached response
   const conditional: ConditionalHeaders | undefined = cached
