@@ -163,6 +163,13 @@ export const Features = {
       "Whether rows be grouped and preferably collapsed and expanded.",
     important: false,
   },
+  rowPinning: {
+    title: "Row Pinning",
+    abbreviation: "Pin",
+    description:
+      "Whether rows be pinned to top or bottom.",
+    important: false,
+  },
   rowSelection: {
     title: "Row Selection",
     abbreviation: "Sel",
@@ -188,6 +195,19 @@ export const Features = {
     abbreviation: "Sort",
     description:
       "The library or interface has provisions for ordering rows given certain criteria.",
+    important: false,
+  },
+  sparklines: {
+    title: "Sparklines",
+    abbreviation: "Spark",
+    description:
+      "Has support for sparklines (miniaturized charts) in cells.",
+    important: false,
+  },
+  theming: {
+    title: "Theming",
+    abbreviation: "Theme",
+    description: "Has support for theming via CSS variables.",
     important: false,
   },
   trees: {
@@ -223,3 +243,4 @@ export type FeatureName = keyof typeof Features;
 
 export const FeatureNames = Object.keys(Features) as FeatureName[];
 FeatureNames.sort();
+  
