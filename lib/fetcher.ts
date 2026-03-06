@@ -159,16 +159,7 @@ const createNpmFetchFunction = () => {
         },
       });
     } catch (err: any) {
-      const res = err.response;
-      const status = res?.status;
-      const resHeaders = Object.fromEntries(res?.headers?.entries() ?? []);
-      console.log(
-        "fetcher: failed %s - status=%s, headers=%o - %s",
-        url,
-        status,
-        resHeaders,
-        err,
-      );
+      console.log("fetcher: error %s - %s", url, err.message);
       throw err;
     }
   };
@@ -220,16 +211,7 @@ const throttledFetch = throttler(
         },
       });
     } catch (err: any) {
-      const res = err.response;
-      const status = res?.status;
-      const resHeaders = Object.fromEntries(res?.headers?.entries() ?? []);
-      console.log(
-        "fetcher: failed %s - status=%s, headers=%o - %s",
-        url,
-        status,
-        resHeaders,
-        err,
-      );
+      console.log("fetcher: error %s - %s", url, err.message);
       throw err;
     }
   },
