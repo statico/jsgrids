@@ -14,7 +14,7 @@ frameworks:
   react: true
 features:
   accessible: true
-  copyPaste: true
+  copyPaste: Premium feature
   csvExport: true
   customEditors: true
   customFormatters: true
@@ -23,22 +23,22 @@ features:
   fillDown: Premium feature
   fillRight: Premium feature
   filtering: true
-  formulas: true
+  formulas: false
   freezableCols: true
   headless: true
-  i18n: true
+  i18n: false
   maintained: true
-  mergeCells: true
+  mergeCells: false
   openSource: true
-  pagination: Premium Feature
+  pagination: Premium feature
   pdfExport: false
-  pivots: Premium Feature
-  rangeSelection: Premium Feature
+  pivots: Premium feature
+  rangeSelection: Premium feature
   resizableCols: true
   responsive: true
   rowGrouping: true
   rowSelection: true
-  search: true
+  search: false
   serverSide: Premium feature
   sorting: true
   trees: Premium feature

@@ -236,7 +236,7 @@ export const getLibraries = async (): Promise<LibraryInfo[]> => {
         const name = item.npmPackage;
         try {
           const { data } = await fetcher(
-            `https://api.npms.io/v2/package/${name}`,
+            `https://api.npms.io/v2/package/${encodeURIComponent(name)}`,
           );
           // Extract quality score (score.final) and round up to percentage
           const qualityScore = data.score?.final ?? 0;

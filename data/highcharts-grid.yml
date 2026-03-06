@@ -17,17 +17,16 @@ frameworks:
 features:
   accessible: true
   csvExport: Pro feature
-  customEditors: true
+  customEditors: Pro feature
   customFormatters: true
-  editable: true
+  editable: Pro feature
   filtering: true
   i18n: true
   maintained: true
   pagination: true
   resizableCols: true
   responsive: true
-  rowSelection: true
-  rowPinning: true
+  openSource: false
   serverSide: Pro feature
   sorting: true
   sparklines: Pro feature
