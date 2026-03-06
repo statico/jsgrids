@@ -236,22 +236,27 @@ const throttledFetch = throttler(
 );
 
 const cachedThrottledFetch = async (url: string) => {
-  const cached = cache.get(url);
+  const entry = cache.get(url);
+
+  // If cached data is still fresh (within TTL), return it immediately
+  if (entry?.fresh) {
+    return entry.data;
+  }
 
   // If we've exceeded the deadline, return cached data or throw
   if (Date.now() > fetchDeadline) {
-    if (cached) {
+    if (entry) {
       console.log("fetcher: deadline exceeded, using cached data for %s", url);
-      return cached;
+      return entry.data;
     }
     throw new Error(`Fetch deadline exceeded and no cached data for ${url}`);
   }
 
-  // Build conditional request headers from cached response
-  const conditional: ConditionalHeaders | undefined = cached
+  // Build conditional request headers from stale cached response
+  const conditional: ConditionalHeaders | undefined = entry
     ? {
-        etag: cached.headers?.etag,
-        lastModified: cached.headers?.["last-modified"],
+        etag: entry.data.headers?.etag,
+        lastModified: entry.data.headers?.["last-modified"],
       }
     : undefined;
 
@@ -260,7 +265,9 @@ const cachedThrottledFetch = async (url: string) => {
   const result = await fetchFn(url, conditional);
 
   if (result === NOT_MODIFIED) {
-    return cached;
+    // Revalidated — update the timestamp so TTL resets
+    cache.set(url, entry!.data);
+    return entry!.data;
   }
 
   cache.set(url, result);
