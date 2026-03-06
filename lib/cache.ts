@@ -9,11 +9,9 @@ import {
 import { join } from "path";
 
 //
-// This is a simple filesystem cache because, amazingly, nothing on npm seemed
-// to be this simple and this is easy to write.
+// Simple filesystem cache. No time-based expiry — freshness is determined
+// by conditional HTTP requests (ETag / If-Modified-Since) in the fetcher.
 //
-
-const expiryInMs = 1000 * 60 * 60 * 24;
 
 // Put the cache in the .next/cache/jsgrids directory so that it is
 // automatically cached by Vercel.
@@ -35,22 +33,14 @@ const get = (key: string): any => {
   }
 
   const obj = JSON.parse(readFileSync(path, "utf8"));
-  if (obj?.expiration >= Date.now()) {
-    return obj?.data;
-  } else {
-    console.log("cache: expired %s", key);
-    return null;
-  }
+  // Support old format { expiration, data } and new format { data }
+  return obj?.data ?? null;
 };
 
 const set = (key: string, data: any): void => {
   console.log("cache: write %s", key);
   const path = join(basedir, keyToFilename(key));
-  const obj = JSON.stringify({
-    expiration: Date.now() + expiryInMs,
-    data,
-  });
-  writeFileSync(path, obj, "utf8");
+  writeFileSync(path, JSON.stringify({ data }), "utf8");
 };
 
 const clear = (key: string): void => {
@@ -59,14 +49,4 @@ const clear = (key: string): void => {
   if (existsSync(path)) unlinkSync(path);
 };
 
-// Syntactic sugar to heop with the most common pattern.
-const fetch = async (key: string, fn: () => Promise<any>): Promise<any> => {
-  const cached = get(key);
-  if (cached) return cached;
-
-  const fresh = await fn();
-  if (fresh) set(key, fresh);
-  return fresh;
-};
-
-export { get, set, clear, fetch };
+export { get, set, clear };
