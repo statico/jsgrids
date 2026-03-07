@@ -9,11 +9,14 @@ import {
 import { join } from "path";
 
 //
-// This is a simple filesystem cache because, amazingly, nothing on npm seemed
-// to be this simple and this is easy to write.
+// Simple filesystem cache with a soft TTL. Within the TTL, cached data is
+// returned immediately (no network request). After the TTL expires, the
+// fetcher makes conditional HTTP requests (ETag / If-Modified-Since) to
+// revalidate. Default TTL is 1 hour, configurable via CACHE_TTL_MINUTES.
 //
 
-const expiryInMs = 1000 * 60 * 60 * 24;
+const ttlMinutes = Number(process.env.CACHE_TTL_MINUTES) || 60;
+const ttlMs = ttlMinutes * 60 * 1000;
 
 // Put the cache in the .next/cache/jsgrids directory so that it is
 // automatically cached by Vercel.
@@ -27,7 +30,12 @@ const keyToFilename = (key: string): string => {
   return hash.digest("hex") + ".json";
 };
 
-const get = (key: string): any => {
+interface CacheResult {
+  data: any;
+  fresh: boolean;
+}
+
+const get = (key: string): CacheResult | null => {
   const path = join(basedir, keyToFilename(key));
   if (!existsSync(path)) {
     console.log("cache: miss for %s", key);
@@ -35,22 +43,18 @@ const get = (key: string): any => {
   }
 
   const obj = JSON.parse(readFileSync(path, "utf8"));
-  if (obj?.expiration >= Date.now()) {
-    return obj?.data;
-  } else {
-    console.log("cache: expired %s", key);
-    return null;
-  }
+  const data = obj?.data ?? null;
+  if (data === null) return null;
+
+  // Check freshness using stored timestamp, or treat old-format entries as stale
+  const fresh = typeof obj?.timestamp === "number" && Date.now() - obj.timestamp < ttlMs;
+  return { data, fresh };
 };
 
 const set = (key: string, data: any): void => {
   console.log("cache: write %s", key);
   const path = join(basedir, keyToFilename(key));
-  const obj = JSON.stringify({
-    expiration: Date.now() + expiryInMs,
-    data,
-  });
-  writeFileSync(path, obj, "utf8");
+  writeFileSync(path, JSON.stringify({ data, timestamp: Date.now() }), "utf8");
 };
 
 const clear = (key: string): void => {
@@ -59,14 +63,4 @@ const clear = (key: string): void => {
   if (existsSync(path)) unlinkSync(path);
 };
 
-// Syntactic sugar to heop with the most common pattern.
-const fetch = async (key: string, fn: () => Promise<any>): Promise<any> => {
-  const cached = get(key);
-  if (cached) return cached;
-
-  const fresh = await fn();
-  if (fresh) set(key, fresh);
-  return fresh;
-};
-
-export { get, set, clear, fetch };
+export { get, set, clear };

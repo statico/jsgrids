@@ -2,6 +2,14 @@ import pRetry, { AbortError } from "p-retry";
 import pThrottle from "p-throttle";
 import * as cache from "./cache";
 
+// Sentinel value for 304 Not Modified responses
+const NOT_MODIFIED = Symbol("NOT_MODIFIED");
+
+interface ConditionalHeaders {
+  etag?: string;
+  lastModified?: string;
+}
+
 // Throttler for non-npm APIs (GitHub, Package Phobia, npms.io)
 const throttler = pThrottle({ limit: 1, interval: 1000 });
 
@@ -31,8 +39,18 @@ const isNpmRequest = (url: string): boolean => {
 const REQUEST_TIMEOUT = 10000;
 const PACKAGEPHOBIA_TIMEOUT = 5000;
 
+// Global deadline for all fetches during page generation.
+// Default 14 minutes (1 min less than Hobby plan timeout), configurable via
+// FETCH_DEADLINE_MINUTES env var.
+const deadlineMinutes = Number(process.env.FETCH_DEADLINE_MINUTES) || 14;
+const fetchDeadline = Date.now() + deadlineMinutes * 60 * 1000;
+console.log("fetcher: deadline set to %d minutes", deadlineMinutes);
+
 // Core fetch logic (shared between npm and non-npm requests)
-const fetchWithHeaders = async (url: string) => {
+const fetchWithHeaders = async (
+  url: string,
+  conditional?: ConditionalHeaders,
+) => {
   const { GITHUB_TOKEN, NPM_TOKEN, VERCEL_URL, VERCEL_GITHUB_COMMIT_SHA } =
     process.env;
   if (!GITHUB_TOKEN) {
@@ -65,6 +83,14 @@ const fetchWithHeaders = async (url: string) => {
     headers["User-Agent"] = ua;
   }
 
+  // Add conditional request headers for cache validation
+  if (conditional?.etag) {
+    headers["If-None-Match"] = conditional.etag;
+  }
+  if (conditional?.lastModified) {
+    headers["If-Modified-Since"] = conditional.lastModified;
+  }
+
   // Add timeout using AbortController - shorter timeout for packagephobia
   const timeout = /packagephobia/.test(url)
     ? PACKAGEPHOBIA_TIMEOUT
@@ -91,10 +117,14 @@ const fetchWithHeaders = async (url: string) => {
 
 // Create the npm fetch function (used to recreate throttled function)
 const createNpmFetchFunction = () => {
-  return async (url: string) => {
+  return async (url: string, conditional?: ConditionalHeaders) => {
     try {
       const fn = async () => {
-        const { res, resHeaders } = await fetchWithHeaders(url);
+        const { res, resHeaders } = await fetchWithHeaders(url, conditional);
+        if (res.status === 304) {
+          console.log("fetcher: 304 not modified %s", url);
+          return NOT_MODIFIED;
+        }
         // Check status before parsing JSON - error pages may return HTML
         if (!res.ok) {
           const message = `Request to ${url} failed with status ${res.status}`;
@@ -129,16 +159,7 @@ const createNpmFetchFunction = () => {
         },
       });
     } catch (err: any) {
-      const res = err.response;
-      const status = res?.status;
-      const resHeaders = Object.fromEntries(res?.headers?.entries() ?? []);
-      console.log(
-        "fetcher: failed %s - status=%s, headers=%o - %s",
-        url,
-        status,
-        resHeaders,
-        err,
-      );
+      console.log("fetcher: error %s - %s", url, err.message);
       throw err;
     }
   };
@@ -149,62 +170,90 @@ let npmThrottledFetch = npmThrottler(createNpmFetchFunction());
 
 // Hammering APIs usually leads to trouble, and we don't really care about build
 // time, so let's be nice.
-const throttledFetch = throttler(async (url: string) => {
-  try {
-    const fn = async () => {
-      const { res, resHeaders } = await fetchWithHeaders(url);
-      // Check status before parsing JSON - error pages may return HTML
-      if (!res.ok) {
-        const message = `Request to ${url} failed with status ${res.status}`;
-        // Don't retry on 403/404 - these are permanent failures
-        if (res.status === 403 || res.status === 404) {
-          throw new AbortError(message);
+const throttledFetch = throttler(
+  async (url: string, conditional?: ConditionalHeaders) => {
+    try {
+      const fn = async () => {
+        const { res, resHeaders } = await fetchWithHeaders(url, conditional);
+        if (res.status === 304) {
+          console.log("fetcher: 304 not modified %s", url);
+          return NOT_MODIFIED;
         }
-        throw new Error(message);
-      }
-      const data = await res.json();
-      return { headers: resHeaders, data };
-    };
+        // Check status before parsing JSON - error pages may return HTML
+        if (!res.ok) {
+          const message = `Request to ${url} failed with status ${res.status}`;
+          // Don't retry on 403/404 - these are permanent failures
+          if (res.status === 403 || res.status === 404) {
+            throw new AbortError(message);
+          }
+          throw new Error(message);
+        }
+        const data = await res.json();
+        return { headers: resHeaders, data };
+      };
 
-    const isPackagePhobia = /packagephobia/.test(url);
-    const isNpms = /npms\.io/.test(url);
-    // Reduce retries for unreliable APIs - npms.io often returns 404s for valid packages
-    // and packagephobia can be slow/unreliable
-    const retries = isPackagePhobia || isNpms ? 0 : 3;
-    return await pRetry(fn, {
-      minTimeout: 2000,
-      factor: 1,
-      retries,
-      onFailedAttempt: (err) => {
-        console.log(
-          "fetcher: failed %s, attempt number = %d, retries left = %d",
-          url,
-          err.attemptNumber,
-          err.retriesLeft,
-        );
-      },
-    });
-  } catch (err: any) {
-    const res = err.response;
-    const status = res?.status;
-    const resHeaders = Object.fromEntries(res?.headers?.entries() ?? []);
-    console.log(
-      "fetcher: failed %s - status=%s, headers=%o - %s",
-      url,
-      status,
-      resHeaders,
-      err,
-    );
-    throw err;
-  }
-});
+      const isPackagePhobia = /packagephobia/.test(url);
+      const isNpms = /npms\.io/.test(url);
+      // Reduce retries for unreliable APIs - npms.io often returns 404s for valid packages
+      // and packagephobia can be slow/unreliable
+      const retries = isPackagePhobia || isNpms ? 0 : 3;
+      return await pRetry(fn, {
+        minTimeout: 2000,
+        factor: 1,
+        retries,
+        onFailedAttempt: (err) => {
+          console.log(
+            "fetcher: failed %s, attempt number = %d, retries left = %d",
+            url,
+            err.attemptNumber,
+            err.retriesLeft,
+          );
+        },
+      });
+    } catch (err: any) {
+      console.log("fetcher: error %s - %s", url, err.message);
+      throw err;
+    }
+  },
+);
 
 const cachedThrottledFetch = async (url: string) => {
-  // Route npm requests to npm throttler, others to regular throttler
-  if (isNpmRequest(url)) {
-    return cache.fetch(url, () => npmThrottledFetch(url));
+  const entry = cache.get(url);
+
+  // If cached data is still fresh (within TTL), return it immediately
+  if (entry?.fresh) {
+    return entry.data;
   }
-  return cache.fetch(url, () => throttledFetch(url));
+
+  // If we've exceeded the deadline, return cached data or throw
+  if (Date.now() > fetchDeadline) {
+    if (entry) {
+      console.log("fetcher: deadline exceeded, using cached data for %s", url);
+      return entry.data;
+    }
+    throw new Error(`Fetch deadline exceeded and no cached data for ${url}`);
+  }
+
+  // Build conditional request headers from stale cached response
+  const conditional: ConditionalHeaders | undefined = entry
+    ? {
+        etag: entry.data.headers?.etag,
+        lastModified: entry.data.headers?.["last-modified"],
+      }
+    : undefined;
+
+  // Route npm requests to npm throttler, others to regular throttler
+  const fetchFn = isNpmRequest(url) ? npmThrottledFetch : throttledFetch;
+  const result = await fetchFn(url, conditional);
+
+  if (result === NOT_MODIFIED) {
+    // Revalidated — update the timestamp so TTL resets
+    cache.set(url, entry!.data);
+    return entry!.data;
+  }
+
+  cache.set(url, result);
+  return result;
 };
 
 export default cachedThrottledFetch;

@@ -207,7 +207,7 @@ export const Features = {
   theming: {
     title: "Theming",
     abbreviation: "Theme",
-    description: "Has support for theming via CSS variables.",
+    description: "Has built-in support for custom theming and style customization.",
     important: false,
   },
   trees: {

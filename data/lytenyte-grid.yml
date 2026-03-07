@@ -1,0 +1,47 @@
+title: LyteNyte Grid
+homeUrl: https://www.1771technologies.com/
+demoUrl: https://www.1771technologies.com/demo
+githubRepo: 1771-Technologies/lytenyte
+npmPackage: "@1771technologies/lytenyte-core"
+license: Apache 2.0 or Commercial License
+revenueModel: Free for Personal Use
+description: >
+  LyteNyte Grid is a ~40 KB, zero-dependency React data grid engineered
+  for high performance and enterprise-scale datasets. It can handle
+  10,000 updates/sec and render millions of rows.
+  No wrappers. No heavy abstractions.
+frameworks:
+  react: true
+features:
+  accessible: true
+  copyPaste: Premium feature
+  csvExport: true
+  customEditors: true
+  customFormatters: true
+  draggableRows: true
+  editable: true
+  fillDown: Premium feature
+  fillRight: Premium feature
+  filtering: true
+  formulas: false
+  freezableCols: true
+  headless: true
+  i18n: false
+  maintained: true
+  mergeCells: false
+  openSource: true
+  pagination: Premium feature
+  pdfExport: false
+  pivots: Premium feature
+  rangeSelection: Premium feature
+  resizableCols: true
+  responsive: true
+  rowGrouping: true
+  rowSelection: true
+  search: false
+  serverSide: Premium feature
+  sorting: true
+  trees: Premium feature
+  typescript: true
+  xlsxExport: true
+  virtualization: true
