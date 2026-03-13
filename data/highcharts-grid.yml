@@ -26,7 +26,6 @@ features:
   pagination: true
   resizableCols: true
   responsive: true
-  openSource: false
   serverSide: Pro feature
   sorting: true
   sparklines: Pro feature
