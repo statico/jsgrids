@@ -1,9 +1,9 @@
-name: Daily Rebuild
+name: Weekly Rebuild
 
 on:
   schedule:
-    # Run daily at 00:00 UTC (midnight)
-    - cron: "0 0 * * *"
+    # Run weekly at 00:00 UTC on Mondays
+    - cron: "0 0 * * 1"
   workflow_dispatch: # Allow manual triggering
 
 jobs:
