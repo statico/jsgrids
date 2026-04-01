@@ -1,0 +1,44 @@
+title: GridSheet
+homeUrl: https://gridsheet.walkframe.com/
+githubRepo: walkframe/gridsheet
+npmPackage: "@gridsheet/react-core"
+license: Apache License 2.0
+revenueModel: Free
+description: >
+  A modern, extensible spreadsheet engine for the web. Features a formula
+  engine, custom cell rendering, virtualization, and multi-framework support.
+frameworks:
+  react: true
+  vue: true
+  svelte: true
+features:
+  accessible: false
+  copyPaste: true
+  csvExport: true
+  customEditors: true
+  customFormatters: true
+  draggableRows: false
+  editable: true
+  fillDown: true
+  fillRight: true
+  filtering: true
+  formulas: true
+  freezableCols: true
+  headless: false
+  i18n: false
+  maintained: true
+  mergeCells: false
+  openSource: true
+  pagination: false
+  pdfExport: false
+  pivots: false
+  rangeSelection: true
+  resizableCols: true
+  responsive: true
+  rowGrouping: false
+  rowSelection: true
+  serverSide: false
+  sorting: true
+  trees: false
+  xlsxExport: false
+  virtualization: true
