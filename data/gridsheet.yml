@@ -1,5 +1,6 @@
 title: GridSheet
 homeUrl: https://gridsheet.walkframe.com/
+demoUrl: null
 githubRepo: walkframe/gridsheet
 npmPackage: "@gridsheet/react-core"
 license: Apache License 2.0
@@ -40,5 +41,6 @@ features:
   serverSide: false
   sorting: true
   trees: false
+  typescript: true
   xlsxExport: false
   virtualization: true
