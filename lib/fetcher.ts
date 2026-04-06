@@ -11,7 +11,7 @@ interface ConditionalHeaders {
 }
 
 // Throttler for non-npm APIs (GitHub, Package Phobia, npms.io)
-const throttler = pThrottle({ limit: 1, interval: 1000 });
+const throttler = pThrottle({ limit: 5, interval: 1000 });
 
 // Dynamic throttler for npm requests
 // Start at 2 seconds (30 per minute), increase on 429 errors

@@ -109,8 +109,20 @@ export type LibraryInfo = z.infer<typeof LibraryInfo>;
 
 const allowedFeatures = new Set(Object.keys(Features));
 
-// Get all the library data, fetching from APIs or using the cache as necessary.
+// Deduplicate concurrent calls (/ and /list pages generate simultaneously during build)
+let _librariesPromise: Promise<LibraryInfo[]> | null = null;
+
 export const getLibraries = async (): Promise<LibraryInfo[]> => {
+  if (!_librariesPromise) {
+    _librariesPromise = _getLibrariesImpl().catch((err) => {
+      _librariesPromise = null;
+      throw err;
+    });
+  }
+  return _librariesPromise;
+};
+
+const _getLibrariesImpl = async (): Promise<LibraryInfo[]> => {
   // Get paths to all YAML files.
   const dataDir = join(process.cwd(), "data");
   const paths = readdirSync(dataDir)
