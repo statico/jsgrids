@@ -1,0 +1,54 @@
+title: Toolbox Grid
+homeUrl: https://toolboxjs.com
+demoUrl: null
+githubRepo: OysteinAmundsen/toolbox
+npmPackage: "@toolbox-web/grid"
+license: MIT License
+revenueModel: Free
+description: >
+  A zero-dependency, framework-agnostic data grid web component with
+  virtualization, sorting, filtering, editing, and 20+ plugins. Built with
+  pure TypeScript and works natively in vanilla JS, React, Angular, Vue,
+  and Svelte.
+frameworks:
+  vanilla: true
+  react: true
+  vue: true
+  angular: true
+  svelte: true
+features:
+  accessible: true
+  copyPaste: true
+  csvExport: true
+  customEditors: true
+  customFormatters: true
+  draggableRows: true
+  editable: true
+  fillDown: false
+  fillRight: false
+  filtering: true
+  formulas: false
+  freezableCols: true
+  headless: false
+  i18n: false
+  maintained: true
+  mergeCells: false
+  openSource: true
+  pagination: false
+  pdfExport: false
+  pivots: true
+  rangeSelection: true
+  resizableCols: true
+  responsive: true
+  rowGrouping: true
+  rowPinning: false
+  rowSelection: true
+  search: false
+  serverSide: true
+  sorting: true
+  sparklines: false
+  theming: true
+  trees: true
+  typescript: true
+  xlsxExport: false
+  virtualization: true
