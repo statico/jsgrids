@@ -15,7 +15,7 @@ import { join } from "path";
 // revalidate. Default TTL is 1 hour, configurable via CACHE_TTL_MINUTES.
 //
 
-const ttlMinutes = Number(process.env.CACHE_TTL_MINUTES) || 60;
+const ttlMinutes = Number(process.env.CACHE_TTL_MINUTES) || 1440;
 const ttlMs = ttlMinutes * 60 * 1000;
 
 // Put the cache in the .next/cache/jsgrids directory so that it is

@@ -129,34 +129,111 @@ const _getLibrariesImpl = async (): Promise<LibraryInfo[]> => {
     .filter((name) => /\.yml$/.test(name))
     .map((name) => join(dataDir, name));
 
+  // Parse all YAML files upfront to collect npm package names for bulk fetch.
+  const parsed: { path: string; id: string; item: AugmentedInfo }[] = [];
+  for (const path of paths) {
+    const id = basename(path, ".yml");
+    const obj = parseYaml(readFileSync(path, "utf8"));
+    if (typeof obj !== "object") {
+      throw new Error(`Expected ${path} to be an object`);
+    }
+
+    let item: AugmentedInfo;
+    try {
+      const importedData = ImportedYAMLInfo.parse(obj);
+      item = AugmentedInfo.parse({ id, ...importedData });
+    } catch (err: any) {
+      const validationError = fromZodError(err);
+      throw new Error(`${path} didn't validate: ${validationError}`);
+    }
+
+    for (const key in item.features) {
+      if (!allowedFeatures.has(key)) {
+        throw new Error(`In ${path}, unexpected feature "${key}"`);
+      }
+    }
+
+    parsed.push({ path, id, item });
+  }
+
+  // Batch-fetch NPM download counts using the bulk API endpoint.
+  // The bulk endpoint doesn't support scoped packages (@scope/pkg), so we
+  // batch unscoped packages (1 request for ~44 packages) and fetch scoped
+  // packages individually in parallel via Promise.all.
+  const npmPackageNames = [
+    ...new Set(
+      parsed
+        .map((p) => p.item.npmPackage)
+        .filter((name): name is string => name != null),
+    ),
+  ];
+  const unscopedPackages = npmPackageNames.filter((n) => !n.startsWith("@"));
+  const scopedPackages = npmPackageNames.filter((n) => n.startsWith("@"));
+  const npmDownloads = new Map<string, number>();
+
+  // Fetch unscoped packages in bulk (1-2 requests instead of ~44 individual)
+  if (unscopedPackages.length > 0) {
+    const chunkSize = 50;
+    for (let i = 0; i < unscopedPackages.length; i += chunkSize) {
+      const chunk = unscopedPackages.slice(i, i + chunkSize);
+      try {
+        const { data } = await fetcher(
+          `https://api.npmjs.org/downloads/point/last-week/${chunk.join(",")}`,
+        );
+        if (chunk.length === 1) {
+          npmDownloads.set(chunk[0], data.downloads ?? 0);
+        } else {
+          for (const name of chunk) {
+            const entry = data[name];
+            if (entry && typeof entry.downloads === "number") {
+              npmDownloads.set(name, entry.downloads);
+            }
+          }
+        }
+      } catch (err: any) {
+        console.log(
+          "libraries: bulk npm fetch failed for chunk %d: %s",
+          i / chunkSize,
+          err.message,
+        );
+      }
+    }
+  }
+
+  // Fetch scoped packages individually in parallel
+  if (scopedPackages.length > 0) {
+    const scopedResults = await Promise.allSettled(
+      scopedPackages.map(async (name) => {
+        const { data } = await fetcher(
+          `https://api.npmjs.org/downloads/point/last-week/${name}`,
+        );
+        npmDownloads.set(name, data.downloads ?? 0);
+      }),
+    );
+    for (let i = 0; i < scopedResults.length; i++) {
+      if (scopedResults[i].status === "rejected") {
+        console.log(
+          "libraries: npm fetch failed for %s: %s",
+          scopedPackages[i],
+          (scopedResults[i] as PromiseRejectedResult).reason?.message,
+        );
+      }
+    }
+    console.log(
+      "libraries: bulk npm fetch got downloads for %d/%d packages",
+      npmDownloads.size,
+      npmPackageNames.length,
+    );
+  }
+
   const items: AugmentedInfo[] = [];
   const results = await Promise.allSettled(
-    paths.map(async (path) => {
-      const id = basename(path, ".yml");
+    parsed.map(async ({ path, item }) => {
+      // Run GitHub, Package Phobia, and npms.io in parallel.
+      // NPM downloads are already pre-fetched via bulk API.
+      const githubPromise = (async () => {
+        if (!item.githubRepo) return;
 
-      // Load raw YAML data and make sure it validates.
-      const obj = parseYaml(readFileSync(path, "utf8"));
-      if (typeof obj !== "object") {
-        throw new Error(`Expected ${path} to be an object`);
-      }
-
-      let item: AugmentedInfo;
-      try {
-        const importedData = ImportedYAMLInfo.parse(obj);
-        item = AugmentedInfo.parse({ id, ...importedData });
-      } catch (err: any) {
-        const validationError = fromZodError(err);
-        throw new Error(`${path} didn't validate: ${validationError}`);
-      }
-
-      for (const key in item.features) {
-        if (!allowedFeatures.has(key)) {
-          throw new Error(`In ${path}, unexpected feature "${key}"`);
-        }
-      }
-
-      // Populate GitHub data if the library has a GitHub repo.
-      if (item.githubRepo) {
         const { data: repo } = await fetcher(
           `https://api.github.com/repos/${item.githubRepo}`,
         );
@@ -201,62 +278,38 @@ const _getLibrariesImpl = async (): Promise<LibraryInfo[]> => {
           network: repo.network_count,
           contributors,
         };
-      }
+      })();
 
-      // Populate NPM data if the library has an NPM package name.
-      if (item.npmPackage) {
-        const name = item.npmPackage;
-        const res = await fetcher(
-          `https://api.npmjs.org/downloads/point/last-week/${name}`,
-        );
-        const data: any = res.data;
-        const npm = {
-          url: `https://www.npmjs.com/package/${name}`,
-          downloads: data.downloads,
-        };
-        item.npm = npm;
-      }
-
-      // Grab package sizes from Package Phobia.
-      if (item.npmPackage) {
+      const packagephobiaPromise = (async () => {
+        if (!item.npmPackage) return;
         const name = item.npmPackage;
         const url = `https://packagephobia.com/result?p=${name}`;
         try {
           const { data } = await fetcher(
             `https://packagephobia.com/v2/api.json?p=${name}`,
           );
-          // Package Phobia API returns publish and install sizes in bytes
           const publishSize =
             data.publish?.bytes ?? data.publishSize ?? data.size ?? 0;
           const installSize =
             data.install?.bytes ?? data.installSize ?? data.gzip ?? 0;
-          item.packagephobia = {
-            url,
-            publishSize,
-            installSize,
-          };
+          item.packagephobia = { url, publishSize, installSize };
         } catch (err) {
-          // Package Phobia might error out, so let's do the best we can and
-          // signal to the frontend that the API is broken.
           console.log("libraries: giving up getting package size for %s", name);
           item.packagephobia = { url, publishSize: -1, installSize: -1 };
         }
-      }
+      })();
 
-      // Grab quality score and dependencies from npms.io.
-      if (item.npmPackage) {
+      const npmsPromise = (async () => {
+        if (!item.npmPackage) return;
         const name = item.npmPackage;
         try {
           const { data } = await fetcher(
             `https://api.npms.io/v2/package/${encodeURIComponent(name)}`,
           );
-          // Extract quality score (score.final) and round up to percentage
           const qualityScore = data.score?.final ?? 0;
           const quality = Math.ceil(qualityScore * 100);
-          // Extract maintenance score (score.detail.maintenance) and round up to percentage
           const maintenanceScore = data.score?.detail?.maintenance ?? 0;
           const maintenance = Math.ceil(maintenanceScore * 100);
-          // Extract dependencies count
           const dependencies = data.collected?.metadata?.dependencies
             ? Object.keys(data.collected.metadata.dependencies).length
             : 0;
@@ -268,8 +321,21 @@ const _getLibrariesImpl = async (): Promise<LibraryInfo[]> => {
             dependenciesUrl: `https://www.npmjs.com/package/${name}?activeTab=dependencies`,
           };
         } catch (err) {
-          // npms.io might error out, so we'll just skip it
           console.log("libraries: giving up getting npms.io data for %s", name);
+        }
+      })();
+
+      // Run all API calls concurrently
+      await Promise.all([githubPromise, packagephobiaPromise, npmsPromise]);
+
+      // Apply pre-fetched NPM download data
+      if (item.npmPackage) {
+        const downloads = npmDownloads.get(item.npmPackage);
+        if (downloads !== undefined) {
+          item.npm = {
+            url: `https://www.npmjs.com/package/${item.npmPackage}`,
+            downloads,
+          };
         }
       }
 

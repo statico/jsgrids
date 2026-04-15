@@ -18,9 +18,12 @@ const throttler = pThrottle({ limit: 5, interval: 1000 });
 let npmThrottleInterval = 2000; // 2 seconds in milliseconds
 let npmThrottler = pThrottle({ limit: 1, interval: npmThrottleInterval });
 
+// Maximum npm throttle interval (10 seconds) to prevent runaway backoff
+const MAX_NPM_THROTTLE_INTERVAL = 10000;
+
 // Helper to recreate npm throttler with new interval
 const recreateNpmThrottler = (newInterval: number) => {
-  npmThrottleInterval = newInterval;
+  npmThrottleInterval = Math.min(newInterval, MAX_NPM_THROTTLE_INTERVAL);
   npmThrottler = pThrottle({ limit: 1, interval: npmThrottleInterval });
   console.log(
     "fetcher: npm throttle interval increased to %d seconds",
