@@ -1,0 +1,56 @@
+title: Univer
+homeUrl: https://univer.ai
+demoUrl: https://docs.univer.ai/en-US/showcase
+githubRepo: dream-num/univer
+npmPackage: "@univerjs/core"
+license: Apache-2.0 License
+revenueModel: Freemium
+description: >
+  Univer is an isomorphic, full-stack framework for creating and editing
+  spreadsheets, documents, and presentations. The successor to Luckysheet, it
+  features a powerful canvas-based rendering engine, an extensive formula engine
+  that runs in Web Workers or on the server, and a highly extensible plugin
+  architecture. The open-source core covers editing, formulas, filtering,
+  sorting, conditional formatting, data validation, and more, while pro features
+  like XLSX import/export, pivot tables, collaborative editing, and printing are
+  available under a free-for-commercial-use license with paid upgrade plans.
+frameworks:
+  vanilla: true
+  react: true
+  vue: true
+features:
+  accessible: false
+  copyPaste: true
+  csvExport: false
+  customEditors: true
+  customFormatters: true
+  draggableRows: true
+  editable: true
+  fillDown: true
+  fillRight: true
+  filtering: true
+  formulas: true
+  freezableCols: true
+  headless: false
+  i18n: true
+  maintained: true
+  mergeCells: true
+  openSource: true
+  pagination: false
+  pdfExport: Pro feature
+  pivots: Pro feature
+  rangeSelection: true
+  resizableCols: true
+  responsive: false
+  rowGrouping: false
+  rowPinning: false
+  rowSelection: true
+  search: true
+  serverSide: false
+  sorting: true
+  sparklines: Pro feature
+  theming: true
+  trees: false
+  typescript: true
+  xlsxExport: Pro feature
+  virtualization: true

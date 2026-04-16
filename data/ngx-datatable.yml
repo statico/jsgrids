@@ -1,0 +1,50 @@
+title: ngx-datatable
+homeUrl: https://swimlane.gitbook.io/ngx-datatable/
+demoUrl: https://swimlane.github.io/ngx-datatable/
+githubRepo: swimlane/ngx-datatable
+npmPackage: "@swimlane/ngx-datatable"
+license: MIT License
+revenueModel: Free
+description: >
+  A feature-rich yet lightweight data table component for Angular. Designed for
+  presenting large and complex data with no external dependencies. It doesn't
+  make assumptions about your data or how you filter, sort, or page it, giving
+  you full control over data manipulation.
+frameworks:
+  angular: true
+features:
+  accessible: true
+  copyPaste: false
+  csvExport: false
+  customEditors: false
+  customFormatters: true
+  draggableRows: true
+  editable: true
+  fillDown: false
+  fillRight: false
+  filtering: false
+  formulas: false
+  freezableCols: true
+  headless: false
+  i18n: false
+  maintained: true
+  mergeCells: false
+  openSource: true
+  pagination: true
+  pdfExport: false
+  pivots: false
+  rangeSelection: false
+  resizableCols: true
+  responsive: false
+  rowGrouping: true
+  rowPinning: false
+  rowSelection: true
+  search: false
+  serverSide: true
+  sorting: true
+  sparklines: false
+  theming: true
+  trees: true
+  typescript: true
+  xlsxExport: false
+  virtualization: true

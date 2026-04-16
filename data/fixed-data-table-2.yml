@@ -1,0 +1,51 @@
+title: Fixed Data Table 2
+homeUrl: https://schrodinger.github.io/fixed-data-table-2/
+demoUrl: https://schrodinger.github.io/fixed-data-table-2/example-object-data.html
+githubRepo: schrodinger/fixed-data-table-2
+npmPackage: fixed-data-table-2
+license: BSD-3-Clause License
+revenueModel: Free
+description: >
+  A continuation of Facebook's fixed-data-table, maintained by Schrodinger.
+  Fixed Data Table 2 is a React table component designed to handle thousands of
+  rows of data without sacrificing performance. It supports fixed headers,
+  footers, fixed and scrollable columns, variable row heights, column grouping,
+  column resizing, and touch scrolling.
+frameworks:
+  react: true
+features:
+  accessible: true
+  copyPaste: false
+  csvExport: false
+  customEditors: false
+  customFormatters: true
+  draggableRows: false
+  editable: false
+  fillDown: false
+  fillRight: false
+  filtering: false
+  formulas: false
+  freezableCols: true
+  headless: false
+  i18n: false
+  maintained: true
+  mergeCells: false
+  openSource: true
+  pagination: false
+  pdfExport: false
+  pivots: false
+  rangeSelection: false
+  resizableCols: true
+  responsive: false
+  rowGrouping: false
+  rowPinning: false
+  rowSelection: false
+  search: false
+  serverSide: false
+  sorting: false
+  sparklines: false
+  theming: false
+  trees: false
+  typescript: Via DefinitelyTyped
+  xlsxExport: false
+  virtualization: true

@@ -1,0 +1,58 @@
+title: ZingGrid
+homeUrl: https://www.zinggrid.com/
+demoUrl: https://www.zinggrid.com/demos
+githubRepo: ZingGrid/zinggrid
+npmPackage: zinggrid
+license: Proprietary
+revenueModel: Freemium
+description: >
+  ZingGrid is a JavaScript Web Component data grid and table library built with
+  ES6 and native web components. It focuses on creating CRUD grids quickly with
+  minimal setup and supports multiple data sources including REST, Firebase,
+  GraphQL, and databases. It requires no framework wrappers and offers built-in
+  features like editing, sorting, filtering, pagination, search, theming, and
+  accessibility. Free for development, education, and non-profit use with paid
+  licenses for commercial deployment.
+frameworks:
+  vanilla: true
+  react: true
+  angular: true
+  vue: true
+  svelte: true
+  jquery: true
+features:
+  accessible: true
+  copyPaste: true
+  csvExport: true
+  customEditors: true
+  customFormatters: true
+  draggableRows: false
+  editable: true
+  fillDown: false
+  fillRight: false
+  filtering: true
+  formulas: false
+  freezableCols: true
+  headless: false
+  i18n: true
+  maintained: true
+  mergeCells: false
+  openSource: false
+  pagination: true
+  pdfExport: false
+  pivots: false
+  rangeSelection: false
+  resizableCols: true
+  responsive: true
+  rowGrouping: true
+  rowPinning: Frozen rows
+  rowSelection: true
+  search: true
+  serverSide: true
+  sorting: true
+  sparklines: false
+  theming: true
+  trees: false
+  typescript: true
+  xlsxExport: false
+  virtualization: false

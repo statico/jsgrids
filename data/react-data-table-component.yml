@@ -1,0 +1,51 @@
+title: React Data Table Component
+homeUrl: https://react-data-table-component.netlify.app
+demoUrl: https://react-data-table-component.netlify.app/?path=/story/getting-started-intro--page
+githubRepo: jbetancur/react-data-table-component
+npmPackage: react-data-table-component
+license: Apache License 2.0
+revenueModel: Free
+description: >
+  A simple, declarative React data table component with built-in sorting,
+  pagination, row selection, and expandable rows. Designed for ease of use
+  with a clean API, it supports theming via styled-components, server-side
+  pagination and sorting, conditional row and cell styling, fixed headers,
+  column reordering, and responsive layouts out of the box.
+frameworks:
+  react: true
+features:
+  accessible: true
+  copyPaste: false
+  csvExport: false
+  customEditors: false
+  customFormatters: true
+  draggableRows: false
+  editable: false
+  fillDown: false
+  fillRight: false
+  filtering: false
+  formulas: false
+  freezableCols: false
+  headless: false
+  i18n: false
+  maintained: false
+  mergeCells: false
+  openSource: true
+  pagination: true
+  pdfExport: false
+  pivots: false
+  rangeSelection: false
+  resizableCols: false
+  responsive: true
+  rowGrouping: false
+  rowPinning: false
+  rowSelection: true
+  search: false
+  serverSide: Pagination and sorting
+  sorting: true
+  sparklines: false
+  theming: true
+  trees: false
+  typescript: true
+  xlsxExport: false
+  virtualization: false

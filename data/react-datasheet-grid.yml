@@ -1,0 +1,50 @@
+title: React Datasheet Grid
+homeUrl: https://react-datasheet-grid.netlify.app/
+demoUrl: https://react-datasheet-grid.netlify.app/
+githubRepo: nick-keller/react-datasheet-grid
+npmPackage: react-datasheet-grid
+license: MIT License
+revenueModel: Free
+description: >
+  An Airtable-like / Excel-like component to create beautiful spreadsheets in
+  React. Features copy/paste to and from Excel and Google Sheets, keyboard
+  navigation and shortcuts, custom context menus, drag-to-expand selection,
+  custom widgets, virtualized rows and columns, and smooth animations.
+frameworks:
+  react: true
+features:
+  accessible: false
+  copyPaste: true
+  csvExport: false
+  customEditors: true
+  customFormatters: true
+  draggableRows: false
+  editable: true
+  fillDown: true
+  fillRight: false
+  filtering: false
+  formulas: false
+  freezableCols: Gutter and optional right column
+  headless: false
+  i18n: false
+  maintained: true
+  mergeCells: false
+  openSource: true
+  pagination: false
+  pdfExport: false
+  pivots: false
+  rangeSelection: true
+  resizableCols: false
+  responsive: false
+  rowGrouping: false
+  rowPinning: false
+  rowSelection: false
+  search: false
+  serverSide: false
+  sorting: false
+  sparklines: false
+  theming: true
+  trees: false
+  typescript: true
+  xlsxExport: false
+  virtualization: true

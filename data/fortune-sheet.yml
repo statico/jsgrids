@@ -1,0 +1,51 @@
+title: FortuneSheet
+homeUrl: https://ruilisi.github.io/fortune-sheet-docs/
+demoUrl: https://ruilisi.github.io/fortune-sheet-demo/
+githubRepo: ruilisi/fortune-sheet
+npmPackage: "@fortune-sheet/react"
+license: MIT License
+revenueModel: Free
+description: >
+  FortuneSheet is a drop-in JavaScript spreadsheet library that provides rich
+  features like Excel and Google Sheets. It is a TypeScript rewrite of
+  Luckysheet with improved architecture, native React support, immer-based
+  state management, and no jQuery dependency. It supports collaborative editing,
+  formulas, conditional formatting, data verification, and more.
+frameworks:
+  react: true
+features:
+  accessible: false
+  copyPaste: true
+  csvExport: false
+  customEditors: false
+  customFormatters: false
+  draggableRows: false
+  editable: true
+  fillDown: true
+  fillRight: true
+  filtering: true
+  formulas: true
+  freezableCols: true
+  headless: false
+  i18n: true
+  maintained: true
+  mergeCells: true
+  openSource: true
+  pagination: false
+  pdfExport: false
+  pivots: false
+  rangeSelection: true
+  resizableCols: true
+  responsive: false
+  rowGrouping: false
+  rowPinning: false
+  rowSelection: true
+  search: true
+  serverSide: false
+  sorting: true
+  sparklines: false
+  theming: false
+  trees: false
+  typescript: true
+  xlsxExport: Via fortuneexcel plugin
+  virtualization: true
