@@ -29,7 +29,7 @@
     "react-icons": "^5.6.0",
     "tailwind-merge": "^3.5.0",
     "yaml": "^2.8.3",
-    "zod": "^4.3.6",
+    "zod": "^4.4.1",
     "zod-validation-error": "^5.0.0",
     "zustand": "^5.0.12"
   },
