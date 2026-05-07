@@ -14,7 +14,7 @@ frameworks:
   vanilla: true
 features:
   accessible: UI accessibility is up to the embedding application.
-  copyPaste: false
+  copyPaste: Programmatic range copy and paste; no browser clipboard UI.
   csvExport: false
   customEditors: false
   customFormatters: false
@@ -22,17 +22,17 @@ features:
   editable: true
   fillDown: false
   fillRight: false
-  filtering: Metadata support; UI behavior is up to the embedding application.
+  filtering: false
   formulas: true
   freezableCols: false
   headless: true
-  i18n: true
+  i18n: false
   maintained: true
-  mergeCells: Metadata support; UI behavior is up to the embedding application.
+  mergeCells: false
   openSource: true
   pagination: false
   pdfExport: false
-  pivots: Formula support includes PIVOTBY; visual pivot table UI is not included.
+  pivots: false
   rangeSelection: false
   resizableCols: false
   responsive: UI layout is up to the embedding application.
@@ -41,7 +41,7 @@ features:
   rowSelection: false
   search: false
   serverSide: true
-  sorting: Metadata and formula support; UI behavior is up to the embedding application.
+  sorting: false
   sparklines: false
   theming: false
   trees: false
