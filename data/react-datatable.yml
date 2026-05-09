@@ -16,12 +16,12 @@ frameworks:
   react: true
 features:
   accessible: true
-  copyPaste: false
-  csvExport: false
+  copyPaste: Adding copy and paste is up to you in your shipped source.
+  csvExport: Adding CSV export is up to you in your shipped source.
   customEditors: true
   customFormatters: true
   draggableRows: false
-  editable: false
+  editable: Adding editable cells is up to you in your shipped source.
   fillDown: false
   fillRight: false
   filtering: true
@@ -48,5 +48,5 @@ features:
   theming: true
   trees: false
   typescript: true
-  xlsxExport: false
+  xlsxExport: Adding XLSX export is up to you in your shipped source.
   virtualization: true
