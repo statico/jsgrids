@@ -1,7 +1,7 @@
 title: react-datatable
 homeUrl: https://react-datatable.com/
-demoUrl: https://react-datatable.com/#showcase
-githubRepo: FroeMic/react-datatable
+demoUrl: https://react-datatable.com/docs
+githubRepo: null
 npmPackage: null
 license: Custom License
 revenueModel: Commercial with Trial
@@ -31,7 +31,7 @@ features:
   i18n: false
   maintained: true
   mergeCells: false
-  openSource: true
+  openSource: false
   pagination: true
   pdfExport: false
   pivots: false
