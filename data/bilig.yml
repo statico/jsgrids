@@ -1,6 +1,6 @@
 title: bilig
 homeUrl: https://proompteng.github.io/bilig/
-demoUrl: https://github.com/proompteng/bilig/tree/main/examples/headless-workpaper
+demoUrl: https://proompteng.github.io/bilig/try-bilig-headless-in-node.html
 githubRepo: proompteng/bilig
 npmPackage: "@bilig/headless"
 license: MIT License
@@ -9,7 +9,8 @@ description: >
   bilig is a headless TypeScript spreadsheet engine and WorkPaper API for Node
   services, coding agents, and server-side workbook automation. It supports
   formula-backed workbooks, structural edits, persistence round trips,
-  validation, and readback without opening a browser grid.
+  XLSX import/export through @bilig/headless/xlsx, validation, and readback
+  without opening a browser grid.
 frameworks:
   vanilla: true
 features:
@@ -46,5 +47,5 @@ features:
   theming: false
   trees: false
   typescript: true
-  xlsxExport: false
+  xlsxExport: XLSX import/export is available through @bilig/headless/xlsx; no spreadsheet UI is bundled.
   virtualization: false
