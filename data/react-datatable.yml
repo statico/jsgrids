@@ -1,0 +1,52 @@
+title: react-datatable
+homeUrl: https://react-datatable.com/
+demoUrl: https://react-datatable.com/docs
+githubRepo: null
+npmPackage: null
+license: Custom License
+revenueModel: Commercial with Trial
+description: >
+  Source-first React datatable kit built on TanStack Table with shadcn-style
+  Radix primitives and Tailwind. Ships an integrated product surface—global
+  search, column filters, multi-sort, grouping, row selection, bulk actions,
+  saved views, URL state, local and server-backed loading (pagination and
+  infinite scroll), and row/column virtualization with frozen columns—meant to
+  be copied into your app so you own and customize the UI.
+frameworks:
+  react: true
+features:
+  accessible: true
+  copyPaste: Adding copy and paste is up to you in your shipped source.
+  csvExport: Adding CSV export is up to you in your shipped source.
+  customEditors: true
+  customFormatters: true
+  draggableRows: false
+  editable: Adding editable cells is up to you in your shipped source.
+  fillDown: false
+  fillRight: false
+  filtering: true
+  formulas: false
+  freezableCols: true
+  headless: false
+  i18n: false
+  maintained: true
+  mergeCells: false
+  openSource: false
+  pagination: true
+  pdfExport: false
+  pivots: false
+  rangeSelection: false
+  resizableCols: true
+  responsive: true
+  rowGrouping: true
+  rowPinning: false
+  rowSelection: true
+  search: true
+  serverSide: true
+  sorting: true
+  sparklines: false
+  theming: true
+  trees: false
+  typescript: true
+  xlsxExport: Adding XLSX export is up to you in your shipped source.
+  virtualization: true
